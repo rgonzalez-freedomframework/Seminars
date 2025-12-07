@@ -56,9 +56,9 @@ export default async function Home() {
                 triggerText="Get Started - Register Free"
                 triggerClassName="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-semibold text-lg px-8 py-6"
               />
-              <Link href="/sign-up">
+              <Link href="/sign-in">
                 <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-semibold text-lg px-8 py-6">
-                  Login / Register
+                  Login
                 </Button>
               </Link>
             </div>

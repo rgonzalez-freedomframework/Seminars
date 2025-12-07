@@ -7,11 +7,17 @@ const isPublicRoute=createRouteMatcher([
     '/api(.*)',
     '/live-webinar(.*)',
     '/',
-    '/home',
     '/admin/sign-in',
 ])
 
 export default clerkMiddleware(async(auth,req)=>{
+    const {userId} = await auth();
+    
+    // Redirect authenticated users from landing page to /home
+    if(userId && req.nextUrl.pathname === '/'){
+        return Response.redirect(new URL('/home', req.url));
+    }
+    
     if(!isPublicRoute(req)){
         await auth.protect()
     }

@@ -35,16 +35,16 @@ export default async function Home() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#1D2A38] via-[#3A4750] to-[#1D2A38]">
+    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100">
       {/* Header with Login Button */}
-      <header className="absolute top-0 left-0 right-0 z-50">
+      <header className="absolute top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200">
         <div className="container mx-auto px-4 py-6">
           <div className="flex justify-between items-center">
-            <Link href="/" className="text-2xl font-bold text-white hover:text-[#CCA43B] transition-colors">
+            <Link href="/" className="text-2xl font-bold text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
               Freedom Framework
             </Link>
             <Link href="/sign-in">
-              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-semibold px-6 py-3">
+              <Button size="lg" variant="outline" className="border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white font-semibold px-6 py-3">
                 Login
               </Button>
             </Link>
@@ -60,11 +60,11 @@ export default async function Home() {
             <Badge className="mb-6 bg-[#CCA43B] text-[#1D2A38] hover:bg-[#CCA43B]/90 text-sm font-semibold px-4 py-2">
               FREEDOM FRAMEWORK™
             </Badge>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#1D2A38] mb-6 tracking-tight">
               Discover Your Firm's
               <span className="block text-[#CCA43B]">Freedom Score</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
+            <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed">
               Take the 5-minute assessment used by 7- and 8-figure law firm owners to diagnose operational bottlenecks and map their path to true time + financial freedom.
             </p>
             <div className="flex justify-center">
@@ -78,20 +78,20 @@ export default async function Home() {
       </section>
 
       {/* Why This Matters Section */}
-      <section className="py-20 bg-white/5 backdrop-blur-sm">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-8 text-center">
+            <h2 className="text-3xl md:text-5xl font-bold text-[#1D2A38] mb-8 text-center">
               Why This Matters
             </h2>
-            <div className="prose prose-lg prose-invert mx-auto">
-              <p className="text-xl text-gray-300 leading-relaxed mb-6">
+            <div className="prose prose-lg mx-auto">
+              <p className="text-xl text-gray-700 leading-relaxed mb-6">
                 You didn't build your law firm to work 60 hours a week.
               </p>
-              <p className="text-lg text-gray-300 leading-relaxed mb-6">
+              <p className="text-lg text-gray-700 leading-relaxed mb-6">
                 And yet—most high-performing firms end up either:
               </p>
-              <ul className="space-y-3 text-lg text-gray-300 mb-6">
+              <ul className="space-y-3 text-lg text-gray-700 mb-6">
                 <li className="flex items-start gap-3">
                   <span className="text-[#CCA43B] mt-1">•</span>
                   <span>Busy but underpaid</span>
@@ -108,7 +108,7 @@ export default async function Home() {
               <p className="text-xl text-[#CCA43B] font-semibold mb-4">
                 The real goal?
               </p>
-              <p className="text-lg text-gray-300 leading-relaxed">
+              <p className="text-lg text-gray-700 leading-relaxed">
                 A firm that funds your life and gives you back your time. Find out exactly where your firm stands today.
               </p>
             </div>
@@ -117,56 +117,56 @@ export default async function Home() {
       </section>
 
       {/* What You'll Learn Section */}
-      <section className="py-20">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-12 text-center">
+            <h2 className="text-3xl md:text-5xl font-bold text-[#1D2A38] mb-12 text-center">
               What You'll Learn
             </h2>
-            <p className="text-xl text-gray-300 mb-8 text-center">
+            <p className="text-xl text-gray-700 mb-8 text-center">
               This diagnostic reveals:
             </p>
             <div className="grid md:grid-cols-2 gap-6">
-              <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/15 transition-all">
+              <Card className="bg-white border-gray-200 shadow-md hover:shadow-xl hover:border-[#CCA43B] transition-all">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <CheckCircle2 className="w-6 h-6 text-[#CCA43B] flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="text-lg font-semibold text-white mb-2">Your Freedom Matrix Position</h3>
-                      <p className="text-gray-300">Discover your firm's current quadrant on the Freedom Matrix</p>
+                      <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Your Freedom Matrix Position</h3>
+                      <p className="text-gray-600">Discover your firm's current quadrant on the Freedom Matrix</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/15 transition-all">
+              <Card className="bg-white border-gray-200 shadow-md hover:shadow-xl hover:border-[#CCA43B] transition-all">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <CheckCircle2 className="w-6 h-6 text-[#CCA43B] flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="text-lg font-semibold text-white mb-2">Hidden Freedom Traps</h3>
-                      <p className="text-gray-300">Whether your billing model is creating hidden "freedom traps"</p>
+                      <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Hidden Freedom Traps</h3>
+                      <p className="text-gray-600">Whether your billing model is creating hidden "freedom traps"</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/15 transition-all">
+              <Card className="bg-white border-gray-200 shadow-md hover:shadow-xl hover:border-[#CCA43B] transition-all">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <CheckCircle2 className="w-6 h-6 text-[#CCA43B] flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="text-lg font-semibold text-white mb-2">Fastest Path Forward</h3>
-                      <p className="text-gray-300">The one operational shift that will unlock the fastest results</p>
+                      <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Fastest Path Forward</h3>
+                      <p className="text-gray-600">The one operational shift that will unlock the fastest results</p>
                     </div>
                   </div>
                 </CardContent>
               </Card>
-              <Card className="bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/15 transition-all">
+              <Card className="bg-white border-gray-200 shadow-md hover:shadow-xl hover:border-[#CCA43B] transition-all">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <CheckCircle2 className="w-6 h-6 text-[#CCA43B] flex-shrink-0 mt-1" />
                     <div>
-                      <h3 className="text-lg font-semibold text-white mb-2">Distance to Freedom</h3>
-                      <p className="text-gray-300">How close you really are to the Freedom Zone</p>
+                      <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Distance to Freedom</h3>
+                      <p className="text-gray-600">How close you really are to the Freedom Zone</p>
                     </div>
                   </div>
                 </CardContent>
@@ -177,39 +177,39 @@ export default async function Home() {
       </section>
 
       {/* Four Quadrants Section */}
-      <section className="py-20 bg-white/5 backdrop-blur-sm">
+      <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-bold text-white mb-12 text-center">
+            <h2 className="text-3xl md:text-5xl font-bold text-[#1D2A38] mb-12 text-center">
               The Four Quadrants
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
-              <Card className="bg-gradient-to-br from-red-900/40 to-red-800/40 border-red-500/30">
+              <Card className="bg-gradient-to-br from-red-50 to-red-100 border-red-300">
                 <CardContent className="p-8">
-                  <Award className="w-12 h-12 text-red-400 mb-4" />
-                  <h3 className="text-2xl font-bold text-white mb-3">Grind Zone</h3>
-                  <p className="text-gray-300">High effort, low return. Working hard but not seeing the financial freedom you deserve.</p>
+                  <Award className="w-12 h-12 text-red-600 mb-4" />
+                  <h3 className="text-2xl font-bold text-red-900 mb-3">Grind Zone</h3>
+                  <p className="text-gray-700">High effort, low return. Working hard but not seeing the financial freedom you deserve.</p>
                 </CardContent>
               </Card>
-              <Card className="bg-gradient-to-br from-blue-900/40 to-blue-800/40 border-blue-500/30">
+              <Card className="bg-gradient-to-br from-blue-50 to-blue-100 border-blue-300">
                 <CardContent className="p-8">
-                  <Target className="w-12 h-12 text-blue-400 mb-4" />
-                  <h3 className="text-2xl font-bold text-white mb-3">Drift Zone</h3>
-                  <p className="text-gray-300">Low activity, low results. Lacking direction and momentum in your practice.</p>
+                  <Target className="w-12 h-12 text-blue-600 mb-4" />
+                  <h3 className="text-2xl font-bold text-blue-900 mb-3">Drift Zone</h3>
+                  <p className="text-gray-700">Low activity, low results. Lacking direction and momentum in your practice.</p>
                 </CardContent>
               </Card>
-              <Card className="bg-gradient-to-br from-amber-900/40 to-amber-800/40 border-amber-500/30">
+              <Card className="bg-gradient-to-br from-amber-50 to-amber-100 border-amber-300">
                 <CardContent className="p-8">
-                  <TrendingUp className="w-12 h-12 text-amber-400 mb-4" />
-                  <h3 className="text-2xl font-bold text-white mb-3">Golden Cage</h3>
-                  <p className="text-gray-300">Profitable but trapped. Making money but owner-dependent and can't step away.</p>
+                  <TrendingUp className="w-12 h-12 text-amber-600 mb-4" />
+                  <h3 className="text-2xl font-bold text-amber-900 mb-3">Golden Cage</h3>
+                  <p className="text-gray-700">Profitable but trapped. Making money but owner-dependent and can't step away.</p>
                 </CardContent>
               </Card>
-              <Card className="bg-gradient-to-br from-[#CCA43B]/40 to-[#CCA43B]/60 border-[#CCA43B]">
+              <Card className="bg-gradient-to-br from-[#CCA43B] to-[#CCA43B]/80 border-[#CCA43B]">
                 <CardContent className="p-8">
-                  <Award className="w-12 h-12 text-white mb-4" />
-                  <h3 className="text-2xl font-bold text-white mb-3">Freedom Zone</h3>
-                  <p className="text-white">The goal: A firm that funds your life and gives you back your time.</p>
+                  <Award className="w-12 h-12 text-[#1D2A38] mb-4" />
+                  <h3 className="text-2xl font-bold text-[#1D2A38] mb-3">Freedom Zone</h3>
+                  <p className="text-[#1D2A38]">The goal: A firm that funds your life and gives you back your time.</p>
                 </CardContent>
               </Card>
             </div>
@@ -218,13 +218,13 @@ export default async function Home() {
       </section>
 
       {/* Main CTA Section */}
-      <section className="py-20">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-[#1D2A38] mb-6">
               Get Your Freedom Matrix Score
             </h2>
-            <p className="text-xl text-gray-300 mb-8">
+            <p className="text-xl text-gray-700 mb-8">
               Click below to access the diagnostic instantly.
             </p>
             <GeneralRegistrationForm 
@@ -237,21 +237,21 @@ export default async function Home() {
 
       {/* Webinars Section */}
       {webinars.length > 0 && (
-        <section id="webinars" className="py-20">
+        <section id="webinars" className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">
+                <h2 className="text-3xl md:text-5xl font-bold text-[#1D2A38] mb-4">
                   Register for Our Free Webinar
                 </h2>
-                <p className="text-xl text-gray-300">
+                <p className="text-xl text-gray-700">
                   Get Your Freedom Matrix Score & Personalized Action Plan
                 </p>
               </div>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {webinars.map((webinar) => (
                   <Link key={webinar.id} href={`/live-webinar/${webinar.id}`}>
-                    <Card className="h-full bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/15 hover:border-[#CCA43B]/50 transition-all cursor-pointer">
+                    <Card className="h-full bg-white border-gray-200 shadow-md hover:shadow-xl hover:border-[#CCA43B] transition-all cursor-pointer">
                       {webinar.thumbnail && (
                         <div className="w-full h-48 overflow-hidden rounded-t-lg">
                           <img
@@ -275,17 +275,17 @@ export default async function Home() {
                             )}
                             {webinar.webinarStatus}
                           </Badge>
-                          <span className="text-sm text-gray-400">
+                          <span className="text-sm text-gray-600">
                             {webinar._count.attendances} registered
                           </span>
                         </div>
-                        <h3 className="text-xl font-bold text-white mb-3 line-clamp-2">
+                        <h3 className="text-xl font-bold text-[#1D2A38] mb-3 line-clamp-2">
                           {webinar.title}
                         </h3>
-                        <p className="text-gray-300 mb-4 line-clamp-2">
+                        <p className="text-gray-700 mb-4 line-clamp-2">
                           {webinar.description || 'Join this transformative webinar'}
                         </p>
-                        <div className="space-y-2 text-sm text-gray-400">
+                        <div className="space-y-2 text-sm text-gray-600">
                           <div className="flex items-center gap-2">
                             <Calendar className="w-4 h-4" />
                             {new Date(webinar.startTime).toLocaleDateString('en-US', {
@@ -318,13 +318,13 @@ export default async function Home() {
       )}
 
       {/* Bonus Section */}
-      <section className="py-20 bg-white/5 backdrop-blur-sm">
+      <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-[#1D2A38] mb-8">
               Bonus: What You'll Receive
             </h2>
-            <div className="space-y-4 text-lg text-gray-300">
+            <div className="space-y-4 text-lg text-gray-700">
               <div className="flex items-center justify-center gap-3">
                 <span className="text-[#CCA43B] text-2xl">🎁</span>
                 <span>Your Freedom Matrix Summary PDF</span>
@@ -343,12 +343,12 @@ export default async function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-white/10">
+      <footer className="py-12 border-t border-gray-300 bg-gray-50">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-gray-400 mb-2">
+          <p className="text-gray-700 mb-2">
             Freedom Framework™ for Law Firm Owners
           </p>
-          <p className="text-gray-500 text-sm">
+          <p className="text-gray-600 text-sm">
             © 2025 All Rights Reserved
           </p>
         </div>

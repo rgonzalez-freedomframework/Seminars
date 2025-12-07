@@ -44,9 +44,9 @@ const Pages = async () => {
   });
 
   return (
-    <div className="w-full min-h-screen">
+    <div className="w-full min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100">
       {/* Navigation Bar */}
-      <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <nav className="border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container mx-auto px-4 md:px-8 lg:px-12">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-2">

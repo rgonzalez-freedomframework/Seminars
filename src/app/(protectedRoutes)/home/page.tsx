@@ -1,83 +1,153 @@
-import React from 'react'
-import Onboarding from './_components/OnBoarding'
-import FeatureCard from './_components/FeatureCard'
-import { potentialCustomer } from '@/lib/data'
-import { Upload,Webcam } from 'lucide-react'
-import FeatureSectionLayout from './_components/FeatureSectionLayout'
-import UserInfoCard from '@/components/ReusableComponent/UserInfoCard'
-import Image from 'next/image'
+import React from 'react';
+import { prismaClient } from '@/lib/prismaClient';
+import { WebinarStatusEnum } from '@prisma/client';
+import Link from 'next/link';
+import { Calendar, Clock, PlayCircle } from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
 
-const Pages = () => {
+const Pages = async () => {
+  // Get all upcoming and live webinars for users
+  const webinars = await prismaClient.webinar.findMany({
+    where: {
+      webinarStatus: {
+        in: [WebinarStatusEnum.SCHEDULED, WebinarStatusEnum.WAITING_ROOM, WebinarStatusEnum.LIVE],
+      },
+    },
+    include: {
+      presenter: {
+        select: {
+          name: true,
+          profileImage: true,
+        },
+      },
+      _count: {
+        select: {
+          attendances: true,
+        },
+      },
+    },
+    orderBy: {
+      startTime: 'asc',
+    },
+  });
+
   return (
     <div className="w-full h-full mt-8 px-6 md:px-8 lg:px-10 xl:px-12">
-      <div className="w-full flex flex-col sm:flex-row justify-between items-start gap-14">
-        <div className="space-y-6">
-          <h2 className="text-primary font-semibold text-4xl">
-            Get maximum Conversion from your webinars
-          </h2>
-          <Onboarding />
-        </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 place-content-center">
-            <FeatureCard
-                Icon={<Upload className="w-10 h-10" />}
-                heading="Browse or drag a pre-recorded webinar file"
-                link="#"
-            />
-            <FeatureCard
-                Icon={<Webcam className="w-10 h-10" />}
-                heading="Browse or drag a pre-recorded webinar file"
-                link="/webinars"
-            />
-        </div>
+      <div className="mb-8">
+        <h1 className="text-primary font-semibold text-4xl mb-2">
+          Welcome to Your Dashboard
+        </h1>
+        <p className="text-muted-foreground text-lg">
+          Access your registered webinars and exclusive content
+        </p>
       </div>
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 rounded-xl bg-background-10">
-        <FeatureSectionLayout
-            heading="See how far along are your potential customers"
-            link="/lead"
-        >
-            <div className="p-5 flex flex-col gap-4 items-start border rounded-xl border-border backdrop-blur-3xl">
-            <div className="w-full flex justify-between items-center gap-3">
-                <p className="text-primary font-semibold text-sm">Conversions</p>
-                <p className="text-xs text-muted-foreground font-normal">50</p>
-            </div>
-                <div className="flex flex-col gap-4 items-start">
-                    {Array.from({ length: 3 }).map((_, index) => (
-                        <Image
-                        key={index}
-                        src="/featurecard.png"
-                        alt="Info-card"
-                        width={250}
-                        height={250}
-                        className="w-full h-full object-cover rounded-xl"
-                        />
-                    ))}
-                </div>
-            </div>
-        </FeatureSectionLayout>
-        <FeatureSectionLayout
-            heading="See the list of your current customers"
-            link="/pipeline"
-            >
-            <div className="flex gap-4 items-center h-full w-full justify-center relative flex-wrap">
-                {potentialCustomer.slice(0, 2).map((customer, index) => (
-                <UserInfoCard
-                    customer={customer}
-                    tags={customer.tags}
-                    key={index}
-                />
-                ))}
-                <Image
-                src={'/glowCard.png'}
-                alt='Info-card'
-                width={350}
-                height={350}
-                className='object-cover rounded-xl absolute px-5 mb-28 hidden sm:flex backdrop-blur-[20px]'
-                />
-            </div>
-            </FeatureSectionLayout>
-        </div>
-    </div>
-  )
-}
 
-export default Pages
+      {/* Upcoming Webinars Section */}
+      <div className="mb-12">
+        <h2 className="text-primary font-semibold text-2xl mb-6">
+          Available Webinars
+        </h2>
+        {webinars.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {webinars.map((webinar) => (
+              <Link key={webinar.id} href={`/live-webinar/${webinar.id}`}>
+                <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer border-2 hover:border-primary">
+                  {webinar.thumbnail && (
+                    <div className="w-full h-48 overflow-hidden rounded-t-lg relative">
+                      <img
+                        src={webinar.thumbnail}
+                        alt={webinar.title}
+                        className="w-full h-full object-cover"
+                      />
+                      {webinar.webinarStatus === WebinarStatusEnum.LIVE && (
+                        <div className="absolute top-4 right-4">
+                          <Badge className="bg-red-600 text-white">
+                            <span className="mr-1 h-2 w-2 bg-white rounded-full animate-pulse"></span>
+                            LIVE NOW
+                          </Badge>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                  <CardHeader>
+                    <div className="flex items-center justify-between mb-2">
+                      <Badge
+                        variant={
+                          webinar.webinarStatus === WebinarStatusEnum.LIVE
+                            ? 'destructive'
+                            : 'secondary'
+                        }
+                      >
+                        {webinar.webinarStatus}
+                      </Badge>
+                      <span className="text-sm text-muted-foreground">
+                        {webinar._count.attendances} attending
+                      </span>
+                    </div>
+                    <CardTitle className="line-clamp-2">{webinar.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-muted-foreground mb-4 line-clamp-2">
+                      {webinar.description || 'Join this exclusive webinar'}
+                    </p>
+                    <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4" />
+                        {new Date(webinar.startTime).toLocaleDateString('en-US', {
+                          weekday: 'short',
+                          month: 'short',
+                          day: 'numeric',
+                        })}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-4 h-4" />
+                        {new Date(webinar.startTime).toLocaleTimeString('en-US', {
+                          hour: 'numeric',
+                          minute: '2-digit',
+                        })}
+                        {webinar.duration && ` (${webinar.duration} min)`}
+                      </div>
+                    </div>
+                    <Button className="w-full" variant="default">
+                      <PlayCircle className="w-4 h-4 mr-2" />
+                      {webinar.webinarStatus === WebinarStatusEnum.LIVE ? 'Join Now' : 'View Details'}
+                    </Button>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <Card>
+            <CardContent className="py-16 text-center">
+              <p className="text-muted-foreground text-lg mb-4">
+                No webinars available at the moment
+              </p>
+              <p className="text-sm text-muted-foreground">
+                Check back soon for new content!
+              </p>
+            </CardContent>
+          </Card>
+        )}
+      </div>
+
+      {/* Resources Section - Placeholder for future file uploads */}
+      <div>
+        <h2 className="text-primary font-semibold text-2xl mb-6">
+          Your Resources
+        </h2>
+        <Card>
+          <CardContent className="py-16 text-center">
+            <p className="text-muted-foreground">
+              Exclusive resources and materials will appear here
+            </p>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+};
+
+export default Pages;

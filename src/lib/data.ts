@@ -3,21 +3,21 @@ import { Sparkle, Webcam, Home, Users, Settings } from 'lucide-react'
 export const sidebarData = [
   {
     id: 1,
-    title: 'Home',
+    title: 'Dashboard',
     icon: Home,
     link: '/home',
   },
   {
     id: 2,
-    title: 'Webinars',
+    title: 'Admin: Webinars',
     icon: Webcam,
-    link: '/webinars',
+    link: '/admin/webinars',
   },
   {
     id: 3,
-    title: 'Leads',
+    title: 'Admin: Leads',
     icon: Users,
-    link: '/lead',
+    link: '/admin/leads',
   },
   {
     id: 4,
@@ -30,7 +30,7 @@ export const sidebarData = [
     id: 5,
     title: 'Settings',
     icon: Settings,
-    link: '/settings',
+    link: '/admin/settings',
   },
 ]
 

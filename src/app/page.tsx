@@ -5,6 +5,7 @@ import { Calendar, Clock, CheckCircle2, Award, Target, TrendingUp } from 'lucide
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import GeneralRegistrationForm from '@/components/ReusableComponent/GeneralRegistrationForm';
 
 export default async function Home() {
   // Get upcoming and live webinars
@@ -50,20 +51,17 @@ export default async function Home() {
             <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
               Take the 5-minute assessment used by 7- and 8-figure law firm owners to diagnose operational bottlenecks and map their path to true time + financial freedom.
             </p>
-            {webinars.length > 0 && (
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link href="#webinars">
-                  <Button size="lg" className="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-semibold text-lg px-8 py-6">
-                    Register for Free Webinar
-                  </Button>
-                </Link>
-                <Link href="/sign-in">
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-semibold text-lg px-8 py-6">
-                    Sign In
-                  </Button>
-                </Link>
-              </div>
-            )}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              <GeneralRegistrationForm 
+                triggerText="Get Started - Register Free"
+                triggerClassName="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-semibold text-lg px-8 py-6"
+              />
+              <Link href="/sign-in">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-semibold text-lg px-8 py-6">
+                  Admin Sign In
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>

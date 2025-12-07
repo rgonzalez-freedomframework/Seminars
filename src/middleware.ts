@@ -7,6 +7,7 @@ const isPublicRoute=createRouteMatcher([
     '/api(.*)',
     '/live-webinar(.*)',
     '/',
+    '/home',
 ])
 
 export default clerkMiddleware(async(auth,req)=>{

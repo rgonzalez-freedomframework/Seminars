@@ -13,10 +13,11 @@ const Pages = async () => {
   const { userId } = await auth();
   const user = await currentUser();
   
-  // Check if user is admin (you can customize this logic)
-  const isAdmin = user?.emailAddresses.some(
-    email => email.emailAddress === 'rgonzalez@freedomframework.us'
-  );
+  // Check if user is admin using Clerk's publicMetadata
+  // You can set this via Clerk Dashboard: Users → Select User → Metadata → Public metadata: {"role": "admin"}
+  // Or programmatically via Clerk API
+  const isAdmin = user?.publicMetadata?.role === 'admin' || 
+    user?.emailAddresses.some(email => email.emailAddress === 'rgonzalez@freedomframework.us');
   // Get all upcoming and live webinars for users
   const webinars = await prismaClient.webinar.findMany({
     where: {

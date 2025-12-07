@@ -32,8 +32,8 @@ export default async function LiveWebinarIndexPage() {
   });
 
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-12 max-w-7xl">
+    <div className="min-h-screen">
+      <div className="container mx-auto px-4 py-8 md:py-12 max-w-7xl">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-primary mb-4">
             Free Webinars

@@ -35,16 +35,16 @@ export default async function Home() {
   });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50">
       {/* Header with Login Button */}
-      <header className="absolute top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-gray-200">
-        <div className="container mx-auto px-4 py-6">
+      <header className="absolute top-0 left-0 right-0 z-50 bg-gray-50/95 backdrop-blur-sm border-b border-gray-300">
+        <div className="container mx-auto px-4 py-4 md:py-6">
           <div className="flex justify-between items-center">
-            <Link href="/" className="text-2xl font-bold text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
+            <Link href="/" className="text-xl md:text-2xl font-bold text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
               Freedom Framework
             </Link>
             <Link href="/sign-in">
-              <Button size="lg" variant="outline" className="border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white font-semibold px-6 py-3">
+              <Button size="lg" variant="outline" className="border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white font-semibold px-4 py-2 md:px-6 md:py-3 transition-all">
                 Login
               </Button>
             </Link>
@@ -55,16 +55,16 @@ export default async function Home() {
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        <div className="container mx-auto px-4 py-32 md:py-40 relative z-10">
+        <div className="container mx-auto px-4 py-24 sm:py-32 md:py-40 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-6 bg-[#CCA43B] text-[#1D2A38] hover:bg-[#CCA43B]/90 text-sm font-semibold px-4 py-2">
+            <Badge className="mb-4 md:mb-6 bg-[#CCA43B] text-[#1D2A38] hover:bg-[#CCA43B]/90 text-xs md:text-sm font-semibold px-3 md:px-4 py-1.5 md:py-2">
               FREEDOM FRAMEWORK™
             </Badge>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-[#1D2A38] mb-6 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-[#1D2A38] mb-4 md:mb-6 tracking-tight">
               Discover Your Firm's
               <span className="block text-[#CCA43B]">Freedom Score</span>
             </h1>
-            <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed">
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-700 mb-6 md:mb-8 leading-relaxed px-4">
               Take the 5-minute assessment used by 7- and 8-figure law firm owners to diagnose operational bottlenecks and map their path to true time + financial freedom.
             </p>
             <div className="flex justify-center">
@@ -78,7 +78,7 @@ export default async function Home() {
       </section>
 
       {/* Why This Matters Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 md:py-20 bg-white/50">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-5xl font-bold text-[#1D2A38] mb-8 text-center">
@@ -117,7 +117,7 @@ export default async function Home() {
       </section>
 
       {/* What You'll Learn Section */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-gray-100/50">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl md:text-5xl font-bold text-[#1D2A38] mb-12 text-center">
@@ -177,7 +177,7 @@ export default async function Home() {
       </section>
 
       {/* Four Quadrants Section */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 md:py-20 bg-white/50">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl md:text-5xl font-bold text-[#1D2A38] mb-12 text-center">
@@ -218,7 +218,7 @@ export default async function Home() {
       </section>
 
       {/* Main CTA Section */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-gray-100/50">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-[#1D2A38] mb-6">
@@ -237,7 +237,7 @@ export default async function Home() {
 
       {/* Webinars Section */}
       {webinars.length > 0 && (
-        <section id="webinars" className="py-20 bg-gray-50">
+        <section id="webinars" className="py-12 md:py-20 bg-white/50">
           <div className="container mx-auto px-4">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
@@ -318,7 +318,7 @@ export default async function Home() {
       )}
 
       {/* Bonus Section */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-gray-100/50">
         <div className="container mx-auto px-4">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1D2A38] mb-8">
@@ -343,7 +343,7 @@ export default async function Home() {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-gray-300 bg-gray-50">
+      <footer className="py-8 md:py-12 border-t border-gray-300 bg-white/50">
         <div className="container mx-auto px-4 text-center">
           <p className="text-gray-700 mb-2">
             Freedom Framework™ for Law Firm Owners

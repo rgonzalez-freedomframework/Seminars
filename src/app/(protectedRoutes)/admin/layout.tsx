@@ -16,10 +16,10 @@ const AdminLayout = async ({ children }: Props) => {
   }
 
   return (
-    <div className="flex w-full min-h-screen">
+    <div className="flex w-full min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50">
       {/* SIDEBAR */}
       <Sidebar/>
-      <div className="flex flex-col w-full h-screen overflow-auto px-4 scrollbar-hide container mx-auto">
+      <div className="flex flex-col w-full h-screen overflow-auto px-2 md:px-4 scrollbar-hide container mx-auto">
         <Header user={userExist.user}/>
         {children}
       </div>

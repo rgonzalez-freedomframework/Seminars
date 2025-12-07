@@ -44,9 +44,9 @@ const Pages = async () => {
   });
 
   return (
-    <div className="w-full min-h-screen bg-gradient-to-br from-white via-gray-50 to-gray-100">
+    <div className="w-full min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50">
       {/* Navigation Bar */}
-      <nav className="border-b border-gray-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+      <nav className="border-b border-gray-300 bg-gray-50/95 backdrop-blur supports-[backdrop-filter]:bg-gray-50/60">
         <div className="container mx-auto px-4 md:px-8 lg:px-12">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-2">
@@ -57,7 +57,7 @@ const Pages = async () => {
             <div className="flex items-center gap-4">
               {isAdmin && (
                 <Link href="/admin/webinars">
-                  <Button variant="outline" size="sm" className="gap-2">
+                  <Button variant="outline" size="sm" className="gap-2 border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white transition-all">
                     <Shield className="w-4 h-4" />
                     Admin Panel
                   </Button>
@@ -67,7 +67,7 @@ const Pages = async () => {
                 <UserButton afterSignOutUrl="/" />
               ) : (
                 <Link href="/sign-in">
-                  <Button size="sm">Sign In</Button>
+                  <Button size="sm" className="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-semibold">Sign In</Button>
                 </Link>
               )}
             </div>
@@ -152,7 +152,7 @@ const Pages = async () => {
                         {webinar.duration && ` (${webinar.duration} min)`}
                       </div>
                     </div>
-                    <Button className="w-full" variant="default">
+                    <Button className="w-full bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-semibold transition-all" variant="default">
                       <PlayCircle className="w-4 h-4 mr-2" />
                       {webinar.webinarStatus === WebinarStatusEnum.LIVE ? 'Join Now' : 'View Details'}
                     </Button>

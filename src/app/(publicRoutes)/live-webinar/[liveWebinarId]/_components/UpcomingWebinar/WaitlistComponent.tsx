@@ -24,6 +24,9 @@ const WaitlistComponent = ({
 }: Props) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+  const [businessName, setBusinessName] = useState('');
+  const [description, setDescription] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -48,6 +51,9 @@ const WaitlistComponent = ({
       const res = await registerAttendee({
         email,
         name,
+        phone,
+        businessName,
+        description,
         webinarId,
       });
 
@@ -60,6 +66,9 @@ const WaitlistComponent = ({
           id: res.data.user.id,
           name: res.data.user.name,
           email: res.data.user.email,
+          phone: res.data.user.phone,
+          businessName: res.data.user.businessName,
+          description: res.data.user.description,
           createdAt: new Date(),
           updatedAt: new Date(),
           callStatus: 'PENDING',
@@ -72,6 +81,9 @@ const WaitlistComponent = ({
     );
     setEmail('');
     setName('');
+    setPhone('');
+    setBusinessName('');
+    setDescription('');
     setSubmitted(true);
     setTimeout(() => {
     setIsOpen(false);
@@ -127,6 +139,24 @@ const WaitlistComponent = ({
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
+          />
+          <Input
+            type="tel"
+            placeholder="Phone Number (Optional)"
+            value={phone}
+            onChange={(e) => setPhone(e.target.value)}
+          />
+          <Input
+            type="text"
+            placeholder="Business Name (Optional)"
+            value={businessName}
+            onChange={(e) => setBusinessName(e.target.value)}
+          />
+          <Input
+            type="text"
+            placeholder="Tell us about your needs (Optional)"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
           />
         </React.Fragment>
         

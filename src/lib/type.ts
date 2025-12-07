@@ -47,7 +47,7 @@ export const validateBasicInfo = (data: {
 export const validateCTA = (data: {
   ctaLabel?: string
   tags?: string[]
-  ctaType: string
+  ctaType?: string
   aiAgent?: string
 }): ValidationResult => {
   const errors: ValidationErrors = {}
@@ -90,7 +90,7 @@ export type AttendanceData = {
 }
 
 export type WebinarWithPresenter = Webinar & {
-  presenter: User
+  presenter: User | Pick<User, 'id' | 'name' | 'profileImage' | 'stripeConnectId'>
 }
 
 export type StreamCallRecording = {

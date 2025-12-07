@@ -31,16 +31,16 @@ const LiveWebinarView = ({
     const viewerCount = useParticipantCount()
 
     const [chatClient, setChatClient] = useState<StreamChat | null>(null)
-    const [channel, setChannel] = useState<any>(null)
-    const [dialogOpen, setDialogOpen] = useState(false)
+    const [channel, setChannel] = useState<ReturnType<StreamChat['channel']> | null>(null)
     const hostParticipant = participants.length > 0 ? participants[0] : null
 
     const handleCTAButtonClick = async () => {
     if (!channel) return
     console.log('CTA button clicked', channel)
+    // Send custom event - TypeScript workaround for custom event types
     await channel.sendEvent({
         type: 'open_cta_dialog',
-    })
+    } as never)
     }
         useEffect(() => {
         const initChat = async () => {
@@ -77,9 +77,9 @@ const LiveWebinarView = ({
 
         useEffect(() => {
         if (chatClient && channel) {
-            channel.on((event: any) => {
+            channel.on((event: { type?: string }) => {
             if (event.type === 'open_cta_dialog' && isHost) {
-                setDialogOpen(true)
+                // Handle CTA dialog
             }
 
             // console.log("New message:", event);s

@@ -1,9 +1,7 @@
 'use client'
-import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
@@ -16,9 +14,7 @@ import CTAStep from './CTAStep'
 import AdditionalInfoStep from './AdditionalInfoStep'
 import SuccessStep from './SuccessStep'
 
-type Props = {}
-
-const CreateWebinarButton = (props: Props) => {
+function CreateWebinarButton() {
   const { isModalOpen, setModalOpen,isComplete, setComplete,resetForm} = useWebinarStore()
   const [webinarLink,setWebinarLink]=useState('')
   const steps = [
@@ -32,12 +28,7 @@ const CreateWebinarButton = (props: Props) => {
     id: 'cta',
     title: 'CTA',
     description: 'Please provide the end-point for your customers through your webinar',
-    component: (
-      <CTAStep
-        assistants={[]}
-        stripeProducts={[]}
-      />
-    ),
+    component: <CTAStep />,
   },
   {
     id: 'additionalInfo',

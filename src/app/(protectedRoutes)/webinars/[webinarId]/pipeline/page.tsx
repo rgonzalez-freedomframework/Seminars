@@ -8,9 +8,9 @@ import { formatColumnTitle } from './_components/utils'
 
 
 type Props = {
-  params: {
+  params: Promise<{
     webinarId: string
-  }
+  }>
 }   
 
 const Page = async ({ params }: Props) => {

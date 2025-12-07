@@ -1,0 +1,17 @@
+{
+  "buildCommand": "prisma generate && prisma migrate deploy && next build",
+  "framework": "nextjs",
+  "installCommand": "npm install",
+  "env": {
+    "DATABASE_URL": "@database_url",
+    "NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY": "@clerk_publishable_key",
+    "CLERK_SECRET_KEY": "@clerk_secret_key",
+    "NEXT_PUBLIC_STREAM_API_KEY": "@stream_api_key",
+    "STREAM_TOKEN": "@stream_token",
+    "STREAM_CALL_ID": "@stream_call_id",
+    "NEXT_PUBLIC_STREAM_USER_ID": "@stream_user_id",
+    "NEXT_PUBLIC_STRIPE_CLIENT_ID": "@stripe_client_id",
+    "STRIPE_SECRET_KEY": "@stripe_secret_key",
+    "NEXT_PUBLIC_BASE_URL": "@base_url"
+  }
+}

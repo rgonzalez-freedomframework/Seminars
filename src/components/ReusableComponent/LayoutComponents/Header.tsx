@@ -10,6 +10,7 @@ import CreateWebinarButton from '../CreateWebinarButton'
 type Props = { user: User }
 
 //TODO: Stripe Subscription, Assistant,
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Header = ({ user }: Props) => {
   const pathname = usePathname()
   const router = useRouter()

@@ -102,9 +102,17 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
                         animate={{
                             backgroundColor: isCurrent || isCompleted ? 'rgb(147, 51, 234)' : 'rgb(31, 41, 55)',
                             scale: [isCurrent && !isCompleted ? 0.8 : 1, 1],
-                            transition: { duration: 0.3 },
                         }}
-                        className="flex items-center justify-center w-8 h-8 rounded-full z-10"
+                        transition={{ duration: 0.3 }}
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            width: '2rem',
+                            height: '2rem',
+                            borderRadius: '9999px',
+                            zIndex: 10,
+                        }}
                         >
                         <AnimatePresence mode="wait">
                             {isCompleted ? (
@@ -124,7 +132,7 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.5 }}
                                 transition={{ duration: 0.2 }}
-                                className="text-white"
+                                style={{ color: 'white' }}
                             >
                                 <Check className="w-5 h-5 text-white/50" />
                             </motion.div>
@@ -142,7 +150,7 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
                                 backgroundColor: 'rgb(147, 51, 234)',
                             }}
                             transition={{ duration: 0.5, ease: 'easeInOut' }}
-                            className="w-full h-full"
+                            style={{ width: '100%', height: '100%' }}
                             />
                         </div>
                         )}
@@ -153,7 +161,7 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
                         color: isCurrent || isCompleted ? 'rgb(255, 255, 255)' : 'rgb(156, 163, 175)',
                         }}
                         transition={{ duration: 0.3 }}
-                        className="font-medium"
+                        style={{ fontWeight: 500 }}
                     >
                         {step.title}
                     </motion.h3>
@@ -177,7 +185,7 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
             animate={{ x: 0, opacity: 1 }}
             exit={{ x: -20, opacity: 0 }}
             transition={{ duration: 0.3 }}
-            className="p-6"
+            style={{ padding: '1.5rem' }}
             >
             <div className="mb-6">
                 <h2 className="text-xl font-semibold">{currentStep.title}</h2>

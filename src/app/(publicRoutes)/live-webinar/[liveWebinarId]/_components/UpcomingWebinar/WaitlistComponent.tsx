@@ -60,6 +60,8 @@ const WaitlistComponent = ({
           id: res.data.user.id,
           name: res.data.user.name,
           email: res.data.user.email,
+          createdAt: new Date(),
+          updatedAt: new Date(),
           callStatus: 'PENDING',
         })
       }

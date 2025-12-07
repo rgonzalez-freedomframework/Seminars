@@ -1,13 +1,22 @@
 import React from 'react';
 import { prismaClient } from '@/lib/prismaClient';
 import { WebinarStatusEnum } from '@prisma/client';
+import { auth, currentUser } from '@clerk/nextjs/server';
+import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
-import { Calendar, Clock, PlayCircle } from 'lucide-react';
+import { Calendar, Clock, PlayCircle, Shield } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 
 const Pages = async () => {
+  const { userId } = await auth();
+  const user = await currentUser();
+  
+  // Check if user is admin (you can customize this logic)
+  const isAdmin = user?.emailAddresses.some(
+    email => email.emailAddress === 'rgonzalez@freedomframework.us'
+  );
   // Get all upcoming and live webinars for users
   const webinars = await prismaClient.webinar.findMany({
     where: {
@@ -34,15 +43,47 @@ const Pages = async () => {
   });
 
   return (
-    <div className="w-full h-full mt-8 px-6 md:px-8 lg:px-10 xl:px-12">
-      <div className="mb-8">
-        <h1 className="text-primary font-semibold text-4xl mb-2">
-          Welcome to Your Dashboard
-        </h1>
-        <p className="text-muted-foreground text-lg">
-          Access your registered webinars and exclusive content
-        </p>
-      </div>
+    <div className="w-full min-h-screen">
+      {/* Navigation Bar */}
+      <nav className="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="container mx-auto px-4 md:px-8 lg:px-12">
+          <div className="flex h-16 items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Link href="/" className="text-xl font-bold text-primary">
+                Freedom Framework
+              </Link>
+            </div>
+            <div className="flex items-center gap-4">
+              {isAdmin && (
+                <Link href="/admin/webinars">
+                  <Button variant="outline" size="sm" className="gap-2">
+                    <Shield className="w-4 h-4" />
+                    Admin Panel
+                  </Button>
+                </Link>
+              )}
+              {userId ? (
+                <UserButton afterSignOutUrl="/" />
+              ) : (
+                <Link href="/sign-in">
+                  <Button size="sm">Sign In</Button>
+                </Link>
+              )}
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-4 md:px-8 lg:px-12 py-8">
+        <div className="mb-8">
+          <h1 className="text-primary font-semibold text-4xl mb-2">
+            Welcome {user?.firstName || 'Back'}!
+          </h1>
+          <p className="text-muted-foreground text-lg">
+            Access your registered webinars and exclusive content
+          </p>
+        </div>
 
       {/* Upcoming Webinars Section */}
       <div className="mb-12">
@@ -145,6 +186,7 @@ const Pages = async () => {
             </p>
           </CardContent>
         </Card>
+      </div>
       </div>
     </div>
   );

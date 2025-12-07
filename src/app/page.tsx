@@ -62,6 +62,11 @@ export default async function Home() {
                 </Button>
               </Link>
             </div>
+            <div className="mt-4">
+              <Link href="/admin/sign-in" className="text-sm text-gray-400 hover:text-[#CCA43B] transition-colors">
+                Admin Login →
+              </Link>
+            </div>
           </div>
         </div>
       </section>

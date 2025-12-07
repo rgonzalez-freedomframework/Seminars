@@ -100,11 +100,11 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
         <h3 className="text-2xl font-semibold text-primary">{webinar?.title}</h3>
         <p className="text-muted-foreground text-xs">{webinar?.description}</p>
         <div className="w-full justify-center flex gap-2 flex-wrap items-center">
-            <Button variant="outline" className="rounded-md bg-secondary backdrop-blur-2xl">
+            <Button variant="outline" className="rounded-md bg-white border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white font-semibold">
             <Calendar className="mr-2" />
             {format(new Date(webinar.startTime), 'dd MMMM yyyy')}
             </Button>
-            <Button variant="outline">
+            <Button variant="outline" className="rounded-md bg-white border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white font-semibold">
             <Clock className="mr-2" />
             {format(new Date(webinar.startTime), 'hh:mm a')}
             </Button>

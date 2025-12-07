@@ -10,8 +10,8 @@ const Sidebar = () => {
   const pathname = usePathname()
 
   return (
-    <div className="w-18 sm:w-28 h-screen sticky top-0 py-10 px-2 sm:px-6 border bg-background border-border flex flex-col items-center justify-start gap-10">
-        <Sparkles className="w-5 h-5 text-white" strokeWidth={1.8} />
+    <div className="w-18 sm:w-28 h-screen sticky top-0 py-10 px-2 sm:px-6 border-2 bg-white border-gray-300 flex flex-col items-center justify-start gap-10">
+        <Sparkles className="w-5 h-5 text-[#CCA43B]" strokeWidth={1.8} />
         <div className="w-full h-full justify-between items-center flex flex-col">
         <div className='w-full h-fit flex flex-col gap-4 items-center justify-center'>
         {sidebarData.map((item) => (

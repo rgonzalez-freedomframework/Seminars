@@ -56,7 +56,7 @@ const Page = () => {
           </div>
         </div>
 
-        <div className="my-6 p-4 bg-muted rounded-md">
+        <div className="my-6 p-4 bg-gray-100 rounded-md border-2 border-gray-300">
           <div className="flex items-start">
             {isConnected ? (
               <LucideCheckCircle2 className="h-5 w-5 text-green-500 mt-0.5 mr-3 flex-shrink-0" />

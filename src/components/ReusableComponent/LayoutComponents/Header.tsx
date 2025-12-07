@@ -16,17 +16,17 @@ const Header = ({ user }: Props) => {
   const router = useRouter()
 
   return (
-    <div className="w-full px-6 md:px-8 lg:px-10 xl:px-12 pt-10 sticky top-0 z-10 flex justify-between items-center flex-wrap gap-4 bg-background">
+    <div className="w-full px-6 md:px-8 lg:px-10 xl:px-12 pt-10 sticky top-0 z-10 flex justify-between items-center flex-wrap gap-4 bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50">
       {pathname.includes('pipeline') ? (
         <Button
-            className="bg-primary/10 border border-border rounded-xl"
+            className="bg-white border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white rounded-xl font-semibold"
             variant={'outline'}
             onClick={() => router.push('/webinars')}
         >
             <ArrowLeft /> Back to Webinars
         </Button>
         ) : (
-        <div className="px-4 py-2 flex justify-center text-bold items-center rounded-xl bg-background border border-border text-primary capitalize">
+        <div className="px-4 py-2 flex justify-center text-bold items-center rounded-xl bg-white border-2 border-gray-300 text-[#1D2A38] capitalize font-semibold">
             {pathname.split('/')[1]}
         </div>
         )}

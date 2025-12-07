@@ -26,19 +26,19 @@ const Page = async () => {
       <TabsList className="bg-transparent space-x-3">
         <TabsTrigger
             value="all"
-            className="bg-secondary opacity-50 data-[state=active]:opacity-100 px-8 py-4"
+            className="bg-white border-2 border-gray-300 text-[#1D2A38] data-[state=active]:bg-[#CCA43B] data-[state=active]:text-[#1D2A38] data-[state=active]:border-[#CCA43B] px-8 py-4 font-semibold"
         >
             All
         </TabsTrigger>
         <TabsTrigger
             value="upcoming"
-            className="bg-secondary px-8 py-4"
+            className="bg-white border-2 border-gray-300 text-[#1D2A38] data-[state=active]:bg-[#CCA43B] data-[state=active]:text-[#1D2A38] data-[state=active]:border-[#CCA43B] px-8 py-4 font-semibold"
         >
             Upcoming
         </TabsTrigger>
         <TabsTrigger
             value="ended"
-            className="bg-secondary px-8 py-4"
+            className="bg-white border-2 border-gray-300 text-[#1D2A38] data-[state=active]:bg-[#CCA43B] data-[state=active]:text-[#1D2A38] data-[state=active]:border-[#CCA43B] px-8 py-4 font-semibold"
         >
             Ended
         </TabsTrigger>

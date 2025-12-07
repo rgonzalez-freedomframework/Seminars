@@ -29,8 +29,8 @@ export function StripeToggleButton({ initialConnected }: { initialConnected: boo
       disabled={loading}
       className={`px-5 py-2.5 rounded-md font-medium text-sm flex items-center gap-2 transition-colors ${
         isConnected
-          ? 'bg-muted hover:bg-muted/80 text-foreground'
-          : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white'
+          ? 'bg-gray-200 hover:bg-gray-300 text-[#1D2A38] border-2 border-gray-400'
+          : 'bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 text-white border-2 border-purple-700'
       }`}
     >
       {loading ? 'Loading...' : isConnected ? 'Disconnect' : 'Connect with Stripe'}

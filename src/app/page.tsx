@@ -40,9 +40,9 @@ export default async function Home() {
       <header className="absolute top-0 left-0 right-0 z-50">
         <div className="container mx-auto px-4 py-6">
           <div className="flex justify-between items-center">
-            <div className="text-2xl font-bold text-white">
+            <Link href="/" className="text-2xl font-bold text-white hover:text-[#CCA43B] transition-colors">
               Freedom Framework
-            </div>
+            </Link>
             <Link href="/sign-in">
               <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-semibold px-6 py-3">
                 Login
@@ -213,6 +213,24 @@ export default async function Home() {
                 </CardContent>
               </Card>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Main CTA Section */}
+      <section className="py-20">
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Get Your Freedom Matrix Score
+            </h2>
+            <p className="text-xl text-gray-300 mb-8">
+              Click below to access the diagnostic instantly.
+            </p>
+            <GeneralRegistrationForm 
+              triggerText="START THE ASSESSMENT"
+              triggerClassName="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-bold text-xl px-12 py-8 text-center inline-block"
+            />
           </div>
         </div>
       </section>

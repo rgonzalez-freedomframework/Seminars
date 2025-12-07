@@ -36,10 +36,26 @@ export default async function Home() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#1D2A38] via-[#3A4750] to-[#1D2A38]">
+      {/* Header with Login Button */}
+      <header className="absolute top-0 left-0 right-0 z-50">
+        <div className="container mx-auto px-4 py-6">
+          <div className="flex justify-between items-center">
+            <div className="text-2xl font-bold text-white">
+              Freedom Framework
+            </div>
+            <Link href="/sign-in">
+              <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-semibold px-6 py-3">
+                Login
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
       <section className="relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        <div className="container mx-auto px-4 py-20 md:py-32 relative z-10">
+        <div className="container mx-auto px-4 py-32 md:py-40 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
             <Badge className="mb-6 bg-[#CCA43B] text-[#1D2A38] hover:bg-[#CCA43B]/90 text-sm font-semibold px-4 py-2">
               FREEDOM FRAMEWORK™
@@ -51,16 +67,11 @@ export default async function Home() {
             <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
               Take the 5-minute assessment used by 7- and 8-figure law firm owners to diagnose operational bottlenecks and map their path to true time + financial freedom.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <div className="flex justify-center">
               <GeneralRegistrationForm 
                 triggerText="Get Started - Register Free"
                 triggerClassName="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-semibold text-lg px-8 py-6"
               />
-              <Link href="/sign-in">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-semibold text-lg px-8 py-6">
-                  Login
-                </Button>
-              </Link>
             </div>
           </div>
         </div>

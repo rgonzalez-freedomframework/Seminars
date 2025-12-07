@@ -53,23 +53,23 @@ const page = async () => {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="text-sm text-muted-foreground">Name</TableHead>
-              <TableHead className="text-sm text-muted-foreground">Email</TableHead>
-              <TableHead className="text-sm text-muted-foreground">Phone</TableHead>
-              <TableHead className="text-sm text-muted-foreground">Business</TableHead>
-              <TableHead className="text-sm text-muted-foreground">Description</TableHead>
-              <TableHead className="text-right text-sm text-muted-foreground">Webinars</TableHead>
+              <TableHead className="text-sm text-gray-700 font-semibold">Name</TableHead>
+              <TableHead className="text-sm text-gray-700 font-semibold">Email</TableHead>
+              <TableHead className="text-sm text-gray-700 font-semibold">Phone</TableHead>
+              <TableHead className="text-sm text-gray-700 font-semibold">Business</TableHead>
+              <TableHead className="text-sm text-gray-700 font-semibold">Description</TableHead>
+              <TableHead className="text-right text-sm text-gray-700 font-semibold">Webinars</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
             {attendees.length > 0 ? (
               attendees.map((attendee) => (
                 <TableRow key={attendee.id} className="border-0">
-                  <TableCell className="font-medium">{attendee.name}</TableCell>
-                  <TableCell>{attendee.email}</TableCell>
-                  <TableCell>{attendee.phone || '-'}</TableCell>
-                  <TableCell>{attendee.businessName || '-'}</TableCell>
-                  <TableCell className="max-w-xs truncate">{attendee.description || '-'}</TableCell>
+                  <TableCell className="font-medium text-[#1D2A38]">{attendee.name}</TableCell>
+                  <TableCell className="text-gray-700">{attendee.email}</TableCell>
+                  <TableCell className="text-gray-700">{attendee.phone || '-'}</TableCell>
+                  <TableCell className="text-gray-700">{attendee.businessName || '-'}</TableCell>
+                  <TableCell className="max-w-xs truncate text-gray-700">{attendee.description || '-'}</TableCell>
                   <TableCell className="text-right">
                     {attendee.Attendance.map((attendance, idx) => (
                       <Badge key={idx} variant="outline" className="ml-1">
@@ -81,7 +81,7 @@ const page = async () => {
               ))
             ) : (
               <TableRow>
-                <TableCell colSpan={6} className="text-center py-8 text-muted-foreground">
+                <TableCell colSpan={6} className="text-center py-8 text-gray-600">
                   No leads yet. Create a webinar and share the link to start collecting leads!
                 </TableCell>
               </TableRow>

@@ -52,14 +52,10 @@ const Pages = async () => {
     },
   });
 
-  // Get resources from webinars the user has attended or registered for
+  // Get resources from webinars that have resources available
+  // TODO: Filter by user attendance when attendance tracking is fully implemented
   const userResources = await prismaClient.webinar.findMany({
     where: {
-      attendances: {
-        some: {
-          userId: userId || undefined,
-        },
-      },
       resources: {
         some: {},
       },

@@ -1,5 +1,6 @@
 import { onAuthenticateUser } from '@/actions/auth';
 import { getWebinarById } from '@/actions/webinar';
+import { checkAndUpdateExpiredWebinars } from '@/actions/webinarManagement';
 import React from 'react';
 import RenderWebinar from './_components/RenderWebinar';
 
@@ -15,6 +16,9 @@ type Props = {
 const page = async ({ params, searchParams }: Props) => {
   const { liveWebinarId } = await params;
   const { error } = await searchParams;
+
+  // Check and update any expired webinars before displaying
+  await checkAndUpdateExpiredWebinars();
 
   const webinarData = await getWebinarById(liveWebinarId);
   if (!webinarData) {

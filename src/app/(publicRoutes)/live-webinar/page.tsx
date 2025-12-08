@@ -4,8 +4,12 @@ import Link from 'next/link';
 import { Calendar, Clock, Users } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
+import { checkAndUpdateExpiredWebinars } from '@/actions/webinarManagement';
 
 export default async function LiveWebinarIndexPage() {
+  // Check and update any expired webinars before displaying
+  await checkAndUpdateExpiredWebinars();
+  
   // Get all upcoming and live webinars
   const webinars = await prismaClient.webinar.findMany({
     where: {

@@ -65,6 +65,10 @@ export const createWebinar = async (formData: WebinarFormState) => {
     let zoomWebinarData = null
     if (formData.additionalInfo?.enableZoom) {
       try {
+        // Get the server's timezone (where webinar is being created from)
+        // This ensures consistency across the system
+        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        
         const zoomResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/zoom/create-webinar`, {
           method: 'POST',
           headers: {
@@ -74,7 +78,7 @@ export const createWebinar = async (formData: WebinarFormState) => {
             topic: formData.basicInfo.webinarName,
             startTime: combinedDateTime.toISOString(),
             duration: formData.basicInfo.duration || 60,
-            timezone: 'America/New_York',
+            timezone: timezone,
             agenda: formData.basicInfo.description || '',
           }),
         })

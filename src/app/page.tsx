@@ -6,8 +6,12 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import GeneralRegistrationForm from '@/components/ReusableComponent/GeneralRegistrationForm';
+import { checkAndUpdateExpiredWebinars } from '@/actions/webinarManagement';
 
 export default async function Home() {
+  // Check and update any expired webinars before displaying
+  await checkAndUpdateExpiredWebinars();
+  
   // Get upcoming and live webinars
   const webinars = await prismaClient.webinar.findMany({
     where: {

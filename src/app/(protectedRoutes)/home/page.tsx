@@ -8,10 +8,14 @@ import { Calendar, Clock, PlayCircle, Shield } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
+import { checkAndUpdateExpiredWebinars } from '@/actions/webinarManagement';
 
 const Pages = async () => {
   const { userId } = await auth();
   const user = await currentUser();
+  
+  // Check and update any expired webinars before displaying
+  await checkAndUpdateExpiredWebinars();
   
   // Check if user is admin using Clerk's publicMetadata
   // You can set this via Clerk Dashboard: Users → Select User → Metadata → Public metadata: {"role": "admin"}

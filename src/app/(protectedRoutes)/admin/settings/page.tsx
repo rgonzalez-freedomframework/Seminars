@@ -32,7 +32,7 @@ const Page = () => {
   return (
     <div className="w-full mx-auto py-8 px-6 md:px-8 lg:px-10 xl:px-12">
       <h1 className="text-2xl font-bold mb-6 text-[#1D2A38]">Payment Integration</h1>
-      <div className="w-full p-6 border border-input rounded-lg bg-background shadow-sm">
+      <div className="w-full p-6 border-2 border-gray-300 rounded-lg bg-white shadow-sm">
         <div className="flex items-center mb-4">
           <div className="h-10 w-10 rounded-full bg-gradient-to-r from-purple-500 to-indigo-600 flex items-center justify-center mr-4">
             <svg

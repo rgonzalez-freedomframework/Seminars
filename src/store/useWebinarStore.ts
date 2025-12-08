@@ -11,6 +11,7 @@ export type WebinarFormState = {
     duration?: number
     videoUrl?: string
     isPreRecorded?: boolean
+    thumbnail?: string
   }
   cta: {
     ctaLabel?: string
@@ -24,6 +25,14 @@ export type WebinarFormState = {
     couponCode?: string
     couponEnabled?: boolean
     enableZoom?: boolean
+    resources?: Array<{
+      title: string
+      description: string
+      fileUrl: string
+      fileName: string
+      fileSize: number
+      fileType: string
+    }>
   }
 }
 

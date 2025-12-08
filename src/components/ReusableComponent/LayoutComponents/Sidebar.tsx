@@ -20,7 +20,7 @@ const Sidebar = () => {
             <TooltipTrigger asChild>
                 <Link href={item.link} className={`flex items-center gap-2 cursor-pointer rounded-lg p-2 ${pathname.includes(item.link)?'iconBackground':'bg-gray-100 hover:bg-gray-200'}`}>
                     <item.icon
-                    className={`w-4 h-4 ${pathname.includes(item.link)?'text-white':'text-[#1D2A38]'}`}
+                    className={`w-4 h-4 !text-[#1D2A38] !stroke-[#1D2A38]`}
                     />
                 </Link>
             </TooltipTrigger>

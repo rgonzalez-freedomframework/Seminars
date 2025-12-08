@@ -238,7 +238,9 @@ const Pages = async () => {
                   </CollapsibleTrigger>
                   <CollapsibleContent>
                     <CardContent className="pt-4 space-y-3">
-                      {webinar.resources.map((resource) => (
+                      {webinar.resources
+                        .filter((resource) => !!resource.fileUrl)
+                        .map((resource) => (
                         <div
                           key={resource.id}
                           className="flex items-start justify-between p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-[#CCA43B] transition-colors group"
@@ -261,6 +263,8 @@ const Pages = async () => {
                           <a
                             href={resource.fileUrl}
                             download
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="flex-shrink-0"
                             onClick={(e) => e.stopPropagation()}
                           >
@@ -273,7 +277,7 @@ const Pages = async () => {
                             </Button>
                           </a>
                         </div>
-                      ))}
+                        ))}
                     </CardContent>
                   </CollapsibleContent>
                 </Card>

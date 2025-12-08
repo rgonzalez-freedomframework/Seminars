@@ -79,3 +79,44 @@ export async function GET(
     );
   }
 }
+
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: Promise<{ webinarId: string }> }
+) {
+  try {
+    const { userId } = await auth();
+
+    if (!userId) {
+      return NextResponse.json(
+        { error: 'Unauthorized' },
+        { status: 401 }
+      );
+    }
+
+    const { webinarId } = await params;
+
+    if (!webinarId) {
+      return NextResponse.json(
+        { error: 'Webinar ID is required' },
+        { status: 400 }
+      );
+    }
+
+    const body = await request.json();
+
+    // Update Zoom webinar
+    await zoomClient.updateWebinar(webinarId, body);
+
+    return NextResponse.json({
+      success: true,
+      message: 'Zoom webinar updated successfully',
+    });
+  } catch (error: any) {
+    console.error('Error updating Zoom webinar:', error);
+    return NextResponse.json(
+      { error: error.message || 'Failed to update Zoom webinar' },
+      { status: 500 }
+    );
+  }
+}

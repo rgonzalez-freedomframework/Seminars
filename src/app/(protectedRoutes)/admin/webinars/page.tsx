@@ -1,5 +1,6 @@
 import { onAuthenticateUser } from '@/actions/auth'
 import { getWebinarByPresenterId } from '@/actions/webinar'
+import { checkAndUpdateExpiredWebinars } from '@/actions/webinarManagement'
 import PageHeader from '@/components/ReusableComponent/PageHeader'
 import { Tabs, TabsList, TabsTrigger, TabsContent} from '@/components/ui/tabs'
 import { Webcam,HomeIcon, Handshake } from 'lucide-react'
@@ -13,6 +14,10 @@ const Page = async () => {
   if (!checkUser.user) {
     redirect('/')
   }
+  
+  // Check and update any webinars that should have ended
+  await checkAndUpdateExpiredWebinars()
+  
   const webinars=await getWebinarByPresenterId(checkUser?.user?.id)
   return (
     <Tabs defaultValue="all" className="w-full flex flex-col gap-8">

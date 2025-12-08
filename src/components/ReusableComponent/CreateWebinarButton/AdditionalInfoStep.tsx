@@ -113,7 +113,7 @@ const handleAddResource = async () => {
           fileType: newResource.file?.type || ''
         }])
         
-        // Reset form
+        // Reset form but keep file input visible
         setNewResource({
           title: '',
           description: '',
@@ -122,7 +122,7 @@ const handleAddResource = async () => {
           progress: 0
         })
         
-        toast.success('Resource added successfully!')
+        toast.success(`Resource "${newResource.title}" added successfully!`)
       } else {
         toast.error('Upload failed. Please try again.')
       }

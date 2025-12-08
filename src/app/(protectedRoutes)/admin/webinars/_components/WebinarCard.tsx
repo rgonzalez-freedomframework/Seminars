@@ -77,11 +77,11 @@ const WebinarCard = ({ webinar }: Props) => {
     <div className="flex gap-3 flex-col items-start w-full">
       <Link href={`/live-webinar/${webinar?.id}`} className="w-full max-w-[400px]">
         <Image
-          src="/darkthumbnail.png"
+          src={webinar?.thumbnail || "/darkthumbnail.png"}
           alt="webinar"
           width={400}
           height={100}
-          className="rounded-md w-[400px]"
+          className="rounded-md w-[400px] object-cover"
         />
       </Link>
           <div className="w-full flex justify-between gap-3 items-center">

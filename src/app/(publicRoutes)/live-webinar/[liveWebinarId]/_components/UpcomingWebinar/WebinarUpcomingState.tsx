@@ -62,7 +62,7 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
         <div className="space-y-6 w-full h-full flex justify-center items-center flex-col animate-in fade-in zoom-in duration-700 delay-300">
         <div className="w-full max-w-md aspect-[4/3] relative rounded-2xl overflow-hidden mb-6 shadow-2xl border-4 border-[#CCA43B]/20 hover:border-[#CCA43B]/40 transition-all duration-300 hover:scale-[1.02]">
             <Image
-            src={'/aieracourse.png'}
+            src={webinar.thumbnail || '/aieracourse.png'}
             alt={webinar.title}
             fill
             className="object-cover"
@@ -111,11 +111,21 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
         <div className="w-full justify-center flex gap-3 flex-wrap items-center">
             <Button variant="outline" className="rounded-xl bg-white border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white font-semibold transition-all duration-300 hover:scale-105 shadow-md">
             <Calendar className="mr-2 w-4 h-4" />
-            {format(new Date(webinar.startTime), 'dd MMMM yyyy')}
+            {new Date(webinar.startTime).toLocaleDateString('en-US', { 
+              month: 'long', 
+              day: 'numeric', 
+              year: 'numeric',
+              timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+            })}
             </Button>
             <Button variant="outline" className="rounded-xl bg-white border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white font-semibold transition-all duration-300 hover:scale-105 shadow-md">
             <Clock className="mr-2 w-4 h-4" />
-            {format(new Date(webinar.startTime), 'hh:mm a')}
+            {new Date(webinar.startTime).toLocaleTimeString('en-US', { 
+              hour: 'numeric', 
+              minute: '2-digit',
+              hour12: true,
+              timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+            })}
             </Button>
         </div>
         </div>

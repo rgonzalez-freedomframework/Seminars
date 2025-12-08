@@ -3,13 +3,12 @@ import React from 'react'
 
 const Signup = () => {
   return (
-    <div className="flex flex-col items-center justify-center w-full min-h-screen px-4 sm:px-6 md:px-8">
-      <div className="w-full max-w-2xl mx-auto flex flex-col">
-        <div className="mb-6 md:mb-8 pl-6 md:pl-10">
-          <h1 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-2">Get Started Free</h1>
-          <p className="text-gray-700 text-sm md:text-base">Create your account to access exclusive content</p>
-        </div>
-        <div className="w-full">
+    <div className="w-full max-w-2xl">
+      <div className="mb-6 md:mb-8 px-2">
+        <h1 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-2">Get Started Free</h1>
+        <p className="text-gray-700 text-sm md:text-base">Create your account to access exclusive content</p>
+      </div>
+      <div>
         <SignUp 
           appearance={{
             elements: {
@@ -27,7 +26,6 @@ const Signup = () => {
           signInUrl="/sign-in"
           afterSignUpUrl="/home"
         />
-        </div>
       </div>
     </div>
   )

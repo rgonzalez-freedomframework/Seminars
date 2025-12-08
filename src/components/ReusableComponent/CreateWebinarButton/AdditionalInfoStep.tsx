@@ -292,7 +292,7 @@ const handleRemoveResource = (index: number) => {
             <Button
               type="button"
               variant="outline"
-              className="relative flex-1 border-2 border-gray-300 hover:border-[#CCA43B]"
+              className="relative flex-1 justify-center border-2 border-gray-300 bg-white text-[#1D2A38] font-semibold hover:border-[#CCA43B] hover:bg-[#CCA43B]/5 shadow-sm"
               disabled={newResource.uploading}
             >
               <Upload className="h-4 w-4 mr-2" />

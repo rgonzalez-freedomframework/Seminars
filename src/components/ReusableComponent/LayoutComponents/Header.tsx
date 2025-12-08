@@ -8,6 +8,7 @@ import React from 'react'
 import { Zap } from 'lucide-react'
 import PurpleIcon from '../PurpleIcon'
 import CreateWebinarButton from '../CreateWebinarButton'
+import { VERSION } from '@/lib/version'
 type Props = { user: User }
 
 //TODO: Stripe Subscription, Assistant,
@@ -32,7 +33,7 @@ const Header = ({ user }: Props) => {
           </Button>
         ) : (
           <div className="px-4 py-2 flex justify-center text-bold items-center rounded-xl bg-white border-2 border-gray-300 text-[#1D2A38] font-semibold animate-in fade-in slide-in-from-top-2 duration-500">
-              {pathname.split('/')[1] === 'admin' ? `Admin View v${require('../../../../../version.json').version}` : pathname.split('/')[1]}
+              {pathname.split('/')[1] === 'admin' ? `Admin View v${VERSION}` : pathname.split('/')[1]}
           </div>
         )}
       </div>

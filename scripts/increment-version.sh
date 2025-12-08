@@ -2,6 +2,7 @@
 # Increment version before build
 
 VERSION_FILE="version.json"
+VERSION_TS="src/lib/version.ts"
 
 if [ -f "$VERSION_FILE" ]; then
   # Read current version
@@ -21,13 +22,24 @@ if [ -f "$VERSION_FILE" ]; then
   NEW_PATCH=$((PATCH + 1))
   NEW_VERSION="$MAJOR.$MINOR.$NEW_PATCH"
   
-  # Update version file
+  TIMESTAMP=$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")
+  
+  # Update version.json
   cat > "$VERSION_FILE" << EOF
 {
   "version": "$NEW_VERSION",
   "build": $NEW_BUILD,
-  "timestamp": "$(date -u +"%Y-%m-%dT%H:%M:%S.000Z")"
+  "timestamp": "$TIMESTAMP"
 }
+EOF
+  
+  # Update version.ts
+  cat > "$VERSION_TS" << EOF
+// Auto-generated version file
+// This is updated by scripts/increment-version.sh before each build
+export const VERSION = '$NEW_VERSION'
+export const BUILD = $NEW_BUILD
+export const TIMESTAMP = '$TIMESTAMP'
 EOF
   
   echo "Version updated to $NEW_VERSION (build $NEW_BUILD)"

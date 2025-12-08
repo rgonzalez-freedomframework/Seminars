@@ -52,12 +52,20 @@ export const createWebinar = async (formData: WebinarFormState) => {
     formData.basicInfo.time,
     formData.basicInfo.timeFormat || 'AM'
     )
-    const now = new Date()
 
-    if (combinedDateTime < now) {
+    // Only block webinars whose calendar date is before today.
+    // This avoids timezone issues where "today" with an earlier time
+    // might be interpreted as being in the past on the server.
+    const today = new Date()
+    today.setHours(0, 0, 0, 0)
+
+    const webinarDateOnly = new Date(combinedDateTime)
+    webinarDateOnly.setHours(0, 0, 0, 0)
+
+    if (webinarDateOnly < today) {
     return {
-        status: 400,
-        message: 'Webinar date and time cannot be in the past',
+      status: 400,
+      message: 'Webinar date and time cannot be in the past',
     }
     }
 

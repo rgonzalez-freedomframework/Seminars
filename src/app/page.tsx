@@ -37,8 +37,8 @@ export default async function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50">
       {/* Header with Login Button */}
-      <header className="absolute top-0 left-0 right-0 z-50 bg-gray-50/95 backdrop-blur-sm border-b border-gray-300">
-        <div className="container mx-auto px-4 py-4 md:py-6">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-300 shadow-sm transition-all duration-300">
+        <div className="container mx-auto px-4 py-3 md:py-4 transition-all duration-300">
           <div className="flex justify-between items-center">
             <Link href="/" className="text-xl md:text-2xl font-bold text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
               Freedom Framework
@@ -53,24 +53,25 @@ export default async function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden pt-20">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#CCA43B]/5 via-transparent to-[#1D2A38]/5"></div>
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        <div className="container mx-auto px-4 py-24 sm:py-32 md:py-40 relative z-10">
+        <div className="container mx-auto px-4 py-24 sm:py-32 md:py-40 relative z-10 animate-in fade-in duration-1000">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 md:mb-6 bg-[#CCA43B] text-[#1D2A38] hover:bg-[#CCA43B]/90 text-xs md:text-sm font-semibold px-3 md:px-4 py-1.5 md:py-2">
+            <Badge className="mb-4 md:mb-6 bg-[#CCA43B] text-[#1D2A38] hover:bg-[#CCA43B]/90 text-xs md:text-sm font-semibold px-3 md:px-4 py-1.5 md:py-2 animate-in slide-in-from-top duration-700">
               FREEDOM FRAMEWORK™
             </Badge>
-            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-[#1D2A38] mb-4 md:mb-6 tracking-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-[#1D2A38] mb-4 md:mb-6 tracking-tight animate-in slide-in-from-bottom duration-1000">
               Discover Your Firm's
-              <span className="block text-[#CCA43B]">Freedom Score</span>
+              <span className="block text-[#CCA43B] bg-gradient-to-r from-[#CCA43B] to-[#B8932F] bg-clip-text">Freedom Score</span>
             </h1>
-            <p className="text-lg md:text-xl lg:text-2xl text-gray-700 mb-6 md:mb-8 leading-relaxed px-4">
+            <p className="text-lg md:text-xl lg:text-2xl text-gray-700 mb-6 md:mb-8 leading-relaxed px-4 animate-in fade-in duration-1000 delay-300">
               Take the 5-minute assessment used by 7- and 8-figure law firm owners to diagnose operational bottlenecks and map their path to true time + financial freedom.
             </p>
-            <div className="flex justify-center">
+            <div className="flex justify-center animate-in zoom-in duration-700 delay-500">
               <GeneralRegistrationForm 
                 triggerText="Get Started - Register Free"
-                triggerClassName="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-semibold text-lg px-8 py-6"
+                triggerClassName="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-bold text-xl md:text-2xl px-10 md:px-16 py-6 md:py-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
               />
             </div>
           </div>
@@ -78,10 +79,11 @@ export default async function Home() {
       </section>
 
       {/* Why This Matters Section */}
-      <section className="py-12 md:py-20 bg-white/50">
-        <div className="container mx-auto px-4">
+      <section className="py-12 md:py-20 bg-gradient-to-br from-white to-gray-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#CCA43B]/5 to-transparent pointer-events-none"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-bold text-[#1D2A38] mb-8 text-center">
+            <h2 className="text-3xl md:text-5xl font-bold text-[#1D2A38] mb-8 text-center animate-in slide-in-from-bottom duration-700">
               Why This Matters
             </h2>
             <div className="prose prose-lg mx-auto">
@@ -117,8 +119,9 @@ export default async function Home() {
       </section>
 
       {/* What You'll Learn Section */}
-      <section className="py-12 md:py-20 bg-gray-100/50">
-        <div className="container mx-auto px-4">
+      <section className="py-12 md:py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-l from-[#1D2A38]/5 to-transparent pointer-events-none"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto">
             <h2 className="text-3xl md:text-5xl font-bold text-[#1D2A38] mb-12 text-center">
               What You'll Learn
@@ -127,7 +130,7 @@ export default async function Home() {
               This diagnostic reveals:
             </p>
             <div className="grid md:grid-cols-2 gap-6">
-              <Card className="bg-white border-gray-200 shadow-md hover:shadow-xl hover:border-[#CCA43B] transition-all">
+              <Card className="bg-white border-gray-200 shadow-md hover:shadow-xl hover:border-[#CCA43B] transition-all duration-300 transform hover:-translate-y-2 animate-in fade-in duration-700">
                 <CardContent className="p-6">
                   <div className="flex items-start gap-4">
                     <CheckCircle2 className="w-6 h-6 text-[#CCA43B] flex-shrink-0 mt-1" />
@@ -177,10 +180,11 @@ export default async function Home() {
       </section>
 
       {/* Four Quadrants Section */}
-      <section className="py-12 md:py-20 bg-white/50">
-        <div className="container mx-auto px-4">
+      <section className="py-12 md:py-20 bg-gradient-to-br from-white via-gray-50 to-white relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#CCA43B]/10 via-transparent to-[#1D2A38]/5 pointer-events-none"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-5xl mx-auto">
-            <h2 className="text-3xl md:text-5xl font-bold text-[#1D2A38] mb-12 text-center">
+            <h2 className="text-3xl md:text-5xl font-bold text-[#1D2A38] mb-12 text-center animate-in slide-in-from-bottom duration-700">
               The Four Quadrants
             </h2>
             <div className="grid md:grid-cols-2 gap-6">
@@ -218,8 +222,9 @@ export default async function Home() {
       </section>
 
       {/* Main CTA Section */}
-      <section className="py-12 md:py-20 bg-gray-100/50">
-        <div className="container mx-auto px-4">
+      <section className="py-12 md:py-20 bg-gradient-to-r from-gray-50 via-white to-gray-50 relative overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#CCA43B]/10 to-[#1D2A38]/5 pointer-events-none"></div>
+        <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-bold text-[#1D2A38] mb-6">
               Get Your Freedom Matrix Score
@@ -229,7 +234,7 @@ export default async function Home() {
             </p>
             <GeneralRegistrationForm 
               triggerText="START THE ASSESSMENT"
-              triggerClassName="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-bold text-xl px-12 py-8 text-center inline-block"
+              triggerClassName="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-bold text-2xl md:text-3xl px-14 md:px-20 py-6 md:py-10 text-center inline-block shadow-2xl hover:shadow-[#CCA43B]/50 transition-all duration-300 transform hover:scale-105 animate-in zoom-in duration-700"
             />
           </div>
         </div>

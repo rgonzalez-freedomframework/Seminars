@@ -58,9 +58,12 @@ export default async function Home() {
         <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
         <div className="container mx-auto px-4 py-24 sm:py-32 md:py-40 relative z-10 animate-in fade-in duration-1000">
           <div className="max-w-4xl mx-auto text-center">
-            <Badge className="mb-4 md:mb-6 bg-[#CCA43B] text-[#1D2A38] hover:bg-[#CCA43B]/90 text-xs md:text-sm font-semibold px-3 md:px-4 py-1.5 md:py-2 animate-in slide-in-from-top duration-700">
-              FREEDOM FRAMEWORK™
-            </Badge>
+            <div className="mb-4 md:mb-6 animate-in slide-in-from-top duration-700">
+              <span className="inline-block text-xs md:text-sm font-bold tracking-[0.2em] text-[#CCA43B] uppercase relative">
+                <span className="relative z-10">Freedom Framework™</span>
+                <span className="absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-[#CCA43B] to-transparent"></span>
+              </span>
+            </div>
             <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-bold text-[#1D2A38] mb-4 md:mb-6 tracking-tight animate-in slide-in-from-bottom duration-1000">
               Discover Your Firm's
               <span className="block text-[#CCA43B] bg-gradient-to-r from-[#CCA43B] to-[#B8932F] bg-clip-text">Freedom Score</span>

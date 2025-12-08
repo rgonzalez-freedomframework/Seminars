@@ -101,7 +101,7 @@ const WebinarCard = ({ webinar }: Props) => {
 
       <div className="flex gap-2 items-center">
         <Link
-          href={`/webinars/${webinar?.id}/pipeline`}
+          href={`/admin/webinars/${webinar?.id}/pipeline`}
           className="flex px-4 py-2 rounded-md border-2 border-gray-300 bg-white shadow-md hover:shadow-lg hover:border-[#CCA43B] transition-all"
         >
           <GitFork className="w-4 h-4 text-[#1D2A38]" />

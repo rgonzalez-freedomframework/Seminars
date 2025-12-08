@@ -44,7 +44,7 @@ const handleTimeFormatChange = (value: string) => {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="webinarName" className={errors.webinarName ? 'text-red-400' : ''}>
+        <Label htmlFor="webinarName" className={errors.webinarName ? 'text-red-400' : 'text-[#1D2A38]'}>
             Webinar name <span className="text-red-400">*</span>
             </Label>
             <Input
@@ -54,7 +54,7 @@ const handleTimeFormatChange = (value: string) => {
             onChange={handleChange}
             placeholder="Introduction to Mochi"
             className={cn(
-                '!bg-background/50 border border-input',
+                'bg-white border-2 border-gray-300 text-[#1D2A38]',
                 errors.webinarName && 'border-red-400 focus-visible:ring-red-400'
             )}
             />
@@ -65,7 +65,7 @@ const handleTimeFormatChange = (value: string) => {
       <div className="space-y-2">
         <Label
             htmlFor="description"
-            className={errors.description ? 'text-red-400' : ''}
+            className={errors.description ? 'text-red-400' : 'text-[#1D2A38]'}
         >
             Description <span className="text-red-400">*</span>
         </Label>
@@ -76,7 +76,7 @@ const handleTimeFormatChange = (value: string) => {
             onChange={handleChange}
             placeholder="Tell customers what your webinar is about"
             className={cn(
-            'min-h-[100px] !bg-background/50 border border-input',
+            'min-h-[100px] bg-white border-2 border-gray-300 text-[#1D2A38]',
             errors.description && 'border-red-400 focus-visible:ring-red-400'
             )}
         />
@@ -86,7 +86,7 @@ const handleTimeFormatChange = (value: string) => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-                <Label htmlFor="date" className={errors.date ? 'text-red-400' : ''}>
+                <Label htmlFor="date" className={errors.date ? 'text-red-400' : 'text-[#1D2A38]'}>
                 Webinar Date <span className="text-red-400">*</span>
                 </Label>
                 <Popover>
@@ -94,8 +94,8 @@ const handleTimeFormatChange = (value: string) => {
                     <Button
                     variant="outline"
                     className={cn(
-                        'w-full justify-start text-left font-normal bg-background/50 border border-input',
-                        date && 'text-gray-500',
+                        'w-full justify-start text-left font-normal bg-white border-2 border-gray-300 text-[#1D2A38]',
+                        !date && 'text-gray-500',
                         errors.date && 'border-red-400 focus-visible:ring-red-400'
                     )}
                     >
@@ -103,13 +103,13 @@ const handleTimeFormatChange = (value: string) => {
                     {date ? format(date, 'PPP') : 'Select date'}
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 !bg-background/50 border border-input">
+                <PopoverContent className="w-auto p-0 bg-white border-2 border-gray-300">
                 <Calendar
                     mode="single"
                     selected={date}
                     onSelect={handleDateChange}
                     initialFocus
-                    className="bg-background"
+                    className="bg-white"
                     disabled={(date) => {
                     const today = new Date()
                     today.setHours(0, 0, 0, 0) // Reset time to start of day
@@ -122,19 +122,19 @@ const handleTimeFormatChange = (value: string) => {
             </div>
 
             <div className="space-y-2">
-            <Label className={errors.time ? 'text-red-400' : ''}>
+            <Label className={errors.time ? 'text-red-400' : 'text-[#1D2A38]'}>
                 Webinar Time <span className="text-red-400">*</span>
             </Label>
                     <div className="flex gap-2">
   <div className="relative flex-1">
-            <Clock className="absolute left-3 top-2.5 h-4 w-4 text-foreground" />
+            <Clock className="absolute left-3 top-2.5 h-4 w-4 text-[#1D2A38]" />
             <Input
             name="time"
             value={formData.basicInfo.time || ''}
             onChange={handleChange}
             placeholder="12:00"
             className={cn(
-                'pl-9 !bg-background/50 border border-input',
+                'pl-9 bg-white border-2 border-gray-300 text-[#1D2A38]',
                 errors.time && 'border-red-400 focus-visible:ring-red-400'
             )}
             />
@@ -143,10 +143,10 @@ const handleTimeFormatChange = (value: string) => {
             value={formData.basicInfo.timeFormat || 'AM'}
             onValueChange={handleTimeFormatChange}
             >
-            <SelectTrigger className="w-20 !bg-background/50 border border-input">
+            <SelectTrigger className="w-20 bg-white border-2 border-gray-300 text-[#1D2A38]">
                 <SelectValue placeholder="AM" />
             </SelectTrigger>
-            <SelectContent className="!bg-background border border-input">
+            <SelectContent className="bg-white border-2 border-gray-300">
                 <SelectItem value="AM">AM</SelectItem>
                 <SelectItem value="PM">PM</SelectItem>
             </SelectContent>
@@ -155,14 +155,14 @@ const handleTimeFormatChange = (value: string) => {
             {errors.time && <p className='text-sm text-red-400'>{errors.time}</p>}
             </div>
         </div>
-        <div className="flex items-center gap-2 text-sm text-gray-400 mt-4">
+        <div className="flex items-center gap-2 text-sm text-gray-600 mt-4">
             <div className="flex items-center">
-                <Upload className="h-4 w-4 mr-2" />
+                <Upload className="h-4 w-4 mr-2 text-[#1D2A38]" />
                 Uploading a video makes this webinar pre-recorded.
             </div>
             <Button
                 variant="outline"
-                className="ml-auto relative border border-input hover:bg-background"
+                className="ml-auto relative border-2 border-gray-300 hover:bg-gray-100 text-[#1D2A38]"
             >
                 Upload File
                 <Input

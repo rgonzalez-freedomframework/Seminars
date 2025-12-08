@@ -85,7 +85,7 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
     }
 }
   return (
-    <div className="flex flex-col justify-center items-center bg-[#27272A]/20 border border-border rounded-3xl overflow-hidden max-w-6xl mx-auto backdrop-blur-[106px]">
+    <div className="flex flex-col justify-center items-center bg-white border-2 border-gray-300 rounded-3xl overflow-hidden max-w-6xl mx-auto">
       <div className="flex items-center justify-start">
         <div className="w-full md:w-1/3 p-6">
           <div className="space-y-6">
@@ -100,7 +100,7 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
                         <motion.div
                         initial={false}
                         animate={{
-                            backgroundColor: isCurrent || isCompleted ? 'rgb(147, 51, 234)' : 'rgb(31, 41, 55)',
+                            backgroundColor: isCurrent || isCompleted ? 'rgb(204, 164, 59)' : 'rgb(209, 213, 219)',
                             scale: [isCurrent && !isCompleted ? 0.8 : 1, 1],
                         }}
                         transition={{ duration: 0.3 }}
@@ -132,22 +132,22 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
                                 animate={{ opacity: 1, scale: 1 }}
                                 exit={{ opacity: 0, scale: 0.5 }}
                                 transition={{ duration: 0.2 }}
-                                style={{ color: 'white' }}
+                                style={{ color: '#1D2A38' }}
                             >
-                                <Check className="w-5 h-5 text-white/50" />
+                                <Check className="w-5 h-5 text-gray-400" />
                             </motion.div>
                             )}
                         </AnimatePresence>
                         </motion.div>
                         {index < steps.length - 1 && (
-                        <div className="absolute top-8 left-4 w-0.5 h-16 bg-gray-700 overflow-hidden">
+                        <div className="absolute top-8 left-4 w-0.5 h-16 bg-gray-300 overflow-hidden">
                             <motion.div
                             initial={{
                                 height: isPast || isCompleted ? '100%' : '0%',
                             }}
                             animate={{
                                 height: isPast || isCompleted ? '100%' : '0%',
-                                backgroundColor: 'rgb(147, 51, 234)',
+                                backgroundColor: 'rgb(204, 164, 59)',
                             }}
                             transition={{ duration: 0.5, ease: 'easeInOut' }}
                             style={{ width: '100%', height: '100%' }}
@@ -158,14 +158,14 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
                     <div className="pt-1">
                     <motion.h3
                         animate={{
-                        color: isCurrent || isCompleted ? 'rgb(255, 255, 255)' : 'rgb(156, 163, 175)',
+                        color: isCurrent || isCompleted ? 'rgb(29, 42, 56)' : 'rgb(156, 163, 175)',
                         }}
                         transition={{ duration: 0.3 }}
                         style={{ fontWeight: 500 }}
                     >
                         {step.title}
                     </motion.h3>
-                    <p className="text-sm text-gray-500">{step.description}</p>
+                    <p className="text-sm text-gray-600">{step.description}</p>
                     </div>
                 </div>
                 </div>
@@ -188,8 +188,8 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
             style={{ padding: '1.5rem' }}
             >
             <div className="mb-6">
-                <h2 className="text-xl font-semibold">{currentStep.title}</h2>
-                <p className="text-gray-400">{currentStep.description}</p>
+                <h2 className="text-xl font-semibold text-[#1D2A38]">{currentStep.title}</h2>
+                <p className="text-gray-600">{currentStep.description}</p>
             </div>
             {/* Render the current step component */}
             {currentStep.component}
@@ -212,13 +212,13 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
             onClick={handleBack}
             disabled={isSubmitting}
             className={cn(
-            'border-gray-700 text-white hover:bg-gray-800',
+            'border-2 border-gray-300 text-[#1D2A38] hover:bg-gray-100',
             isFirstStep && 'opacity-50 cursor-not-allowed'
             )}
         >
             {isFirstStep ? 'Cancel' : 'Back'}
         </Button>
-        <Button onClick={handleNext} disabled={isSubmitting}>
+        <Button onClick={handleNext} disabled={isSubmitting} className="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-semibold">
         {isLastStep ? (
             isSubmitting ? (
             <>

@@ -30,10 +30,10 @@ const errors = getStepValidationErrors('additionalInfo')
     <div className="space-y-8">
         <div className="flex items-center justify-between">
         <div>
-            <Label htmlFor="lock-chat" className="text-base font-medium">
+            <Label htmlFor="lock-chat" className="text-base font-medium text-[#1D2A38]">
             Lock Chat
             </Label>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-gray-600">
             Turn it on to make chat visible to your users at all time
             </p>
         </div>
@@ -46,10 +46,10 @@ const errors = getStepValidationErrors('additionalInfo')
     <div className="space-y-4">
     <div className="flex items-center justify-between">
         <div>
-        <Label htmlFor="coupon-enabled" className="text-base font-medium">
+        <Label htmlFor="coupon-enabled" className="text-base font-medium text-[#1D2A38]">
             Coupon Code
         </Label>
-        <p className="text-sm text-gray-400">
+        <p className="text-sm text-gray-600">
             Turn it on to offer discounts to your viewers
         </p>
         </div>
@@ -67,15 +67,15 @@ const errors = getStepValidationErrors('additionalInfo')
                     onChange={handleCouponCodeChange}
                     placeholder="Paste the code here"
                     className={cn(
-                        '!bg-background/50 border border-input',
+                        'bg-white border-2 border-gray-300 text-[#1D2A38]',
                         errors.couponCode && 'border-red-400 focus-visible:ring-red-400'
                     )}
                     />
                     {errors.couponCode && (
                     <p className="text-sm text-red-400">{errors.couponCode}</p>
                     )}
-                    <div className="flex items-start gap-2 text-sm text-gray-400 mt-2">
-                    <Info className="h-4 w-4 mt-0.5" />
+                    <div className="flex items-start gap-2 text-sm text-gray-600 mt-2">
+                    <Info className="h-4 w-4 mt-0.5 text-[#1D2A38]" />
                     <p>
                         This coupon code can be used to promote a sale. Users can use it
                         for the buy now CTA

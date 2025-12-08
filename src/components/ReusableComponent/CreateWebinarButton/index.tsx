@@ -52,16 +52,16 @@ function CreateWebinarButton() {
     <Dialog open={isModalOpen} onOpenChange={setModalOpen}>
         <DialogTrigger asChild>
             <button
-                className="rounded-xl flex gap-2 items-center hover:cursor-pointer px-4 py-2 border border-border bg-primary/10 backdrop-blur-sm text-sm font-normal text-primary hover:bg-primary-20"
+                className="rounded-xl flex gap-2 items-center hover:cursor-pointer px-4 py-2 border-2 border-[#1D2A38] bg-white text-sm font-semibold text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white transition-all"
                 onClick={() => setModalOpen(true)}
             >
                 <Plus className="w-4 h-4" />
                 Create Webinar
             </button>
         </DialogTrigger>
-       <DialogContent className="sm:max-w-[900px] p-0 bg-transparent border-none">
+       <DialogContent className="sm:max-w-[900px] p-0 bg-white border-2 border-gray-300">
         {isComplete ? (
-          <div className="bg-muted text-primary rounded-lg overflow-hidden">
+          <div className="bg-white text-[#1D2A38] rounded-lg overflow-hidden">
             <DialogTitle className="sr-only">Webinar Created</DialogTitle>
             <SuccessStep
               webinarLink={webinarLink}

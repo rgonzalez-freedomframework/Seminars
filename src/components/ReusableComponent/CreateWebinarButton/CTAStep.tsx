@@ -37,7 +37,7 @@ const handleSelectCTAType = (value: string) => {
     <div className="space-y-2">
       <Label
         htmlFor="ctalabel"
-        className={errors.ctaLabel ? 'text-red-400' : ''}
+        className={errors.ctaLabel ? 'text-red-400' : 'text-[#1D2A38]'}
       >
         CTA Label <span className="text-red-400">*</span>
       </Label>
@@ -48,7 +48,7 @@ const handleSelectCTAType = (value: string) => {
         onChange={handleChange}
         placeholder="Let's Get Started"
         className={cn(
-          'bg-background/50 border border-input',
+          'bg-white border-2 border-gray-300 text-[#1D2A38]',
           errors.ctaLabel && 'border-red-400 focus-visible:ring-red-400'
         )}
       />
@@ -58,24 +58,24 @@ const handleSelectCTAType = (value: string) => {
     </div>
 
         <div className="space-y-2">
-  <Label htmlFor="tags">Tags</Label>
+  <Label htmlFor="tags" className="text-[#1D2A38]">Tags</Label>
   <Input
     id="tags"
     value={tagInput}
     onChange={(e) => setTagInput(e.target.value)}
     onKeyDown={handleAddTag}
     placeholder="Add tags and press Enter"
-    className="bg-background/50 border border-input"
+    className="bg-white border-2 border-gray-300 text-[#1D2A38]"
   />
     {tags && tags.length > 0 && (
   <div className="flex flex-wrap gap-2 mt-2">
     {tags.map((tag: string, index: number) => (
       <div
         key={index}
-        className="flex items-center gap-1 bg-gray-800 text-white px-3 py-1 rounded-md"
+        className="flex items-center gap-1 bg-[#1D2A38] text-white px-3 py-1 rounded-md"
       >
         {tag}
-        <button onClick={() => removeTag(tag)} className="text-gray-400 hover:text-white">
+        <button onClick={() => removeTag(tag)} className="text-gray-300 hover:text-white">
           <X className="h-3 w-3" />
         </button>
       </div>
@@ -85,19 +85,19 @@ const handleSelectCTAType = (value: string) => {
 </div>
 
 <div className="space-y-2 w-full">
-  <Label>CTA Type</Label>
+  <Label className="text-[#1D2A38]">CTA Type</Label>
   <Tabs defaultValue={CtaTypeEnum.BOOK_A_CALL} className="w-full">
-    <TabsList className="w-full bg-transparent">
+    <TabsList className="w-full bg-gray-100">
       <TabsTrigger
         value={CtaTypeEnum.BOOK_A_CALL}
-        className="w-1/2 data-[state=active]:!bg-background/50"
+        className="w-1/2 data-[state=active]:bg-white data-[state=active]:text-[#1D2A38]"
         onClick={() => handleSelectCTAType(CtaTypeEnum.BOOK_A_CALL)}
       >
         Book a Call
       </TabsTrigger>
       <TabsTrigger
         value={CtaTypeEnum.BUY_NOW}
-        className="w-1/2"
+        className="w-1/2 data-[state=active]:bg-white data-[state=active]:text-[#1D2A38]"
         onClick={() => handleSelectCTAType(CtaTypeEnum.BUY_NOW)}
       >
         Buy Now

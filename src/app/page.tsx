@@ -234,7 +234,7 @@ export default async function Home() {
             </p>
             <GeneralRegistrationForm 
               triggerText="START THE ASSESSMENT"
-              triggerClassName="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold text-xl md:text-2xl px-10 md:px-16 py-5 md:py-7 rounded-xl text-center inline-block shadow-xl hover:shadow-2xl hover:shadow-[#CCA43B]/40 transition-all duration-300 transform hover:scale-105 animate-in zoom-in duration-700 border-2 border-[#CCA43B]"
+              triggerClassName="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-bold text-lg md:text-xl px-8 md:px-12 py-3 md:py-4 rounded-xl text-center inline-flex items-center justify-center shadow-xl hover:shadow-2xl hover:shadow-[#CCA43B]/40 transition-all duration-300 transform hover:scale-105 animate-in zoom-in duration-700 border-2 border-[#CCA43B]"
             />
           </div>
         </div>

@@ -338,7 +338,7 @@ const handleRemoveResource = (index: number) => {
                       <p className="text-xs text-green-700 mt-1">{resource.description}</p>
                     )}
                     <p className="text-xs text-green-600 mt-1">
-                      {resource.file?.name} ({(resource.file?.size || 0) / (1024 * 1024)).toFixed(2)} MB)
+                      {resource.file?.name} ({((resource.file?.size || 0) / (1024 * 1024)).toFixed(2)} MB)
                     </p>
                   </div>
                 </div>

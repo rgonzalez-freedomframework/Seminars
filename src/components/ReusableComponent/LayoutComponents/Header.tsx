@@ -3,6 +3,7 @@ import { User } from '@prisma/client'
 import { Button } from '@/components/ui/button'
 import { ArrowLeft } from 'lucide-react'
 import { useRouter, usePathname } from 'next/navigation'
+import Link from 'next/link'
 import React from 'react'
 import { Zap } from 'lucide-react'
 import PurpleIcon from '../PurpleIcon'
@@ -31,6 +32,14 @@ const Header = ({ user }: Props) => {
         </div>
       )}
       <div className='flex gap-6 items-center flex-wrap'>
+          <Link href="/">
+            <Button
+              className="bg-white border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white rounded-xl font-semibold"
+              variant={'outline'}
+            >
+              View Landing Page
+            </Button>
+          </Link>
           <CreateWebinarButton/>
       </div>
     </div>

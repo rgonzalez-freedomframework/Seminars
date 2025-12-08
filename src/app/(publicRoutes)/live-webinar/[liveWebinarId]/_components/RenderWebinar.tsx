@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { User, WebinarStatusEnum } from "@prisma/client";
 import WebinarUpcomingState from './UpcomingWebinar/WebinarUpcomingState';
+import WebinarEndedState from './EndedWebinar/WebinarEndedState';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAttendeeStore } from '@/store/useAttendeeStore';
 import { toast } from 'sonner';
@@ -55,6 +56,8 @@ const RenderWebinar = ({
                 <WebinarUpcomingState webinar={webinar} currentUser={user || null} />
                 )}
             </React.Fragment>
+            ): webinar?.webinarStatus === WebinarStatusEnum.ENDED ? (
+            <WebinarEndedState webinar={webinar} currentUser={user || null} />
             ): webinar?.webinarStatus === WebinarStatusEnum.CANCELLED ? (
             <div className="flex justify-center items-center h-full w-full">
                 <div className="text-center space-y-4">

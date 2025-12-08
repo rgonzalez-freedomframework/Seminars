@@ -6,6 +6,7 @@ import { ParticipantView, useCallStateHooks } from '@stream-io/video-react-sdk'
 import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { CtaTypeEnum } from '@prisma/client'
+import WebinarEndTimer from '../LiveWebinar/WebinarEndTimer'
 
 type Props = {
   showChat: boolean
@@ -91,6 +92,13 @@ const LiveWebinarView = ({
 
 
   return (
+    <>
+    <WebinarEndTimer
+      webinarId={webinar.id}
+      startTime={webinar.startTime}
+      duration={webinar.duration}
+      webinarStatus={webinar.webinarStatus}
+    />
     <div className="flex flex-col w-full h-screen max-h-screen overflow-hidden bg-background text-foreground">
     <div className="py-2 px-4 border-b border-border flex items-center justify-between">
         <div className="flex items-center space-x-2">
@@ -168,6 +176,7 @@ const LiveWebinarView = ({
     </div>
     </div>
     </div>
+    </>
   )
 }
 

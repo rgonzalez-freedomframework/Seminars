@@ -62,8 +62,8 @@ const Page = async () => {
         value="upcoming"
         className="w-full grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 place-items-start place-content-start px-6 md:px-8 lg:px-10 xl:px-12 gap-y-10 gap-x-6"
         >
-        {webinars?.filter((w: Webinar) => new Date(w.webinarScheduledDate) > new Date() && w.webinarStatus !== 'ENDED')?.length > 0 ? (
-            webinars.filter((w: Webinar) => new Date(w.webinarScheduledDate) > new Date() && w.webinarStatus !== 'ENDED').map((webinar: Webinar, index: number) => (
+        {webinars?.filter((w: Webinar) => new Date(w.startTime) > new Date() && w.webinarStatus !== 'ENDED')?.length > 0 ? (
+            webinars.filter((w: Webinar) => new Date(w.startTime) > new Date() && w.webinarStatus !== 'ENDED').map((webinar: Webinar, index: number) => (
             <WebinarCard key={index} webinar={webinar} />
             ))
         ) : (

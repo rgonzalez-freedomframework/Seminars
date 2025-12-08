@@ -88,12 +88,12 @@ const CountdownTimer = ({
             <div className="flex items-center justify-center gap-4 mb-8">
             {timeLeft.days > 0 && (
                 <div className="space-y-2">
-                <p className="text-sm text-muted-foreground">Days</p>
+                <p className="text-sm font-semibold text-[#CCA43B]">Days</p>
                 <div className="flex justify-center gap-1">
-                    <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+                    <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
                     {days1}
                     </div>
-                    <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+                    <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
                     {days2}
                     </div>
                 </div>
@@ -101,35 +101,35 @@ const CountdownTimer = ({
             )}
 
             <div className="space-y-2">
-            <p className="text-sm text-muted-foreground">Hours</p>
+            <p className="text-sm font-semibold text-[#CCA43B]">Hours</p>
             <div className="flex justify-center gap-1">
-                <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+                <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
                 {hours1}
                 </div>
-                <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+                <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
                 {hours2}
                 </div>
             </div>
             </div>
             <div className="space-y-2">
-        <p className="text-sm text-muted-foreground">Minutes</p>
+        <p className="text-sm font-semibold text-[#CCA43B]">Minutes</p>
         <div className="flex justify-center gap-1">
-            <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+            <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
             {minutes1}
             </div>
-            <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+            <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
             {minutes2}
             </div>
         </div>
         </div>
 
             <div className="space-y-2">
-        <p className="text-sm text-muted-foreground">Seconds</p>
+        <p className="text-sm font-semibold text-[#CCA43B]">Seconds</p>
         <div className="flex justify-center gap-1">
-            <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+            <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
             {seconds1}
             </div>
-            <div className="bg-secondary w-10 h-12 flex items-center justify-center rounded text-xl">
+            <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
             {seconds2}
             </div>
         </div>

@@ -108,9 +108,9 @@ const WaitlistComponent = ({
         <Button
         className={`${
             webinarStatus === WebinarStatusEnum.LIVE
-            ? 'bg-red-600 hover:bg-red-700'
-            : 'bg-primary hover:bg-primary/90'
-        } rounded-md px-4 py-2 text-primary-foreground text-sm font-semibold`}
+            ? 'bg-red-600 hover:bg-red-700 text-white'
+            : 'bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] border-2 border-[#CCA43B]'
+        } rounded-xl px-6 py-3 text-sm font-bold shadow-lg`}
         >
         {webinarStatus === WebinarStatusEnum.LIVE && (
             <span className="mr-2 h-2 w-2 bg-white rounded-full animate-pulse"></span>
@@ -119,8 +119,8 @@ const WaitlistComponent = ({
         </Button>
     </DialogTrigger>
     <DialogContent  className="border-0 bg-transparent" isHideCloseButton={true}>
-       <DialogHeader className="justify-center items-center border border-input rounded-xl p-4 bg-background">
-      <DialogTitle className="text-center text-lg font-semibold mb-4">
+       <DialogHeader className="justify-center items-center border-2 border-[#CCA43B] rounded-xl p-6 bg-white shadow-xl">
+      <DialogTitle className="text-center text-xl font-bold text-[#1D2A38] mb-4">
         {webinarStatus === WebinarStatusEnum.LIVE ? 'Join the Webinar' : 'Join the Waitlist'}
       </DialogTitle>
       <form onSubmit={handleSubmit} className='flex flex-col gap-4 w-full'>
@@ -163,7 +163,7 @@ const WaitlistComponent = ({
       )}
       <Button
         type="submit"
-        className="w-full"
+        className="w-full bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-bold border-2 border-[#CCA43B] rounded-xl"
         disabled={isSubmitting || submitted}
       >
         {isSubmitting ? (

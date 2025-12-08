@@ -38,9 +38,9 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
     }
     }
   return (
-    <div className="w-full min-h-screen mx-auto max-w-[400px] flex flex-col justify-center items-center gap-8 py-20">
+    <div className="w-full min-h-screen mx-auto max-w-[400px] flex flex-col justify-center items-center gap-8 py-20 bg-white">
       <div className="space-y-6">
-        <p className="text-3xl font-semibold text-primary text-center">
+        <p className="text-3xl font-bold text-[#1D2A38] text-center">
           Seems like you are a little early
         </p>
         <CountdownTimer
@@ -67,7 +67,7 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
             <>
                 {currentUser?.id === webinar?.presenterId ? (
                 <Button
-                className="w-full max-w-[300px] font-semibold"
+                className="w-full max-w-[300px] font-semibold bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] border-2 border-[#CCA43B] rounded-xl"
                 onClick={handleStartWebinar}
                 disabled={loading}
                 >
@@ -97,8 +97,8 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
             )}
             </div>
         <div className="text-center space-y-4">
-        <h3 className="text-2xl font-semibold text-primary">{webinar?.title}</h3>
-        <p className="text-muted-foreground text-xs">{webinar?.description}</p>
+        <h3 className="text-2xl font-bold text-[#1D2A38]">{webinar?.title}</h3>
+        <p className="text-gray-600 text-sm">{webinar?.description}</p>
         <div className="w-full justify-center flex gap-2 flex-wrap items-center">
             <Button variant="outline" className="rounded-md bg-white border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white font-semibold">
             <Calendar className="mr-2" />

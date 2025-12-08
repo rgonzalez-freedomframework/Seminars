@@ -8,6 +8,7 @@ export type WebinarFormState = {
     date?: Date
     time?: string
     timeFormat?: 'AM' | 'PM'
+    duration?: number
   }
   cta: {
     ctaLabel?: string
@@ -20,6 +21,7 @@ export type WebinarFormState = {
     lockChat?: boolean
     couponCode?: string
     couponEnabled?: boolean
+    enableZoom?: boolean
   }
 }
 

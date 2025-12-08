@@ -78,6 +78,9 @@ model Webinar {
   priceId     String?          @db.VarChar(255)
   recordingUrl  String?
   thumbnail     String?
+  zoomWebinarId String?         @db.VarChar(255) // Zoom webinar ID
+  zoomJoinUrl   String?         @db.VarChar(500) // Zoom join URL
+  zoomRegistrationUrl String?   @db.VarChar(500) // Zoom registration URL
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
   deletedAt     DateTime?

@@ -28,6 +28,23 @@ const errors = getStepValidationErrors('additionalInfo')
 
   return (
     <div className="space-y-8">
+        {/* Zoom Integration Toggle */}
+        <div className="flex items-center justify-between">
+        <div>
+            <Label htmlFor="enable-zoom" className="text-base font-medium text-[#1D2A38]">
+            Zoom Integration
+            </Label>
+            <p className="text-sm text-gray-600">
+            Automatically create a Zoom webinar for this event
+            </p>
+        </div>
+        <Switch 
+          id="enable-zoom"
+          checked={formData.additionalInfo.enableZoom || false}
+          onCheckedChange={(checked) => updateAdditionalInfoField('enableZoom', checked)} 
+        />
+        </div>
+
         <div className="flex items-center justify-between">
         <div>
             <Label htmlFor="lock-chat" className="text-base font-medium text-[#1D2A38]">

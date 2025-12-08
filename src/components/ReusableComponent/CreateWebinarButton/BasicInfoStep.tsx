@@ -155,6 +155,26 @@ const handleTimeFormatChange = (value: string) => {
             {errors.time && <p className='text-sm text-red-400'>{errors.time}</p>}
             </div>
         </div>
+
+        {/* Duration Field */}
+        <div className="space-y-2">
+            <Label htmlFor="duration" className="text-[#1D2A38]">
+                Duration (minutes) <span className="text-red-400">*</span>
+            </Label>
+            <Input
+                id="duration"
+                name="duration"
+                type="number"
+                min="15"
+                max="480"
+                value={formData.basicInfo.duration || 60}
+                onChange={handleChange}
+                placeholder="60"
+                className="bg-white border-2 border-gray-300 text-[#1D2A38]"
+            />
+            <p className="text-sm text-gray-600">Enter webinar duration in minutes (15-480)</p>
+        </div>
+
         <div className="flex items-center gap-2 text-sm text-gray-600 mt-4">
             <div className="flex items-center">
                 <Upload className="h-4 w-4 mr-2 text-[#1D2A38]" />

@@ -61,11 +61,46 @@ export const createWebinar = async (formData: WebinarFormState) => {
     }
     }
 
+    // Create Zoom webinar if enabled
+    let zoomWebinarData = null
+    if (formData.additionalInfo?.enableZoom) {
+      try {
+        const zoomResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/zoom/create-webinar`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            topic: formData.basicInfo.webinarName,
+            startTime: combinedDateTime.toISOString(),
+            duration: formData.basicInfo.duration || 60,
+            timezone: 'America/New_York',
+            agenda: formData.basicInfo.description || '',
+          }),
+        })
+
+        if (zoomResponse.ok) {
+          const zoomData = await zoomResponse.json()
+          zoomWebinarData = {
+            zoomWebinarId: zoomData.webinar.zoomId,
+            zoomJoinUrl: zoomData.webinar.joinUrl,
+            zoomRegistrationUrl: zoomData.webinar.registrationUrl,
+          }
+        } else {
+          console.error('Failed to create Zoom webinar:', await zoomResponse.text())
+        }
+      } catch (zoomError) {
+        console.error('Error creating Zoom webinar:', zoomError)
+        // Continue without Zoom integration
+      }
+    }
+
     const webinar = await prismaClient.webinar.create({
     data: {
         title: formData.basicInfo.webinarName,
         description: formData.basicInfo.description || '',
         startTime: combinedDateTime,
+        duration: formData.basicInfo.duration || 60,
         tags: formData.cta.tags || [],
         ctaLabel: formData.cta.ctaLabel,
         ctaType: formData.cta.ctaType || 'BOOK_A_CALL',
@@ -77,14 +112,16 @@ export const createWebinar = async (formData: WebinarFormState) => {
         : null,
         couponEnabled: formData.additionalInfo.couponEnabled || false,
         presenterId: presenterId,
+        ...zoomWebinarData, // Include Zoom data if available
     },
     })
     revalidatePath('/')
     return {
     status: 200,
-    message: 'Webinar created successfully',
+    message: 'Webinar created successfully' + (zoomWebinarData ? ' with Zoom integration' : ''),
     webinarId: webinar.id,
     webinarLink: `/webinar/${webinar.id}`,
+    zoomJoinUrl: zoomWebinarData?.zoomJoinUrl,
     }
     } catch (error) {
     console.error('Error creating webinar:', error)

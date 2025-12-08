@@ -10,13 +10,22 @@ import { cn } from '@/lib/utils'
 import { useWebinarStore } from '@/store/useWebinarStore'
 import { format } from 'date-fns'
 import { CalendarIcon, Clock, Upload, CheckCircle2, Loader2, X } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { toast } from 'sonner'
 
 const BasicInfoStep = () => {
   const { formData, updateBasicInfoField, getStepValidationErrors } =
     useWebinarStore()
   const { date }=formData.basicInfo
+  
+  // Debug logging
+  useEffect(() => {
+    console.log('BasicInfo formData changed:', {
+      thumbnail: formData.basicInfo.thumbnail,
+      videoUrl: formData.basicInfo.videoUrl,
+      isPreRecorded: formData.basicInfo.isPreRecorded
+    })
+  }, [formData.basicInfo.thumbnail, formData.basicInfo.videoUrl, formData.basicInfo.isPreRecorded])
   const [videoFile, setVideoFile] = useState<File | null>(null)
   const [isUploading, setIsUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
@@ -342,23 +351,33 @@ const handleRemoveThumbnail = () => {
                     {date ? format(date, 'PPP') : 'Select date'}
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 bg-white border-2 border-[#CCA43B] shadow-xl z-50">
+                <PopoverContent className="w-auto p-4 bg-white border-2 border-[#CCA43B] shadow-xl z-50">
                 <Calendar
                     mode="single"
                     selected={date}
                     onSelect={handleDateChange}
                     initialFocus
-                    className="bg-white rounded-md"
+                    className="bg-white rounded-md p-3"
                     classNames={{
-                      day_selected: "bg-[#CCA43B] text-[#1D2A38] hover:bg-[#B8932F] hover:text-[#1D2A38] focus:bg-[#CCA43B] focus:text-[#1D2A38]",
-                      day_today: "bg-gray-100 text-[#1D2A38]",
-                      day: "hover:bg-gray-100",
-                      head_cell: "text-[#1D2A38] font-medium",
-                      cell: "text-[#1D2A38]",
-                      caption: "text-[#1D2A38] font-semibold",
-                      nav_button: "hover:bg-gray-100 text-[#1D2A38]",
-                      nav_button_previous: "hover:bg-gray-100",
-                      nav_button_next: "hover:bg-gray-100",
+                      months: "flex flex-col sm:flex-row space-y-4 sm:space-x-4 sm:space-y-0",
+                      month: "space-y-4",
+                      caption: "flex justify-center pt-1 relative items-center text-[#1D2A38] font-bold text-lg",
+                      caption_label: "text-[#1D2A38] font-bold",
+                      nav: "space-x-1 flex items-center",
+                      nav_button: "h-8 w-8 bg-transparent hover:bg-gray-200 text-[#1D2A38] rounded-md border border-gray-300 font-bold",
+                      nav_button_previous: "absolute left-1",
+                      nav_button_next: "absolute right-1",
+                      table: "w-full border-collapse space-y-1",
+                      head_row: "flex mt-2",
+                      head_cell: "text-[#1D2A38] rounded-md w-10 font-bold text-sm",
+                      row: "flex w-full mt-2",
+                      cell: "relative p-0 text-center text-sm focus-within:relative focus-within:z-20 [&:has([aria-selected])]:bg-[#CCA43B]/20 [&:has([aria-selected].day-outside)]:bg-transparent",
+                      day: "h-10 w-10 p-0 font-bold text-[#1D2A38] hover:bg-gray-200 hover:text-[#1D2A38] rounded-md transition-colors",
+                      day_selected: "bg-[#CCA43B] text-white hover:bg-[#B8932F] hover:text-white focus:bg-[#CCA43B] focus:text-white font-bold",
+                      day_today: "bg-blue-100 text-[#1D2A38] font-bold border-2 border-blue-400",
+                      day_outside: "text-gray-400 opacity-50",
+                      day_disabled: "text-gray-300 opacity-50 line-through",
+                      day_hidden: "invisible",
                     }}
                     disabled={(date) => {
                     const today = new Date()
@@ -398,9 +417,9 @@ const handleRemoveThumbnail = () => {
             <SelectTrigger className="w-20 bg-white border-2 border-gray-300 text-[#1D2A38]">
                 <SelectValue placeholder="AM" />
             </SelectTrigger>
-            <SelectContent className="bg-white border-2 border-gray-300">
-                <SelectItem value="AM">AM</SelectItem>
-                <SelectItem value="PM">PM</SelectItem>
+            <SelectContent className="bg-white border-2 border-gray-300 z-50">
+                <SelectItem value="AM" className="text-[#1D2A38] hover:bg-[#CCA43B]/10 cursor-pointer">AM</SelectItem>
+                <SelectItem value="PM" className="text-[#1D2A38] hover:bg-[#CCA43B]/10 cursor-pointer">PM</SelectItem>
             </SelectContent>
         </Select>
             </div>

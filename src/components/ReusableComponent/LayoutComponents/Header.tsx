@@ -24,16 +24,13 @@ const Header = ({ user }: Props) => {
             onClick={() => router.push('/webinars')}
         >
             <ArrowLeft /> Back to Webinars
-        </Button>
+        </div>
         ) : (
         <div className="px-4 py-2 flex justify-center text-bold items-center rounded-xl bg-white border-2 border-gray-300 text-[#1D2A38] capitalize font-semibold">
             {pathname.split('/')[1]}
         </div>
         )}
         <div className='flex gap-6 items-center flex-wrap'>
-            <PurpleIcon>
-                <Zap className="w-4 h-4 text-white" strokeWidth={2} />
-            </PurpleIcon>
             <CreateWebinarButton/>
         </div>
     </div>

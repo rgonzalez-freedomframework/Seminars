@@ -25,11 +25,11 @@ const PageHeader = ({
     <div className="w-full flex justify-center sm:justify-between items-center gap-8 flex-wrap">
         <p className="text-[#1D2A38] text-3xl md:text-4xl font-semibold">{heading}</p>
         <div className="relative md:mr-28">
-            <PurpleIcon className="absolute -left-4 -top-3 -z-10 -rotate-45 py-3">
+            <PurpleIcon className="absolute -left-4 -top-3 -z-10 -rotate-45 py-3 [&_svg]:text-[#1D2A38]">
             {leftIcon}
             </PurpleIcon>
-            <PurpleIcon className="z-10 backdrop-blur">{mainIcon}</PurpleIcon>
-            <PurpleIcon className="absolute -right-4 -top-3 -z-10 py-3 rotate-45">
+            <PurpleIcon className="z-10 backdrop-blur [&_svg]:text-[#1D2A38]">{mainIcon}</PurpleIcon>
+            <PurpleIcon className="absolute -right-4 -top-3 -z-10 py-3 rotate-45 [&_svg]:text-[#1D2A38]">
             {rightIcon}
             </PurpleIcon>
         </div>

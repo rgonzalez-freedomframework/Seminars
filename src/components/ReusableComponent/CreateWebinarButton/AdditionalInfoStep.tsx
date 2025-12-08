@@ -270,7 +270,7 @@ const handleRemoveResource = (index: number) => {
             value={newResource.title}
             onChange={(e) => setNewResource(prev => ({ ...prev, title: e.target.value }))}
             placeholder="e.g., Webinar Slides, Workbook, Checklist"
-            className="bg-white border-2 border-gray-300"
+            className="bg-white border-2 border-gray-300 text-[#1D2A38]"
             disabled={newResource.uploading}
           />
         </div>
@@ -281,7 +281,7 @@ const handleRemoveResource = (index: number) => {
             value={newResource.description}
             onChange={(e) => setNewResource(prev => ({ ...prev, description: e.target.value }))}
             placeholder="Brief description of this resource"
-            className="bg-white border-2 border-gray-300 min-h-[60px]"
+            className="bg-white border-2 border-gray-300 min-h-[60px] text-[#1D2A38]"
             disabled={newResource.uploading}
           />
         </div>

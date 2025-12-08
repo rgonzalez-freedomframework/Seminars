@@ -92,8 +92,8 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
     setCurrentStepIndex(currentStepIndex + 1)
     }
 }
-  return (
-    <div className="flex flex-col justify-center items-center bg-white border-2 border-gray-300 rounded-3xl overflow-hidden max-w-6xl mx-auto">
+    return (
+        <div className="flex flex-col justify-center items-center bg-white border-2 border-gray-300 rounded-3xl overflow-hidden max-w-6xl mx-auto text-[#1D2A38]">
       <div className="flex items-center justify-start">
         <div className="w-full md:w-1/3 p-6">
           <div className="space-y-6">

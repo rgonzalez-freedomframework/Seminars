@@ -132,15 +132,23 @@
   
   /* iOS safe area support with enhanced styling */
   html {
-    padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-    background: linear-gradient(to bottom, #FFFFFF 0%, #F9FAFB 50%, #FFFFFF 100%);
+    background: #FFFFFF !important;
+  }
+  
+  body {
+    background: #FFFFFF !important;
   }
   
   /* Mobile safe area backgrounds */
   @supports (padding: env(safe-area-inset-top)) {
     html {
-      padding-top: calc(env(safe-area-inset-top) + 0px);
-      padding-bottom: calc(env(safe-area-inset-bottom) + 0px);
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      background: #FFFFFF !important;
+    }
+    
+    body {
+      background: #FFFFFF !important;
     }
   }
 }

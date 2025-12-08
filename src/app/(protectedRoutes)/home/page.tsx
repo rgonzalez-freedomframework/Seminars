@@ -57,7 +57,7 @@ const Pages = async () => {
             <div className="flex items-center gap-4">
               {isAdmin && (
                 <Link href="/admin/webinars">
-                  <Button variant="outline" size="sm" className="gap-2 border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white transition-all">
+                  <Button variant="outline" size="sm" className="gap-2 !bg-white !border-2 !border-[#1D2A38] !text-[#1D2A38] hover:!bg-[#1D2A38] hover:!text-white transition-all">
                     <Shield className="w-4 h-4" />
                     Admin Panel
                   </Button>

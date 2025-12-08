@@ -36,7 +36,9 @@ const BasicInfoStep = () => {
         if (newDate) {
             const today = new Date()
             today.setHours(0, 0, 0, 0)
-            if (newDate < today) {
+            const selectedDate = new Date(newDate)
+            selectedDate.setHours(0, 0, 0, 0)
+            if (selectedDate < today) {
             toast.error('Webinar date cannot be in the past')
             console.log('Error: Cannot select a date in the past')
             }
@@ -244,7 +246,7 @@ const handleRemoveThumbnail = () => {
               </div>
             </div>
             
-            {!thumbnailFile && !isThumbnailUploading && (
+            {!isThumbnailUploading && !formData.basicInfo.thumbnail && (
               <Button
                 type="button"
                 variant="outline"
@@ -284,7 +286,7 @@ const handleRemoveThumbnail = () => {
           )}
 
           {/* Upload Success with Preview */}
-          {thumbnailFile && !isThumbnailUploading && formData.basicInfo.thumbnail && (
+          {!isThumbnailUploading && formData.basicInfo.thumbnail && (
             <div className="space-y-2">
               <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-green-300">
                 <img 
@@ -297,9 +299,9 @@ const handleRemoveThumbnail = () => {
                 <div className="flex items-center gap-2">
                   <CheckCircle2 className="h-5 w-5 text-green-600" />
                   <div>
-                    <p className="text-sm font-medium text-green-900">{thumbnailFile.name}</p>
+                    <p className="text-sm font-medium text-green-900">Thumbnail uploaded</p>
                     <p className="text-xs text-green-700">
-                      {(thumbnailFile.size / (1024 * 1024)).toFixed(2)} MB
+                      {formData.basicInfo.thumbnail}
                     </p>
                   </div>
                 </div>
@@ -360,8 +362,10 @@ const handleRemoveThumbnail = () => {
                     }}
                     disabled={(date) => {
                     const today = new Date()
-                    today.setHours(0, 0, 0, 0) // Reset time to start of day
-                    return date < today
+                    today.setHours(0, 0, 0, 0)
+                    const checkDate = new Date(date)
+                    checkDate.setHours(0, 0, 0, 0)
+                    return checkDate < today // Only block dates before today, not today itself
                     }}
                 />
                 </PopoverContent>
@@ -434,7 +438,7 @@ const handleRemoveThumbnail = () => {
               </div>
             </div>
             
-            {!videoFile && !isUploading && (
+            {!isUploading && !formData.basicInfo.videoUrl && (
               <Button
                 type="button"
                 variant="outline"
@@ -474,14 +478,14 @@ const handleRemoveThumbnail = () => {
           )}
 
           {/* Upload Success */}
-          {videoFile && !isUploading && (
+          {!isUploading && formData.basicInfo.videoUrl && (
             <div className="flex items-center justify-between p-3 bg-green-50 border-2 border-green-300 rounded-lg">
               <div className="flex items-center gap-2">
                 <CheckCircle2 className="h-5 w-5 text-green-600" />
                 <div>
-                  <p className="text-sm font-medium text-green-900">{videoFile.name}</p>
+                  <p className="text-sm font-medium text-green-900">Video uploaded successfully</p>
                   <p className="text-xs text-green-700">
-                    {(videoFile.size / (1024 * 1024)).toFixed(2)} MB
+                    {formData.basicInfo.videoUrl}
                   </p>
                 </div>
               </div>

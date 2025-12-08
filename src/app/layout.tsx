@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   ],
 },
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FFFFFF' },
-    { media: '(prefers-color-scheme: dark)', color: '#FFFFFF' }
+    { media: '(prefers-color-scheme: light)', color: '#FEFDFB' },
+    { media: '(prefers-color-scheme: dark)', color: '#FEFDFB' }
   ],
   viewport: {
     width: 'device-width',
@@ -47,7 +47,7 @@ export default function RootLayout({
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-          <meta name="theme-color" content="#FFFFFF" />
+          <meta name="theme-color" content="#FEFDFB" />
         </head>
         <body
           className={`${manrope.variable} antialiased`}

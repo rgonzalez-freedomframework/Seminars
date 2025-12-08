@@ -155,6 +155,16 @@
   background: #FFFFFF;
 }
 
+/* Clerk auth card width override */
+.cl-rootBox {
+  width: 100% !important;
+}
+
+.cl-card {
+  max-width: none !important;
+  width: 100% !important;
+}
+
 /* Add these styles to your global CSS or create a new CSS module */
 @keyframes pulse {
   0%,

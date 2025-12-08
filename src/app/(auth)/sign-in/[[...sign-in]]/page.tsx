@@ -8,12 +8,12 @@ const Signin = () => {
         <h1 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-2">Welcome Back</h1>
         <p className="text-gray-700 text-sm md:text-base">Sign in to access your dashboard</p>
       </div>
-      <div className="w-full">
+      <div className="w-full max-w-4xl mx-auto">
         <SignIn 
           appearance={{
             elements: {
               rootBox: "w-full flex justify-center",
-              card: "shadow-xl w-full max-w-4xl bg-white border-2 border-gray-300 p-8 md:p-12",
+              card: "shadow-xl w-full !max-w-none bg-white border-2 border-gray-300 p-8 md:p-12",
               formButtonPrimary: "bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-semibold",
               footerActionLink: "text-[#1D2A38] hover:text-[#CCA43B]",
               formFieldInput: "border-2 border-gray-300 text-base",

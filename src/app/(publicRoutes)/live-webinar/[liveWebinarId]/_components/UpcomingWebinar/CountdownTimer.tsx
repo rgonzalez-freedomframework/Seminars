@@ -87,49 +87,49 @@ const CountdownTimer = ({
         {!isExpired && (
             <div className="flex items-center justify-center gap-4 mb-8">
             {timeLeft.days > 0 && (
-                <div className="space-y-2">
-                <p className="text-sm font-semibold text-[#CCA43B]">Days</p>
+                <div className="space-y-2 animate-in fade-in zoom-in duration-500">
+                <p className="text-sm font-semibold text-[#CCA43B] uppercase tracking-wider">Days</p>
                 <div className="flex justify-center gap-1">
-                    <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
+                    <div className="bg-gradient-to-br from-[#1D2A38] to-[#2D3A48] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B] transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                     {days1}
                     </div>
-                    <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
+                    <div className="bg-gradient-to-br from-[#1D2A38] to-[#2D3A48] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B] transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                     {days2}
                     </div>
                 </div>
                 </div>
             )}
 
-            <div className="space-y-2">
-            <p className="text-sm font-semibold text-[#CCA43B]">Hours</p>
+            <div className="space-y-2 animate-in fade-in zoom-in duration-500 delay-75">
+            <p className="text-sm font-semibold text-[#CCA43B] uppercase tracking-wider">Hours</p>
             <div className="flex justify-center gap-1">
-                <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
+                <div className="bg-gradient-to-br from-[#1D2A38] to-[#2D3A48] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B] transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                 {hours1}
                 </div>
-                <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
+                <div className="bg-gradient-to-br from-[#1D2A38] to-[#2D3A48] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B] transition-all duration-300 hover:scale-105 hover:shadow-2xl">
                 {hours2}
                 </div>
             </div>
             </div>
-            <div className="space-y-2">
-        <p className="text-sm font-semibold text-[#CCA43B]">Minutes</p>
+            <div className="space-y-2 animate-in fade-in zoom-in duration-500 delay-150">
+        <p className="text-sm font-semibold text-[#CCA43B] uppercase tracking-wider">Minutes</p>
         <div className="flex justify-center gap-1">
-            <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
+            <div className="bg-gradient-to-br from-[#1D2A38] to-[#2D3A48] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B] transition-all duration-300 hover:scale-105 hover:shadow-2xl">
             {minutes1}
             </div>
-            <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
+            <div className="bg-gradient-to-br from-[#1D2A38] to-[#2D3A48] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B] transition-all duration-300 hover:scale-105 hover:shadow-2xl">
             {minutes2}
             </div>
         </div>
         </div>
 
-            <div className="space-y-2">
-        <p className="text-sm font-semibold text-[#CCA43B]">Seconds</p>
+            <div className="space-y-2 animate-in fade-in zoom-in duration-500 delay-200">
+        <p className="text-sm font-semibold text-[#CCA43B] uppercase tracking-wider">Seconds</p>
         <div className="flex justify-center gap-1">
-            <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
+            <div className="bg-gradient-to-br from-[#1D2A38] to-[#2D3A48] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B] transition-all duration-300 hover:scale-105 hover:shadow-2xl animate-pulse">
             {seconds1}
             </div>
-            <div className="bg-[#1D2A38] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B]">
+            <div className="bg-gradient-to-br from-[#1D2A38] to-[#2D3A48] text-white w-14 h-16 flex items-center justify-center rounded-xl text-2xl font-bold shadow-lg border-2 border-[#CCA43B] transition-all duration-300 hover:scale-105 hover:shadow-2xl animate-pulse">
             {seconds2}
             </div>
         </div>

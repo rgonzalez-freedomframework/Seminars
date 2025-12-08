@@ -51,7 +51,12 @@ class ZoomClient {
     this.clientId = process.env.ZOOM_CLIENT_ID || '';
     this.clientSecret = process.env.ZOOM_CLIENT_SECRET || '';
     this.accountId = process.env.ZOOM_ACCOUNT_ID || '';
+  }
 
+  /**
+   * Validate that Zoom credentials are configured
+   */
+  private validateCredentials(): void {
     if (!this.clientId || !this.clientSecret || !this.accountId) {
       throw new Error('Zoom credentials are not configured. Please set ZOOM_CLIENT_ID, ZOOM_CLIENT_SECRET, and ZOOM_ACCOUNT_ID in your environment variables.');
     }
@@ -61,6 +66,8 @@ class ZoomClient {
    * Get OAuth access token using Server-to-Server OAuth
    */
   private async getAccessToken(): Promise<string> {
+    this.validateCredentials();
+    
     // Return cached token if still valid
     if (this.accessToken && Date.now() < this.tokenExpiresAt) {
       return this.accessToken;

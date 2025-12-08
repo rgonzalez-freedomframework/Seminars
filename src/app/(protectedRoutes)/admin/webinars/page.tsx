@@ -23,22 +23,22 @@ const Page = async () => {
         heading="The home to all your webinars"
         placeholder="Search option..."
       >
-      <TabsList className="bg-transparent space-x-3">
+      <TabsList className="!bg-transparent space-x-3 h-auto p-0">
         <TabsTrigger
             value="all"
-            className="bg-white border-2 border-gray-300 text-[#1D2A38] data-[state=active]:bg-[#CCA43B] data-[state=active]:text-[#1D2A38] data-[state=active]:border-[#CCA43B] px-8 py-4 font-semibold"
+            className="!bg-white !border-2 !border-gray-300 !text-[#1D2A38] data-[state=active]:!bg-[#CCA43B] data-[state=active]:!text-[#1D2A38] data-[state=active]:!border-[#CCA43B] px-8 py-4 font-semibold shadow-sm"
         >
             All
         </TabsTrigger>
         <TabsTrigger
             value="upcoming"
-            className="bg-white border-2 border-gray-300 text-[#1D2A38] data-[state=active]:bg-[#CCA43B] data-[state=active]:text-[#1D2A38] data-[state=active]:border-[#CCA43B] px-8 py-4 font-semibold"
+            className="!bg-white !border-2 !border-gray-300 !text-[#1D2A38] data-[state=active]:!bg-[#CCA43B] data-[state=active]:!text-[#1D2A38] data-[state=active]:!border-[#CCA43B] px-8 py-4 font-semibold shadow-sm"
         >
             Upcoming
         </TabsTrigger>
         <TabsTrigger
             value="ended"
-            className="bg-white border-2 border-gray-300 text-[#1D2A38] data-[state=active]:bg-[#CCA43B] data-[state=active]:text-[#1D2A38] data-[state=active]:border-[#CCA43B] px-8 py-4 font-semibold"
+            className="!bg-white !border-2 !border-gray-300 !text-[#1D2A38] data-[state=active]:!bg-[#CCA43B] data-[state=active]:!text-[#1D2A38] data-[state=active]:!border-[#CCA43B] px-8 py-4 font-semibold shadow-sm"
         >
             Ended
         </TabsTrigger>

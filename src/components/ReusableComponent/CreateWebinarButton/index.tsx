@@ -4,6 +4,7 @@ import {
   DialogContent,
   DialogTitle,
   DialogTrigger,
+  DialogDescription,
 } from '@/components/ui/dialog'
 import { useWebinarStore } from '@/store/useWebinarStore'
 import { Plus } from 'lucide-react'
@@ -72,9 +73,9 @@ function CreateWebinarButton() {
           <>
             <DialogTitle className="sr-only">Create Webinar</DialogTitle>
             {/* Hidden description for accessibility to satisfy Radix requirements */}
-            <p id="create-webinar-description" className="sr-only">
+            <DialogDescription className="sr-only">
               Multi-step form to configure basic information, call-to-action, and additional options for your webinar.
-            </p>
+            </DialogDescription>
             <MultiStepForm
             steps={steps} 
             onComplete={handleComplete}

@@ -7,6 +7,7 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useAttendeeStore } from '@/store/useAttendeeStore';
 import { toast } from 'sonner';
 import LiveStreamState from './LiveWebinar/LiveStreamState';
+import PreRecordedVideoPlayer from './LiveWebinar/PreRecordedVideoPlayer';
 import { WebinarWithPresenter } from '@/lib/type';
 
 type Props = {
@@ -38,6 +39,11 @@ const RenderWebinar = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [error]);
+  // Check if this is a pre-recorded webinar
+  if (webinar?.isPreRecorded && webinar?.videoUrl) {
+    return <PreRecordedVideoPlayer webinar={webinar} user={user} />
+  }
+
   return (
     <React.Fragment>
         {webinar?.webinarStatus === WebinarStatusEnum.SCHEDULED ? (

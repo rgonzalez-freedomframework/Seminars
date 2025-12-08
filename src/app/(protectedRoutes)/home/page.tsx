@@ -4,11 +4,16 @@ import { WebinarStatusEnum } from '@prisma/client';
 import { auth, currentUser } from '@clerk/nextjs/server';
 import { UserButton } from '@clerk/nextjs';
 import Link from 'next/link';
-import { Calendar, Clock, PlayCircle, Shield } from 'lucide-react';
+import { Calendar, Clock, PlayCircle, Shield, FileText, Download, ChevronDown, ChevronUp } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { checkAndUpdateExpiredWebinars } from '@/actions/webinarManagement';
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 const Pages = async () => {
   const { userId } = await auth();
@@ -44,6 +49,30 @@ const Pages = async () => {
     },
     orderBy: {
       startTime: 'asc',
+    },
+  });
+
+  // Get resources from webinars the user has attended or registered for
+  const userResources = await prismaClient.webinar.findMany({
+    where: {
+      attendances: {
+        some: {
+          userId: userId || undefined,
+        },
+      },
+      resources: {
+        some: {},
+      },
+    },
+    include: {
+      resources: {
+        orderBy: {
+          createdAt: 'desc',
+        },
+      },
+    },
+    orderBy: {
+      startTime: 'desc',
     },
   });
 
@@ -179,18 +208,95 @@ const Pages = async () => {
         )}
       </div>
 
-      {/* Resources Section - Placeholder for future file uploads */}
+      {/* Resources Section */}
       <div>
-        <h2 className="text-[#1D2A38] font-semibold text-2xl mb-6">
+        <h2 className="text-[#1D2A38] font-semibold text-2xl mb-6 flex items-center gap-2">
+          <FileText className="w-6 h-6" />
           Your Resources
         </h2>
-        <Card className="bg-white border-2 border-gray-300">
-          <CardContent className="py-16 text-center">
-            <p className="text-gray-600">
-              Exclusive resources and materials will appear here
-            </p>
-          </CardContent>
-        </Card>
+        {userResources.length > 0 ? (
+          <div className="space-y-4">
+            {userResources.map((webinar) => (
+              <Collapsible key={webinar.id} defaultOpen={false}>
+                <Card className="bg-white border-2 border-gray-300 hover:border-[#CCA43B] transition-colors">
+                  <CollapsibleTrigger className="w-full">
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 hover:bg-gray-50/50 transition-colors rounded-t-lg">
+                      <div className="flex items-start gap-3">
+                        <FileText className="w-5 h-5 text-[#CCA43B] mt-1 flex-shrink-0" />
+                        <div className="text-left">
+                          <CardTitle className="text-[#1D2A38] text-lg mb-1">{webinar.title}</CardTitle>
+                          <p className="text-sm text-gray-600">
+                            {webinar.resources.length} resource{webinar.resources.length !== 1 ? 's' : ''} available
+                          </p>
+                          <p className="text-xs text-gray-500 mt-1">
+                            {new Date(webinar.startTime).toLocaleDateString('en-US', {
+                              month: 'long',
+                              day: 'numeric',
+                              year: 'numeric',
+                            })}
+                          </p>
+                        </div>
+                      </div>
+                      <ChevronDown className="w-5 h-5 text-gray-600 group-data-[state=open]:rotate-180 transition-transform flex-shrink-0" />
+                    </CardHeader>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent>
+                    <CardContent className="pt-4 space-y-3">
+                      {webinar.resources.map((resource) => (
+                        <div
+                          key={resource.id}
+                          className="flex items-start justify-between p-4 bg-gray-50 rounded-lg border border-gray-200 hover:border-[#CCA43B] transition-colors group"
+                        >
+                          <div className="flex-1 min-w-0 mr-4">
+                            <h3 className="font-semibold text-[#1D2A38] mb-1">{resource.title}</h3>
+                            {resource.description && (
+                              <p className="text-sm text-gray-600 mb-2">{resource.description}</p>
+                            )}
+                            <div className="flex items-center gap-4 text-xs text-gray-500">
+                              <span>{resource.fileName}</span>
+                              {resource.fileSize && (
+                                <span>{(resource.fileSize / (1024 * 1024)).toFixed(2)} MB</span>
+                              )}
+                              {resource.fileType && (
+                                <span className="uppercase">{resource.fileType.split('/')[1]}</span>
+                              )}
+                            </div>
+                          </div>
+                          <a
+                            href={resource.fileUrl}
+                            download
+                            className="flex-shrink-0"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <Button
+                              size="sm"
+                              className="bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-semibold"
+                            >
+                              <Download className="w-4 h-4 mr-2" />
+                              Download
+                            </Button>
+                          </a>
+                        </div>
+                      ))}
+                    </CardContent>
+                  </CollapsibleContent>
+                </Card>
+              </Collapsible>
+            ))}
+          </div>
+        ) : (
+          <Card className="bg-white border-2 border-gray-300">
+            <CardContent className="py-16 text-center">
+              <FileText className="w-12 h-12 text-gray-400 mx-auto mb-4" />
+              <p className="text-gray-600 text-lg mb-2">
+                No resources available yet
+              </p>
+              <p className="text-sm text-gray-500">
+                Resources from webinars you attend will appear here
+              </p>
+            </CardContent>
+          </Card>
+        )}
       </div>
       </div>
     </div>

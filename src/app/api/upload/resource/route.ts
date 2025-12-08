@@ -18,22 +18,19 @@ export async function POST(request: NextRequest) {
 
     const formData = await request.formData();
     const file = formData.get('file') as File;
-    const webinarId = formData.get('webinarId') as string;
-    const title = formData.get('title') as string;
-    const description = formData.get('description') as string | null;
 
-    if (!file || !webinarId || !title) {
+    if (!file) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'No file provided' },
         { status: 400 }
       );
     }
 
-    // Validate file size (100MB max for resources)
-    const maxSize = 100 * 1024 * 1024;
+    // Validate file size (50MB max for resources)
+    const maxSize = 50 * 1024 * 1024;
     if (file.size > maxSize) {
       return NextResponse.json(
-        { error: 'File too large. Maximum size is 100MB.' },
+        { error: 'File too large. Maximum size is 50MB.' },
         { status: 400 }
       );
     }
@@ -56,24 +53,15 @@ export async function POST(request: NextRequest) {
     const buffer = Buffer.from(bytes);
     await writeFile(filepath, buffer);
 
-    // Save to database
+    // Return public URL (will be saved to DB when webinar is created)
     const publicUrl = `/uploads/resources/${filename}`;
-    
-    const resource = await prismaClient.webinarResource.create({
-      data: {
-        webinarId,
-        title,
-        description,
-        fileUrl: publicUrl,
-        fileName: file.name,
-        fileSize: file.size,
-        fileType: file.type,
-      },
-    });
 
     return NextResponse.json({
       success: true,
-      resource,
+      url: publicUrl,
+      filename: file.name,
+      fileSize: file.size,
+      fileType: file.type,
     });
   } catch (error: any) {
     console.error('Error uploading resource:', error);

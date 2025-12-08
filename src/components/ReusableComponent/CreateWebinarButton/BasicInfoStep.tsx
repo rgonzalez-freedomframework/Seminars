@@ -20,6 +20,9 @@ const BasicInfoStep = () => {
   const [videoFile, setVideoFile] = useState<File | null>(null)
   const [isUploading, setIsUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
+  const [thumbnailFile, setThumbnailFile] = useState<File | null>(null)
+  const [isThumbnailUploading, setIsThumbnailUploading] = useState(false)
+  const [thumbnailUploadProgress, setThumbnailUploadProgress] = useState(0)
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
@@ -116,6 +119,76 @@ const handleRemoveVideo = () => {
   toast.success('Video removed')
 }
 
+const handleThumbnailUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0]
+  if (!file) return
+
+  // Validate file type
+  const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif']
+  if (!validTypes.includes(file.type)) {
+    toast.error('Please upload a valid image file (JPEG, PNG, WebP, GIF)')
+    return
+  }
+
+  // Validate file size (max 5MB)
+  const maxSize = 5 * 1024 * 1024
+  if (file.size > maxSize) {
+    toast.error('Image file is too large. Maximum size is 5MB')
+    return
+  }
+
+  setThumbnailFile(file)
+  setIsThumbnailUploading(true)
+  setThumbnailUploadProgress(0)
+
+  try {
+    const formData = new FormData()
+    formData.append('image', file)
+
+    const xhr = new XMLHttpRequest()
+    
+    xhr.upload.addEventListener('progress', (e) => {
+      if (e.lengthComputable) {
+        const progress = Math.round((e.loaded / e.total) * 100)
+        setThumbnailUploadProgress(progress)
+      }
+    })
+
+    xhr.addEventListener('load', () => {
+      if (xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText)
+        updateBasicInfoField('thumbnail', response.url)
+        toast.success('Thumbnail uploaded successfully!')
+      } else {
+        toast.error('Upload failed. Please try again.')
+        setThumbnailFile(null)
+      }
+      setIsThumbnailUploading(false)
+    })
+
+    xhr.addEventListener('error', () => {
+      toast.error('Upload failed. Please try again.')
+      setThumbnailFile(null)
+      setIsThumbnailUploading(false)
+    })
+
+    xhr.open('POST', '/api/upload/image')
+    xhr.send(formData)
+  } catch (error) {
+    console.error('Upload error:', error)
+    toast.error('Failed to upload image')
+    setThumbnailFile(null)
+    setIsThumbnailUploading(false)
+  }
+}
+
+const handleRemoveThumbnail = () => {
+  setThumbnailFile(null)
+  setThumbnailUploadProgress(0)
+  updateBasicInfoField('thumbnail', undefined)
+  toast.success('Thumbnail removed')
+}
+
   return (
     <div className="space-y-6">
       <div className="space-y-2">
@@ -159,6 +232,95 @@ const handleRemoveVideo = () => {
             <p className="text-sm text-red-400">{errors.description}</p>
         )}
         </div>
+
+        {/* Thumbnail Upload Section */}
+        <div className="space-y-3 p-4 border-2 border-gray-300 rounded-lg bg-gray-50">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Upload className="h-5 w-5 text-[#1D2A38]" />
+              <div>
+                <p className="text-sm font-medium text-[#1D2A38]">Webinar Card Image</p>
+                <p className="text-xs text-gray-600">Upload a custom thumbnail for the webinar card</p>
+              </div>
+            </div>
+            
+            {!thumbnailFile && !isThumbnailUploading && (
+              <Button
+                type="button"
+                variant="outline"
+                className="relative border-2 border-[#CCA43B] hover:bg-[#CCA43B]/10 text-[#1D2A38] font-semibold"
+                disabled={isThumbnailUploading}
+              >
+                Choose Image
+                <Input
+                  className="absolute inset-0 opacity-0 cursor-pointer"
+                  type="file"
+                  accept="image/jpeg,image/jpg,image/png,image/webp,image/gif"
+                  onChange={handleThumbnailUpload}
+                  disabled={isThumbnailUploading}
+                />
+              </Button>
+            )}
+          </div>
+
+          {/* Upload Progress */}
+          {isThumbnailUploading && (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-[#1D2A38] font-medium">Uploading...</span>
+                <span className="text-[#CCA43B] font-semibold">{thumbnailUploadProgress}%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div
+                  className="bg-[#CCA43B] h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${thumbnailUploadProgress}%` }}
+                />
+              </div>
+              <p className="text-xs text-gray-600 flex items-center gap-1">
+                <Loader2 className="h-3 w-3 animate-spin" />
+                Uploading {thumbnailFile?.name}...
+              </p>
+            </div>
+          )}
+
+          {/* Upload Success with Preview */}
+          {thumbnailFile && !isThumbnailUploading && formData.basicInfo.thumbnail && (
+            <div className="space-y-2">
+              <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-green-300">
+                <img 
+                  src={formData.basicInfo.thumbnail} 
+                  alt="Webinar thumbnail" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="flex items-center justify-between p-3 bg-green-50 border-2 border-green-300 rounded-lg">
+                <div className="flex items-center gap-2">
+                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+                  <div>
+                    <p className="text-sm font-medium text-green-900">{thumbnailFile.name}</p>
+                    <p className="text-xs text-green-700">
+                      {(thumbnailFile.size / (1024 * 1024)).toFixed(2)} MB
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleRemoveThumbnail}
+                  className="hover:bg-red-100 hover:text-red-600"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          )}
+
+          <p className="text-xs text-gray-500 mt-2">
+            Maximum file size: 5MB. Supported formats: JPEG, PNG, WebP, GIF
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
                 <Label htmlFor="date" className={errors.date ? 'text-red-400' : 'text-[#1D2A38]'}>

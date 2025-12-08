@@ -117,10 +117,27 @@ export const createWebinar = async (formData: WebinarFormState) => {
         couponEnabled: formData.additionalInfo.couponEnabled || false,
         videoUrl: formData.basicInfo.videoUrl || null,
         isPreRecorded: !!formData.basicInfo.videoUrl,
+        thumbnail: formData.basicInfo.thumbnail || null,
         presenterId: presenterId,
         ...zoomWebinarData, // Include Zoom data if available
     },
     })
+
+    // Create resources if any were uploaded
+    if (formData.additionalInfo.resources && formData.additionalInfo.resources.length > 0) {
+      await prismaClient.webinarResource.createMany({
+        data: formData.additionalInfo.resources.map((resource: any) => ({
+          webinarId: webinar.id,
+          title: resource.title,
+          description: resource.description || null,
+          fileUrl: resource.fileUrl,
+          fileName: resource.fileName,
+          fileSize: resource.fileSize,
+          fileType: resource.fileType,
+        })),
+      })
+    }
+
     revalidatePath('/')
     return {
     status: 200,

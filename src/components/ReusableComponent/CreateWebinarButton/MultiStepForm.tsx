@@ -49,6 +49,14 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
 
     const handleNext = async () => {
     setValidationError(null)
+    console.log('=== STEP NAVIGATION ===')
+    console.log('Current step:', currentStep.id)
+    console.log('FormData before validation:', {
+      thumbnail: formData.basicInfo.thumbnail,
+      videoUrl: formData.basicInfo.videoUrl,
+      isPreRecorded: formData.basicInfo.isPreRecorded,
+      resources: formData.additionalInfo.resources
+    })
     const isValid = validateStep(currentStep.id as keyof typeof formData)
 
     if (!isValid) {

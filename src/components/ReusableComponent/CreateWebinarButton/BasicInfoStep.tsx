@@ -25,7 +25,13 @@ const BasicInfoStep = () => {
       videoUrl: formData.basicInfo.videoUrl,
       isPreRecorded: formData.basicInfo.isPreRecorded
     })
-  }, [formData.basicInfo.thumbnail, formData.basicInfo.videoUrl, formData.basicInfo.isPreRecorded])
+    console.log('UI State:', {
+      isThumbnailUploading,
+      isUploading,
+      shouldShowThumbnailSuccess: !isThumbnailUploading && formData.basicInfo.thumbnail,
+      shouldShowVideoSuccess: !isUploading && formData.basicInfo.videoUrl
+    })
+  }, [formData.basicInfo.thumbnail, formData.basicInfo.videoUrl, formData.basicInfo.isPreRecorded, isThumbnailUploading, isUploading])
   const [videoFile, setVideoFile] = useState<File | null>(null)
   const [isUploading, setIsUploading] = useState(false)
   const [uploadProgress, setUploadProgress] = useState(0)
@@ -47,7 +53,8 @@ const BasicInfoStep = () => {
             today.setHours(0, 0, 0, 0)
             const selectedDate = new Date(newDate)
             selectedDate.setHours(0, 0, 0, 0)
-            if (selectedDate < today) {
+            // Only show error if date is strictly before today (not including today)
+            if (selectedDate.getTime() < today.getTime()) {
             toast.error('Webinar date cannot be in the past')
             console.log('Error: Cannot select a date in the past')
             }
@@ -98,9 +105,13 @@ const handleVideoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         const response = JSON.parse(xhr.responseText)
+        console.log('Video upload response:', response)
+        console.log('Setting video URL to:', response.url)
         updateBasicInfoField('videoUrl', response.url)
+        console.log('Video state after update - uploading:', false, 'url:', response.url)
         toast.success('Video uploaded successfully!')
       } else {
+        console.error('Video upload failed with status:', xhr.status)
         toast.error('Upload failed. Please try again.')
         setVideoFile(null)
       }

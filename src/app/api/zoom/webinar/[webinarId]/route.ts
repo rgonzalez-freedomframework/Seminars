@@ -4,7 +4,7 @@ import { auth } from '@clerk/nextjs/server';
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { webinarId: string } }
+  { params }: { params: Promise<{ webinarId: string }> }
 ) {
   try {
     const { userId } = await auth();
@@ -16,7 +16,7 @@ export async function DELETE(
       );
     }
 
-    const { webinarId } = params;
+    const { webinarId } = await params;
 
     if (!webinarId) {
       return NextResponse.json(
@@ -43,7 +43,7 @@ export async function DELETE(
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { webinarId: string } }
+  { params }: { params: Promise<{ webinarId: string }> }
 ) {
   try {
     const { userId } = await auth();
@@ -55,7 +55,7 @@ export async function GET(
       );
     }
 
-    const { webinarId } = params;
+    const { webinarId } = await params;
 
     if (!webinarId) {
       return NextResponse.json(

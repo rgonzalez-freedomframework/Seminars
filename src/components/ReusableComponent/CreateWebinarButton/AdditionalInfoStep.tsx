@@ -90,6 +90,7 @@ const handleAddResource = async () => {
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         const response = JSON.parse(xhr.responseText)
+        console.log('Resource upload response:', response)
         
         // Add to resources list
         const uploadedResource: ResourceUpload = {
@@ -101,17 +102,24 @@ const handleAddResource = async () => {
           progress: 100
         }
         
-        setResources(prev => [...prev, uploadedResource])
+        setResources(prev => {
+          const updated = [...prev, uploadedResource]
+          console.log('Updated resources list:', updated)
+          return updated
+        })
         
         // Store in form data
-        updateAdditionalInfoField('resources', [...(formData.additionalInfo.resources || []), {
+        const resourceData = {
           title: newResource.title,
           description: newResource.description,
           fileUrl: response.url,
-          fileName: response.filename,
+          fileName: response.filename || newResource.file?.name || 'unknown',
           fileSize: newResource.file?.size || 0,
           fileType: newResource.file?.type || ''
-        }])
+        }
+        console.log('Saving resource to form data:', resourceData)
+        
+        updateAdditionalInfoField('resources', [...(formData.additionalInfo.resources || []), resourceData])
         
         // Reset form but keep file input visible
         setNewResource({

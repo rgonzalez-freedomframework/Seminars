@@ -9,6 +9,8 @@ export type WebinarFormState = {
     time?: string
     timeFormat?: 'AM' | 'PM'
     duration?: number
+    videoUrl?: string
+    isPreRecorded?: boolean
   }
   cta: {
     ctaLabel?: string

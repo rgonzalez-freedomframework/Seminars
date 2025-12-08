@@ -9,14 +9,17 @@ import { Textarea } from '@/components/ui/textarea'
 import { cn } from '@/lib/utils'
 import { useWebinarStore } from '@/store/useWebinarStore'
 import { format } from 'date-fns'
-import { CalendarIcon, Clock, Upload } from 'lucide-react'
-import React from 'react'
+import { CalendarIcon, Clock, Upload, CheckCircle2, Loader2, X } from 'lucide-react'
+import React, { useState } from 'react'
 import { toast } from 'sonner'
 
 const BasicInfoStep = () => {
   const { formData, updateBasicInfoField, getStepValidationErrors } =
     useWebinarStore()
   const { date }=formData.basicInfo
+  const [videoFile, setVideoFile] = useState<File | null>(null)
+  const [isUploading, setIsUploading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
@@ -39,6 +42,78 @@ const BasicInfoStep = () => {
 
 const handleTimeFormatChange = (value: string) => {
   updateBasicInfoField('timeFormat', value as 'AM' | 'PM')
+}
+
+const handleVideoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const file = e.target.files?.[0]
+  if (!file) return
+
+  // Validate file type
+  const validTypes = ['video/mp4', 'video/webm', 'video/ogg', 'video/quicktime']
+  if (!validTypes.includes(file.type)) {
+    toast.error('Please upload a valid video file (MP4, WebM, OGG, MOV)')
+    return
+  }
+
+  // Validate file size (max 500MB)
+  const maxSize = 500 * 1024 * 1024
+  if (file.size > maxSize) {
+    toast.error('Video file is too large. Maximum size is 500MB')
+    return
+  }
+
+  setVideoFile(file)
+  setIsUploading(true)
+  setUploadProgress(0)
+
+  try {
+    // Create form data
+    const formData = new FormData()
+    formData.append('video', file)
+
+    // Upload with progress tracking
+    const xhr = new XMLHttpRequest()
+    
+    xhr.upload.addEventListener('progress', (e) => {
+      if (e.lengthComputable) {
+        const progress = Math.round((e.loaded / e.total) * 100)
+        setUploadProgress(progress)
+      }
+    })
+
+    xhr.addEventListener('load', () => {
+      if (xhr.status === 200) {
+        const response = JSON.parse(xhr.responseText)
+        updateBasicInfoField('videoUrl', response.url)
+        toast.success('Video uploaded successfully!')
+      } else {
+        toast.error('Upload failed. Please try again.')
+        setVideoFile(null)
+      }
+      setIsUploading(false)
+    })
+
+    xhr.addEventListener('error', () => {
+      toast.error('Upload failed. Please try again.')
+      setVideoFile(null)
+      setIsUploading(false)
+    })
+
+    xhr.open('POST', '/api/upload/video')
+    xhr.send(formData)
+  } catch (error) {
+    console.error('Upload error:', error)
+    toast.error('Failed to upload video')
+    setVideoFile(null)
+    setIsUploading(false)
+  }
+}
+
+const handleRemoveVideo = () => {
+  setVideoFile(null)
+  setUploadProgress(0)
+  updateBasicInfoField('videoUrl', undefined)
+  toast.success('Video removed')
 }
 
   return (
@@ -103,13 +178,24 @@ const handleTimeFormatChange = (value: string) => {
                     {date ? format(date, 'PPP') : 'Select date'}
                     </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-auto p-0 bg-white border-2 border-gray-300">
+                <PopoverContent className="w-auto p-0 bg-white border-2 border-[#CCA43B] shadow-xl z-50">
                 <Calendar
                     mode="single"
                     selected={date}
                     onSelect={handleDateChange}
                     initialFocus
-                    className="bg-white"
+                    className="bg-white rounded-md"
+                    classNames={{
+                      day_selected: "bg-[#CCA43B] text-[#1D2A38] hover:bg-[#B8932F] hover:text-[#1D2A38] focus:bg-[#CCA43B] focus:text-[#1D2A38]",
+                      day_today: "bg-gray-100 text-[#1D2A38]",
+                      day: "hover:bg-gray-100",
+                      head_cell: "text-[#1D2A38] font-medium",
+                      cell: "text-[#1D2A38]",
+                      caption: "text-[#1D2A38] font-semibold",
+                      nav_button: "hover:bg-gray-100 text-[#1D2A38]",
+                      nav_button_previous: "hover:bg-gray-100",
+                      nav_button_next: "hover:bg-gray-100",
+                    }}
                     disabled={(date) => {
                     const today = new Date()
                     today.setHours(0, 0, 0, 0) // Reset time to start of day
@@ -175,21 +261,83 @@ const handleTimeFormatChange = (value: string) => {
             <p className="text-sm text-gray-600">Enter webinar duration in minutes (15-480)</p>
         </div>
 
-        <div className="flex items-center gap-2 text-sm text-gray-600 mt-4">
-            <div className="flex items-center">
-                <Upload className="h-4 w-4 mr-2 text-[#1D2A38]" />
-                Uploading a video makes this webinar pre-recorded.
+        {/* Video Upload Section */}
+        <div className="space-y-3 p-4 border-2 border-gray-300 rounded-lg bg-gray-50">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <Upload className="h-5 w-5 text-[#1D2A38]" />
+              <div>
+                <p className="text-sm font-medium text-[#1D2A38]">Pre-recorded Video</p>
+                <p className="text-xs text-gray-600">Upload a video to make this webinar pre-recorded</p>
+              </div>
             </div>
-            <Button
+            
+            {!videoFile && !isUploading && (
+              <Button
+                type="button"
                 variant="outline"
-                className="ml-auto relative border-2 border-gray-300 hover:bg-gray-100 text-[#1D2A38]"
-            >
-                Upload File
+                className="relative border-2 border-[#CCA43B] hover:bg-[#CCA43B]/10 text-[#1D2A38] font-semibold"
+                disabled={isUploading}
+              >
+                Choose Video
                 <Input
-                className="absolute inset-0 opacity-0 cursor-pointer"
-                type="file"
+                  className="absolute inset-0 opacity-0 cursor-pointer"
+                  type="file"
+                  accept="video/mp4,video/webm,video/ogg,video/quicktime"
+                  onChange={handleVideoUpload}
+                  disabled={isUploading}
                 />
-            </Button>
+              </Button>
+            )}
+          </div>
+
+          {/* Upload Progress */}
+          {isUploading && (
+            <div className="space-y-2">
+              <div className="flex items-center justify-between text-sm">
+                <span className="text-[#1D2A38] font-medium">Uploading...</span>
+                <span className="text-[#CCA43B] font-semibold">{uploadProgress}%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+                <div
+                  className="bg-[#CCA43B] h-2 rounded-full transition-all duration-300"
+                  style={{ width: `${uploadProgress}%` }}
+                />
+              </div>
+              <p className="text-xs text-gray-600 flex items-center gap-1">
+                <Loader2 className="h-3 w-3 animate-spin" />
+                Uploading {videoFile?.name}...
+              </p>
+            </div>
+          )}
+
+          {/* Upload Success */}
+          {videoFile && !isUploading && (
+            <div className="flex items-center justify-between p-3 bg-green-50 border-2 border-green-300 rounded-lg">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-green-600" />
+                <div>
+                  <p className="text-sm font-medium text-green-900">{videoFile.name}</p>
+                  <p className="text-xs text-green-700">
+                    {(videoFile.size / (1024 * 1024)).toFixed(2)} MB
+                  </p>
+                </div>
+              </div>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={handleRemoveVideo}
+                className="hover:bg-red-100 hover:text-red-600"
+              >
+                <X className="h-4 w-4" />
+              </Button>
+            </div>
+          )}
+
+          <p className="text-xs text-gray-500 mt-2">
+            Maximum file size: 500MB. Supported formats: MP4, WebM, OGG, MOV
+          </p>
         </div>
     </div>
   )

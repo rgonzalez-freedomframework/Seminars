@@ -77,10 +77,13 @@ model Webinar {
   aiAgentId     String?           @db.Uuid
   priceId     String?          @db.VarChar(255)
   recordingUrl  String?
+  videoUrl      String?           @db.VarChar(500) // Pre-recorded video URL
+  isPreRecorded Boolean           @default(false) // Flag for pre-recorded webinars
   thumbnail     String?
   zoomWebinarId String?         @db.VarChar(255) // Zoom webinar ID
   zoomJoinUrl   String?         @db.VarChar(500) // Zoom join URL
   zoomRegistrationUrl String?   @db.VarChar(500) // Zoom registration URL
+  resources     WebinarResource[] // Related resources
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
   deletedAt     DateTime?
@@ -90,6 +93,22 @@ model Webinar {
   @@index([presenterId])
   @@index([aiAgentId])
   @@index([startTime])
+}
+
+model WebinarResource {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  webinarId   String   @db.Uuid
+  webinar     Webinar  @relation(fields: [webinarId], references: [id], onDelete: Cascade)
+  title       String   @db.VarChar(255)
+  description String?  @db.Text
+  fileUrl     String   @db.VarChar(500)
+  fileName    String   @db.VarChar(255)
+  fileSize    Int?     // File size in bytes
+  fileType    String?  @db.VarChar(100) // MIME type
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([webinarId])
 }
 
 model Attendee {

@@ -73,10 +73,10 @@ const handleAddResource = async () => {
   setNewResource(prev => ({ ...prev, uploading: true, progress: 0 }))
 
   try {
-    const formData = new FormData()
-    formData.append('file', newResource.file)
-    formData.append('title', newResource.title)
-    formData.append('description', newResource.description)
+    const uploadFormData = new FormData()
+    uploadFormData.append('file', newResource.file)
+    uploadFormData.append('title', newResource.title)
+    uploadFormData.append('description', newResource.description)
 
     const xhr = new XMLHttpRequest()
     
@@ -135,7 +135,7 @@ const handleAddResource = async () => {
     })
 
     xhr.open('POST', '/api/upload/resource')
-    xhr.send(formData)
+    xhr.send(uploadFormData)
   } catch (error) {
     console.error('Upload error:', error)
     toast.error('Failed to upload resource')

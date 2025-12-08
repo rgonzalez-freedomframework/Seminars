@@ -86,34 +86,6 @@ const Page = async () => {
             </div>
         )}
         </TabsContent>
-        <TabsContent
-        value="upcoming"
-        className="w-full grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 place-items-start place-content-start px-6 md:px-8 lg:px-10 xl:px-12 gap-y-10 gap-x-6"
-        >
-        {webinars?.filter((w: Webinar) => new Date(w.startTime) > new Date() && w.webinarStatus !== 'ENDED')?.length > 0 ? (
-            webinars.filter((w: Webinar) => new Date(w.startTime) > new Date() && w.webinarStatus !== 'ENDED').map((webinar: Webinar, index: number) => (
-            <WebinarCard key={index} webinar={webinar} />
-            ))
-        ) : (
-            <div className="w-full h-[200px] flex justify-center items-center text-[#1D2A38] font-semibold text-2xl col-span-12">
-            No Upcoming Webinars
-            </div>
-        )}
-        </TabsContent>
-        <TabsContent
-        value="ended"
-        className="w-full grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 place-items-start place-content-start px-6 md:px-8 lg:px-10 xl:px-12 gap-y-10 gap-x-6"
-        >
-        {webinars?.filter((w: Webinar) => w.webinarStatus === 'ENDED')?.length > 0 ? (
-            webinars.filter((w: Webinar) => w.webinarStatus === 'ENDED').map((webinar: Webinar, index: number) => (
-            <WebinarCard key={index} webinar={webinar} />
-            ))
-        ) : (
-            <div className="w-full h-[200px] flex justify-center items-center text-[#1D2A38] font-semibold text-2xl col-span-12">
-            No Ended Webinars
-            </div>
-        )}
-        </TabsContent>
     </Tabs>
   )
 }

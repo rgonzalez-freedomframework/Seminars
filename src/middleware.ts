@@ -13,8 +13,12 @@ const isPublicRoute=createRouteMatcher([
 export default clerkMiddleware(async(auth,req)=>{
     const {userId} = await auth();
     
-    // Redirect authenticated users from landing page to /home
-    if(userId && req.nextUrl.pathname === '/'){
+    // Check if user wants to view landing page (has query param or referer is admin)
+    const viewLanding = req.nextUrl.searchParams.get('view') === 'landing';
+    const fromAdmin = req.headers.get('referer')?.includes('/admin');
+    
+    // Redirect authenticated users from landing page to /home (unless explicitly viewing landing)
+    if(userId && req.nextUrl.pathname === '/' && !viewLanding && !fromAdmin){
         return Response.redirect(new URL('/home', req.url));
     }
     

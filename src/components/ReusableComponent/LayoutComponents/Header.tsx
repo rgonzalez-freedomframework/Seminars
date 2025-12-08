@@ -32,14 +32,14 @@ const Header = ({ user }: Props) => {
         </div>
       )}
       <div className='flex gap-6 items-center flex-wrap'>
-          <a href="/" target="_blank" rel="noopener noreferrer">
+          <Link href="/?view=landing">
             <Button
               className="!bg-white !border-2 !border-[#1D2A38] !text-[#1D2A38] hover:!bg-[#1D2A38] hover:!text-white rounded-xl font-semibold transition-all"
               variant={'outline'}
             >
               View Landing Page
             </Button>
-          </a>
+          </Link>
           <CreateWebinarButton/>
       </div>
     </div>

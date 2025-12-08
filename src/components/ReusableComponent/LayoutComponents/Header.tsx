@@ -32,7 +32,7 @@ const Header = ({ user }: Props) => {
           </Button>
         ) : (
           <div className="px-4 py-2 flex justify-center text-bold items-center rounded-xl bg-white border-2 border-gray-300 text-[#1D2A38] font-semibold animate-in fade-in slide-in-from-top-2 duration-500">
-              {pathname.split('/')[1] === 'admin' ? 'Admin View' : pathname.split('/')[1]}
+              {pathname.split('/')[1] === 'admin' ? 'Admin View v1.4.0' : pathname.split('/')[1]}
           </div>
         )}
       </div>

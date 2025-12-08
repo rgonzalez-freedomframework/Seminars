@@ -23,7 +23,7 @@ const PageHeader = ({
   return(
   <div className="w-full h-full mt-8 px-6 md:px-8 lg:px-10 xl:px-12">
     <div className="w-full flex justify-center sm:justify-between items-center gap-8 flex-wrap">
-        <p className="text-[#1D2A38] text-4xl font-semibold">{heading}</p>
+        <p className="text-[#1D2A38] text-3xl md:text-4xl font-semibold">{heading}</p>
         <div className="relative md:mr-28">
             <PurpleIcon className="absolute -left-4 -top-3 -z-10 -rotate-45 py-3">
             {leftIcon}
@@ -36,11 +36,11 @@ const PageHeader = ({
     </div>
     <div className="w-full flex flex-wrap gap-6 items-center justify-between mt-8">
     <div className="w-full md:max-w-3/4 relative flex-1">
-        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500" />
+        <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-[#1D2A38]" />
         <Input
         type="text"
         placeholder={placeholder || 'Search...'}
-        className="pl-10 rounded-md"
+        className="pl-10 rounded-md bg-white border-2 border-gray-300 text-[#1D2A38] placeholder:text-gray-500"
         />
     </div>
     <div className="md:max-w-1/4 w-full overflow-x-auto">{children}</div>

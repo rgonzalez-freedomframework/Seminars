@@ -1,7 +1,8 @@
 import { auth } from '@clerk/nextjs/server'
-import { writeFile } from 'fs/promises'
 import { NextRequest, NextResponse } from 'next/server'
 import path from 'path'
+import { writeFile } from 'fs/promises'
+import { put } from '@vercel/blob'
 
 export async function POST(request: NextRequest) {
   try {
@@ -42,32 +43,42 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Create unique filename
-    const bytes = await file.arrayBuffer()
-    const buffer = Buffer.from(bytes)
-    
     const timestamp = Date.now()
     const originalName = file.name.replace(/\s+/g, '-')
     const filename = `${timestamp}-${originalName}`
-    
-    // Save to public/uploads/images directory
+
+    // On Vercel, use Blob storage (read-only filesystem restriction)
+    if (process.env.VERCEL) {
+      const blob = await put(`uploads/images/${filename}`, file, {
+        access: 'public',
+        contentType: file.type,
+      })
+
+      return NextResponse.json({
+        success: true,
+        url: blob.url,
+        filename: blob.pathname,
+      })
+    }
+
+    // Local dev fallback: write to public/uploads/images
+    const bytes = await file.arrayBuffer()
+    const buffer = Buffer.from(bytes)
+
     const uploadDir = path.join(process.cwd(), 'public', 'uploads', 'images')
     const filePath = path.join(uploadDir, filename)
-    
-    // Create directory if it doesn't exist
+
     const { mkdir } = await import('fs/promises')
     await mkdir(uploadDir, { recursive: true })
-    
-    // Write file
+
     await writeFile(filePath, buffer)
-    
-    // Return public URL
+
     const publicUrl = `/uploads/images/${filename}`
-    
+
     return NextResponse.json({
       success: true,
       url: publicUrl,
-      filename: filename
+      filename,
     })
   } catch (error) {
     console.error('Image upload error:', error)

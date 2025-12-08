@@ -71,6 +71,10 @@ function CreateWebinarButton() {
         ) : (
           <>
             <DialogTitle className="sr-only">Create Webinar</DialogTitle>
+            {/* Hidden description for accessibility to satisfy Radix requirements */}
+            <p id="create-webinar-description" className="sr-only">
+              Multi-step form to configure basic information, call-to-action, and additional options for your webinar.
+            </p>
             <MultiStepForm
             steps={steps} 
             onComplete={handleComplete}

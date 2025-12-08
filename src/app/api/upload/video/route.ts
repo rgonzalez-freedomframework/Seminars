@@ -3,6 +3,7 @@ import { auth } from '@clerk/nextjs/server';
 import { writeFile, mkdir } from 'fs/promises';
 import { join } from 'path';
 import { existsSync } from 'fs';
+import { put } from '@vercel/blob';
 
 export async function POST(request: NextRequest) {
   try {
@@ -43,24 +44,37 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create uploads directory if it doesn't exist
+    const timestamp = Date.now();
+    const extension = file.name.split('.').pop();
+    const filename = `${userId}-${timestamp}.${extension}`;
+
+    // On Vercel, store video in Blob storage
+    if (process.env.VERCEL) {
+      const blob = await put(`uploads/videos/${filename}`, file, {
+        access: 'public',
+        contentType: file.type,
+      });
+
+      return NextResponse.json({
+        success: true,
+        url: blob.url,
+        filename: blob.pathname,
+        size: file.size,
+        type: file.type,
+      });
+    }
+
+    // Local dev fallback: write to public/uploads/videos
     const uploadsDir = join(process.cwd(), 'public', 'uploads', 'videos');
     if (!existsSync(uploadsDir)) {
       await mkdir(uploadsDir, { recursive: true });
     }
 
-    // Generate unique filename
-    const timestamp = Date.now();
-    const extension = file.name.split('.').pop();
-    const filename = `${userId}-${timestamp}.${extension}`;
     const filepath = join(uploadsDir, filename);
-
-    // Convert file to buffer and save
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
     await writeFile(filepath, buffer);
 
-    // Return public URL
     const publicUrl = `/uploads/videos/${filename}`;
 
     return NextResponse.json({

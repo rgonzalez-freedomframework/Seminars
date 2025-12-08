@@ -18,6 +18,14 @@ const BasicInfoStep = () => {
     useWebinarStore()
   const { date }=formData.basicInfo
   
+  // State declarations must come before useEffect
+  const [videoFile, setVideoFile] = useState<File | null>(null)
+  const [isUploading, setIsUploading] = useState(false)
+  const [uploadProgress, setUploadProgress] = useState(0)
+  const [thumbnailFile, setThumbnailFile] = useState<File | null>(null)
+  const [isThumbnailUploading, setIsThumbnailUploading] = useState(false)
+  const [thumbnailUploadProgress, setThumbnailUploadProgress] = useState(0)
+  
   // Debug logging
   useEffect(() => {
     console.log('BasicInfo formData changed:', {
@@ -32,12 +40,6 @@ const BasicInfoStep = () => {
       shouldShowVideoSuccess: !isUploading && formData.basicInfo.videoUrl
     })
   }, [formData.basicInfo.thumbnail, formData.basicInfo.videoUrl, formData.basicInfo.isPreRecorded, isThumbnailUploading, isUploading])
-  const [videoFile, setVideoFile] = useState<File | null>(null)
-  const [isUploading, setIsUploading] = useState(false)
-  const [uploadProgress, setUploadProgress] = useState(0)
-  const [thumbnailFile, setThumbnailFile] = useState<File | null>(null)
-  const [isThumbnailUploading, setIsThumbnailUploading] = useState(false)
-  const [thumbnailUploadProgress, setThumbnailUploadProgress] = useState(0)
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {

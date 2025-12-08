@@ -49,11 +49,11 @@ const Pages = async () => {
       <nav className="border-b border-gray-300 bg-gray-50/95 backdrop-blur supports-[backdrop-filter]:bg-gray-50/60">
         <div className="container mx-auto px-4 md:px-8 lg:px-12">
           <div className="flex h-16 items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Link href="/" className="text-xl font-bold text-[#1D2A38]">
-                Freedom Framework
+          <div className="flex items-center gap-2">
+              <Link href="/?view=landing" className="text-xl font-bold text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
+                Freedom Framework™
               </Link>
-            </div>
+          </div>
             <div className="flex items-center gap-4">
               {isAdmin && (
                 <Link href="/admin/webinars">

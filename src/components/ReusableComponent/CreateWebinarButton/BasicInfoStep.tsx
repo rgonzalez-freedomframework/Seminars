@@ -261,8 +261,7 @@ const handleRemoveVideo = () => {
             <p className="text-sm text-gray-600">Enter webinar duration in minutes (15-480)</p>
         </div>
 
-        {/* Video Upload Section - TEMPORARILY DISABLED 
-            TODO: Re-enable after running database migration for videoUrl field
+        {/* Video Upload Section */}
         <div className="space-y-3 p-4 border-2 border-gray-300 rounded-lg bg-gray-50">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -340,7 +339,6 @@ const handleRemoveVideo = () => {
             Maximum file size: 500MB. Supported formats: MP4, WebM, OGG, MOV
           </p>
         </div>
-        */}
     </div>
   )
 }

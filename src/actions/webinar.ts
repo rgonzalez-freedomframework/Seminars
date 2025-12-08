@@ -115,9 +115,8 @@ export const createWebinar = async (formData: WebinarFormState) => {
         ? formData.additionalInfo.couponCode
         : null,
         couponEnabled: formData.additionalInfo.couponEnabled || false,
-        // TODO: Uncomment after running migration
-        // videoUrl: formData.basicInfo.videoUrl || null,
-        // isPreRecorded: !!formData.basicInfo.videoUrl,
+        videoUrl: formData.basicInfo.videoUrl || null,
+        isPreRecorded: !!formData.basicInfo.videoUrl,
         presenterId: presenterId,
         ...zoomWebinarData, // Include Zoom data if available
     },

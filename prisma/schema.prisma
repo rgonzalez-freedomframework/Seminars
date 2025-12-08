@@ -73,6 +73,8 @@ model Webinar {
   couponEnabled Boolean           @default(false)
   couponExpiry  DateTime?
   lockChat      Boolean           @default(false)
+  videoUrl      String?           @db.VarChar(500)
+  isPreRecorded Boolean           @default(false)
   stripeProductId String?         @db.VarChar(255)
   aiAgentId     String?           @db.Uuid
   priceId     String?          @db.VarChar(255)
@@ -86,6 +88,7 @@ model Webinar {
   deletedAt     DateTime?
   Attendee      Attendee?         @relation(fields: [attendeeId], references: [id])
   attendeeId    String?           @db.Uuid
+  resources     WebinarResource[]
 
   @@index([presenterId])
   @@index([aiAgentId])
@@ -123,4 +126,21 @@ model Attendance {
   @@unique([attendeeId, webinarId]) // ✅ This enforces 1 attendee per webinar
   @@index([webinarId])
   @@index([attendedType])
+}
+
+model WebinarResource {
+  id          String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  webinarId   String   @db.Uuid
+  title       String   @db.VarChar(255)
+  description String?  @db.Text
+  fileUrl     String   @db.VarChar(500)
+  fileName    String   @db.VarChar(255)
+  fileSize    Int?
+  fileType    String?  @db.VarChar(100)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  webinar Webinar @relation(fields: [webinarId], references: [id], onDelete: Cascade)
+
+  @@index([webinarId])
 }

@@ -11,7 +11,7 @@ const manrope=Manrope({
 
 
 export const metadata: Metadata = {
-  title: "Spotlight",
+  title: "Freedom Framework™",
   description: "AI Powered Webinar Streaming & Sales Platform",
   icons: {
   icon: [
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'default',
-    title: 'Spotlight',
+    title: 'Freedom Framework™',
   },
 };
 

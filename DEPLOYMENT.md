@@ -1,4 +1,4 @@
-# Vercel Deployment Guide for Spotlight
+# Vercel Deployment Guide for Freedom Framework™
 
 ## Prerequisites Checklist
 

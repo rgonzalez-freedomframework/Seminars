@@ -1,10 +1,10 @@
-# Spotlight – AI Powered Webinar Streaming & Sales Platform 📈
+# Freedom Framework™ – AI Powered Webinar Streaming & Sales Platform 📈
 
 ![image](https://github.com/user-attachments/assets/55e8f027-9589-4d86-83d3-9bec21e60bd6)
 
 
 
-Spotlight is an AI powered webinar streaming platform for marketers and business owners. Users can create webinars, show popup screens to attendees to book a call or buy a product during the livestream, track lead sales and sales progress and more.
+Freedom Framework™ is an AI powered webinar streaming platform for marketers and business owners. Users can create webinars, show popup screens to attendees to book a call or buy a product during the livestream, track lead sales and sales progress and more.
 
 The "book a call" CTA works best for high ticket services / or courses! The host can create breakout rooms for interested prospects and the AI sales agent can speak to leads and even close leads with the product link.
 
@@ -76,8 +76,8 @@ https://github.com/user-attachments/assets/fc958cd5-d652-4a0c-ab66-b19348303c0a
 
 ```bash
 # Clone the repo
-git clone https://github.com/TuShArBhArDwA/Spotlight.git
-cd Spotlight
+git clone https://github.com/rgonzalez-freedomframework/Seminars.git
+cd Seminars
 ```
 
 ### Install dependencies

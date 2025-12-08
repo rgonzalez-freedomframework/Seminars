@@ -74,7 +74,7 @@ export default async function Home() {
             <div className="flex justify-center animate-in zoom-in duration-700 delay-500">
               <GeneralRegistrationForm 
                 triggerText="Get Started - Register Free"
-                triggerClassName="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-bold text-xl md:text-2xl px-10 md:px-16 py-6 md:py-8 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                triggerClassName="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-bold text-lg md:text-xl px-8 md:px-12 py-3 md:py-4 rounded-xl text-center inline-flex items-center justify-center shadow-xl hover:shadow-2xl hover:shadow-[#CCA43B]/40 transition-all duration-300 transform hover:scale-105 border-2 border-[#CCA43B]"
               />
             </div>
           </div>

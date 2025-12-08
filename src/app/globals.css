@@ -158,11 +158,18 @@
 /* Clerk auth card width override */
 .cl-rootBox {
   width: 100% !important;
+  max-width: 1280px !important;
 }
 
 .cl-card {
   max-width: none !important;
   width: 100% !important;
+  min-width: 600px !important;
+}
+
+.cl-internal-b3fm6y {
+  width: 100% !important;
+  max-width: none !important;
 }
 
 /* Add these styles to your global CSS or create a new CSS module */

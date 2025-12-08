@@ -44,7 +44,7 @@ export default async function Home() {
               Freedom Framework
             </Link>
             <Link href="/sign-in">
-              <Button size="lg" variant="outline" className="!border-2 !border-[#1D2A38] !text-[#1D2A38] !bg-white hover:!bg-[#1D2A38] hover:!text-white font-semibold px-4 py-2 md:px-6 md:py-3 transition-all shadow-sm">
+              <Button size="lg" variant="outline" className="!border-2 !border-gray-400 !text-[#1D2A38] !bg-white hover:!bg-[#1D2A38] hover:!text-white font-semibold px-4 py-2 md:px-6 md:py-3 transition-all shadow-sm">
                 Login
               </Button>
             </Link>

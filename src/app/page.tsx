@@ -40,8 +40,8 @@ export default async function Home() {
       <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-white via-white/95 to-white/90 backdrop-blur-md border-b-2 border-[#CCA43B]/20 shadow-lg transition-all duration-300">
         <div className="container mx-auto px-4 py-3 md:py-4 transition-all duration-300">
           <div className="flex justify-between items-center">
-            <Link href="/" className="text-xl md:text-2xl font-bold text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
-              Freedom Framework
+            <Link href="/?view=landing" className="text-xl md:text-2xl font-bold text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
+              Freedom Framework™
             </Link>
             <Link href="/sign-in">
               <Button size="lg" variant="outline" className="!border-2 !border-gray-400 !text-[#1D2A38] !bg-white hover:!bg-[#1D2A38] hover:!text-white font-semibold px-4 py-2 md:px-6 md:py-3 transition-all shadow-sm">

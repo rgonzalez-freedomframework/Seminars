@@ -53,7 +53,7 @@ const Page = async () => {
             <WebinarCard key={index} webinar={webinar} />
             ))
         ) : (
-            <div className="w-full h-[200px] flex justify-center items-center text-primary font-semibold text-2xl col-span-12">
+            <div className="w-full h-[200px] flex justify-center items-center text-[#1D2A38] font-semibold text-2xl col-span-12">
             No Webinar found
             </div>
         )}

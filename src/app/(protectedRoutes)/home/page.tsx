@@ -50,7 +50,7 @@ const Pages = async () => {
         <div className="container mx-auto px-4 md:px-8 lg:px-12">
           <div className="flex h-16 items-center justify-between">
             <div className="flex items-center gap-2">
-              <Link href="/" className="text-xl font-bold text-primary">
+              <Link href="/" className="text-xl font-bold text-[#1D2A38]">
                 Freedom Framework
               </Link>
             </div>
@@ -78,17 +78,17 @@ const Pages = async () => {
       {/* Main Content */}
       <div className="container mx-auto px-4 md:px-8 lg:px-12 py-8">
         <div className="mb-8">
-          <h1 className="text-primary font-semibold text-4xl mb-2">
+          <h1 className="text-[#1D2A38] font-semibold text-4xl mb-2">
             Welcome {user?.firstName || 'Back'}!
           </h1>
-          <p className="text-muted-foreground text-lg">
+          <p className="text-gray-700 text-lg">
             Access your registered webinars and exclusive content
           </p>
         </div>
 
       {/* Upcoming Webinars Section */}
       <div className="mb-12">
-        <h2 className="text-primary font-semibold text-2xl mb-6">
+        <h2 className="text-[#1D2A38] font-semibold text-2xl mb-6">
           Available Webinars
         </h2>
         {webinars.length > 0 ? (
@@ -124,17 +124,17 @@ const Pages = async () => {
                       >
                         {webinar.webinarStatus}
                       </Badge>
-                      <span className="text-sm text-muted-foreground">
+                      <span className="text-sm text-gray-600">
                         {webinar._count.attendances} attending
                       </span>
                     </div>
-                    <CardTitle className="line-clamp-2">{webinar.title}</CardTitle>
+                    <CardTitle className="line-clamp-2 text-[#1D2A38]">{webinar.title}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <p className="text-muted-foreground mb-4 line-clamp-2">
+                    <p className="text-gray-600 mb-4 line-clamp-2">
                       {webinar.description || 'Join this exclusive webinar'}
                     </p>
-                    <div className="space-y-2 text-sm text-muted-foreground mb-4">
+                    <div className="space-y-2 text-sm text-gray-600 mb-4">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
                         {new Date(webinar.startTime).toLocaleDateString('en-US', {
@@ -164,10 +164,10 @@ const Pages = async () => {
         ) : (
           <Card>
             <CardContent className="py-16 text-center">
-              <p className="text-muted-foreground text-lg mb-4">
+              <p className="text-gray-600 text-lg mb-4">
                 No webinars available at the moment
               </p>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-gray-600">
                 Check back soon for new content!
               </p>
             </CardContent>
@@ -177,12 +177,12 @@ const Pages = async () => {
 
       {/* Resources Section - Placeholder for future file uploads */}
       <div>
-        <h2 className="text-primary font-semibold text-2xl mb-6">
+        <h2 className="text-[#1D2A38] font-semibold text-2xl mb-6">
           Your Resources
         </h2>
         <Card>
           <CardContent className="py-16 text-center">
-            <p className="text-muted-foreground">
+            <p className="text-gray-600">
               Exclusive resources and materials will appear here
             </p>
           </CardContent>

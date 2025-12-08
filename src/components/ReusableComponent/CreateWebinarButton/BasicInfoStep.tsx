@@ -168,9 +168,13 @@ const handleThumbnailUpload = async (e: React.ChangeEvent<HTMLInputElement>) => 
     xhr.addEventListener('load', () => {
       if (xhr.status === 200) {
         const response = JSON.parse(xhr.responseText)
+        console.log('Thumbnail upload response:', response)
+        console.log('Setting thumbnail URL to:', response.url)
         updateBasicInfoField('thumbnail', response.url)
+        console.log('Thumbnail state after update - uploading:', false, 'url:', response.url)
         toast.success('Thumbnail uploaded successfully!')
       } else {
+        console.error('Thumbnail upload failed with status:', xhr.status)
         toast.error('Upload failed. Please try again.')
         setThumbnailFile(null)
       }
@@ -295,21 +299,25 @@ const handleRemoveThumbnail = () => {
           )}
 
           {/* Upload Success with Preview */}
-          {!isThumbnailUploading && formData.basicInfo.thumbnail && (
-            <div className="space-y-2">
-              <div className="relative w-full h-48 rounded-lg overflow-hidden border-2 border-green-300">
+          {!isThumbnailUploading && formData.basicInfo.thumbnail ? (
+            <div className="space-y-3">
+              <div className="relative w-full h-48 rounded-lg overflow-hidden border-4 border-green-500 shadow-lg">
                 <img 
                   src={formData.basicInfo.thumbnail} 
                   alt="Webinar thumbnail" 
                   className="w-full h-full object-cover"
                 />
+                <div className="absolute top-2 right-2 bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold flex items-center gap-1">
+                  <CheckCircle2 className="h-4 w-4" />
+                  UPLOADED
+                </div>
               </div>
-              <div className="flex items-center justify-between p-3 bg-green-50 border-2 border-green-300 rounded-lg">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="h-5 w-5 text-green-600" />
+              <div className="flex items-center justify-between p-4 bg-green-50 border-2 border-green-500 rounded-lg">
+                <div className="flex items-center gap-3">
+                  <CheckCircle2 className="h-6 w-6 text-green-600" />
                   <div>
-                    <p className="text-sm font-medium text-green-900">Thumbnail uploaded</p>
-                    <p className="text-xs text-green-700">
+                    <p className="text-base font-bold text-green-900">✓ Thumbnail Uploaded Successfully!</p>
+                    <p className="text-xs text-green-700 mt-1">
                       {formData.basicInfo.thumbnail}
                     </p>
                   </div>
@@ -321,11 +329,11 @@ const handleRemoveThumbnail = () => {
                   onClick={handleRemoveThumbnail}
                   className="hover:bg-red-100 hover:text-red-600"
                 >
-                  <X className="h-4 w-4" />
+                  <X className="h-5 w-5" />
                 </Button>
               </div>
             </div>
-          )}
+          ) : null}
 
           <p className="text-xs text-gray-500 mt-2">
             Maximum file size: 5MB. Supported formats: JPEG, PNG, WebP, GIF
@@ -497,13 +505,13 @@ const handleRemoveThumbnail = () => {
           )}
 
           {/* Upload Success */}
-          {!isUploading && formData.basicInfo.videoUrl && (
-            <div className="flex items-center justify-between p-3 bg-green-50 border-2 border-green-300 rounded-lg">
-              <div className="flex items-center gap-2">
-                <CheckCircle2 className="h-5 w-5 text-green-600" />
+          {!isUploading && formData.basicInfo.videoUrl ? (
+            <div className="flex items-center justify-between p-4 bg-green-50 border-4 border-green-500 rounded-lg shadow-lg">
+              <div className="flex items-center gap-3">
+                <CheckCircle2 className="h-6 w-6 text-green-600" />
                 <div>
-                  <p className="text-sm font-medium text-green-900">Video uploaded successfully</p>
-                  <p className="text-xs text-green-700">
+                  <p className="text-base font-bold text-green-900">✓ Video Uploaded Successfully!</p>
+                  <p className="text-xs text-green-700 mt-1">
                     {formData.basicInfo.videoUrl}
                   </p>
                 </div>
@@ -515,10 +523,10 @@ const handleRemoveThumbnail = () => {
                 onClick={handleRemoveVideo}
                 className="hover:bg-red-100 hover:text-red-600"
               >
-                <X className="h-4 w-4" />
+                <X className="h-5 w-5" />
               </Button>
             </div>
-          )}
+          ) : null}
 
           <p className="text-xs text-gray-500 mt-2">
             Maximum file size: 500MB. Supported formats: MP4, WebM, OGG, MOV

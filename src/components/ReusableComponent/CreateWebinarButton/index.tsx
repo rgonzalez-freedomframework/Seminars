@@ -60,7 +60,7 @@ function CreateWebinarButton() {
                 Create Webinar
             </button>
         </DialogTrigger>
-       <DialogContent className="sm:max-w-[900px] p-0 bg-white border-2 border-gray-300">
+      <DialogContent className="sm:max-w-[900px] max-h-[90vh] overflow-y-auto p-0 bg-white border-2 border-gray-300">
         {isComplete ? (
           <div className="bg-white text-[#1D2A38] rounded-lg overflow-hidden">
             <DialogTitle className="sr-only">Webinar Created</DialogTitle>

@@ -330,7 +330,7 @@ const handleRemoveThumbnail = () => {
                   <CheckCircle2 className="h-6 w-6 text-green-600" />
                   <div>
                     <p className="text-base font-bold text-green-900">✓ Thumbnail Uploaded Successfully!</p>
-                    <p className="text-xs text-green-700 mt-1">
+                    <p className="text-xs text-green-700 mt-1 break-all">
                       {formData.basicInfo.thumbnail}
                     </p>
                   </div>
@@ -524,7 +524,7 @@ const handleRemoveThumbnail = () => {
                 <CheckCircle2 className="h-6 w-6 text-green-600" />
                 <div>
                   <p className="text-base font-bold text-green-900">✓ Video Uploaded Successfully!</p>
-                  <p className="text-xs text-green-700 mt-1">
+                  <p className="text-xs text-green-700 mt-1 break-all">
                     {formData.basicInfo.videoUrl}
                   </p>
                 </div>

@@ -95,7 +95,7 @@ const Pages = async () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {webinars.map((webinar) => (
               <Link key={webinar.id} href={`/live-webinar/${webinar.id}`}>
-                <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer border-2 hover:border-primary">
+                <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer border-2 border-gray-300 bg-white hover:border-[#CCA43B]">
                   {webinar.thumbnail && (
                     <div className="w-full h-48 overflow-hidden rounded-t-lg relative">
                       <img
@@ -162,7 +162,7 @@ const Pages = async () => {
             ))}
           </div>
         ) : (
-          <Card>
+          <Card className="bg-white border-2 border-gray-300">
             <CardContent className="py-16 text-center">
               <p className="text-gray-600 text-lg mb-4">
                 No webinars available at the moment
@@ -180,7 +180,7 @@ const Pages = async () => {
         <h2 className="text-[#1D2A38] font-semibold text-2xl mb-6">
           Your Resources
         </h2>
-        <Card>
+        <Card className="bg-white border-2 border-gray-300">
           <CardContent className="py-16 text-center">
             <p className="text-gray-600">
               Exclusive resources and materials will appear here

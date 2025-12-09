@@ -8,6 +8,7 @@ import { useAttendeeStore } from '@/store/useAttendeeStore';
 import { toast } from 'sonner';
 import LiveStreamState from './LiveWebinar/LiveStreamState';
 import PreRecordedVideoPlayer from './LiveWebinar/PreRecordedVideoPlayer';
+import ZoomMeetingPlayer from './LiveWebinar/ZoomMeetingPlayer';
 import { WebinarWithPresenter } from '@/lib/type';
 
 type Props = {
@@ -53,12 +54,23 @@ const RenderWebinar = ({
         ) : webinar?.webinarStatus === WebinarStatusEnum.LIVE ? (
            <React.Fragment>
                 {user?.id === webinar?.presenterId ? (
+                // Show livestream controls for presenter (host)
                 <LiveStreamState apiKey={apiKey} token={token} callId={callId} webinar={webinar} user={user}/>
-                ) : // Only show the participant view if they've registered
-                attendee ? (
+                ) : webinar.zoomJoinUrl ? (
+                // Show embedded Zoom meeting for attendees (no login required)
+                <ZoomMeetingPlayer
+                  meetingNumber={webinar.zoomWebinarId || ''}
+                  userName={attendee?.name || user?.name || 'Guest'}
+                  userEmail={attendee?.email || user?.email || ''}
+                  passWord={''} // No password needed with join_before_host=true
+                  zoomJoinUrl={webinar.zoomJoinUrl}
+                />
+                ) : attendee ? (
+                // Fallback to livestream participant view if no Zoom
                 // <Participant apiKey={apiKey} token={token} callId={callId} />
-                ''
+                <WebinarUpcomingState webinar={webinar} currentUser={user || null} />
                 ) : (
+                // Show registration if not registered yet
                 <WebinarUpcomingState webinar={webinar} currentUser={user || null} />
                 )}
             </React.Fragment>

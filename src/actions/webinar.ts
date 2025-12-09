@@ -57,40 +57,45 @@ export const createWebinar = async (formData: WebinarFormState) => {
     // To avoid timezone mismatches between the user's browser and the server,
     // we do not enforce an additional strict past-date check here.
 
-    // Create Zoom webinar if enabled
+    // Create Zoom meeting if enabled
     let zoomWebinarData = null
     if (formData.additionalInfo?.enableZoom) {
       try {
-        // Get the server's timezone (where webinar is being created from)
-        // This ensures consistency across the system
+        // Import Zoom client directly to avoid HTTP fetch issues
+        const { zoomClient } = await import('@/lib/zoom/client')
+        
+        // Get the server's timezone
         const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
         
-        const zoomResponse = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/zoom/create-webinar`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        // Create Zoom meeting (works with Free/Pro accounts)
+        const zoomMeeting = await zoomClient.createMeeting({
+          topic: formData.basicInfo.webinarName,
+          type: 2, // Scheduled meeting
+          start_time: combinedDateTime.toISOString(),
+          duration: formData.basicInfo.duration || 60,
+          timezone: timezone,
+          agenda: formData.basicInfo.description || '',
+          settings: {
+            host_video: true,
+            participant_video: true,
+            join_before_host: true, // Allow participants to join without host login
+            mute_upon_entry: false,
+            waiting_room: false, // Disable waiting room for instant access
+            audio: 'both',
+            auto_recording: 'cloud',
+            approval_type: 0, // Auto-approve
           },
-          body: JSON.stringify({
-            topic: formData.basicInfo.webinarName,
-            startTime: combinedDateTime.toISOString(),
-            duration: formData.basicInfo.duration || 60,
-            timezone: timezone,
-            agenda: formData.basicInfo.description || '',
-          }),
         })
 
-        if (zoomResponse.ok) {
-          const zoomData = await zoomResponse.json()
-          zoomWebinarData = {
-            zoomWebinarId: zoomData.webinar.zoomId,
-            zoomJoinUrl: zoomData.webinar.joinUrl,
-            zoomRegistrationUrl: zoomData.webinar.registrationUrl,
-          }
-        } else {
-          console.error('Failed to create Zoom webinar:', await zoomResponse.text())
+        zoomWebinarData = {
+          zoomWebinarId: zoomMeeting.id.toString(),
+          zoomJoinUrl: zoomMeeting.join_url,
+          zoomRegistrationUrl: null, // Meetings don't have registration URLs
         }
-      } catch (zoomError) {
-        console.error('Error creating Zoom webinar:', zoomError)
+        
+        console.log('✅ Zoom meeting created:', zoomMeeting.id, zoomMeeting.join_url)
+      } catch (zoomError: any) {
+        console.error('❌ Error creating Zoom meeting:', zoomError.message)
         // Continue without Zoom integration
       }
     }

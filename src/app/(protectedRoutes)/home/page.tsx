@@ -181,10 +181,19 @@ const Pages = async () => {
                         {webinar.duration && ` (${webinar.duration} min)`}
                       </div>
                     </div>
-                    <Button className="w-full bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-semibold transition-all" variant="default">
-                      <PlayCircle className="w-4 h-4 mr-2" />
-                      {webinar.webinarStatus === WebinarStatusEnum.LIVE ? 'Join Now' : 'View Details'}
-                    </Button>
+                    {webinar.zoomJoinUrl && webinar.webinarStatus === WebinarStatusEnum.LIVE ? (
+                      <Button 
+                        className="w-full bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-bold border-2 border-[#CCA43B] transition-all"
+                      >
+                        <PlayCircle className="w-4 h-4 mr-2" />
+                        Join Meeting
+                      </Button>
+                    ) : (
+                      <Button className="w-full bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-semibold transition-all" variant="default">
+                        <PlayCircle className="w-4 h-4 mr-2" />
+                        {webinar.webinarStatus === WebinarStatusEnum.LIVE ? 'Join Now' : 'View Details'}
+                      </Button>
+                    )}
                   </CardContent>
                 </Card>
               </Link>

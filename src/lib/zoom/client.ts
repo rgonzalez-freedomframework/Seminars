@@ -9,9 +9,28 @@ interface ZoomTokenResponse {
   scope: string;
 }
 
+interface ZoomMeetingRequest {
+  topic: string;
+  type: 2; // Scheduled meeting (1=instant, 2=scheduled, 3=recurring no fixed time, 8=recurring fixed time)
+  start_time: string; // ISO 8601 format
+  duration: number; // in minutes
+  timezone: string;
+  agenda?: string;
+  settings?: {
+    host_video?: boolean;
+    participant_video?: boolean;
+    join_before_host?: boolean; // Allow participants to join before host
+    mute_upon_entry?: boolean;
+    waiting_room?: boolean;
+    audio?: 'both' | 'telephony' | 'voip';
+    auto_recording?: 'local' | 'cloud' | 'none';
+    approval_type?: 0 | 1 | 2; // 0=auto approve, 1=manual approve, 2=no registration
+  };
+}
+
 interface ZoomWebinarRequest {
   topic: string;
-  type: 5; // Webinar
+  type: 5; // Webinar (requires Webinar license)
   start_time: string; // ISO 8601 format
   duration: number; // in minutes
   timezone: string;
@@ -24,6 +43,23 @@ interface ZoomWebinarRequest {
     audio?: 'both' | 'telephony' | 'voip';
     auto_recording?: 'local' | 'cloud' | 'none';
   };
+}
+
+interface ZoomMeetingResponse {
+  id: number;
+  uuid: string;
+  host_id: string;
+  topic: string;
+  type: number;
+  start_time: string;
+  duration: number;
+  timezone: string;
+  created_at: string;
+  join_url: string;
+  start_url?: string; // Host start URL
+  password?: string;
+  h323_password?: string;
+  pstn_password?: string;
 }
 
 interface ZoomWebinarResponse {
@@ -99,7 +135,32 @@ class ZoomClient {
   }
 
   /**
-   * Create a Zoom webinar
+   * Create a Zoom meeting (works with free/pro accounts)
+   */
+  async createMeeting(data: ZoomMeetingRequest): Promise<ZoomMeetingResponse> {
+    const token = await this.getAccessToken();
+
+    try {
+      const response = await axios.post<ZoomMeetingResponse>(
+        `${ZOOM_API_BASE_URL}/users/me/meetings`,
+        data,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error: any) {
+      console.error('Failed to create Zoom meeting:', error.response?.data || error.message);
+      throw new Error(`Failed to create Zoom meeting: ${error.response?.data?.message || error.message}`);
+    }
+  }
+
+  /**
+   * Create a Zoom webinar (requires Webinar license)
    */
   async createWebinar(data: ZoomWebinarRequest): Promise<ZoomWebinarResponse> {
     const token = await this.getAccessToken();
@@ -120,6 +181,50 @@ class ZoomClient {
     } catch (error: any) {
       console.error('Failed to create Zoom webinar:', error.response?.data || error.message);
       throw new Error(`Failed to create Zoom webinar: ${error.response?.data?.message || error.message}`);
+    }
+  }
+
+  /**
+   * Get meeting details
+   */
+  async getMeeting(meetingId: string): Promise<ZoomMeetingResponse> {
+    const token = await this.getAccessToken();
+
+    try {
+      const response = await axios.get<ZoomMeetingResponse>(
+        `${ZOOM_API_BASE_URL}/meetings/${meetingId}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+      );
+
+      return response.data;
+    } catch (error: any) {
+      console.error('Failed to get Zoom meeting:', error.response?.data || error.message);
+      throw new Error(`Failed to get Zoom meeting: ${error.response?.data?.message || error.message}`);
+    }
+  }
+
+  /**
+   * Delete a Zoom meeting
+   */
+  async deleteMeeting(meetingId: string): Promise<void> {
+    const token = await this.getAccessToken();
+
+    try {
+      await axios.delete(
+        `${ZOOM_API_BASE_URL}/meetings/${meetingId}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+      );
+    } catch (error: any) {
+      console.error('Failed to delete Zoom meeting:', error.response?.data || error.message);
+      throw new Error(`Failed to delete Zoom meeting: ${error.response?.data?.message || error.message}`);
     }
   }
 
@@ -193,4 +298,4 @@ class ZoomClient {
 
 // Export singleton instance
 export const zoomClient = new ZoomClient();
-export type { ZoomWebinarRequest, ZoomWebinarResponse };
+export type { ZoomMeetingRequest, ZoomMeetingResponse, ZoomWebinarRequest, ZoomWebinarResponse };

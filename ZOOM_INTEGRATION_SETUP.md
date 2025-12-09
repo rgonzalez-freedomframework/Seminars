@@ -30,12 +30,14 @@ After creating the app, you'll see three important credentials:
 ### Scopes
 Add the following scopes to your app:
 
-**Required Scopes:**
+**Required Scopes (for Meetings - FREE/Pro):**
 - `meeting:write:admin` - Create meetings
 - `meeting:read:admin` - Read meeting details  
 - `user:read:admin` - Read user information
-- `webinar:write:admin` - Create webinars
-- `webinar:read:admin` - Read webinar details
+
+**Optional Scopes (for Webinars - Paid license required):**
+- `webinar:write:admin` - Create webinars (only if you have Webinar license)
+- `webinar:read:admin` - Read webinar details (only if you have Webinar license)
 
 ### Activation
 1. Click **Continue**
@@ -96,10 +98,13 @@ npx prisma migrate deploy
 ### What Happens Automatically
 
 When Zoom integration is enabled:
-- ✅ A Zoom webinar is created with your settings
-- ✅ Join URL is saved to the database
-- ✅ Registration URL is generated (if enabled)
-- ✅ Webinar is synced with Zoom's calendar
+- ✅ A Zoom **Meeting** is created by default (works with Free/Pro accounts)
+- ✅ Join URL is saved to the database  
+- ✅ Participants can join without logging in (join_before_host enabled)
+- ✅ No waiting room - instant access
+- ✅ Cloud recording enabled automatically
+
+**Note:** The system uses Zoom Meetings by default. Meetings allow everyone to participate freely (like a video call). If you upgrade to a Webinar license later, you can switch to Webinars where only hosts/panelists can talk.
 
 ### Accessing Zoom Webinar Details
 
@@ -170,6 +175,43 @@ GET /api/zoom/webinar/[webinarId]
 ```
 DELETE /api/zoom/webinar/[webinarId]
 ```
+
+## Switching Zoom Accounts
+
+To use a different Zoom account (or switch accounts later):
+
+### 1. Create New Server-to-Server OAuth App
+- Follow Step 1 again with the new Zoom account
+- Get new Account ID, Client ID, and Client Secret
+
+### 2. Update Environment Variables
+
+**In Vercel (Production):**
+1. Go to https://vercel.com/dashboard
+2. Select your project → Settings → Environment Variables
+3. Find and **Edit** these three variables:
+   - `ZOOM_CLIENT_ID`
+   - `ZOOM_CLIENT_SECRET`
+   - `ZOOM_ACCOUNT_ID`
+4. Replace with new credentials
+5. Click **Save**
+6. **Redeploy** your application (Deployments → Redeploy)
+
+**Locally:**
+1. Edit `.env.local` file
+2. Update the three Zoom variables
+3. Restart your development server
+
+### 3. That's It!
+- No code changes required
+- Old meetings will still have their links (they're stored in database)
+- New meetings will be created under the new account
+- Takes effect immediately after redeployment
+
+### Multiple Accounts
+You can only use one Zoom account at a time. To manage multiple accounts:
+- Use different environment variables per deployment (Production vs Preview)
+- Or switch credentials when needed via Vercel settings
 
 ## Troubleshooting
 

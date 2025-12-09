@@ -53,21 +53,9 @@ export const createWebinar = async (formData: WebinarFormState) => {
     formData.basicInfo.timeFormat || 'AM'
     )
 
-    // Only block webinars whose calendar date is before today.
-    // This avoids timezone issues where "today" with an earlier time
-    // might be interpreted as being in the past on the server.
-    const today = new Date()
-    today.setHours(0, 0, 0, 0)
-
-    const webinarDateOnly = new Date(combinedDateTime)
-    webinarDateOnly.setHours(0, 0, 0, 0)
-
-    if (webinarDateOnly < today) {
-    return {
-      status: 400,
-      message: 'Webinar date and time cannot be in the past',
-    }
-    }
+    // Note: client-side validation already blocks days before "today" for the user.
+    // To avoid timezone mismatches between the user's browser and the server,
+    // we do not enforce an additional strict past-date check here.
 
     // Create Zoom webinar if enabled
     let zoomWebinarData = null

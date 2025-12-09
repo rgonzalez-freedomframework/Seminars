@@ -84,20 +84,20 @@ const handleSelectCTAType = (value: string) => {
 )}
 </div>
 
-<div className="space-y-3 w-full p-4 border-2 border-gray-300 rounded-lg bg-white">
+<div className="space-y-3 w-full p-4 border-2 border-gray-300 rounded-lg bg-white text-[#1D2A38]">
   <Label className="text-sm font-semibold text-[#1D2A38]">CTA Type</Label>
   <Tabs defaultValue={CtaTypeEnum.BOOK_A_CALL} className="w-full">
     <TabsList className="w-full bg-gray-100 border-2 border-gray-300 rounded-md">
       <TabsTrigger
         value={CtaTypeEnum.BOOK_A_CALL}
-        className="w-1/2 text-sm font-semibold text-gray-600 data-[state=active]:bg-[#CCA43B] data-[state=active]:text-white data-[state=active]:shadow-sm"
+        className="w-1/2 text-sm font-semibold text-[#1D2A38] data-[state=active]:bg-[#CCA43B] data-[state=active]:text-[#1D2A38] data-[state=active]:shadow-sm"
         onClick={() => handleSelectCTAType(CtaTypeEnum.BOOK_A_CALL)}
       >
         Book a Call
       </TabsTrigger>
       <TabsTrigger
         value={CtaTypeEnum.BUY_NOW}
-        className="w-1/2 text-sm font-semibold text-gray-600 data-[state=active]:bg-[#CCA43B] data-[state=active]:text-white data-[state=active]:shadow-sm"
+        className="w-1/2 text-sm font-semibold text-[#1D2A38] data-[state=active]:bg-[#CCA43B] data-[state=active]:text-[#1D2A38] data-[state=active]:shadow-sm"
         onClick={() => handleSelectCTAType(CtaTypeEnum.BUY_NOW)}
       >
         Buy Now

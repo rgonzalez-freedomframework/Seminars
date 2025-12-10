@@ -104,6 +104,13 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
             >
               {webinar.webinarStatus}
             </Badge>
+            {typeof webinar.seatsRemaining === "number" &&
+              typeof webinar.seatsTotal === "number" &&
+              webinar.seatsTotal > 0 && (
+                <div className="px-3 py-1 rounded-full text-xs font-semibold bg-[#1D2A38] text-white">
+                  {webinar.seatsRemaining} seats left
+                </div>
+              )}
           </div>
           <CardTitle className="line-clamp-2 text-[#1D2A38]">
             {webinar.title}
@@ -125,13 +132,6 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
                 duration={webinar.duration || undefined}
               />
             </div>
-            {typeof webinar.seatsRemaining === "number" &&
-              typeof webinar.seatsTotal === "number" &&
-              webinar.seatsTotal > 0 && (
-                <div className="text-xs text-gray-600">
-                  {webinar.seatsRemaining} seats left
-                </div>
-              )}
           </div>
           <Button className="w-full bg-[#1D2A38] hover:bg-[#1D2A38]/90 text-white font-semibold transition-all" variant="default">
             <PlayCircle className="w-4 h-4 mr-2" />
@@ -171,6 +171,13 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
             >
               {webinar.webinarStatus}
             </Badge>
+            {typeof webinar.seatsRemaining === "number" &&
+              typeof webinar.seatsTotal === "number" &&
+              webinar.seatsTotal > 0 && (
+                <div className="px-3 py-1 rounded-full text-xs font-semibold bg-[#1D2A38] text-white">
+                  {webinar.seatsRemaining} seats left
+                </div>
+              )}
           </div>
           <CardTitle className="line-clamp-2 text-[#1D2A38]">
             {webinar.title}
@@ -192,13 +199,6 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
                 duration={webinar.duration || undefined}
               />
             </div>
-            {typeof webinar.seatsRemaining === "number" &&
-              typeof webinar.seatsTotal === "number" &&
-              webinar.seatsTotal > 0 && (
-                <div className="text-xs text-gray-600">
-                  {webinar.seatsRemaining} seats left
-                </div>
-              )}
           </div>
           <Button
             className="w-full bg-gray-300 text-gray-600 font-semibold cursor-not-allowed"
@@ -283,6 +283,13 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
               >
                 {webinar.webinarStatus}
               </Badge>
+              {typeof webinar.seatsRemaining === "number" &&
+                typeof webinar.seatsTotal === "number" &&
+                webinar.seatsTotal > 0 && (
+                  <div className="px-3 py-1 rounded-full text-xs font-semibold bg-[#1D2A38] text-white">
+                    {webinar.seatsRemaining} seats left
+                  </div>
+                )}
             </div>
             <CardTitle className="line-clamp-2 text-[#1D2A38]">
               {webinar.title}

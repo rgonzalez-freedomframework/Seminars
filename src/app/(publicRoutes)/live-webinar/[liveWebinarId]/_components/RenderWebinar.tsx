@@ -8,7 +8,6 @@ import { useAttendeeStore } from '@/store/useAttendeeStore';
 import { toast } from 'sonner';
 import LiveStreamState from './LiveWebinar/LiveStreamState';
 import PreRecordedVideoPlayer from './LiveWebinar/PreRecordedVideoPlayer';
-import ZoomMeetingPlayer from './LiveWebinar/ZoomMeetingPlayer';
 import { WebinarWithPresenter } from '@/lib/type';
 
 type Props = {
@@ -57,14 +56,60 @@ const RenderWebinar = ({
                 // Show livestream controls for presenter (host)
                 <LiveStreamState apiKey={apiKey} token={token} callId={callId} webinar={webinar} user={user}/>
                 ) : webinar.zoomJoinUrl ? (
-                // Show embedded Zoom meeting for attendees (no login required)
-                <ZoomMeetingPlayer
-                  meetingNumber={webinar.zoomWebinarId || ''}
-                  userName={attendee?.name || user?.name || 'Guest'}
-                  userEmail={attendee?.email || user?.email || ''}
-                  passWord={webinar.zoomPassword || ''}
-                  zoomJoinUrl={webinar.zoomJoinUrl}
-                />
+                // Show Zoom join details instead of embedding the Zoom Web SDK
+                <div className="w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-white px-4 py-12">
+                  <div className="max-w-lg w-full space-y-6 rounded-2xl border border-gray-200 bg-white/80 shadow-xl p-8">
+                    <h2 className="text-2xl font-bold text-[#1D2A38] text-center">
+                      Join This Webinar on Zoom
+                    </h2>
+                    <p className="text-sm text-gray-600 text-center">
+                      This session is hosted on Zoom. Click the button below to
+                      open Zoom in a new tab, then use the meeting details if
+                      prompted.
+                    </p>
+
+                    <div className="space-y-3 rounded-xl bg-gray-50 border border-gray-200 p-4 text-sm">
+                      {webinar.zoomWebinarId && (
+                        <div className="flex items-center justify-between gap-4">
+                          <span className="font-medium text-gray-700">Meeting ID:</span>
+                          <span className="font-mono text-gray-900 break-all">
+                            {webinar.zoomWebinarId}
+                          </span>
+                        </div>
+                      )}
+                      {webinar.zoomPassword && (
+                        <div className="flex items-center justify-between gap-4">
+                          <span className="font-medium text-gray-700">Passcode:</span>
+                          <span className="font-mono text-gray-900 break-all">
+                            {webinar.zoomPassword}
+                          </span>
+                        </div>
+                      )}
+                      <div className="flex flex-col gap-2">
+                        <span className="font-medium text-gray-700">Join link:</span>
+                        <a
+                          href={webinar.zoomJoinUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-sm font-mono text-blue-700 underline break-all"
+                        >
+                          {webinar.zoomJoinUrl}
+                        </a>
+                      </div>
+                    </div>
+
+                    <div className="flex justify-center">
+                      <a
+                        href={webinar.zoomJoinUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-[#CCA43B] to-[#B8932F] text-[#1D2A38] font-semibold border-2 border-[#CCA43B] shadow-sm hover:from-[#B8932F] hover:to-[#CCA43B] transition-all"
+                      >
+                        Open in Zoom
+                      </a>
+                    </div>
+                  </div>
+                </div>
                 ) : attendee ? (
                 // Fallback to livestream participant view if no Zoom
                 // <Participant apiKey={apiKey} token={token} callId={callId} />

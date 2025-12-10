@@ -2,6 +2,7 @@
 
 import { prismaClient } from '@/lib/prismaClient'
 import { WebinarStatusEnum } from '@prisma/client'
+import { zoomClient } from '@/lib/zoom/client'
 
 /**
  * Check and update webinars that should have ended but are still in LIVE/WAITING_ROOM status
@@ -151,16 +152,10 @@ export async function deleteWebinar(webinarId: string) {
     // Delete from Zoom if integrated
     if (webinar.zoomWebinarId) {
       try {
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/zoom/webinar/${webinar.zoomWebinarId}`,
-          { method: 'DELETE' }
-        )
-
-        if (!response.ok) {
-          console.error('Failed to delete Zoom webinar:', await response.text())
-        }
+        // We create Zoom MEETINGS, so delete via the meetings API
+        await zoomClient.deleteMeeting(webinar.zoomWebinarId)
       } catch (zoomError) {
-        console.error('Error deleting Zoom webinar:', zoomError)
+        console.error('Error deleting Zoom meeting:', zoomError)
         // Continue with database deletion
       }
     }

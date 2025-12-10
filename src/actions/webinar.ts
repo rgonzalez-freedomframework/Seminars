@@ -5,27 +5,9 @@ import { onAuthenticateUser } from './auth'
 import { prismaClient } from '@/lib/prismaClient'
 import { revalidatePath } from 'next/cache'
 import { WebinarStatusEnum } from '@prisma/client'
+import { format } from 'date-fns'
+import { toZonedTime, fromZonedTime } from 'date-fns-tz'
 
-function combineDateTime(
-  date: Date,
-  timeStr: string,
-  timeFormat: 'AM' | 'PM'
-): Date {
-  const [hoursStr, minutesStr] = timeStr.split(':')
-  let hours = parseInt(hoursStr, 10)
-  const minutes = parseInt(minutesStr || '0', 10)
-
-  // Convert to 24-hour format
-  if (timeFormat === 'PM' && hours < 12) {
-    hours += 12
-  } else if (timeFormat === 'AM' && hours === 12) {
-    hours = 0
-  }
-
-  const result = new Date(date)
-  result.setHours(hours, minutes, 0, 0)
-  return result
-}
 export const createWebinar = async (formData: WebinarFormState) => {
   try {
     const user = await onAuthenticateUser()
@@ -44,16 +26,44 @@ export const createWebinar = async (formData: WebinarFormState) => {
     }
 
     if (!formData.basicInfo.time) {
-    return { status: 404, message: 'Webinar time is required' }
+      return { status: 404, message: 'Webinar time is required' }
     }
 
-    const combinedDateTime = formData.basicInfo.dateTime
-      ? new Date(formData.basicInfo.dateTime)
-      : combineDateTime(
-          formData.basicInfo.date,
-          formData.basicInfo.time,
-          formData.basicInfo.timeFormat || 'AM'
-        )
+    const timeZone =
+      formData.basicInfo.timeZone ||
+      Intl.DateTimeFormat().resolvedOptions().timeZone ||
+      'UTC'
+
+    // Reconstruct the local date/time in the presenter's timezone,
+    // then convert to UTC for DB storage and to a local string for Zoom.
+    const baseDate = formData.basicInfo.date!
+    const timeStr = formData.basicInfo.time!
+
+    const [hoursStr, minutesStr] = timeStr.split(':')
+    let hours = parseInt(hoursStr || '0', 10)
+    const minutes = parseInt(minutesStr || '0', 10)
+
+    const timeFormat = formData.basicInfo.timeFormat || 'AM'
+    if (timeFormat === 'PM' && hours < 12) {
+      hours += 12
+    } else if (timeFormat === 'AM' && hours === 12) {
+      hours = 0
+    }
+
+    // Interpret the selected calendar date in the user's timezone
+    const zonedBase = toZonedTime(baseDate, timeZone)
+    const year = zonedBase.getFullYear()
+    const month = zonedBase.getMonth()
+    const day = zonedBase.getDate()
+
+    // Local wall-clock time in the user's timezone
+    const localDateTime = new Date(year, month, day, hours, minutes, 0, 0)
+
+    // UTC instant for our database
+    const combinedDateTime = fromZonedTime(localDateTime, timeZone)
+
+    // Local time string for Zoom, per Zoom API docs (no trailing Z)
+    const zoomStartTime = format(localDateTime, "yyyy-MM-dd'T'HH:mm:ss")
 
     // Create Zoom meeting if enabled
     let zoomWebinarData = null
@@ -62,24 +72,19 @@ export const createWebinar = async (formData: WebinarFormState) => {
         // Import Zoom client directly to avoid HTTP fetch issues
         const { zoomClient } = await import('@/lib/zoom/client')
 
-        // Prefer the client's timezone captured in the form; fall back to server timezone
-        const timezone =
-          formData.basicInfo.timeZone ||
-          Intl.DateTimeFormat().resolvedOptions().timeZone ||
-          'UTC'
-
-        console.log('Creating Zoom meeting with timezone:', timezone, {
+        console.log('Creating Zoom meeting with timezone:', timeZone, {
           rawFormTimeZone: formData.basicInfo.timeZone,
-          startTime: combinedDateTime.toISOString(),
+          zoomStartTime,
+          dbStartTimeIso: combinedDateTime.toISOString(),
         })
 
         // Create Zoom meeting (works with Free/Pro accounts)
         const zoomMeeting = await zoomClient.createMeeting({
           topic: formData.basicInfo.webinarName,
           type: 2, // Scheduled meeting
-          start_time: combinedDateTime.toISOString(),
+          start_time: zoomStartTime,
           duration: formData.basicInfo.duration || 60,
-          timezone: timezone,
+          timezone: timeZone,
           agenda: formData.basicInfo.description || '',
           settings: {
             host_video: true,

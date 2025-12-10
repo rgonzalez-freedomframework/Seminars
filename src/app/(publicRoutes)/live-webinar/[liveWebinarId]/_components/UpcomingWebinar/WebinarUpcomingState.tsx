@@ -45,6 +45,10 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
   );
 
   const handleImageClick = () => {
+    // Only allow clicking through to Zoom once the countdown
+    // has expired and this is a Zoom-based webinar.
+    if (!isZoomWebinar || !isExpired) return;
+
     if (webinar.zoomJoinUrl) {
       window.open(webinar.zoomJoinUrl, '_blank');
     }
@@ -82,7 +86,11 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
 
         <div className="space-y-6 w-full h-full flex justify-center items-center flex-col animate-in fade-in zoom-in duration-700 delay-300">
         <div
-          className="w-full max-w-md aspect-[4/3] relative rounded-2xl overflow-hidden mb-6 shadow-2xl border-4 border-[#CCA43B]/20 hover:border-[#CCA43B]/40 transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+          className={`w-full max-w-md aspect-[4/3] relative rounded-2xl overflow-hidden mb-6 shadow-2xl border-4 border-[#CCA43B]/20 transition-all duration-300 ${
+            isZoomWebinar && isExpired
+              ? 'hover:border-[#CCA43B]/40 hover:scale-[1.02] cursor-pointer'
+              : 'cursor-default'
+          }`}
           onClick={handleImageClick}
         >
             <Image

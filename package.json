@@ -42,6 +42,8 @@
     "@radix-ui/react-tooltip": "^1.2.7",
     "@stream-io/node-sdk": "^0.4.23",
     "@stream-io/video-react-sdk": "^1.14.6",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
     "@vercel/blob": "^2.0.0",
     "@zoom/meetingsdk": "^5.0.0",
     "axios": "^1.13.2",
@@ -64,8 +66,7 @@
     "recharts": "^2.15.3",
     "sonner": "^2.0.3",
     "stream-chat": "^8.60.0",
-    "stream-chat-react": "^12.14.0",
-    "tailwind-merge": "^3.3.0",
+    "tailwind-merge": "^3.4.0",
     "vaul": "^1.1.2",
     "zod": "^3.25.32",
     "zustand": "^5.0.3"

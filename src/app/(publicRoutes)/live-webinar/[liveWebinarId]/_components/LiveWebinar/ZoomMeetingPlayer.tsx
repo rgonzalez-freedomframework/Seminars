@@ -27,7 +27,7 @@ const ZoomMeetingPlayer = ({
     const initZoom = async () => {
       try {
         const { default: ZoomMtgEmbedded } = await import('@zoom/meetingsdk/embedded');
-        // Initialize Zoom SDK
+        // Initialize Zoom SDK (Embedded)
         const client = ZoomMtgEmbedded.createClient();
         clientRef.current = client;
 

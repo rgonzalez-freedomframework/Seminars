@@ -20,12 +20,31 @@ type Props = {
 const EditWebinarForm = ({ webinar }: Props) => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
-  
+
+  const parseSeatsFromTags = (tags: string[] | null): { remaining: string; total: string } | null => {
+    if (!tags || tags.length === 0) return null
+    const seatTag = tags.find((tag) => tag.startsWith('seats:'))
+    if (!seatTag) return null
+
+    const value = seatTag.replace('seats:', '').trim()
+    const [remainingStr, totalStr] = value.split('/')
+    if (!remainingStr || !totalStr) return null
+
+    return {
+      remaining: remainingStr,
+      total: totalStr,
+    }
+  }
+
+  const initialSeats = parseSeatsFromTags((webinar as any).tags || [])
+
   const [formData, setFormData] = useState({
     title: webinar.title,
     description: webinar.description || '',
     startTime: format(new Date(webinar.startTime), "yyyy-MM-dd'T'HH:mm"),
     duration: webinar.duration,
+    seatsRemaining: initialSeats?.remaining ?? '',
+    seatsTotal: initialSeats?.total ?? '',
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -33,11 +52,28 @@ const EditWebinarForm = ({ webinar }: Props) => {
     setIsLoading(true)
 
     try {
+      const seatsRemainingNumber = formData.seatsRemaining.trim() === ''
+        ? null
+        : Math.max(0, parseInt(formData.seatsRemaining, 10) || 0)
+
+      const seatsTotalNumber = formData.seatsTotal.trim() === ''
+        ? null
+        : Math.max(0, parseInt(formData.seatsTotal, 10) || 0)
+
+      const existingTags = webinar.tags || []
+      const filteredTags = existingTags.filter((tag) => !tag.startsWith('seats:'))
+
+      const updatedTags =
+        seatsRemainingNumber !== null && seatsTotalNumber !== null
+          ? [...filteredTags, `seats:${seatsRemainingNumber}/${seatsTotalNumber}`]
+          : filteredTags
+
       const result = await updateWebinar(webinar.id, {
         title: formData.title,
         description: formData.description,
         startTime: new Date(formData.startTime),
         duration: formData.duration,
+        tags: updatedTags,
       })
 
       if (result.status === 200) {
@@ -63,7 +99,7 @@ const EditWebinarForm = ({ webinar }: Props) => {
             Update the core details of your webinar
             {webinar.zoomWebinarId && (
               <span className="block mt-2 text-blue-600 text-sm">
-                ✓ Zoom Integration Active - Changes will sync with Zoom
+                Zoom Integration Active - Changes will sync with Zoom
               </span>
             )}
           </CardDescription>
@@ -79,7 +115,6 @@ const EditWebinarForm = ({ webinar }: Props) => {
               required
             />
           </div>
-
           <div className="space-y-2">
             <Label htmlFor="description">Description</Label>
             <Textarea
@@ -125,6 +160,39 @@ const EditWebinarForm = ({ webinar }: Props) => {
             </div>
           </div>
 
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="seatsRemaining">
+                Seats Remaining
+              </Label>
+              <Input
+                id="seatsRemaining"
+                type="number"
+                min="0"
+                value={formData.seatsRemaining}
+                onChange={(e) => setFormData({ ...formData, seatsRemaining: e.target.value })}
+                placeholder="e.g. 10"
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="seatsTotal">
+                Total Seats
+              </Label>
+              <Input
+                id="seatsTotal"
+                type="number"
+                min="0"
+                value={formData.seatsTotal}
+                onChange={(e) => setFormData({ ...formData, seatsTotal: e.target.value })}
+                placeholder="e.g. 100"
+              />
+              <p className="text-xs text-gray-500">
+                This will appear on attendee cards as "X/Y seats left".
+              </p>
+            </div>
+          </div>
+
           <div className="flex gap-3 pt-4">
             <Button
               type="submit"
@@ -165,11 +233,15 @@ const EditWebinarForm = ({ webinar }: Props) => {
                   Status: <span className="font-semibold">{webinar.webinarStatus}</span>
                 </p>
               </div>
-              <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                webinar.webinarStatus === 'LIVE' ? 'bg-red-100 text-red-700' :
-                webinar.webinarStatus === 'WAITING_ROOM' ? 'bg-yellow-100 text-yellow-700' :
-                'bg-blue-100 text-blue-700'
-              }`}>
+              <div
+                className={`px-3 py-1 rounded-full text-xs font-medium ${
+                  webinar.webinarStatus === 'LIVE'
+                    ? 'bg-red-100 text-red-700'
+                    : webinar.webinarStatus === 'WAITING_ROOM'
+                      ? 'bg-yellow-100 text-yellow-700'
+                      : 'bg-blue-100 text-blue-700'
+                }`}
+              >
                 {webinar.webinarStatus}
               </div>
             </div>

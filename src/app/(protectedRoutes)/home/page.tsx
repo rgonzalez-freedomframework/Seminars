@@ -24,6 +24,32 @@ const Pages = async () => {
 
   const authResult = await onAuthenticateUser();
   const appUser = authResult.user;
+
+  const parseSeatsFromTags = (tags: string[] | null): { seatsRemaining: number | null; seatsTotal: number | null } => {
+    if (!tags || tags.length === 0) {
+      return { seatsRemaining: null, seatsTotal: null };
+    }
+
+    const seatTag = tags.find((tag) => tag.startsWith('seats:'));
+    if (!seatTag) {
+      return { seatsRemaining: null, seatsTotal: null };
+    }
+
+    const value = seatTag.replace('seats:', '').trim();
+    const [remainingStr, totalStr] = value.split('/');
+
+    const remaining = remainingStr ? Number.parseInt(remainingStr, 10) : NaN;
+    const total = totalStr ? Number.parseInt(totalStr, 10) : NaN;
+
+    if (!Number.isFinite(remaining) || !Number.isFinite(total)) {
+      return { seatsRemaining: null, seatsTotal: null };
+    }
+
+    return {
+      seatsRemaining: Math.max(0, remaining),
+      seatsTotal: Math.max(0, total),
+    };
+  };
   
   // Check and update any expired webinars before displaying
   await checkAndUpdateExpiredWebinars();
@@ -78,10 +104,16 @@ const Pages = async () => {
       },
     });
 
-    webinarsForDisplay = webinars.map((webinar) => ({
-      ...webinar,
-      isRegistered: webinar.attendances.length > 0,
-    }));
+    webinarsForDisplay = webinars.map((webinar) => {
+      const { seatsRemaining, seatsTotal } = parseSeatsFromTags(webinar.tags);
+
+      return {
+        ...webinar,
+        isRegistered: webinar.attendances.length > 0,
+        seatsRemaining,
+        seatsTotal,
+      };
+    });
   } else {
     const webinars = await prismaClient.webinar.findMany({
       where: {
@@ -107,10 +139,16 @@ const Pages = async () => {
       },
     });
 
-    webinarsForDisplay = webinars.map((webinar) => ({
-      ...webinar,
-      isRegistered: false,
-    }));
+    webinarsForDisplay = webinars.map((webinar) => {
+      const { seatsRemaining, seatsTotal } = parseSeatsFromTags(webinar.tags);
+
+      return {
+        ...webinar,
+        isRegistered: false,
+        seatsRemaining,
+        seatsTotal,
+      };
+    });
   }
 
   // Get resources only for webinars where the current user is registered/attended

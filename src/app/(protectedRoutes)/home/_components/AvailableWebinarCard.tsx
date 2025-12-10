@@ -27,6 +27,8 @@ type AvailableWebinarCardProps = {
       attendances: number;
     };
     isRegistered: boolean;
+    seatsRemaining: number | null;
+    seatsTotal: number | null;
   };
   currentUserId: string;
   defaultName?: string | null;
@@ -48,6 +50,13 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
   const [description, setDescription] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  const isSoldOut =
+    !webinar.isRegistered &&
+    typeof webinar.seatsTotal === "number" &&
+    webinar.seatsTotal > 0 &&
+    typeof webinar.seatsRemaining === "number" &&
+    webinar.seatsRemaining <= 0;
 
   // If the user is already registered for this webinar, show a simple
   // "View Webinar" card that navigates directly without reopening the modal.
@@ -119,10 +128,90 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
                 duration={webinar.duration || undefined}
               />
             </div>
+            {typeof webinar.seatsRemaining === "number" &&
+              typeof webinar.seatsTotal === "number" &&
+              webinar.seatsTotal > 0 && (
+                <div className="text-xs text-gray-600">
+                  {webinar.seatsRemaining}/{webinar.seatsTotal} seats left
+                </div>
+              )}
           </div>
           <Button className="w-full bg-[#1D2A38] hover:bg-[#1D2A38]/90 text-white font-semibold transition-all" variant="default">
             <PlayCircle className="w-4 h-4 mr-2" />
             View Webinar
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
+
+  // If not registered and sold out, show a non-clickable Sold Out card
+  if (isSoldOut) {
+    return (
+      <Card className="h-full hover:shadow-lg transition-shadow border-2 border-red-300 bg-white relative">
+        {webinar.thumbnail && (
+          <div className="w-full h-48 overflow-hidden rounded-t-lg relative">
+            <img
+              src={webinar.thumbnail}
+              alt={webinar.title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+              <span className="px-4 py-1 rounded-full bg-red-600 text-white text-xs font-semibold uppercase tracking-wide">
+                Sold Out
+              </span>
+            </div>
+          </div>
+        )}
+        <CardHeader>
+          <div className="flex items-center justify-between mb-2">
+            <Badge
+              variant={
+                webinar.webinarStatus === WebinarStatusEnum.LIVE
+                  ? "destructive"
+                  : "secondary"
+              }
+            >
+              {webinar.webinarStatus}
+            </Badge>
+            <span className="text-sm text-gray-600">
+              {webinar._count.attendances} attending
+            </span>
+          </div>
+          <CardTitle className="line-clamp-2 text-[#1D2A38]">
+            {webinar.title}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-gray-600 mb-4 line-clamp-2">
+            {webinar.description || "Join this exclusive webinar"}
+          </p>
+          <div className="space-y-2 text-sm text-gray-600 mb-4">
+            <div className="flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
+              <WebinarCardDate startTime={webinar.startTime} />
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              <WebinarCardTime
+                startTime={webinar.startTime}
+                duration={webinar.duration || undefined}
+              />
+            </div>
+            {typeof webinar.seatsRemaining === "number" &&
+              typeof webinar.seatsTotal === "number" &&
+              webinar.seatsTotal > 0 && (
+                <div className="text-xs text-gray-600">
+                  {webinar.seatsRemaining}/{webinar.seatsTotal} seats left
+                </div>
+              )}
+          </div>
+          <Button
+            className="w-full bg-gray-300 text-gray-600 font-semibold cursor-not-allowed"
+            variant="default"
+            disabled
+          >
+            Sold Out
           </Button>
         </CardContent>
       </Card>

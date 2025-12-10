@@ -96,7 +96,11 @@ export const createWebinar = async (formData: WebinarFormState) => {
         
         console.log('✅ Zoom meeting created:', zoomMeeting.id, zoomMeeting.join_url)
       } catch (zoomError: any) {
-        console.error('❌ Error creating Zoom meeting:', zoomError.message)
+        console.error('❌ Error creating Zoom meeting:', zoomError?.message)
+        if (zoomError?.response) {
+          console.error('Zoom API error status:', zoomError.response.status)
+          console.error('Zoom API error data:', JSON.stringify(zoomError.response.data))
+        }
         // Continue without Zoom integration
       }
     }

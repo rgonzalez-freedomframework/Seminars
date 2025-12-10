@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import ZoomMtgEmbedded from '@zoom/meetingsdk/embedded';
 import { Loader2 } from 'lucide-react';
 
 type Props = {
@@ -27,6 +26,7 @@ const ZoomMeetingPlayer = ({
   useEffect(() => {
     const initZoom = async () => {
       try {
+        const { default: ZoomMtgEmbedded } = await import('@zoom/meetingsdk/embedded');
         // Initialize Zoom SDK
         const client = ZoomMtgEmbedded.createClient();
         clientRef.current = client;

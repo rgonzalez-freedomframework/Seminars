@@ -14,6 +14,8 @@ export async function checkAndUpdateExpiredWebinars() {
     // Find webinars that are LIVE or WAITING_ROOM but their end time has passed
     const expiredWebinars = await prismaClient.webinar.findMany({
       where: {
+        // Only auto-end non-Zoom webinars; Zoom webinars rely on Zoom webhooks
+        zoomWebinarId: null,
         OR: [
           { webinarStatus: WebinarStatusEnum.LIVE },
           { webinarStatus: WebinarStatusEnum.WAITING_ROOM },

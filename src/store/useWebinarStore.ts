@@ -9,6 +9,7 @@ export type WebinarFormState = {
     time?: string
     timeFormat?: 'AM' | 'PM'
     timeZone?: string
+    dateTime?: Date
     duration?: number
     videoUrl?: string
     isPreRecorded?: boolean
@@ -90,6 +91,7 @@ const initialState: WebinarFormState = {
     time: '',
     timeFormat: 'AM',
     timeZone: undefined,
+    dateTime: undefined,
   },
   cta: {
     ctaLabel: '',

@@ -25,6 +25,7 @@ const BasicInfoStep = () => {
   const [thumbnailFile, setThumbnailFile] = useState<File | null>(null)
   const [isThumbnailUploading, setIsThumbnailUploading] = useState(false)
   const [thumbnailUploadProgress, setThumbnailUploadProgress] = useState(0)
+  const [hasCapturedTimezone, setHasCapturedTimezone] = useState(false)
   
   // Debug logging
   useEffect(() => {
@@ -40,6 +41,43 @@ const BasicInfoStep = () => {
       shouldShowVideoSuccess: !isUploading && formData.basicInfo.videoUrl
     })
   }, [formData.basicInfo.thumbnail, formData.basicInfo.videoUrl, formData.basicInfo.isPreRecorded, isThumbnailUploading, isUploading])
+
+  // Capture the browser's timezone once and store it in basicInfo
+  useEffect(() => {
+    if (!hasCapturedTimezone && !formData.basicInfo.timeZone) {
+      const tz = Intl.DateTimeFormat().resolvedOptions().timeZone
+      if (tz) {
+        updateBasicInfoField('timeZone', tz)
+        setHasCapturedTimezone(true)
+      }
+    }
+  }, [formData.basicInfo.timeZone, hasCapturedTimezone, updateBasicInfoField])
+
+  // Keep a combined local DateTime in basicInfo.dateTime for server use
+  useEffect(() => {
+    const d = formData.basicInfo.date
+    const t = formData.basicInfo.time
+    const fmt = formData.basicInfo.timeFormat || 'AM'
+
+    if (!d || !t) {
+      updateBasicInfoField('dateTime', undefined)
+      return
+    }
+
+    const [hoursStr, minutesStr] = t.split(':')
+    let hours = parseInt(hoursStr || '0', 10)
+    const minutes = parseInt(minutesStr || '0', 10)
+
+    if (fmt === 'PM' && hours < 12) {
+      hours += 12
+    } else if (fmt === 'AM' && hours === 12) {
+      hours = 0
+    }
+
+    const combined = new Date(d)
+    combined.setHours(hours, minutes, 0, 0)
+    updateBasicInfoField('dateTime', combined)
+  }, [formData.basicInfo.date, formData.basicInfo.time, formData.basicInfo.timeFormat, updateBasicInfoField])
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {

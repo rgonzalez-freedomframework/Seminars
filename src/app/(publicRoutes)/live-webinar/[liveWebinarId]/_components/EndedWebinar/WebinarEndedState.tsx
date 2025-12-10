@@ -34,13 +34,11 @@ const WebinarEndedState = ({ webinar, currentUser }: Props) => {
         {/* Webinar Image */}
         <div className="space-y-6 w-full h-full flex justify-center items-center flex-col animate-in fade-in zoom-in duration-700 delay-300">
           <div className="w-full max-w-md aspect-[4/3] relative rounded-2xl overflow-hidden mb-6 shadow-2xl border-4 border-gray-200 transition-all duration-300">
-            <Image
-              src={'/aieracourse.png'}
-              alt={webinar.title}
-              fill
-              className="object-cover grayscale-[30%]"
-              priority
-            />
+               <img
+                 src="/darkthumbnail.png"
+                 alt="Webinar thumbnail"
+                 className="h-full w-full object-cover"
+               />
             <div className="absolute inset-0 bg-gradient-to-t from-[#1D2A38]/40 to-transparent"></div>
           </div>
         </div>

@@ -47,15 +47,13 @@ export const createWebinar = async (formData: WebinarFormState) => {
     return { status: 404, message: 'Webinar time is required' }
     }
 
-    const combinedDateTime = combineDateTime(
-    formData.basicInfo.date,
-    formData.basicInfo.time,
-    formData.basicInfo.timeFormat || 'AM'
-    )
-
-    // Note: client-side validation already blocks days before "today" for the user.
-    // To avoid timezone mismatches between the user's browser and the server,
-    // we do not enforce an additional strict past-date check here.
+    const combinedDateTime = formData.basicInfo.dateTime
+      ? new Date(formData.basicInfo.dateTime)
+      : combineDateTime(
+          formData.basicInfo.date,
+          formData.basicInfo.time,
+          formData.basicInfo.timeFormat || 'AM'
+        )
 
     // Create Zoom meeting if enabled
     let zoomWebinarData = null
@@ -63,13 +61,18 @@ export const createWebinar = async (formData: WebinarFormState) => {
       try {
         // Import Zoom client directly to avoid HTTP fetch issues
         const { zoomClient } = await import('@/lib/zoom/client')
-        
+
         // Prefer the client's timezone captured in the form; fall back to server timezone
         const timezone =
           formData.basicInfo.timeZone ||
           Intl.DateTimeFormat().resolvedOptions().timeZone ||
           'UTC'
-        
+
+        console.log('Creating Zoom meeting with timezone:', timezone, {
+          rawFormTimeZone: formData.basicInfo.timeZone,
+          startTime: combinedDateTime.toISOString(),
+        })
+
         // Create Zoom meeting (works with Free/Pro accounts)
         const zoomMeeting = await zoomClient.createMeeting({
           topic: formData.basicInfo.webinarName,

@@ -188,7 +188,7 @@ const EditWebinarForm = ({ webinar }: Props) => {
                 placeholder="e.g. 100"
               />
               <p className="text-xs text-gray-500">
-                This will appear on attendee cards as "X/Y seats left".
+                This will appear on attendee cards as "X seats left".
               </p>
             </div>
           </div>

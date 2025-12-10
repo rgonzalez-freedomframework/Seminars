@@ -104,9 +104,6 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
             >
               {webinar.webinarStatus}
             </Badge>
-            <span className="text-sm text-gray-600">
-              {webinar._count.attendances} attending
-            </span>
           </div>
           <CardTitle className="line-clamp-2 text-[#1D2A38]">
             {webinar.title}
@@ -132,7 +129,7 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
               typeof webinar.seatsTotal === "number" &&
               webinar.seatsTotal > 0 && (
                 <div className="text-xs text-gray-600">
-                  {webinar.seatsRemaining}/{webinar.seatsTotal} seats left
+                  {webinar.seatsRemaining} seats left
                 </div>
               )}
           </div>
@@ -174,9 +171,6 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
             >
               {webinar.webinarStatus}
             </Badge>
-            <span className="text-sm text-gray-600">
-              {webinar._count.attendances} attending
-            </span>
           </div>
           <CardTitle className="line-clamp-2 text-[#1D2A38]">
             {webinar.title}
@@ -202,7 +196,7 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
               typeof webinar.seatsTotal === "number" &&
               webinar.seatsTotal > 0 && (
                 <div className="text-xs text-gray-600">
-                  {webinar.seatsRemaining}/{webinar.seatsTotal} seats left
+                  {webinar.seatsRemaining} seats left
                 </div>
               )}
           </div>
@@ -289,9 +283,6 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
               >
                 {webinar.webinarStatus}
               </Badge>
-              <span className="text-sm text-gray-600">
-                {webinar._count.attendances} attending
-              </span>
             </div>
             <CardTitle className="line-clamp-2 text-[#1D2A38]">
               {webinar.title}

@@ -60,6 +60,13 @@ const WaitlistComponent = ({
       });
 
       if (!res.success) {
+        if (res.status === 409) {
+          toast.error(res.message || 'This webinar is sold out.');
+          setSubmitted(false);
+          setIsOpen(false);
+          return;
+        }
+
         throw new Error(res.message || 'Something went wrong!');
       }
 

@@ -5,6 +5,34 @@ import { AttendanceData } from "@/lib/type"
 import { AttendedTypeEnum, CtaTypeEnum } from "@prisma/client"
 import { revalidatePath } from "next/cache"
 
+const parseSeatsFromTags = (
+  tags: string[] | null
+): { remaining: number | null; total: number | null } => {
+  if (!tags || tags.length === 0) {
+    return { remaining: null, total: null }
+  }
+
+  const seatTag = tags.find((tag) => tag.startsWith("seats:"))
+  if (!seatTag) {
+    return { remaining: null, total: null }
+  }
+
+  const value = seatTag.replace("seats:", "").trim()
+  const [remainingStr, totalStr] = value.split("/")
+
+  const remaining = remainingStr ? Number.parseInt(remainingStr, 10) : NaN
+  const total = totalStr ? Number.parseInt(totalStr, 10) : NaN
+
+  if (!Number.isFinite(remaining) || !Number.isFinite(total)) {
+    return { remaining: null, total: null }
+  }
+
+  return {
+    remaining: Math.max(0, remaining),
+    total: Math.max(0, total),
+  }
+}
+
 
 export const getWebinarAttendance = async (
   webinarId: string,
@@ -165,81 +193,124 @@ export const registerAttendee = async ({
         success: false,
         status: 400,
         message: 'Missing required parameters',
+        data: null,
       };
     }
 
-    const webinar = await prismaClient.webinar.findUnique({
-      where: { id: webinarId },
-    });
-
-    if (!webinar) {
-      return { success: false, status: 404, message: 'Webinar not found' };
-    }
-
-    // Find or create the attendee by email
-    let attendee = await prismaClient.attendee.findUnique({
-    where: { email },
-    });
-
-    if (!attendee) {
-    attendee = await prismaClient.attendee.create({
-        data: { 
-          email, 
-          name,
-          phone: phone || null,
-          businessName: businessName || null,
-          description: description || null,
+    const result = await prismaClient.$transaction(async (tx) => {
+      const webinar = await tx.webinar.findUnique({
+        where: { id: webinarId },
+        select: {
+          id: true,
+          tags: true,
         },
-    });
-    }
+      })
 
-    // Check for existing attendance
-    const existingAttendance = await prismaClient.attendance.findFirst({
-    where: {
-      attendeeId: attendee.id,
-      webinarId: webinarId,
-    },
-    include: {
-      user: true, // Assuming you want to include attendee details
-    },
-    });
+      if (!webinar) {
+        return {
+          success: false,
+          status: 404,
+          message: 'Webinar not found',
+          data: null,
+        } as const
+      }
 
-    if (existingAttendance) {
-    return {
+      // Find or create the attendee by email
+      let attendee = await tx.attendee.findUnique({
+        where: { email },
+      })
+
+      if (!attendee) {
+        attendee = await tx.attendee.create({
+          data: {
+            email,
+            name,
+            phone: phone || null,
+            businessName: businessName || null,
+            description: description || null,
+          },
+        })
+      }
+
+      // Check for existing attendance first - do NOT adjust seats
+      const existingAttendance = await tx.attendance.findFirst({
+        where: {
+          attendeeId: attendee.id,
+          webinarId: webinarId,
+        },
+        include: {
+          user: true,
+        },
+      })
+
+      if (existingAttendance) {
+        return {
+          success: true,
+          status: 200,
+          data: existingAttendance,
+          message: 'You are already registered for this webinar',
+        } as const
+      }
+
+      // Handle seats logic via tags (seats:remaining/total) if configured
+      const { remaining, total } = parseSeatsFromTags(webinar.tags || [])
+
+      if (remaining !== null && total !== null) {
+        if (remaining <= 0) {
+          return {
+            success: false,
+            status: 409,
+            message: 'This webinar is sold out.',
+            data: null,
+          } as const
+        }
+
+        const newRemaining = Math.max(0, remaining - 1)
+        const existingTags = webinar.tags || []
+        const filteredTags = existingTags.filter((tag) => !tag.startsWith('seats:'))
+        const updatedTags = [...filteredTags, `seats:${newRemaining}/${total}`]
+
+        await tx.webinar.update({
+          where: { id: webinarId },
+          data: {
+            tags: updatedTags,
+          },
+        })
+      }
+
+      // Create attendance record
+      const attendance = await tx.attendance.create({
+        data: {
+          attendedType: AttendedTypeEnum.REGISTERED,
+          attendeeId: attendee.id,
+          webinarId: webinarId,
+          userId: userId || null,
+        },
+        include: {
+          user: true,
+        },
+      })
+
+      return {
         success: true,
         status: 200,
-        data: existingAttendance,
-        message: 'You are already registered for this webinar',
-    };
+        data: attendance,
+        message: 'Successfully Registered',
+      } as const
+    })
+
+    if (result.success) {
+      revalidatePath(`/${webinarId}`)
     }
 
-    // Create attendance record
-    const attendance = await prismaClient.attendance.create({
-    data: {
-      attendedType: AttendedTypeEnum.REGISTERED,
-      attendeeId: attendee.id,
-      webinarId: webinarId,
-      userId: userId || null,
-    },
-    include: {
-      user: true, // Assuming you want to include attendee details
-    },
-    });
-
-    revalidatePath(`/${webinarId}`);
-
-    return {
-    success: true,
-    status: 200,
-    data: attendance,
-    message: 'Successfully Registered',
-    };
+    return result
   } catch (error) {
     console.error('Registration error:', error);
     return {
       success: false,
       status: 500,
       message: 'Something went wrong',
+      data: null,
       error: error,
     };
   }

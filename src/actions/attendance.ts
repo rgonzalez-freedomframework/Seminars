@@ -149,6 +149,7 @@ export const registerAttendee = async ({
   phone,
   businessName,
   description,
+  userId,
 }: {
   webinarId: string;
   email: string;
@@ -156,6 +157,7 @@ export const registerAttendee = async ({
   phone?: string;
   businessName?: string;
   description?: string;
+  userId?: string;
 }) => {
   try {
     if (!webinarId || !email || !name) {
@@ -194,11 +196,11 @@ export const registerAttendee = async ({
     // Check for existing attendance
     const existingAttendance = await prismaClient.attendance.findFirst({
     where: {
-        attendeeId: attendee.id,
-        webinarId: webinarId,
+      attendeeId: attendee.id,
+      webinarId: webinarId,
     },
     include: {
-        user: true, // Assuming you want to include attendee details
+      user: true, // Assuming you want to include attendee details
     },
     });
 
@@ -214,12 +216,13 @@ export const registerAttendee = async ({
     // Create attendance record
     const attendance = await prismaClient.attendance.create({
     data: {
-        attendedType: AttendedTypeEnum.REGISTERED,
-        attendeeId: attendee.id,
-        webinarId: webinarId,
+      attendedType: AttendedTypeEnum.REGISTERED,
+      attendeeId: attendee.id,
+      webinarId: webinarId,
+      userId: userId || null,
     },
     include: {
-        user: true, // Assuming you want to include attendee details
+      user: true, // Assuming you want to include attendee details
     },
     });
 

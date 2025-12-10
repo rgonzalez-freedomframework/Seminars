@@ -15,10 +15,15 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import { WebinarCardDate, WebinarCardTime } from './_components/WebinarCardDateTimeClient';
+import AvailableWebinarCard from './_components/AvailableWebinarCard';
+import { onAuthenticateUser } from '@/actions/auth';
 
 const Pages = async () => {
   const { userId } = await auth();
   const user = await currentUser();
+
+  const authResult = await onAuthenticateUser();
+  const appUser = authResult.user;
   
   // Check and update any expired webinars before displaying
   await checkAndUpdateExpiredWebinars();
@@ -53,28 +58,43 @@ const Pages = async () => {
     },
   });
 
-  // Get resources from webinars that have resources available
-  // TODO: Filter by user attendance when attendance tracking is fully implemented
-  const userResources = await prismaClient.webinar.findMany({
-    where: {
-      webinarStatus: {
-        not: WebinarStatusEnum.CANCELLED,
-      },
-      resources: {
-        some: {},
-      },
-    },
-    include: {
-      resources: {
-        orderBy: {
-          createdAt: 'desc',
+  // Get resources only for webinars where the current user is registered/attended
+  const userResources = appUser
+    ? await prismaClient.webinar.findMany({
+        where: {
+          webinarStatus: {
+            not: WebinarStatusEnum.CANCELLED,
+          },
+          resources: {
+            some: {},
+          },
+          attendances: {
+            some: {
+              OR: [
+                {
+                  userId: appUser.id,
+                },
+                {
+                  user: {
+                    email: appUser.email,
+                  },
+                },
+              ],
+            },
+          },
         },
-      },
-    },
-    orderBy: {
-      startTime: 'desc',
-    },
-  });
+        include: {
+          resources: {
+            orderBy: {
+              createdAt: 'desc',
+            },
+          },
+        },
+        orderBy: {
+          startTime: 'desc',
+        },
+      })
+    : [];
 
   return (
     <div className="w-full min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50">
@@ -127,72 +147,13 @@ const Pages = async () => {
         {webinars.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {webinars.map((webinar) => (
-              <Link key={webinar.id} href={`/live-webinar/${webinar.id}`}>
-                <Card className="h-full hover:shadow-lg transition-shadow cursor-pointer border-2 border-gray-300 bg-white hover:border-[#CCA43B]">
-                  {webinar.thumbnail && (
-                    <div className="w-full h-48 overflow-hidden rounded-t-lg relative">
-                      <img
-                        src={webinar.thumbnail}
-                        alt={webinar.title}
-                        className="w-full h-full object-cover"
-                      />
-                      {webinar.webinarStatus === WebinarStatusEnum.LIVE && (
-                        <div className="absolute top-4 right-4">
-                          <Badge className="bg-red-600 text-white">
-                            <span className="mr-1 h-2 w-2 bg-white rounded-full animate-pulse"></span>
-                            LIVE NOW
-                          </Badge>
-                        </div>
-                      )}
-                    </div>
-                  )}
-                  <CardHeader>
-                    <div className="flex items-center justify-between mb-2">
-                      <Badge
-                        variant={
-                          webinar.webinarStatus === WebinarStatusEnum.LIVE
-                            ? 'destructive'
-                            : 'secondary'
-                        }
-                      >
-                        {webinar.webinarStatus}
-                      </Badge>
-                      <span className="text-sm text-gray-600">
-                        {webinar._count.attendances} attending
-                      </span>
-                    </div>
-                    <CardTitle className="line-clamp-2 text-[#1D2A38]">{webinar.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 mb-4 line-clamp-2">
-                      {webinar.description || 'Join this exclusive webinar'}
-                    </p>
-                    <div className="space-y-2 text-sm text-gray-600 mb-4">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4" />
-                        <WebinarCardDate startTime={webinar.startTime} />
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4" />
-                        <WebinarCardTime startTime={webinar.startTime} duration={webinar.duration} />
-                      </div>
-                    </div>
-                    {webinar.zoomJoinUrl && webinar.webinarStatus === WebinarStatusEnum.LIVE ? (
-                      <Button 
-                        className="w-full bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-bold border-2 border-[#CCA43B] transition-all"
-                      >
-                        <PlayCircle className="w-4 h-4 mr-2" />
-                        Join Meeting
-                      </Button>
-                    ) : (
-                      <Button className="w-full bg-[#CCA43B] hover:bg-[#CCA43B]/90 text-[#1D2A38] font-semibold transition-all" variant="default">
-                        <PlayCircle className="w-4 h-4 mr-2" />
-                        {webinar.webinarStatus === WebinarStatusEnum.LIVE ? 'Join Now' : 'View Details'}
-                      </Button>
-                    )}
-                  </CardContent>
-                </Card>
-              </Link>
+              <AvailableWebinarCard
+                key={webinar.id}
+                webinar={webinar}
+                currentUserId={appUser?.id || ''}
+                defaultName={user?.firstName ? `${user.firstName} ${user.lastName ?? ''}`.trim() : undefined}
+                defaultEmail={user?.emailAddresses?.[0]?.emailAddress}
+              />
             ))}
           </div>
         ) : (

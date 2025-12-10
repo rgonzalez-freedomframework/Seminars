@@ -13,6 +13,7 @@ export const validateBasicInfo = (data: {
   date?: Date
   time?: string
   timeFormat?: 'AM' | 'PM'
+  timeZone?: string
 }): ValidationResult => {
   const errors: ValidationErrors = {}
 

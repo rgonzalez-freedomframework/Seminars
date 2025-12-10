@@ -64,8 +64,11 @@ export const createWebinar = async (formData: WebinarFormState) => {
         // Import Zoom client directly to avoid HTTP fetch issues
         const { zoomClient } = await import('@/lib/zoom/client')
         
-        // Get the server's timezone
-        const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+        // Prefer the client's timezone captured in the form; fall back to server timezone
+        const timezone =
+          formData.basicInfo.timeZone ||
+          Intl.DateTimeFormat().resolvedOptions().timeZone ||
+          'UTC'
         
         // Create Zoom meeting (works with Free/Pro accounts)
         const zoomMeeting = await zoomClient.createMeeting({

@@ -31,39 +31,52 @@ const WaitlistComponent = ({
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const { setAttendee } = useAttendeeStore();
-  const router=useRouter()
-    const buttonText = () => {
+  const router = useRouter();
+
+  const isReturnButton =
+    webinarStatus === WebinarStatusEnum.SCHEDULED ||
+    webinarStatus === WebinarStatusEnum.WAITING_ROOM;
+
+  const buttonText = () => {
     switch (webinarStatus) {
-        case WebinarStatusEnum.SCHEDULED:
-        return 'Get Reminder';
-        case WebinarStatusEnum.WAITING_ROOM:
-        return 'Get Reminder';
-        case WebinarStatusEnum.LIVE:
+      case WebinarStatusEnum.LIVE:
         return 'Join Webinar';
-        default:
+      default:
         return 'Register';
     }
-    };
+  };
     const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    try {
-      const res = await registerAttendee({
-        email,
-        name,
-        phone,
-        businessName,
-        description,
-        webinarId,
-      });
+      };
 
-      if (!res.success) {
-        throw new Error(res.message || 'Something went wrong!');
+      if (isReturnButton) {
+        return (
+          <Button
+            className="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] border-2 border-[#CCA43B] rounded-xl px-6 py-3 text-sm font-bold shadow-lg"
+            onClick={() => router.push('/home')}
+         >
+            Return to Dashboard
+          </Button>
+        );
       }
 
-      if (res.data?.user) {
-        setAttendee({
-          id: res.data.user.id,
+      return (
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+          <DialogTrigger asChild>
+            <Button
+              className={`$
+                webinarStatus === WebinarStatusEnum.LIVE
+                  ? 'bg-red-600 hover:bg-red-700 text-white'
+                  : 'bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] border-2 border-[#CCA43B]'
+              } rounded-xl px-6 py-3 text-sm font-bold shadow-lg`}
+            >
+              {webinarStatus === WebinarStatusEnum.LIVE && (
+                <span className="mr-2 h-2 w-2 bg-white rounded-full animate-pulse"></span>
+              )}
+              {buttonText()}
+            </Button>
+          </DialogTrigger>
           name: res.data.user.name,
           email: res.data.user.email,
           phone: res.data.user.phone,

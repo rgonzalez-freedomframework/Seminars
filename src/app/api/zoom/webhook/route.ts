@@ -4,7 +4,7 @@ import crypto from 'crypto';
 
 /**
  * Zoom Webhook Endpoint
- * Receives updates from Zoom about webinar changes
+ * Receives updates from Zoom about meeting/webinar changes
  * https://developers.zoom.us/docs/api/rest/webhook-reference/
  */
 export async function POST(request: NextRequest) {
@@ -46,6 +46,7 @@ export async function POST(request: NextRequest) {
 
     // Handle different webhook events
     switch (event) {
+      // Webinar events
       case 'webinar.updated':
         await handleWebinarUpdated(payload);
         break;
@@ -59,6 +60,23 @@ export async function POST(request: NextRequest) {
         break;
 
       case 'webinar.ended':
+        await handleWebinarEnded(payload);
+        break;
+
+      // Meeting events (we reuse the same handlers because schema is compatible)
+      case 'meeting.updated':
+        await handleWebinarUpdated(payload);
+        break;
+
+      case 'meeting.deleted':
+        await handleWebinarDeleted(payload);
+        break;
+
+      case 'meeting.started':
+        await handleWebinarStarted(payload);
+        break;
+
+      case 'meeting.ended':
         await handleWebinarEnded(payload);
         break;
 

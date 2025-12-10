@@ -83,6 +83,7 @@ model Webinar {
   zoomWebinarId String?         @db.VarChar(255) // Zoom webinar ID
   zoomJoinUrl   String?         @db.VarChar(500) // Zoom join URL
   zoomRegistrationUrl String?   @db.VarChar(500) // Zoom registration URL
+  zoomPassword  String?         @db.VarChar(255) // Zoom meeting/webinar password
   createdAt     DateTime          @default(now())
   updatedAt     DateTime          @updatedAt
   deletedAt     DateTime?

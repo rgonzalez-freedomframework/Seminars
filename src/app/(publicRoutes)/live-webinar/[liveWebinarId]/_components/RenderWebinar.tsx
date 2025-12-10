@@ -62,7 +62,7 @@ const RenderWebinar = ({
                   meetingNumber={webinar.zoomWebinarId || ''}
                   userName={attendee?.name || user?.name || 'Guest'}
                   userEmail={attendee?.email || user?.email || ''}
-                  passWord={''} // No password needed with join_before_host=true
+                  passWord={webinar.zoomPassword || ''}
                   zoomJoinUrl={webinar.zoomJoinUrl}
                 />
                 ) : attendee ? (

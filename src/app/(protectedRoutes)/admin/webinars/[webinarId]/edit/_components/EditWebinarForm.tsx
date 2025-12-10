@@ -176,6 +176,46 @@ const EditWebinarForm = ({ webinar }: Props) => {
           </CardContent>
         </Card>
       )}
+
+      {webinar.zoomWebinarId && (
+        <Card className="mt-6">
+          <CardHeader>
+            <CardTitle className="text-sm">Zoom Meeting Details</CardTitle>
+            <CardDescription>
+              These values come directly from Zoom via the API.
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-3 text-sm text-gray-700">
+            <div>
+              <p className="font-medium text-[#1D2A38]">Meeting ID</p>
+              <p className="mt-1 break-all">{webinar.zoomWebinarId}</p>
+            </div>
+
+            {webinar.zoomJoinUrl && (
+              <div>
+                <p className="font-medium text-[#1D2A38]">Join URL</p>
+                <a
+                  href={webinar.zoomJoinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-1 inline-block break-all text-blue-600 hover:underline"
+                >
+                  {webinar.zoomJoinUrl}
+                </a>
+              </div>
+            )}
+
+            <div>
+              <p className="font-medium text-[#1D2A38]">Password</p>
+              <p className="mt-1 text-xs text-gray-600">
+                {webinar.zoomPassword
+                  ? 'Stored and passed securely to the Zoom Meeting SDK.'
+                  : 'No password returned by Zoom for this meeting.'}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </form>
   )
 }

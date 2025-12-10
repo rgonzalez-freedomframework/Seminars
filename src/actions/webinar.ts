@@ -91,6 +91,7 @@ export const createWebinar = async (formData: WebinarFormState) => {
           zoomWebinarId: zoomMeeting.id.toString(),
           zoomJoinUrl: zoomMeeting.join_url,
           zoomRegistrationUrl: null, // Meetings don't have registration URLs
+          zoomPassword: zoomMeeting.password || null,
         }
         
         console.log('✅ Zoom meeting created:', zoomMeeting.id, zoomMeeting.join_url)

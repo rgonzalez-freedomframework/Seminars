@@ -19,8 +19,8 @@ type Props = {
 const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
   const [loading, setLoading] = useState(false);
   const [isExpired, setIsExpired] = useState(false);
-    
-    const router = useRouter();
+
+  const router = useRouter();
 
     const handleStartWebinar = async () => {
     setLoading(true);
@@ -43,6 +43,12 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
     () => Boolean(webinar.zoomJoinUrl),
     [webinar.zoomJoinUrl]
   );
+
+  const handleImageClick = () => {
+    if (webinar.zoomJoinUrl) {
+      window.open(webinar.zoomJoinUrl, '_blank');
+    }
+  };
   return (
     <div className="w-full min-h-screen relative overflow-hidden bg-gradient-to-br from-white via-gray-50 to-white">
       {/* Animated Background Elements */}
@@ -75,7 +81,10 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
       </div>
 
         <div className="space-y-6 w-full h-full flex justify-center items-center flex-col animate-in fade-in zoom-in duration-700 delay-300">
-        <div className="w-full max-w-md aspect-[4/3] relative rounded-2xl overflow-hidden mb-6 shadow-2xl border-4 border-[#CCA43B]/20 hover:border-[#CCA43B]/40 transition-all duration-300 hover:scale-[1.02]">
+        <div
+          className="w-full max-w-md aspect-[4/3] relative rounded-2xl overflow-hidden mb-6 shadow-2xl border-4 border-[#CCA43B]/20 hover:border-[#CCA43B]/40 transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+          onClick={handleImageClick}
+        >
             <Image
             src={webinar.thumbnail || '/aieracourse.png'}
             alt={webinar.title}

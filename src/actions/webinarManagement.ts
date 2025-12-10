@@ -44,6 +44,9 @@ export async function checkAndUpdateExpiredWebinars() {
 
     console.log(`Checked ${updatedCount.total} webinars, marked ${updatedCount.ended} as ended`)
 
+    // Also sync Zoom-integrated webinars that were deleted directly in Zoom
+    await syncZoomDeletedWebinars()
+
     return {
       success: true,
       checked: updatedCount.total,
@@ -179,7 +182,9 @@ export async function deleteWebinar(webinarId: string) {
 }
 
 /**
- * Cancel a webinar (keeps it in database but marks as cancelled)
+ * Cancel a webinar
+ * - Marks it as CANCELLED in our database (kept for history/resources)
+ * - Deletes the underlying Zoom meeting if one exists
  */
 export async function cancelWebinar(webinarId: string) {
   try {
@@ -191,27 +196,20 @@ export async function cancelWebinar(webinarId: string) {
       return { status: 404, message: 'Webinar not found' }
     }
 
-    // Update status to CANCELLED
+    // Update status to CANCELLED locally
     const updatedWebinar = await prismaClient.webinar.update({
       where: { id: webinarId },
       data: { webinarStatus: WebinarStatusEnum.CANCELLED },
     })
 
-    // Optionally cancel in Zoom (or keep it there with a note)
+    // Delete the Zoom meeting so it no longer appears in Zoom
+    // (we only create Zoom MEETINGS in this flow)
     if (webinar.zoomWebinarId) {
       try {
-        await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/zoom/webinar/${webinar.zoomWebinarId}`,
-          {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              topic: `[CANCELLED] ${webinar.title}`,
-            }),
-          }
-        )
+        await zoomClient.deleteMeeting(webinar.zoomWebinarId)
       } catch (zoomError) {
-        console.error('Error updating Zoom webinar:', zoomError)
+        console.error('Error deleting Zoom meeting while cancelling:', zoomError)
+        // We keep the local cancellation even if Zoom deletion fails
       }
     }
 
@@ -226,5 +224,59 @@ export async function cancelWebinar(webinarId: string) {
       status: 500,
       message: 'Failed to cancel webinar',
     }
+  }
+}
+
+/**
+ * Sync Zoom deletions for Zoom-integrated webinars.
+ * If a Zoom meeting no longer exists (deleted directly in Zoom),
+ * mark the corresponding webinar as CANCELLED locally so it
+ * disappears from attendee-facing lists.
+ */
+async function syncZoomDeletedWebinars() {
+  try {
+    const zoomWebinars = await prismaClient.webinar.findMany({
+      where: {
+        zoomWebinarId: { not: null },
+        webinarStatus: {
+          in: [
+            WebinarStatusEnum.SCHEDULED,
+            WebinarStatusEnum.WAITING_ROOM,
+            WebinarStatusEnum.LIVE,
+          ],
+        },
+      },
+      select: {
+        id: true,
+        zoomWebinarId: true,
+      },
+    })
+
+    for (const webinar of zoomWebinars) {
+      if (!webinar.zoomWebinarId) continue
+
+      try {
+        // If the meeting exists, this call will succeed and we do nothing
+        await zoomClient.getMeeting(webinar.zoomWebinarId)
+      } catch (error: any) {
+        const message = error?.message || ''
+
+        // Zoom returns messages like "Meeting does not exist" when deleted
+        const isNotFound =
+          message.toLowerCase().includes('does not exist') ||
+          message.toLowerCase().includes('not found')
+
+        if (isNotFound) {
+          await prismaClient.webinar.update({
+            where: { id: webinar.id },
+            data: { webinarStatus: WebinarStatusEnum.CANCELLED },
+          })
+        } else {
+          console.error('Error checking Zoom meeting status:', error)
+        }
+      }
+    }
+  } catch (error) {
+    console.error('Error syncing Zoom-deleted webinars:', error)
   }
 }

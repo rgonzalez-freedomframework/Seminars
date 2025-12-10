@@ -109,7 +109,14 @@ const ZoomMeetingPlayer = ({
         }
       } catch (err: any) {
         console.error('Zoom initialization error:', err);
-        setError(err.message || 'Failed to initialize Zoom meeting');
+        const rawMessage = err?.message as string | undefined;
+        if (rawMessage && rawMessage.includes('ReactCurrentOwner')) {
+          setError(
+            'This browser cannot embed the Zoom meeting directly. Please open it in the Zoom app using the button below.'
+          );
+        } else {
+          setError('Failed to initialize the Zoom meeting. You can still join via the Zoom app below.');
+        }
         setIsLoading(false);
       }
     };

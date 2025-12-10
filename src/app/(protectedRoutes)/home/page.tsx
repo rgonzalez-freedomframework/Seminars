@@ -33,30 +33,85 @@ const Pages = async () => {
   // Or programmatically via Clerk API
   const isAdmin = user?.publicMetadata?.role === 'admin' || 
     user?.emailAddresses.some(email => email.emailAddress === 'rgonzalez@freedomframework.us');
-  // Get all upcoming and live webinars for users
-  const webinars = await prismaClient.webinar.findMany({
-    where: {
-      webinarStatus: {
-        in: [WebinarStatusEnum.SCHEDULED, WebinarStatusEnum.WAITING_ROOM, WebinarStatusEnum.LIVE],
-      },
-    },
-    include: {
-      presenter: {
-        select: {
-          name: true,
-          profileImage: true,
+  // Get all upcoming and live webinars for users, plus whether this user is registered
+  let webinarsForDisplay: Array<any> = [];
+
+  if (appUser) {
+    const webinars = await prismaClient.webinar.findMany({
+      where: {
+        webinarStatus: {
+          in: [WebinarStatusEnum.SCHEDULED, WebinarStatusEnum.WAITING_ROOM, WebinarStatusEnum.LIVE],
         },
       },
-      _count: {
-        select: {
-          attendances: true,
+      include: {
+        presenter: {
+          select: {
+            name: true,
+            profileImage: true,
+          },
+        },
+        _count: {
+          select: {
+            attendances: true,
+          },
+        },
+        attendances: {
+          where: {
+            OR: [
+              {
+                userId: appUser.id,
+              },
+              {
+                user: {
+                  email: appUser.email,
+                },
+              },
+            ],
+          },
+          select: {
+            id: true,
+          },
         },
       },
-    },
-    orderBy: {
-      startTime: 'asc',
-    },
-  });
+      orderBy: {
+        startTime: 'asc',
+      },
+    });
+
+    webinarsForDisplay = webinars.map((webinar) => ({
+      ...webinar,
+      isRegistered: webinar.attendances.length > 0,
+    }));
+  } else {
+    const webinars = await prismaClient.webinar.findMany({
+      where: {
+        webinarStatus: {
+          in: [WebinarStatusEnum.SCHEDULED, WebinarStatusEnum.WAITING_ROOM, WebinarStatusEnum.LIVE],
+        },
+      },
+      include: {
+        presenter: {
+          select: {
+            name: true,
+            profileImage: true,
+          },
+        },
+        _count: {
+          select: {
+            attendances: true,
+          },
+        },
+      },
+      orderBy: {
+        startTime: 'asc',
+      },
+    });
+
+    webinarsForDisplay = webinars.map((webinar) => ({
+      ...webinar,
+      isRegistered: false,
+    }));
+  }
 
   // Get resources only for webinars where the current user is registered/attended
   const userResources = appUser
@@ -144,9 +199,9 @@ const Pages = async () => {
         <h2 className="text-[#1D2A38] font-semibold text-2xl mb-6">
           Available Webinars
         </h2>
-        {webinars.length > 0 ? (
+        {webinarsForDisplay.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {webinars.map((webinar) => (
+            {webinarsForDisplay.map((webinar) => (
               <AvailableWebinarCard
                 key={webinar.id}
                 webinar={webinar}

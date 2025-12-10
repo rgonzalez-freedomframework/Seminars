@@ -26,6 +26,7 @@ type AvailableWebinarCardProps = {
     _count: {
       attendances: number;
     };
+    isRegistered: boolean;
   };
   currentUserId: string;
   defaultName?: string | null;
@@ -47,6 +48,86 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
   const [description, setDescription] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+
+  // If the user is already registered for this webinar, show a simple
+  // "View Webinar" card that navigates directly without reopening the modal.
+  if (webinar.isRegistered) {
+    return (
+      <Card
+        className="h-full hover:shadow-lg transition-shadow cursor-pointer border-2 border-[#CCA43B] bg-white"
+        onClick={() => router.push(`/live-webinar/${webinar.id}`)}
+      >
+        {webinar.thumbnail && (
+          <div className="w-full h-48 overflow-hidden rounded-t-lg relative">
+            <img
+              src={webinar.thumbnail}
+              alt={webinar.title}
+              className="w-full h-full object-cover"
+            />
+            {webinar.webinarStatus === WebinarStatusEnum.LIVE && (
+              <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
+                <Badge className="bg-red-600 text-white">
+                  <span className="mr-1 h-2 w-2 bg-white rounded-full animate-pulse"></span>
+                  LIVE NOW
+                </Badge>
+                <Badge variant="outline" className="bg-white/90 text-[#1D2A38] border-[#CCA43B]">
+                  Registered
+                </Badge>
+              </div>
+            )}
+            {webinar.webinarStatus !== WebinarStatusEnum.LIVE && (
+              <div className="absolute top-4 right-4">
+                <Badge variant="outline" className="bg-white/90 text-[#1D2A38] border-[#CCA43B]">
+                  Registered
+                </Badge>
+              </div>
+            )}
+          </div>
+        )}
+        <CardHeader>
+          <div className="flex items-center justify-between mb-2">
+            <Badge
+              variant={
+                webinar.webinarStatus === WebinarStatusEnum.LIVE
+                  ? "destructive"
+                  : "secondary"
+              }
+            >
+              {webinar.webinarStatus}
+            </Badge>
+            <span className="text-sm text-gray-600">
+              {webinar._count.attendances} attending
+            </span>
+          </div>
+          <CardTitle className="line-clamp-2 text-[#1D2A38]">
+            {webinar.title}
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <p className="text-gray-600 mb-4 line-clamp-2">
+            {webinar.description || "Join this exclusive webinar"}
+          </p>
+          <div className="space-y-2 text-sm text-gray-600 mb-4">
+            <div className="flex items-center gap-2">
+              <Calendar className="w-4 h-4" />
+              <WebinarCardDate startTime={webinar.startTime} />
+            </div>
+            <div className="flex items-center gap-2">
+              <Clock className="w-4 h-4" />
+              <WebinarCardTime
+                startTime={webinar.startTime}
+                duration={webinar.duration || undefined}
+              />
+            </div>
+          </div>
+          <Button className="w-full bg-[#1D2A38] hover:bg-[#1D2A38]/90 text-white font-semibold transition-all" variant="default">
+            <PlayCircle className="w-4 h-4 mr-2" />
+            View Webinar
+          </Button>
+        </CardContent>
+      </Card>
+    );
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

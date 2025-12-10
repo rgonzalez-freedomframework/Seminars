@@ -57,6 +57,9 @@ const Pages = async () => {
   // TODO: Filter by user attendance when attendance tracking is fully implemented
   const userResources = await prismaClient.webinar.findMany({
     where: {
+      webinarStatus: {
+        not: WebinarStatusEnum.CANCELLED,
+      },
       resources: {
         some: {},
       },

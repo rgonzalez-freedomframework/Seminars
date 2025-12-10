@@ -14,6 +14,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import { WebinarCardDate, WebinarCardTime } from './_components/WebinarCardDateTimeClient';
 
 const Pages = async () => {
   const { userId } = await auth();
@@ -166,19 +167,11 @@ const Pages = async () => {
                     <div className="space-y-2 text-sm text-gray-600 mb-4">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4" />
-                        {new Date(webinar.startTime).toLocaleDateString('en-US', {
-                          weekday: 'short',
-                          month: 'short',
-                          day: 'numeric',
-                        })}
+                        <WebinarCardDate startTime={webinar.startTime} />
                       </div>
                       <div className="flex items-center gap-2">
                         <Clock className="w-4 h-4" />
-                        {new Date(webinar.startTime).toLocaleTimeString('en-US', {
-                          hour: 'numeric',
-                          minute: '2-digit',
-                        })}
-                        {webinar.duration && ` (${webinar.duration} min)`}
+                        <WebinarCardTime startTime={webinar.startTime} duration={webinar.duration} />
                       </div>
                     </div>
                     {webinar.zoomJoinUrl && webinar.webinarStatus === WebinarStatusEnum.LIVE ? (

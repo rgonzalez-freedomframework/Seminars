@@ -73,8 +73,18 @@ const WebinarCard = ({ webinar }: Props) => {
       setShowCancelDialog(false)
     }
   }
+  const isCancelled = webinar.webinarStatus === 'CANCELLED'
+
   return (
-    <div className="flex gap-3 flex-col items-start w-full">
+    <div className="flex gap-3 flex-col items-start w-full relative">
+      {isCancelled && (
+        <div className="absolute -top-2 left-0 right-0 z-10 flex justify-center">
+          <div className="px-3 py-1 rounded-full bg-red-600 text-white text-xs font-semibold shadow-md flex items-center gap-1">
+            <XCircle className="w-3 h-3" />
+            <span>Cancelled / Deleted</span>
+          </div>
+        </div>
+      )}
       <Link href={`/live-webinar/${webinar?.id}`} className="w-full max-w-[400px]">
         <Image
           src={webinar?.thumbnail || "/darkthumbnail.png"}

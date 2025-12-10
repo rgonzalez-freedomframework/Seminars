@@ -94,7 +94,7 @@ const initialState: WebinarFormState = {
     dateTime: undefined,
   },
   cta: {
-    ctaLabel: '',
+    ctaLabel: 'Join Webinar',
     tags: [],
     ctaType: 'BOOK_A_CALL',
     aiAgent: '',

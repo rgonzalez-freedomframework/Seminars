@@ -11,7 +11,6 @@ import { Plus } from 'lucide-react'
 import React, { useState } from 'react'
 import MultiStepForm from './MultiStepForm'
 import BasicInfoStep from './BasicInfoStep'
-import CTAStep from './CTAStep'
 import AdditionalInfoStep from './AdditionalInfoStep'
 import SuccessStep from './SuccessStep'
 
@@ -26,15 +25,9 @@ function CreateWebinarButton() {
     component: <BasicInfoStep />,
   },
   {
-    id: 'cta',
-    title: 'CTA',
-    description: 'Please provide the end-point for your customers through your webinar',
-    component: <CTAStep />,
-  },
-  {
     id: 'additionalInfo',
     title: 'Additional information',
-    description: 'Please fill out information about additional options if necessary',
+    description: 'Configure Zoom integration and any additional options if necessary',
     component: <AdditionalInfoStep/>,
   },
 ]

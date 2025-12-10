@@ -92,8 +92,8 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
     setCurrentStepIndex(currentStepIndex + 1)
     }
 }
-    return (
-        <div className="flex flex-col justify-center items-center bg-white border-2 border-gray-300 rounded-3xl overflow-hidden max-w-6xl mx-auto text-[#1D2A38]">
+        return (
+		<div className="flex flex-col justify-center items-center bg-white border-2 border-gray-300 rounded-3xl overflow-hidden max-w-6xl mx-auto text-black">
       <div className="flex items-center justify-start">
         <div className="w-full md:w-1/3 p-6">
           <div className="space-y-6">
@@ -166,14 +166,14 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
                     <div className="pt-1">
                     <motion.h3
                         animate={{
-                        color: isCurrent || isCompleted ? 'rgb(29, 42, 56)' : 'rgb(156, 163, 175)',
+                        color: 'rgb(0, 0, 0)',
                         }}
                         transition={{ duration: 0.3 }}
                         style={{ fontWeight: 500 }}
                     >
                         {step.title}
                     </motion.h3>
-                    <p className="text-sm text-gray-600">{step.description}</p>
+                    <p className="text-sm text-black">{step.description}</p>
                     </div>
                 </div>
                 </div>
@@ -196,9 +196,9 @@ const MultiStepForm = ({ steps, onComplete }: Props) => {
             style={{ padding: '1.5rem' }}
             >
             <div className="mb-6">
-                <h2 className="text-xl font-semibold text-[#1D2A38]">{currentStep.title}</h2>
-                <p className="text-gray-600">{currentStep.description}</p>
-            </div>
+                    <h2 className="text-xl font-semibold text-black">{currentStep.title}</h2>
+                    <p className="text-black">{currentStep.description}</p>
+                </div>
             {/* Render the current step component */}
             {currentStep.component}
 

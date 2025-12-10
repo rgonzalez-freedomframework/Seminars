@@ -173,10 +173,10 @@ const handleRemoveResource = (index: number) => {
         {/* Zoom Integration Toggle */}
         <div className="flex items-center justify-between p-4 border-2 border-gray-300 rounded-lg bg-white hover:border-[#CCA43B]/50 transition-colors">
         <div className="flex-1">
-            <Label htmlFor="enable-zoom" className="text-base font-semibold text-[#1D2A38] cursor-pointer">
+    			<Label htmlFor="enable-zoom" className="text-base font-semibold text-black cursor-pointer">
             Zoom Integration
             </Label>
-            <p className="text-sm text-gray-600 mt-1">
+    			<p className="text-sm text-black mt-1">
             Automatically create a Zoom webinar for this event
             </p>
         </div>
@@ -190,10 +190,10 @@ const handleRemoveResource = (index: number) => {
 
         <div className="flex items-center justify-between p-4 border-2 border-gray-300 rounded-lg bg-white hover:border-[#CCA43B]/50 transition-colors">
         <div className="flex-1">
-            <Label htmlFor="lock-chat" className="text-base font-semibold text-[#1D2A38] cursor-pointer">
+    			<Label htmlFor="lock-chat" className="text-base font-semibold text-black cursor-pointer">
             Lock Chat
             </Label>
-            <p className="text-sm text-gray-600 mt-1">
+    			<p className="text-sm text-black mt-1">
             Turn it on to make chat visible to your users at all time
             </p>
         </div>
@@ -208,10 +208,10 @@ const handleRemoveResource = (index: number) => {
     <div className="space-y-4 p-4 border-2 border-gray-300 rounded-lg bg-white">
     <div className="flex items-center justify-between">
         <div className="flex-1">
-        <Label htmlFor="coupon-enabled" className="text-base font-semibold text-[#1D2A38] cursor-pointer">
+      <Label htmlFor="coupon-enabled" className="text-base font-semibold text-black cursor-pointer">
             Coupon Code
         </Label>
-        <p className="text-sm text-gray-600 mt-1">
+      <p className="text-sm text-black mt-1">
             Turn it on to offer discounts to your viewers
         </p>
         </div>
@@ -224,7 +224,7 @@ const handleRemoveResource = (index: number) => {
     </div>
             {couponEnabled && (
                 <div className="space-y-2 pt-2 border-t-2 border-gray-200">
-                    <Label htmlFor="coupon-code" className="text-sm font-medium text-[#1D2A38]">
+                    <Label htmlFor="coupon-code" className="text-sm font-medium text-black">
                       Enter Coupon Code
                     </Label>
                     <Input
@@ -233,14 +233,14 @@ const handleRemoveResource = (index: number) => {
                     onChange={handleCouponCodeChange}
                     placeholder="e.g., SAVE20"
                     className={cn(
-                        'bg-white border-2 border-gray-300 text-[#1D2A38] focus:border-[#CCA43B]',
+                      'bg-white border-2 border-gray-300 text-black focus:border-[#CCA43B]',
                         errors.couponCode && 'border-red-400 focus-visible:ring-red-400'
                     )}
                     />
                     {errors.couponCode && (
                     <p className="text-sm text-red-400">{errors.couponCode}</p>
                     )}
-                    <div className="flex items-start gap-2 text-xs text-gray-600 bg-blue-50 p-3 rounded-md border border-blue-200">
+                    <div className="flex items-start gap-2 text-xs text-black bg-blue-50 p-3 rounded-md border border-blue-200">
                     <Info className="h-4 w-4 mt-0.5 text-blue-600 flex-shrink-0" />
                     <p>
                         This coupon code can be used to promote a sale. Users can apply it
@@ -255,44 +255,44 @@ const handleRemoveResource = (index: number) => {
     {/* Resources Upload Section */}
     <div className="space-y-4 p-4 border-2 border-gray-300 rounded-lg bg-white">
       <div className="flex items-center gap-2 mb-2">
-        <FileText className="h-5 w-5 text-[#1D2A38]" />
+      <FileText className="h-5 w-5 text-black" />
         <div>
-          <h3 className="text-base font-semibold text-[#1D2A38]">Webinar Resources</h3>
-          <p className="text-sm text-gray-600">Add downloadable files for attendees</p>
+        <h3 className="text-base font-semibold text-black">Webinar Resources</h3>
+        <p className="text-sm text-black">Add downloadable files for attendees</p>
         </div>
       </div>
 
       {/* Add New Resource Form */}
       <div className="space-y-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
         <div className="space-y-2">
-          <Label className="text-sm font-medium text-[#1D2A38]">Resource Title</Label>
+        <Label className="text-sm font-medium text-black">Resource Title</Label>
           <Input
             value={newResource.title}
             onChange={(e) => setNewResource(prev => ({ ...prev, title: e.target.value }))}
             placeholder="e.g., Webinar Slides, Workbook, Checklist"
-            className="bg-white border-2 border-gray-300 text-[#1D2A38]"
+            className="bg-white border-2 border-gray-300 text-black"
             disabled={newResource.uploading}
           />
         </div>
 
         <div className="space-y-2">
-          <Label className="text-sm font-medium text-[#1D2A38]">Description (Optional)</Label>
+          <Label className="text-sm font-medium text-black">Description (Optional)</Label>
           <Textarea
             value={newResource.description}
             onChange={(e) => setNewResource(prev => ({ ...prev, description: e.target.value }))}
             placeholder="Brief description of this resource"
-            className="bg-white border-2 border-gray-300 min-h-[60px] text-[#1D2A38]"
+            className="bg-white border-2 border-gray-300 min-h-[60px] text-black"
             disabled={newResource.uploading}
           />
         </div>
 
         <div className="space-y-2">
-          <Label className="text-sm font-medium text-[#1D2A38]">File</Label>
+          <Label className="text-sm font-medium text-black">File</Label>
           <div className="flex gap-2">
             <Button
               type="button"
               variant="outline"
-              className="relative flex-1 justify-center border-2 border-gray-300 bg-white text-[#1D2A38] font-semibold hover:border-[#CCA43B] hover:bg-[#CCA43B]/5 shadow-sm"
+              className="relative flex-1 justify-center border-2 border-gray-300 bg-white text-black font-semibold hover:border-[#CCA43B] hover:bg-[#CCA43B]/5 shadow-sm"
               disabled={newResource.uploading}
             >
               <Upload className="h-4 w-4 mr-2" />
@@ -321,7 +321,7 @@ const handleRemoveResource = (index: number) => {
             </Button>
           </div>
           {newResource.file && (
-            <p className="text-xs text-gray-600">
+          <p className="text-xs text-black">
               {(newResource.file.size / (1024 * 1024)).toFixed(2)} MB
             </p>
           )}
@@ -331,7 +331,7 @@ const handleRemoveResource = (index: number) => {
       {/* Uploaded Resources List */}
       {resources.length > 0 && (
         <div className="space-y-2">
-          <Label className="text-sm font-medium text-[#1D2A38]">Added Resources ({resources.length})</Label>
+          <Label className="text-sm font-medium text-black">Added Resources ({resources.length})</Label>
           <div className="space-y-2">
             {resources.map((resource, index) => (
               <div
@@ -365,8 +365,8 @@ const handleRemoveResource = (index: number) => {
         </div>
       )}
 
-      <p className="text-xs text-gray-500">
-        Maximum file size: 50MB per file. Resources will be available to all registered attendees.
+      <p className="text-xs text-black">
+      Maximum file size: 50MB per file. Resources will be available to all registered attendees.
       </p>
     </div>
     </div>

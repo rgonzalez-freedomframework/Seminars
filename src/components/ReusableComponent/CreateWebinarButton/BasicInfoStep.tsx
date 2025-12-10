@@ -258,7 +258,7 @@ const handleRemoveThumbnail = () => {
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <Label htmlFor="webinarName" className={errors.webinarName ? 'text-red-400' : 'text-[#1D2A38]'}>
+  		<Label htmlFor="webinarName" className={errors.webinarName ? 'text-red-400' : 'text-black'}>
             Webinar name <span className="text-red-400">*</span>
             </Label>
             <Input
@@ -268,7 +268,7 @@ const handleRemoveThumbnail = () => {
             onChange={handleChange}
             placeholder="Introduction to Mochi"
             className={cn(
-                'bg-white border-2 border-gray-300 text-[#1D2A38]',
+              'bg-white border-2 border-gray-300 text-black',
                 errors.webinarName && 'border-red-400 focus-visible:ring-red-400'
             )}
             />
@@ -276,10 +276,10 @@ const handleRemoveThumbnail = () => {
             <p className="text-sm text-red-400">{errors.webinarName}</p>
         )}
       </div>
-      <div className="space-y-2">
-        <Label
+    <div className="space-y-2">
+    <Label
             htmlFor="description"
-            className={errors.description ? 'text-red-400' : 'text-[#1D2A38]'}
+      className={errors.description ? 'text-red-400' : 'text-black'}
         >
             Description <span className="text-red-400">*</span>
         </Label>
@@ -290,7 +290,7 @@ const handleRemoveThumbnail = () => {
             onChange={handleChange}
             placeholder="Tell customers what your webinar is about"
             className={cn(
-            'min-h-[100px] bg-white border-2 border-gray-300 text-[#1D2A38]',
+            'min-h-[100px] bg-white border-2 border-gray-300 text-black',
             errors.description && 'border-red-400 focus-visible:ring-red-400'
             )}
         />
@@ -305,8 +305,8 @@ const handleRemoveThumbnail = () => {
             <div className="flex items-center gap-2">
               <Upload className="h-5 w-5 text-[#1D2A38]" />
               <div>
-                <p className="text-sm font-medium text-[#1D2A38]">Webinar Card Image</p>
-                <p className="text-xs text-gray-600">Upload a custom thumbnail for the webinar card</p>
+                <p className="text-sm font-medium text-black">Webinar Card Image</p>
+                <p className="text-xs text-black">Upload a custom thumbnail for the webinar card</p>
               </div>
             </div>
             
@@ -333,7 +333,7 @@ const handleRemoveThumbnail = () => {
           {isThumbnailUploading && (
             <div className="space-y-2">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-[#1D2A38] font-medium">Uploading...</span>
+                <span className="text-black font-medium">Uploading...</span>
                 <span className="text-[#CCA43B] font-semibold">{thumbnailUploadProgress}%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
@@ -342,7 +342,7 @@ const handleRemoveThumbnail = () => {
                   style={{ width: `${thumbnailUploadProgress}%` }}
                 />
               </div>
-              <p className="text-xs text-gray-600 flex items-center gap-1">
+              <p className="text-xs text-black flex items-center gap-1">
                 <Loader2 className="h-3 w-3 animate-spin" />
                 Uploading {thumbnailFile?.name}...
               </p>
@@ -386,14 +386,14 @@ const handleRemoveThumbnail = () => {
             </div>
           ) : null}
 
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="text-xs text-black mt-2">
             Maximum file size: 5MB. Supported formats: JPEG, PNG, WebP, GIF
           </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
-                <Label htmlFor="date" className={errors.date ? 'text-red-400' : 'text-[#1D2A38]'}>
+              <Label htmlFor="date" className={errors.date ? 'text-red-400' : 'text-black'}>
                 Webinar Date <span className="text-red-400">*</span>
                 </Label>
                 <Popover>
@@ -401,8 +401,8 @@ const handleRemoveThumbnail = () => {
                     <Button
                     variant="outline"
                     className={cn(
-                        'w-full justify-start text-left font-normal bg-white border-2 border-gray-300 text-[#1D2A38]',
-                        !date && 'text-gray-500',
+                      'w-full justify-start text-left font-normal bg-white border-2 border-gray-300 text-black',
+                      !date && 'text-black',
                         errors.date && 'border-red-400 focus-visible:ring-red-400'
                     )}
                     >
@@ -452,19 +452,19 @@ const handleRemoveThumbnail = () => {
             </div>
 
             <div className="space-y-2">
-            <Label className={errors.time ? 'text-red-400' : 'text-[#1D2A38]'}>
+            <Label className={errors.time ? 'text-red-400' : 'text-black'}>
                 Webinar Time <span className="text-red-400">*</span>
             </Label>
                     <div className="flex gap-2">
   <div className="relative flex-1">
-            <Clock className="absolute left-3 top-2.5 h-4 w-4 text-[#1D2A38]" />
+            <Clock className="absolute left-3 top-2.5 h-4 w-4 text-black" />
             <Input
             name="time"
             value={formData.basicInfo.time || ''}
             onChange={handleChange}
             placeholder="12:00"
             className={cn(
-                'pl-9 bg-white border-2 border-gray-300 text-[#1D2A38]',
+              'pl-9 bg-white border-2 border-gray-300 text-black',
                 errors.time && 'border-red-400 focus-visible:ring-red-400'
             )}
             />
@@ -473,12 +473,12 @@ const handleRemoveThumbnail = () => {
             value={formData.basicInfo.timeFormat || 'AM'}
             onValueChange={handleTimeFormatChange}
             >
-            <SelectTrigger className="w-20 bg-white border-2 border-gray-300 text-[#1D2A38]">
+            <SelectTrigger className="w-20 bg-white border-2 border-gray-300 text-black">
                 <SelectValue placeholder="AM" />
             </SelectTrigger>
             <SelectContent className="bg-white border-2 border-gray-300 z-50">
-                <SelectItem value="AM" className="text-[#1D2A38] hover:bg-[#CCA43B]/10 cursor-pointer">AM</SelectItem>
-                <SelectItem value="PM" className="text-[#1D2A38] hover:bg-[#CCA43B]/10 cursor-pointer">PM</SelectItem>
+                <SelectItem value="AM" className="text-black hover:bg-[#CCA43B]/10 cursor-pointer">AM</SelectItem>
+                <SelectItem value="PM" className="text-black hover:bg-[#CCA43B]/10 cursor-pointer">PM</SelectItem>
             </SelectContent>
         </Select>
             </div>
@@ -488,7 +488,7 @@ const handleRemoveThumbnail = () => {
 
         {/* Duration Field */}
         <div className="space-y-2">
-            <Label htmlFor="duration" className="text-[#1D2A38]">
+          <Label htmlFor="duration" className="text-black">
                 Duration (minutes) <span className="text-red-400">*</span>
             </Label>
             <Input
@@ -500,9 +500,9 @@ const handleRemoveThumbnail = () => {
                 value={formData.basicInfo.duration || 60}
                 onChange={handleChange}
                 placeholder="60"
-                className="bg-white border-2 border-gray-300 text-[#1D2A38]"
+                className="bg-white border-2 border-gray-300 text-black"
             />
-            <p className="text-sm text-gray-600">Enter webinar duration in minutes (15-480)</p>
+              <p className="text-sm text-black">Enter webinar duration in minutes (15-480)</p>
         </div>
 
         {/* Video Upload Section */}
@@ -511,8 +511,8 @@ const handleRemoveThumbnail = () => {
             <div className="flex items-center gap-2">
               <Upload className="h-5 w-5 text-[#1D2A38]" />
               <div>
-                <p className="text-sm font-medium text-[#1D2A38]">Pre-recorded Video</p>
-                <p className="text-xs text-gray-600">Upload a video to make this webinar pre-recorded</p>
+                <p className="text-sm font-medium text-black">Pre-recorded Video</p>
+                <p className="text-xs text-black">Upload a video to make this webinar pre-recorded</p>
               </div>
             </div>
             
@@ -539,7 +539,7 @@ const handleRemoveThumbnail = () => {
           {isUploading && (
             <div className="space-y-2">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-[#1D2A38] font-medium">Uploading...</span>
+                <span className="text-black font-medium">Uploading...</span>
                 <span className="text-[#CCA43B] font-semibold">{uploadProgress}%</span>
               </div>
               <div className="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
@@ -548,7 +548,7 @@ const handleRemoveThumbnail = () => {
                   style={{ width: `${uploadProgress}%` }}
                 />
               </div>
-              <p className="text-xs text-gray-600 flex items-center gap-1">
+              <p className="text-xs text-black flex items-center gap-1">
                 <Loader2 className="h-3 w-3 animate-spin" />
                 Uploading {videoFile?.name}...
               </p>
@@ -579,7 +579,7 @@ const handleRemoveThumbnail = () => {
             </div>
           ) : null}
 
-          <p className="text-xs text-gray-500 mt-2">
+          <p className="text-xs text-black mt-2">
             Maximum file size: 500MB. Supported formats: MP4, WebM, OGG, MOV
           </p>
         </div>

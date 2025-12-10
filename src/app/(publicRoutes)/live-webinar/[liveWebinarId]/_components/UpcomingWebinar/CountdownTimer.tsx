@@ -8,6 +8,7 @@ type Props = {
   className?: string;
   webinarId: string;
   webinarStatus: WebinarStatusEnum;
+  onExpired?: () => void;
 };
 
 const CountdownTimer = ({
@@ -15,6 +16,7 @@ const CountdownTimer = ({
   className,
   webinarId,
   webinarStatus,
+  onExpired,
 }: Props) => {
   const [isExpired, setIsExpired] = useState(false);
     const [timeLeft, setTimeLeft] = useState({
@@ -44,21 +46,28 @@ const CountdownTimer = ({
     if (difference <= 0) {
       if (!isExpired) {
         setIsExpired(true);
-      if (webinarStatus === WebinarStatusEnum.SCHEDULED) {
-        const updateStatus = async () => {
-          try {
-            await changeWebinarStatus(
-              webinarId,
-              WebinarStatusEnum.WAITING_ROOM
-            )
-          } catch (err) {
-            console.error(err);
-          }
+
+        // Notify parent that the countdown has finished
+        if (onExpired) {
+          onExpired();
         }
-        // Call the async function separately
-        updateStatus();
+
+        // Move SCHEDULED webinars into the WAITING_ROOM state
+        if (webinarStatus === WebinarStatusEnum.SCHEDULED) {
+          const updateStatus = async () => {
+            try {
+              await changeWebinarStatus(
+                webinarId,
+                WebinarStatusEnum.WAITING_ROOM
+              )
+            } catch (err) {
+              console.error(err);
+            }
+          }
+          // Call the async function separately
+          updateStatus();
+        }
       }
-    }
     return {
         days: 0,
         hours: 0,

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { User, Webinar, WebinarStatusEnum } from "@prisma/client";
 import CountdownTimer from './CountdownTimer';
 import WaitlistComponent from './WaitlistComponent';
@@ -18,6 +18,7 @@ type Props = {
 
 const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
   const [loading, setLoading] = useState(false);
+  const [isExpired, setIsExpired] = useState(false);
     
     const router = useRouter();
 
@@ -37,6 +38,11 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
         setLoading(false);
     }
     }
+
+  const isZoomWebinar = useMemo(
+    () => Boolean(webinar.zoomJoinUrl),
+    [webinar.zoomJoinUrl]
+  );
   return (
     <div className="w-full min-h-screen relative overflow-hidden bg-gradient-to-br from-white via-gray-50 to-white">
       {/* Animated Background Elements */}
@@ -48,15 +54,24 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
 
       <div className="relative z-10 w-full min-h-screen mx-auto max-w-[500px] flex flex-col justify-center items-center gap-8 py-20 px-4">
       <div className="space-y-6 animate-in fade-in slide-in-from-top duration-700">
-        <p className="text-3xl md:text-4xl font-bold text-[#1D2A38] text-center leading-tight">
-          Seems like you are <span className="text-[#CCA43B]">a little early</span>
-        </p>
-        <CountdownTimer
-          targetDate={new Date(webinar.startTime)}
-          className="text-center animate-in fade-in slide-in-from-bottom duration-700 delay-150"
-          webinarId={webinar.id}
-          webinarStatus={webinar.webinarStatus}
-        />
+        {!isZoomWebinar || !isExpired ? (
+          <>
+            <p className="text-3xl md:text-4xl font-bold text-[#1D2A38] text-center leading-tight">
+              Seems like you are <span className="text-[#CCA43B]">a little early</span>
+            </p>
+            <CountdownTimer
+              targetDate={new Date(webinar.startTime)}
+              className="text-center animate-in fade-in slide-in-from-bottom duration-700 delay-150"
+              webinarId={webinar.id}
+              webinarStatus={webinar.webinarStatus}
+              onExpired={() => setIsExpired(true)}
+            />
+          </>
+        ) : (
+          <p className="text-3xl md:text-4xl font-bold text-[#1D2A38] text-center leading-tight">
+            Your webinar is starting now. <span className="text-[#CCA43B]">Join on Zoom</span>
+          </p>
+        )}
       </div>
 
         <div className="space-y-6 w-full h-full flex justify-center items-center flex-col animate-in fade-in zoom-in duration-700 delay-300">
@@ -70,7 +85,62 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-[#1D2A38]/20 to-transparent"></div>
         </div>
-        {webinar?.webinarStatus === WebinarStatusEnum.SCHEDULED ? (
+        {/* If this is a Zoom webinar and the countdown has finished, show join details instead of waitlist/start buttons */}
+        {isZoomWebinar && isExpired ? (
+          <div className="w-full max-w-md space-y-4 rounded-2xl border border-gray-200 bg-white/80 shadow-lg p-6">
+            <h2 className="text-xl font-bold text-[#1D2A38] text-center">
+              Join this webinar on Zoom
+            </h2>
+            <p className="text-sm text-gray-600 text-center">
+              Click the link below to open Zoom. You can wait in the Zoom waiting room until the host starts the session.
+            </p>
+
+            <div className="space-y-3 rounded-xl bg-gray-50 border border-gray-200 p-4 text-sm">
+              {webinar.zoomWebinarId && (
+                <div className="flex items-center justify-between gap-4">
+                  <span className="font-medium text-gray-700">Meeting ID:</span>
+                  <span className="font-mono text-gray-900 break-all">
+                    {webinar.zoomWebinarId}
+                  </span>
+                </div>
+              )}
+              {webinar.zoomPassword && (
+                <div className="flex items-center justify-between gap-4">
+                  <span className="font-medium text-gray-700">Passcode:</span>
+                  <span className="font-mono text-gray-900 break-all">
+                    {webinar.zoomPassword}
+                  </span>
+                </div>
+              )}
+              {webinar.zoomJoinUrl && (
+                <div className="flex flex-col gap-2">
+                  <span className="font-medium text-gray-700">Join link:</span>
+                  <a
+                    href={webinar.zoomJoinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-sm font-mono text-blue-700 underline break-all"
+                  >
+                    {webinar.zoomJoinUrl}
+                  </a>
+                </div>
+              )}
+            </div>
+
+            {webinar.zoomJoinUrl && (
+              <div className="flex justify-center pt-2">
+                <a
+                  href={webinar.zoomJoinUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-[#CCA43B] to-[#B8932F] text-[#1D2A38] font-semibold border-2 border-[#CCA43B] shadow-sm hover:from-[#B8932F] hover:to-[#CCA43B] transition-all"
+                >
+                  Open in Zoom
+                </a>
+              </div>
+            )}
+          </div>
+        ) : webinar?.webinarStatus === WebinarStatusEnum.SCHEDULED ? (
             <WaitlistComponent webinarId={webinar.id} webinarStatus="SCHEDULED" />
         ) : webinar?.webinarStatus === WebinarStatusEnum.WAITING_ROOM ? (
             <>

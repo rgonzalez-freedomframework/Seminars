@@ -44,7 +44,6 @@ const EditWebinarForm = ({ webinar }: Props) => {
     startTime: format(new Date(webinar.startTime), "yyyy-MM-dd'T'HH:mm"),
     duration: webinar.duration,
     seatsRemaining: initialSeats?.remaining ?? '',
-    seatsTotal: initialSeats?.total ?? '',
   })
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -56,9 +55,21 @@ const EditWebinarForm = ({ webinar }: Props) => {
         ? null
         : Math.max(0, parseInt(formData.seatsRemaining, 10) || 0)
 
-      const seatsTotalNumber = formData.seatsTotal.trim() === ''
-        ? null
-        : Math.max(0, parseInt(formData.seatsTotal, 10) || 0)
+      const previousTotal = initialSeats?.total
+        ? Math.max(0, parseInt(initialSeats.total, 10) || 0)
+        : null
+
+      let seatsTotalNumber: number | null = null
+
+      if (seatsRemainingNumber !== null) {
+        if (previousTotal !== null) {
+          seatsTotalNumber = Math.max(previousTotal, seatsRemainingNumber)
+        } else {
+          seatsTotalNumber = seatsRemainingNumber
+        }
+      } else {
+        seatsTotalNumber = previousTotal
+      }
 
       const existingTags = webinar.tags || []
       const filteredTags = existingTags.filter((tag) => !tag.startsWith('seats:'))
@@ -160,7 +171,7 @@ const EditWebinarForm = ({ webinar }: Props) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 gap-4">
             <div className="space-y-2">
               <Label htmlFor="seatsRemaining">
                 Seats Remaining
@@ -173,22 +184,8 @@ const EditWebinarForm = ({ webinar }: Props) => {
                 onChange={(e) => setFormData({ ...formData, seatsRemaining: e.target.value })}
                 placeholder="e.g. 10"
               />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="seatsTotal">
-                Total Seats
-              </Label>
-              <Input
-                id="seatsTotal"
-                type="number"
-                min="0"
-                value={formData.seatsTotal}
-                onChange={(e) => setFormData({ ...formData, seatsTotal: e.target.value })}
-                placeholder="e.g. 100"
-              />
               <p className="text-xs text-gray-500">
-                This will appear on attendee cards as "X seats left".
+                This controls how many seats are currently available. Set to 0 to mark the webinar as sold out.
               </p>
             </div>
           </div>

@@ -42,6 +42,7 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     let width = 0
     let height = 0
     let t = 0
+    let baseGradient: CanvasGradient | null = null
     let lastTime = typeof performance !== 'undefined' ? performance.now() : 0
 
     const prefersReducedMotion =
@@ -75,8 +76,9 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     const initScene = () => {
       const mobile = isMobile()
 
-      const particleCount = mobile ? 12 : 28
-      const lineCount = mobile ? 2 : 4
+      // Slightly reduced counts for smoother performance
+      const particleCount = mobile ? 8 : 18
+      const lineCount = mobile ? 1 : 3
 
       particles = []
       lines = []
@@ -86,10 +88,10 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * (mobile ? 0.08 : 0.12),
-          vy: (Math.random() - 0.5) * (mobile ? 0.08 : 0.12),
-          radius: Math.random() * 1.2 + 0.6,
-          alpha: Math.random() * 0.35 + 0.15,
+          vx: (Math.random() - 0.5) * (mobile ? 0.05 : 0.08),
+          vy: (Math.random() - 0.5) * (mobile ? 0.05 : 0.08),
+          radius: Math.random() * 1 + 0.5,
+          alpha: Math.random() * 0.25 + 0.1,
         })
       }
 
@@ -98,8 +100,8 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
         const baseX = (width / lineCount) * i + (width / lineCount) * 0.5
         lines.push({
           x: baseX + (Math.random() - 0.5) * (width * 0.1),
-          speedX: (Math.random() - 0.5) * (mobile ? 0.02 : 0.04),
-          amplitude: (mobile ? 12 : 20) + Math.random() * (mobile ? 8 : 15),
+          speedX: (Math.random() - 0.5) * (mobile ? 0.015 : 0.03),
+          amplitude: (mobile ? 10 : 18) + Math.random() * (mobile ? 6 : 12),
           phase: Math.random() * Math.PI * 2,
           alpha: 0.08 + Math.random() * 0.08,
         })
@@ -109,12 +111,14 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     const drawStaticGradient = () => {
       ctx.clearRect(0, 0, width, height)
 
-      const gradient = ctx.createLinearGradient(0, 0, width, height)
-      gradient.addColorStop(0, 'rgba(10, 25, 47, 0.95)')
-      gradient.addColorStop(0.5, 'rgba(15, 36, 77, 0.8)')
-      gradient.addColorStop(1, 'rgba(3, 16, 36, 0.95)')
+      if (!baseGradient) {
+        baseGradient = ctx.createLinearGradient(0, 0, width, height)
+        baseGradient.addColorStop(0, 'rgba(10, 25, 47, 0.95)')
+        baseGradient.addColorStop(0.5, 'rgba(15, 36, 77, 0.8)')
+        baseGradient.addColorStop(1, 'rgba(3, 16, 36, 0.95)')
+      }
 
-      ctx.fillStyle = gradient
+      ctx.fillStyle = baseGradient
       ctx.fillRect(0, 0, width, height)
     }
 
@@ -133,16 +137,14 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     const drawParticles = () => {
       ctx.save()
       ctx.globalCompositeOperation = 'lighter'
+      ctx.fillStyle = 'rgba(173, 201, 255, 0.4)'
       for (const p of particles) {
-        const gradient = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.radius * 4)
-        gradient.addColorStop(0, `rgba(173, 201, 255, ${p.alpha})`)
-        gradient.addColorStop(1, 'rgba(173, 201, 255, 0)')
-
-        ctx.fillStyle = gradient
+        ctx.globalAlpha = p.alpha
         ctx.beginPath()
-        ctx.arc(p.x, p.y, p.radius * 4, 0, Math.PI * 2)
+        ctx.arc(p.x, p.y, p.radius * 3, 0, Math.PI * 2)
         ctx.fill()
       }
+      ctx.globalAlpha = 1
       ctx.restore()
     }
 
@@ -161,7 +163,7 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
 
     const drawLines = () => {
       ctx.save()
-      ctx.lineWidth = 1.2
+      ctx.lineWidth = 1.1
       ctx.lineCap = 'round'
       ctx.globalCompositeOperation = 'screen'
 
@@ -173,12 +175,7 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
         const bottomY = height * 1.2
         const ctrlOffsetX = line.amplitude * 0.4
 
-        const gradient = ctx.createLinearGradient(x - 40, topY, x + 40, bottomY)
-        gradient.addColorStop(0, `rgba(99, 179, 237, ${line.alpha})`)
-        gradient.addColorStop(0.5, `rgba(56, 189, 248, ${line.alpha * 1.4})`)
-        gradient.addColorStop(1, `rgba(30, 64, 175, ${line.alpha})`)
-
-        ctx.strokeStyle = gradient
+        ctx.strokeStyle = `rgba(56, 189, 248, ${line.alpha})`
         ctx.beginPath()
         ctx.moveTo(x, topY)
         ctx.bezierCurveTo(
@@ -202,12 +199,14 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
 
       ctx.clearRect(0, 0, width, height)
 
-      // Base navy gradient background
-      const gradient = ctx.createLinearGradient(0, 0, width, height)
-      gradient.addColorStop(0, 'rgba(4, 18, 40, 1)')
-      gradient.addColorStop(0.5, 'rgba(12, 32, 70, 0.95)')
-      gradient.addColorStop(1, 'rgba(2, 10, 24, 1)')
-      ctx.fillStyle = gradient
+      // Base navy gradient background (reused for performance)
+      if (!baseGradient) {
+        baseGradient = ctx.createLinearGradient(0, 0, width, height)
+        baseGradient.addColorStop(0, 'rgba(4, 18, 40, 1)')
+        baseGradient.addColorStop(0.5, 'rgba(12, 32, 70, 0.95)')
+        baseGradient.addColorStop(1, 'rgba(2, 10, 24, 1)')
+      }
+      ctx.fillStyle = baseGradient
       ctx.fillRect(0, 0, width, height)
 
       updateParticles(delta)

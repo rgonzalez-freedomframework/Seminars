@@ -23,7 +23,7 @@ type FlowLine = {
   alpha: number
 }
 
-const MAX_DPR = 1.5
+const MAX_DPR = 1.2
 const MOBILE_BREAKPOINT = 768
 
 export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ className }) => {
@@ -44,6 +44,7 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     let t = 0
     let baseGradient: CanvasGradient | null = null
     let lastTime = typeof performance !== 'undefined' ? performance.now() : 0
+    let lastRenderTime = lastTime
 
     const prefersReducedMotion =
       typeof window !== 'undefined' &&
@@ -76,9 +77,9 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     const initScene = () => {
       const mobile = isMobile()
 
-      // Slightly reduced counts for smoother performance
-      const particleCount = mobile ? 8 : 18
-      const lineCount = mobile ? 1 : 3
+      // Further reduced counts for smoother performance
+      const particleCount = mobile ? 4 : 10
+      const lineCount = mobile ? 1 : 2
 
       particles = []
       lines = []
@@ -101,9 +102,9 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
         lines.push({
           x: baseX + (Math.random() - 0.5) * (width * 0.1),
           speedX: (Math.random() - 0.5) * (mobile ? 0.015 : 0.03),
-          amplitude: (mobile ? 10 : 18) + Math.random() * (mobile ? 6 : 12),
+          amplitude: (mobile ? 10 : 18) + Math.random() * (mobile ? 6 : 10),
           phase: Math.random() * Math.PI * 2,
-          alpha: 0.08 + Math.random() * 0.08,
+          alpha: 0.12 + Math.random() * 0.08,
         })
       }
     }
@@ -196,6 +197,14 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
       const now = typeof performance !== 'undefined' ? performance.now() : 0
       const delta = Math.min((now - lastTime) / 1000, 0.05) || 0.016
       lastTime = now
+
+      // Soft cap FPS to reduce work on slower devices
+      const frameInterval = 1000 / 28 // ~28 FPS
+      if (now - lastRenderTime < frameInterval) {
+        animationFrameId = window.requestAnimationFrame(render)
+        return
+      }
+      lastRenderTime = now
 
       ctx.clearRect(0, 0, width, height)
 

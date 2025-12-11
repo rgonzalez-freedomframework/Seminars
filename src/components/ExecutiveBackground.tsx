@@ -15,14 +15,6 @@ type Particle = {
   alpha: number
 }
 
-type FlowLine = {
-  x: number
-  speedX: number
-  amplitude: number
-  phase: number
-  alpha: number
-}
-
 const MAX_DPR = 1.2
 const MOBILE_BREAKPOINT = 768
 
@@ -38,7 +30,6 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
 
     let animationFrameId: number
     let particles: Particle[] = []
-    let lines: FlowLine[] = []
     let width = 0
     let height = 0
     let t = 0
@@ -77,34 +68,20 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     const initScene = () => {
       const mobile = isMobile()
 
-      // Further reduced counts for smoother performance
-      const particleCount = mobile ? 4 : 10
-      const lineCount = mobile ? 1 : 2
+      // Node count for the molecular/network effect
+      const particleCount = mobile ? 16 : 32
 
       particles = []
-      lines = []
 
-      // Initialize particles
+      // Initialize nodes (particles) with slow drift
       for (let i = 0; i < particleCount; i++) {
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * (mobile ? 0.05 : 0.08),
-          vy: (Math.random() - 0.5) * (mobile ? 0.05 : 0.08),
-          radius: Math.random() * 1 + 0.5,
-          alpha: Math.random() * 0.25 + 0.1,
-        })
-      }
-
-      // Initialize flow lines
-      for (let i = 0; i < lineCount; i++) {
-        const baseX = (width / lineCount) * i + (width / lineCount) * 0.5
-        lines.push({
-          x: baseX + (Math.random() - 0.5) * (width * 0.1),
-          speedX: (Math.random() - 0.5) * (mobile ? 0.015 : 0.03),
-          amplitude: (mobile ? 10 : 18) + Math.random() * (mobile ? 6 : 10),
-          phase: Math.random() * Math.PI * 2,
-          alpha: 0.12 + Math.random() * 0.08,
+          vx: (Math.random() - 0.5) * (mobile ? 0.04 : 0.06),
+          vy: (Math.random() - 0.5) * (mobile ? 0.04 : 0.06),
+          radius: (mobile ? 1.2 : 1.6) + Math.random() * (mobile ? 0.8 : 1.2),
+          alpha: 0.3 + Math.random() * 0.4,
         })
       }
     }
@@ -124,9 +101,10 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     }
 
     const updateParticles = (delta: number) => {
+      const driftFactor = isMobile() ? 0.4 : 0.6
       for (const p of particles) {
-        p.x += p.vx * delta * 60
-        p.y += p.vy * delta * 60
+        p.x += p.vx * delta * 60 * driftFactor
+        p.y += p.vy * delta * 60 * driftFactor
 
         if (p.x < -20) p.x = width + 20
         if (p.x > width + 20) p.x = -20
@@ -138,56 +116,73 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     const drawParticles = () => {
       ctx.save()
       ctx.globalCompositeOperation = 'lighter'
-      ctx.fillStyle = 'rgba(173, 201, 255, 0.4)'
+
       for (const p of particles) {
+        // Soft outer glow
+        const gradient = ctx.createRadialGradient(
+          p.x,
+          p.y,
+          0,
+          p.x,
+          p.y,
+          p.radius * 6,
+        )
+        gradient.addColorStop(0, 'rgba(252, 211, 77, 0.85)') // gold core
+        gradient.addColorStop(0.4, 'rgba(252, 211, 77, 0.35)')
+        gradient.addColorStop(1, 'rgba(15, 23, 42, 0)')
+
         ctx.globalAlpha = p.alpha
+        ctx.fillStyle = gradient
         ctx.beginPath()
-        ctx.arc(p.x, p.y, p.radius * 3, 0, Math.PI * 2)
+        ctx.arc(p.x, p.y, p.radius * 3.5, 0, Math.PI * 2)
+        ctx.fill()
+
+        // Solid inner node
+        ctx.globalAlpha = 0.9
+        ctx.fillStyle = '#facc15'
+        ctx.beginPath()
+        ctx.arc(p.x, p.y, p.radius * 1.2, 0, Math.PI * 2)
         ctx.fill()
       }
+
       ctx.globalAlpha = 1
       ctx.restore()
     }
 
     const updateLines = (delta: number) => {
-      const baseSpeedFactor = isMobile() ? 0.6 : 1
-      for (const line of lines) {
-        line.x += line.speedX * delta * 60 * baseSpeedFactor
-
-        const margin = width * 0.2
-        if (line.x < -margin) line.x = width + margin
-        if (line.x > width + margin) line.x = -margin
-      }
-
-      t += delta * 0.4
+      // Time parameter for subtle breathing in the network
+      t += delta * 0.25
     }
 
     const drawLines = () => {
       ctx.save()
-      ctx.lineWidth = 1.1
+      ctx.lineWidth = 1
       ctx.lineCap = 'round'
       ctx.globalCompositeOperation = 'screen'
 
-      for (const line of lines) {
-        const waveOffset = Math.sin(t + line.phase) * line.amplitude
-        const x = line.x + waveOffset
+      const maxDistance = Math.min(width, height) * 0.22
+      const mobile = isMobile()
 
-        const topY = -height * 0.2
-        const bottomY = height * 1.2
-        const ctrlOffsetX = line.amplitude * 0.4
+      for (let i = 0; i < particles.length; i++) {
+        const p1 = particles[i]
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j]
+          const dx = p1.x + Math.sin(t * 0.5 + i * 0.3) * 4 - (p2.x + Math.sin(t * 0.5 + j * 0.3) * 4)
+          const dy = p1.y + Math.cos(t * 0.4 + i * 0.3) * 4 - (p2.y + Math.cos(t * 0.4 + j * 0.3) * 4)
+          const distSq = dx * dx + dy * dy
 
-        ctx.strokeStyle = `rgba(56, 189, 248, ${line.alpha})`
-        ctx.beginPath()
-        ctx.moveTo(x, topY)
-        ctx.bezierCurveTo(
-          x + ctrlOffsetX,
-          height * 0.25,
-          x - ctrlOffsetX,
-          height * 0.75,
-          x,
-          bottomY,
-        )
-        ctx.stroke()
+          if (distSq > maxDistance * maxDistance) continue
+
+          const dist = Math.sqrt(distSq)
+          const strength = 1 - dist / maxDistance
+          const alpha = (mobile ? 0.28 : 0.4) * strength
+
+          ctx.strokeStyle = `rgba(148, 163, 184, ${alpha})`
+          ctx.beginPath()
+          ctx.moveTo(p1.x, p1.y)
+          ctx.lineTo(p2.x, p2.y)
+          ctx.stroke()
+        }
       }
 
       ctx.restore()

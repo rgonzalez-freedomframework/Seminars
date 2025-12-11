@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
+import ExecutiveBackground from '@/components/ExecutiveBackground';
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50">
@@ -23,58 +24,62 @@ export default function Home() {
       <main className="pt-28 pb-20">
         <div className="container mx-auto px-4 max-w-6xl space-y-16">
           {/* Hero / Title */}
-          <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/20 bg-white/90 shadow-xl px-6 py-10 md:px-10 md:py-14 animate-in fade-in slide-in-from-bottom duration-700">
+          <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/20 bg-transparent shadow-xl px-6 py-10 md:px-10 md:py-14 animate-in fade-in slide-in-from-bottom duration-700">
+            {/* Executive animated background */}
+            <ExecutiveBackground className="absolute inset-0 -z-10" />
+            {/* Subtle overlay for readability */}
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-950/85 via-slate-900/80 to-slate-950/90" />
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute -top-24 -right-10 h-64 w-64 rounded-full bg-[#CCA43B]/20 blur-3xl" />
-              <div className="absolute -bottom-24 -left-10 h-72 w-72 rounded-full bg-[#1D2A38]/10 blur-3xl" />
+              <div className="absolute -top-24 -right-10 h-64 w-64 rounded-full bg-[#CCA43B]/30 blur-3xl" />
+              <div className="absolute -bottom-24 -left-10 h-72 w-72 rounded-full bg-[#1D2A38]/20 blur-3xl" />
             </div>
 
             <div className="relative grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,1.3fr)] items-center">
               <div>
-                <p className="inline-flex items-center gap-2 rounded-full bg-[#1D2A38] text-xs md:text-sm font-semibold tracking-[0.18em] text-white px-4 py-1 uppercase mb-4">
+                <p className="inline-flex items-center gap-2 rounded-full bg-white/10 text-xs md:text-sm font-semibold tracking-[0.18em] text-white px-4 py-1 uppercase mb-4 border border-white/20 backdrop-blur-sm">
                   <Sparkles className="h-3 w-3 text-[#CCA43B]" />
                   The Freedom Framework™ Program
                 </p>
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#1D2A38] leading-tight mb-4">
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
                   For Law Firm Owners Ready to Scale Growth — Without Sacrificing Time, Autonomy, or Sanity
                 </h1>
-                <p className="text-lg md:text-xl text-gray-700 mb-3">
+                <p className="text-lg md:text-xl text-slate-100/95 mb-3">
                   You’ve built a successful law firm. Now it’s time to build your freedom.
                 </p>
-                <p className="text-base md:text-lg text-gray-700 mb-6">
+                <p className="text-base md:text-lg text-slate-100/80 mb-6">
                   The Freedom Framework is the only program designed specifically for 7- and 8-figure law firm owners who want a business that runs with clarity, profitability, and autonomy — without the daily drain of being the bottleneck.
                 </p>
 
                 <div className="flex flex-wrap items-center gap-4">
                   <Link href="/sign-in">
-                    <Button className="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-bold px-7 py-3 rounded-xl border-2 border-[#CCA43B] shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
+                    <Button className="bg-gradient-to-r from-[#FDE68A] via-[#FBBF24] to-[#F59E0B] hover:from-[#FBBF24] hover:to-[#FDE68A] text-[#1D2A38] font-bold px-7 py-3 rounded-xl border-2 border-[#FBBF24]/80 shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
                       Apply to Join the Freedom Framework™
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
-                  <p className="text-xs md:text-sm text-gray-600">
+                  <p className="text-xs md:text-sm text-slate-100/80">
                     Designed for established firms ready to scale with intention.
                   </p>
                 </div>
               </div>
 
-              <div className="relative rounded-2xl border border-gray-200 bg-gray-50/80 p-6 md:p-7 shadow-sm backdrop-blur-sm animate-in fade-in slide-in-from-right duration-700 delay-150">
-                <h2 className="text-sm font-semibold text-[#1D2A38] mb-3 uppercase tracking-[0.18em]">Program Snapshot</h2>
-                <ul className="space-y-3 text-sm text-gray-700">
+              <div className="relative rounded-2xl border border-white/20 bg-white/5 p-6 md:p-7 shadow-lg backdrop-blur-md animate-in fade-in slide-in-from-right duration-700 delay-150">
+                <h2 className="text-sm font-semibold text-white mb-3 uppercase tracking-[0.18em]">Program Snapshot</h2>
+                <ul className="space-y-3 text-sm text-slate-100/90">
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B]" />
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#FBBF24]" />
                     <span>Built for 7- and 8-figure law firm owners</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B]" />
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#FBBF24]" />
                     <span>Focus on accountability, predictability, and autonomy</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B]" />
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#FBBF24]" />
                     <span>Live workshops, implementation toolkits, and advisory support</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B]" />
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#FBBF24]" />
                     <span>Designed to reduce owner dependency and unlock freedom</span>
                   </li>
                 </ul>

@@ -6,7 +6,8 @@ export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950">
       <ExecutiveBackground className="absolute inset-0 -z-20" />
-      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-slate-950/70 via-slate-900/35 to-slate-950/80" />
+      {/* Slight tint so content stays readable without hiding the network background */}
+      <div className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-slate-950/35 via-slate-900/15 to-slate-950/45" />
       {/* Header with Login Button */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-b from-white via-white/95 to-white/90 backdrop-blur-md border-b-2 border-[#CCA43B]/20 shadow-lg transition-all duration-300">
         <div className="container mx-auto px-4 py-3 md:py-4 transition-all duration-300">

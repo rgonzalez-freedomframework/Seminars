@@ -10,8 +10,8 @@ const isPublicRoute=createRouteMatcher([
     '/admin/sign-in',
 ])
 
-export default clerkMiddleware(async(auth,req)=>{
-    const {userId} = await auth();
+export default clerkMiddleware((auth,req)=>{
+    const {userId} = auth();
     
     // Check if user wants to view landing page (has query param or referer is admin)
     const viewLanding = req.nextUrl.searchParams.get('view') === 'landing';
@@ -23,7 +23,7 @@ export default clerkMiddleware(async(auth,req)=>{
     }
     
     if(!isPublicRoute(req)){
-        await auth.protect()
+        auth().protect()
     }
 });
 

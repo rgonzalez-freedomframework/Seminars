@@ -90,8 +90,8 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * (mobile ? 0.04 : 0.06),
-          vy: (Math.random() - 0.5) * (mobile ? 0.04 : 0.06),
+          vx: (Math.random() - 0.5) * (mobile ? 0.3 : 0.5),
+          vy: (Math.random() - 0.5) * (mobile ? 0.3 : 0.5),
           radius: (mobile ? 1.2 : 1.6) + Math.random() * (mobile ? 0.8 : 1.2),
           alpha: 0.3 + Math.random() * 0.4,
         })
@@ -115,7 +115,7 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     }
 
     const updateParticles = (delta: number) => {
-      const driftFactor = isMobile() ? 0.4 : 0.6
+      const driftFactor = isMobile() ? 1.5 : 2.0
       for (const p of particles) {
         p.x += p.vx * delta * 60 * driftFactor
         p.y += p.vy * delta * 60 * driftFactor
@@ -207,8 +207,8 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
       const delta = Math.min((now - lastTime) / 1000, 0.05) || 0.016
       lastTime = now
 
-      // Soft cap FPS to reduce work on slower devices
-      const frameInterval = 1000 / 28 // ~28 FPS
+      // Increase FPS for smoother animation
+      const frameInterval = 1000 / 45 // ~45 FPS
       if (now - lastRenderTime < frameInterval) {
         animationFrameId = window.requestAnimationFrame(render)
         return

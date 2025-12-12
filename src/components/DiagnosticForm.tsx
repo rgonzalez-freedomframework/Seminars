@@ -395,11 +395,11 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
     <div className="max-w-4xl mx-auto space-y-8">
       {/* Progress Bar */}
       <div className="space-y-2">
-        <div className="flex justify-between text-sm text-[#1D2A38]/85">
+        <div className="flex justify-between text-sm text-[#1D2A38]/90">
           <span>Section {currentSection} of 3</span>
           <span>{Math.round(progress)}% Complete</span>
         </div>
-        <div className="h-2 bg-[#1D2A38]/10 rounded-full overflow-hidden">
+        <div className="h-2 bg-[#1D2A38]/20 rounded-full overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-[#CCA43B] to-[#B8932F] transition-all duration-500"
             style={{ width: `${progress}%` }}
@@ -410,7 +410,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
       {/* Section Header */}
       <div className="text-center space-y-2">
         <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">{sectionInfo.title}</h2>
-        <p className="text-[#1D2A38]/85 max-w-2xl mx-auto">{sectionInfo.subtitle}</p>
+        <p className="text-[#1D2A38]/90 max-w-2xl mx-auto">{sectionInfo.subtitle}</p>
       </div>
 
       {/* Questions */}
@@ -429,7 +429,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
                   {question.options.map((option) => (
                     <div
                       key={option.value}
-                      className="flex items-start space-x-3 p-4 rounded-lg border border-[#1D2A38]/20 hover:border-[#CCA43B]/50 hover:bg-[#CCA43B]/5 transition-all cursor-pointer"
+                      className="flex items-start space-x-3 p-4 rounded-lg border border-[#1D2A38]/40 hover:border-[#CCA43B]/50 hover:bg-[#CCA43B]/5 transition-all cursor-pointer"
                     >
                       <RadioGroupItem value={option.value} id={`${question.id}-${option.value}`} className="mt-0.5" />
                       <Label

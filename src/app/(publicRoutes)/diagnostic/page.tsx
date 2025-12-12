@@ -11,7 +11,7 @@ export default function DiagnosticPage() {
 
       <div className="relative z-10">
         {/* Header */}
-        <header className="fixed top-0 left-0 right-0 z-50 bg-white/50 backdrop-blur-sm border-b border-[#1D2A38]/20 shadow-sm transition-all duration-300">
+        <header className="fixed top-0 left-0 right-0 z-50 bg-[#F6F7F4] backdrop-blur-md border-b border-[#CCA43B]/25 shadow-sm transition-all duration-300">
           <div className="container mx-auto px-4">
             <div className="flex items-center justify-between h-16">
               <Link href="/" className="flex items-center gap-2 text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
@@ -19,7 +19,7 @@ export default function DiagnosticPage() {
                 <span className="font-semibold">Back to Home</span>
               </Link>
               <Link href="/sign-in">
-                <Button size="lg" variant="outline" className="!border-2 !border-[#1D2A38]/40 !text-[#1D2A38] !bg-white/60 hover:!bg-[#CCA43B]/20 font-semibold px-4 py-2 transition-all">
+                <Button size="lg" variant="outline" className="!border-2 !border-[#1D2A38]/40 !text-[#1D2A38] !bg-[#F6F7F4] hover:!bg-[#CCA43B]/20 font-semibold px-4 py-2 transition-all">
                   Sign In
                 </Button>
               </Link>
@@ -49,7 +49,7 @@ export default function DiagnosticPage() {
         </main>
 
         {/* Footer */}
-        <footer className="py-8 border-t border-[#1D2A38]/20 bg-white/50 backdrop-blur-sm relative z-10 shadow-sm">
+        <footer className="py-8 md:py-12 border-t border-[#1D2A38]/20 bg-white/50 backdrop-blur-sm relative z-10 shadow-sm">
           <div className="container mx-auto px-4 text-center">
             <p className="text-[#1D2A38]/90 mb-2">
               Freedom Framework™ for Law Firm Owners

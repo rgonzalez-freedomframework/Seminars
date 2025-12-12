@@ -133,7 +133,7 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
 
     const drawParticles = () => {
       ctx.save()
-      ctx.globalCompositeOperation = 'lighter'
+      ctx.globalCompositeOperation = 'source-over'
 
       for (const p of particles) {
         // Soft outer glow with warm graphite
@@ -145,8 +145,8 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
           p.y,
           p.radius * 6,
         )
-        gradient.addColorStop(0, 'rgba(40, 38, 34, 0.15)')
-        gradient.addColorStop(0.4, 'rgba(40, 38, 34, 0.08)')
+        gradient.addColorStop(0, 'rgba(40, 38, 34, 0.25)')
+        gradient.addColorStop(0.4, 'rgba(40, 38, 34, 0.12)')
         gradient.addColorStop(1, 'rgba(40, 38, 34, 0)')
 
         ctx.globalAlpha = p.alpha
@@ -156,11 +156,12 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
         ctx.fill()
 
         // Solid inner node with warm graphite
-        ctx.globalAlpha = 0.9
-        ctx.fillStyle = 'rgba(40, 38, 34, 0.25)'
+        ctx.globalAlpha = 1
+        ctx.fillStyle = 'rgba(40, 38, 34, 0.4)'
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.radius * 1.2, 0, Math.PI * 2)
         ctx.fill()
+      }
       }
 
       ctx.globalAlpha = 1
@@ -176,7 +177,7 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
       ctx.save()
       ctx.lineWidth = 1
       ctx.lineCap = 'round'
-      ctx.globalCompositeOperation = 'screen'
+      ctx.globalCompositeOperation = 'source-over'
 
       const maxDistance = Math.min(width, height) * 0.22
       const mobile = isMobile()

@@ -7,7 +7,7 @@ import ExecutiveBackground from '@/components/ExecutiveBackground';
 
 export default function WebinarRegistration() {
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
       <ExecutiveBackground className="fixed inset-0 z-0" />
       
       {/* Header with Login Button */}

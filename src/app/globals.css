@@ -230,6 +230,26 @@
       padding-bottom: env(safe-area-inset-bottom);
     }
   }
+  
+  /* iOS Safari optimizations */
+  html {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+  }
+  
+  body {
+    /* Prevent overscroll bounce on iOS */
+    overscroll-behavior-y: none;
+    /* Smooth scrolling */
+    -webkit-overflow-scrolling: touch;
+    /* Prevent pull-to-refresh on iOS when at top */
+    touch-action: pan-x pan-y;
+  }
+  
+  /* Prevent zoom on double-tap for iOS */
+  * {
+    touch-action: manipulation;
+  }
 }
 
 

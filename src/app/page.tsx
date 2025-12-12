@@ -13,7 +13,7 @@ import {
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
       <ExecutiveBackground className="fixed inset-0 z-0" />
       {/* Header with Login Button */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-sm border-b border-[#CCA43B]/10 shadow-sm transition-all duration-300">

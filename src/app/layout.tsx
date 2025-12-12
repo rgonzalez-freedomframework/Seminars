@@ -19,18 +19,19 @@ export const metadata: Metadata = {
   ],
 },
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#FEFDFB' },
-    { media: '(prefers-color-scheme: dark)', color: '#FEFDFB' }
+    { media: '(prefers-color-scheme: light)', color: '#0a192f' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a192f' }
   ],
   viewport: {
     width: 'device-width',
     initialScale: 1,
     maximumScale: 5,
     userScalable: true,
+    viewportFit: 'cover',
   },
   appleWebApp: {
     capable: true,
-    statusBarStyle: 'default',
+    statusBarStyle: 'black-translucent',
     title: 'Freedom Framework™',
   },
 };
@@ -47,7 +48,8 @@ export default function RootLayout({
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-          <meta name="theme-color" content="#FEFDFB" />
+          <meta name="theme-color" content="#0a192f" />
+          <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         </head>
         <body
           className={`${manrope.variable} antialiased`}

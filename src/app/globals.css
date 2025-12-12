@@ -51,8 +51,8 @@
   --radius: 0.625rem;
   --background: oklch(1 0 0);
   --foreground: oklch(0.14 0.0044 285.82);
-  background-color: #0a192f;
-  color-scheme: dark;
+  background-color: #F6F7F4;
+  color-scheme: light;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -238,7 +238,7 @@
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
     /* Prevent white flash on iOS pull-to-refresh */
-    background-color: #0a192f !important;
+    background-color: #F6F7F4 !important;
   }
   
   body {

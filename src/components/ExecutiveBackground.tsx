@@ -36,8 +36,8 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
 
     console.log('ExecutiveBackground: Initializing animation')
     
-    // Immediately fill with dark background to prevent white flash
-    ctx.fillStyle = '#0a192f'
+    // Immediately fill with warm greige background
+    ctx.fillStyle = '#F6F7F4'
     ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     let animationFrameId: number
@@ -109,9 +109,9 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
 
       if (!baseGradient) {
         baseGradient = ctx.createLinearGradient(0, 0, width, height)
-        baseGradient.addColorStop(0, 'rgba(10, 25, 47, 0.95)')
-        baseGradient.addColorStop(0.5, 'rgba(15, 36, 77, 0.8)')
-        baseGradient.addColorStop(1, 'rgba(3, 16, 36, 0.95)')
+        baseGradient.addColorStop(0, '#F6F7F4')
+        baseGradient.addColorStop(0.5, '#F5F6F3')
+        baseGradient.addColorStop(1, '#F7F8F5')
       }
 
       ctx.fillStyle = baseGradient
@@ -136,7 +136,7 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
       ctx.globalCompositeOperation = 'lighter'
 
       for (const p of particles) {
-        // Soft outer glow
+        // Soft outer glow with warm graphite
         const gradient = ctx.createRadialGradient(
           p.x,
           p.y,
@@ -145,9 +145,9 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
           p.y,
           p.radius * 6,
         )
-        gradient.addColorStop(0, 'rgba(252, 211, 77, 0.85)') // gold core
-        gradient.addColorStop(0.4, 'rgba(252, 211, 77, 0.35)')
-        gradient.addColorStop(1, 'rgba(15, 23, 42, 0)')
+        gradient.addColorStop(0, 'rgba(40, 38, 34, 0.15)')
+        gradient.addColorStop(0.4, 'rgba(40, 38, 34, 0.08)')
+        gradient.addColorStop(1, 'rgba(40, 38, 34, 0)')
 
         ctx.globalAlpha = p.alpha
         ctx.fillStyle = gradient
@@ -155,9 +155,9 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
         ctx.arc(p.x, p.y, p.radius * 3.5, 0, Math.PI * 2)
         ctx.fill()
 
-        // Solid inner node
+        // Solid inner node with warm graphite
         ctx.globalAlpha = 0.9
-        ctx.fillStyle = '#facc15'
+        ctx.fillStyle = 'rgba(40, 38, 34, 0.25)'
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.radius * 1.2, 0, Math.PI * 2)
         ctx.fill()
@@ -193,9 +193,9 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
 
           const dist = Math.sqrt(distSq)
           const strength = 1 - dist / maxDistance
-          const alpha = (mobile ? 0.28 : 0.4) * strength
+          const alpha = (mobile ? 0.05 : 0.08) * strength
 
-          ctx.strokeStyle = `rgba(148, 163, 184, ${alpha})`
+          ctx.strokeStyle = `rgba(40, 38, 34, ${alpha})`
           ctx.beginPath()
           ctx.moveTo(p1.x, p1.y)
           ctx.lineTo(p2.x, p2.y)
@@ -221,12 +221,12 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
 
       ctx.clearRect(0, 0, width, height)
 
-      // Base navy gradient background (reused for performance)
+      // Base warm greige gradient background (reused for performance)
       if (!baseGradient) {
         baseGradient = ctx.createLinearGradient(0, 0, width, height)
-        baseGradient.addColorStop(0, 'rgba(4, 18, 40, 1)')
-        baseGradient.addColorStop(0.5, 'rgba(12, 32, 70, 0.95)')
-        baseGradient.addColorStop(1, 'rgba(2, 10, 24, 1)')
+        baseGradient.addColorStop(0, '#F6F7F4')
+        baseGradient.addColorStop(0.5, '#F5F6F3')
+        baseGradient.addColorStop(1, '#F7F8F5')
       }
       ctx.fillStyle = baseGradient
       ctx.fillRect(0, 0, width, height)
@@ -273,8 +273,8 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     : 'absolute inset-0 pointer-events-none'
 
   return (
-    <div className={wrapperClassName} aria-hidden="true" style={{ backgroundColor: '#0a192f' }}>
-      <canvas ref={canvasRef} className="h-full w-full" style={{ backgroundColor: '#0a192f' }} />
+    <div className={wrapperClassName} aria-hidden="true" style={{ backgroundColor: '#F6F7F4' }}>
+      <canvas ref={canvasRef} className="h-full w-full" style={{ backgroundColor: '#F6F7F4' }} />
     </div>
   )
 }

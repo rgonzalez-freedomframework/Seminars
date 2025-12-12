@@ -11,7 +11,7 @@ export default function WebinarRegistration() {
       <ExecutiveBackground className="fixed inset-0 z-0" />
       
       {/* Header with Login Button */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-sm border-b border-[#CCA43B]/10 shadow-sm transition-all duration-300">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-sm border-b border-[#CCA43B]/10 transition-all duration-300" style={{ boxShadow: 'none' }}>
         <div className="container mx-auto px-4 py-3 md:py-4 transition-all duration-300">
           <div className="flex justify-between items-center">
             <Link href="/" className="text-xl md:text-2xl font-bold text-white hover:text-[#CCA43B] transition-colors">
@@ -19,12 +19,12 @@ export default function WebinarRegistration() {
             </Link>
             <div className="flex items-center gap-3">
               <Link href="/">
-                <Button size="lg" variant="outline" className="!border-2 !border-white/40 !text-white !bg-white/10 hover:!bg-white/20 font-semibold px-4 py-2 transition-all shadow-sm">
+                <Button size="lg" variant="outline" className="!border-2 !border-white/40 !text-white !bg-white/10 hover:!bg-white/20 font-semibold px-4 py-2 transition-all" style={{ boxShadow: 'none' }}>
                   <Home className="h-4 w-4 mr-2" /> Home
                 </Button>
               </Link>
               <Link href="/sign-in">
-                <Button size="lg" variant="outline" className="!border-2 !border-white/40 !text-white !bg-white/10 hover:!bg-white hover:!text-white font-semibold px-4 py-2 md:px-6 md:py-3 transition-all shadow-sm">
+                <Button size="lg" variant="outline" className="!border-2 !border-white/40 !text-white !bg-white/10 hover:!bg-white hover:!text-white font-semibold px-4 py-2 md:px-6 md:py-3 transition-all" style={{ boxShadow: 'none' }}>
                   Login
                 </Button>
               </Link>
@@ -38,7 +38,7 @@ export default function WebinarRegistration() {
         <div className="container mx-auto px-4 max-w-6xl space-y-16">
           
           {/* Hero Section */}
-          <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/20 bg-white/5 backdrop-blur-md shadow-xl px-6 py-10 md:px-10 md:py-14 animate-in fade-in slide-in-from-bottom duration-700">
+          <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/20 bg-white/5 backdrop-blur-md px-6 py-10 md:px-10 md:py-14 animate-in fade-in slide-in-from-bottom duration-700" style={{ boxShadow: 'none' }}>
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute -top-24 -right-10 h-64 w-64 rounded-full bg-[#CCA43B]/30 blur-3xl" />
               <div className="absolute -bottom-24 -left-10 h-72 w-72 rounded-full bg-[#1D2A38]/20 blur-3xl" />
@@ -71,7 +71,7 @@ export default function WebinarRegistration() {
 
               <div className="flex justify-center">
                 <Link href="/sign-in">
-                  <Button className="bg-gradient-to-r from-[#FDE68A] via-[#FBBF24] to-[#F59E0B] hover:from-[#FBBF24] hover:to-[#FDE68A] text-[#1D2A38] font-bold px-8 py-4 text-lg rounded-xl border-2 border-[#FBBF24]/80 shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
+                  <Button className="bg-gradient-to-r from-[#FDE68A] via-[#FBBF24] to-[#F59E0B] hover:from-[#FBBF24] hover:to-[#FDE68A] text-[#1D2A38] font-bold px-8 py-4 text-lg rounded-xl border-2 border-[#FBBF24]/80 transition-all flex items-center gap-2" style={{ boxShadow: 'none' }}>
                     Register Now — Free
                     <ArrowRight className="h-5 w-5" />
                   </Button>
@@ -81,7 +81,7 @@ export default function WebinarRegistration() {
           </section>
 
           {/* Why This Training is Different */}
-          <section className="rounded-3xl border border-[#CCA43B]/30 bg-white/5 backdrop-blur-md p-6 md:p-8 shadow-md animate-in fade-in slide-in-from-bottom duration-700">
+          <section className="rounded-3xl border border-[#CCA43B]/30 bg-white/5 backdrop-blur-md p-6 md:p-8 animate-in fade-in slide-in-from-bottom duration-700" style={{ boxShadow: 'none' }}>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">⭐ Why This Training is Different (And Why You Need the Diagnostic)</h2>
             
             <p className="text-white/90 mb-4 text-lg">
@@ -134,7 +134,7 @@ export default function WebinarRegistration() {
             <p className="text-white/90 text-center mb-8">This masterclass will give you clarity on:</p>
 
             <div className="grid gap-6 md:gap-8 md:grid-cols-2">
-              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all">
+              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 transition-all" style={{ boxShadow: 'none' }}>
                 <h3 className="text-lg md:text-xl font-semibold text-white mb-3">1. The Freedom Matrix™</h3>
                 <p className="text-white/90 mb-3">
                   How to diagnose exactly what's limiting your firm's ability to scale without consuming you.
@@ -147,7 +147,7 @@ export default function WebinarRegistration() {
                 </ul>
               </article>
 
-              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all">
+              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 transition-all" style={{ boxShadow: 'none' }}>
                 <h3 className="text-lg md:text-xl font-semibold text-white mb-3">2. The Hidden Traps of Hourly, Flat-Fee, and Contingency Models</h3>
                 <p className="text-white/90 mb-3">Every billing model contains a built-in freedom trap.</p>
                 <p className="text-white/90 mb-2">You'll learn:</p>
@@ -159,7 +159,7 @@ export default function WebinarRegistration() {
                 </ul>
               </article>
 
-              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all">
+              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 transition-all" style={{ boxShadow: 'none' }}>
                 <h3 className="text-lg md:text-xl font-semibold text-white mb-3">3. The Three Operational Shifts</h3>
                 <p className="text-white/90 mb-3">The exact systems used by thriving firms in the Freedom Zone:</p>
                 <ul className="space-y-2 text-white/90 text-sm">
@@ -178,7 +178,7 @@ export default function WebinarRegistration() {
                 </ul>
               </article>
 
-              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all">
+              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 transition-all" style={{ boxShadow: 'none' }}>
                 <h3 className="text-lg md:text-xl font-semibold text-white mb-3">4. How High-Performing Firms Scale Without Sacrifice</h3>
                 <p className="text-white/90 mb-3">You'll see how these shifts create:</p>
                 <ul className="space-y-1.5 text-white/90 text-sm">
@@ -192,7 +192,7 @@ export default function WebinarRegistration() {
           </section>
 
           {/* What You Receive */}
-          <section className="rounded-3xl border border-[#CCA43B]/30 bg-[#1D2A38]/70 backdrop-blur-md text-white px-6 py-8 md:px-10 md:py-10 shadow-lg">
+          <section className="rounded-3xl border border-[#CCA43B]/30 bg-[#1D2A38]/70 backdrop-blur-md text-white px-6 py-8 md:px-10 md:py-10" style={{ boxShadow: 'none' }}>
             <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">⭐ What You Receive When You Register</h2>
             <p className="text-white/90 mb-6 text-center">You get immediate access to:</p>
 
@@ -233,7 +233,7 @@ export default function WebinarRegistration() {
 
           {/* Who This Is For */}
           <section className="grid gap-8 md:grid-cols-2 items-start">
-            <div className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-8 shadow-md">
+            <div className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-8" style={{ boxShadow: 'none' }}>
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">⭐ Who This Masterclass Is For</h2>
               <p className="text-white/90 mb-4">This training is specifically for:</p>
               <ul className="space-y-3 text-white/90">
@@ -263,7 +263,7 @@ export default function WebinarRegistration() {
               </p>
             </div>
 
-            <div className="rounded-3xl border border-[#CCA43B]/40 bg-gradient-to-br from-[#CCA43B]/10 to-white/5 backdrop-blur-md p-6 md:p-8 shadow-md">
+            <div className="rounded-3xl border border-[#CCA43B]/40 bg-gradient-to-br from-[#CCA43B]/10 to-white/5 backdrop-blur-md p-6 md:p-8" style={{ boxShadow: 'none' }}>
               <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">⭐ About Your Instructor</h2>
               <h3 className="text-xl font-semibold text-white mb-2">Janelle Sam, MBA (Cornell)</h3>
               <p className="text-white/90 mb-3">
@@ -279,7 +279,7 @@ export default function WebinarRegistration() {
           </section>
 
           {/* Event Details */}
-          <section className="rounded-3xl border border-[#CCA43B]/30 bg-white/5 backdrop-blur-md p-6 md:p-8 shadow-md text-center">
+          <section className="rounded-3xl border border-[#CCA43B]/30 bg-white/5 backdrop-blur-md p-6 md:p-8 text-center" style={{ boxShadow: 'none' }}>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-6">⭐ Event Details</h2>
             
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 max-w-4xl mx-auto">
@@ -319,22 +319,22 @@ export default function WebinarRegistration() {
             <h2 className="text-2xl md:text-3xl font-bold text-white text-center">⭐ FAQ</h2>
             
             <div className="grid gap-4">
-              <div className="rounded-2xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-5">
+              <div className="rounded-2xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-5" style={{ boxShadow: 'none' }}>
                 <h3 className="text-lg font-semibold text-white mb-2">Will this training be recorded?</h3>
                 <p className="text-white/90">Yes — registrants will receive the replay link.</p>
               </div>
 
-              <div className="rounded-2xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-5">
+              <div className="rounded-2xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-5" style={{ boxShadow: 'none' }}>
                 <h3 className="text-lg font-semibold text-white mb-2">Is this for small or new firms?</h3>
                 <p className="text-white/90">No — the content in this webinar would be challenging for a firm that does not have admin support in operations to implement. This is recommended for firms that have generated at least $2M+ in annual revenue.</p>
               </div>
 
-              <div className="rounded-2xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-5">
+              <div className="rounded-2xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-5" style={{ boxShadow: 'none' }}>
                 <h3 className="text-lg font-semibold text-white mb-2">Will I get my diagnostic without providing email?</h3>
                 <p className="text-white/90">No — your quadrant summary is delivered by email only.</p>
               </div>
 
-              <div className="rounded-2xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-5">
+              <div className="rounded-2xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-5" style={{ boxShadow: 'none' }}>
                 <h3 className="text-lg font-semibold text-white mb-2">Is this a sales webinar?</h3>
                 <p className="text-white/90">The training is 100% valuable on its own. At the end, you'll hear about the Freedom Framework™ 12-month program, but there is zero pressure to join.</p>
               </div>
@@ -342,7 +342,7 @@ export default function WebinarRegistration() {
           </section>
 
           {/* Final CTA */}
-          <section className="rounded-3xl border border-[#CCA43B]/40 bg-gradient-to-r from-[#CCA43B]/10 via-white/5 to-[#1D2A38]/20 backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-md">
+          <section className="rounded-3xl border border-[#CCA43B]/40 bg-gradient-to-r from-[#CCA43B]/10 via-white/5 to-[#1D2A38]/20 backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center" style={{ boxShadow: 'none' }}>
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">⭐ Ready to Discover Your Path to Freedom?</h2>
             <p className="text-white/90 mb-6 max-w-2xl mx-auto text-base md:text-lg">
               If you want a law firm that scales profitably and gives you back your life… start by learning where your firm stands today.
@@ -351,7 +351,7 @@ export default function WebinarRegistration() {
               Register now to claim your seat and receive your Freedom Matrix Diagnostic by email.
             </p>
             <Link href="/sign-in">
-              <Button className="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-bold px-10 py-4 text-lg rounded-xl border-2 border-[#CCA43B] shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2">
+              <Button className="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-bold px-10 py-4 text-lg rounded-xl border-2 border-[#CCA43B] transition-all inline-flex items-center gap-2" style={{ boxShadow: 'none' }}>
                 Register Now — Free
                 <ArrowRight className="h-5 w-5" />
               </Button>

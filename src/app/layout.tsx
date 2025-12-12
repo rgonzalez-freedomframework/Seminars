@@ -43,7 +43,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
+      <html lang="en" suppressHydrationWarning style={{ backgroundColor: '#0a192f' }}>
         <head>
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -54,6 +54,7 @@ export default function RootLayout({
         <body
           className={`${manrope.variable} antialiased`}
           suppressHydrationWarning
+          style={{ backgroundColor: '#0a192f' }}
         >
           <ThemeProvider
               attribute="class"

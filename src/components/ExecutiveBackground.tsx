@@ -35,6 +35,10 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     }
 
     console.log('ExecutiveBackground: Initializing animation')
+    
+    // Immediately fill with dark background to prevent white flash
+    ctx.fillStyle = '#0a192f'
+    ctx.fillRect(0, 0, canvas.width, canvas.height)
 
     let animationFrameId: number
     let particles: Particle[] = []
@@ -269,8 +273,8 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     : 'absolute inset-0 pointer-events-none'
 
   return (
-    <div className={wrapperClassName} aria-hidden="true">
-      <canvas ref={canvasRef} className="h-full w-full" />
+    <div className={wrapperClassName} aria-hidden="true" style={{ backgroundColor: '#0a192f' }}>
+      <canvas ref={canvasRef} className="h-full w-full" style={{ backgroundColor: '#0a192f' }} />
     </div>
   )
 }

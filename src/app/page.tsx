@@ -179,32 +179,32 @@ export default function Home() {
           {/* What You Get */}
           <section id="inside-program" className="space-y-6">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-              <h2 className="text-2xl md:text-3xl font-bold text-white">⭐ Here's What You Get Inside the Program</h2>
-              <p className="text-sm md:text-base text-white/80 max-w-md">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">⭐ Here's What You Get Inside the Program</h2>
+              <p className="text-sm md:text-base text-[#1D2A38]/70 max-w-md">
                 Every element is built to move your firm from owner-dependent to owner-optional — without adding unnecessary complexity.
               </p>
             </div>
 
             <div className="grid gap-6 md:gap-8 md:grid-cols-2">
-              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-left duration-700">
-                <h3 className="text-lg md:text-xl font-semibold text-white mb-2">1. Monthly Deep-Dive Workshops (Live + Recorded)</h3>
-                <p className="text-white/90 mb-3">
+              <article className="rounded-3xl border border-[#1D2A38]/20 bg-white/60 backdrop-blur-md p-6 md:p-7 transition-all animate-in fade-in slide-in-from-left duration-700" style={{ boxShadow: 'none' }}>
+                <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">1. Monthly Deep-Dive Workshops (Live + Recorded)</h3>
+                <p className="text-[#1D2A38]/90 mb-3">
                   Each month focuses on one of the three operational shifts:
                 </p>
-                <ul className="space-y-1.5 text-white/90 text-sm">
+                <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">
                   <li>Accountability Shift — Build a team that performs without pushing</li>
                   <li>Predictability Shift — Engineer profit and cash flow with clarity</li>
                   <li>Autonomy Shift — Turn your firm into a self-managing business</li>
                 </ul>
-                <p className="text-white/90 text-sm mt-3">
+                <p className="text-[#1D2A38]/90 text-sm mt-3">
                   You’ll walk away from each workshop with templates, scorecards, and decisions you can implement immediately.
                 </p>
               </article>
 
-              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-right duration-700">
-                <h3 className="text-lg md:text-xl font-semibold text-white mb-2">2. The Freedom Matrix Implementation Toolkit</h3>
-                <p className="text-white/90 mb-3">A complete suite of operational tools, including:</p>
-                <ul className="space-y-1.5 text-white/90 text-sm">
+              <article className="rounded-3xl border border-[#1D2A38]/20 bg-white/60 backdrop-blur-md p-6 md:p-7 transition-all animate-in fade-in slide-in-from-right duration-700" style={{ boxShadow: 'none' }}>
+                <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">2. The Freedom Matrix Implementation Toolkit</h3>
+                <p className="text-[#1D2A38]/90 mb-3">A complete suite of operational tools, including:</p>
+                <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">
                   <li>Role scorecard templates</li>
                   <li>KPI dashboards and scorecards</li>
                   <li>Cash flow forecasting tools</li>
@@ -212,12 +212,12 @@ export default function Home() {
                   <li>Delegation and decision rights map</li>
                   <li>Meeting rhythm + leadership cadence frameworks</li>
                 </ul>
-                <p className="text-white/90 text-sm mt-3">Everything is plug-and-play.</p>
+                <p className="text-[#1D2A38]/90 text-sm mt-3">Everything is plug-and-play.</p>
               </article>
 
-              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-left duration-700 delay-100">
-                <h3 className="text-lg md:text-xl font-semibold text-white mb-2">3. Private Freedom Owners Community</h3>
-                <p className="text-white/90 mb-2">
+              <article className="rounded-3xl border border-[#1D2A38]/20 bg-white/60 backdrop-blur-md p-6 md:p-7 transition-all animate-in fade-in slide-in-from-left duration-700 delay-100" style={{ boxShadow: 'none' }}>
+                <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">3. Private Freedom Owners Community</h3>
+                <p className="text-[#1D2A38]/90 mb-2">
                   A curated group of law firm owners committed to scaling with intention, not burnout.
                 </p>
                 <p className="text-white/90 mb-2 text-sm">This is your space to:</p>
@@ -239,13 +239,13 @@ export default function Home() {
                   <li>Identify and fix your biggest operational bottlenecks</li>
                   <li>Create a path to owner autonomy over the next 12 months</li>
                 </ul>
-                <p className="text-white/90 text-sm mt-3">This is where the real transformation happens.</p>
+                <p className="text-[#1D2A38]/90 text-sm mt-3">This is where the real transformation happens.</p>
               </article>
 
-              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all md:col-span-2 animate-in fade-in slide-in-from-bottom duration-700 delay-150">
-                <h3 className="text-lg md:text-xl font-semibold text-white mb-2">5. Office Hours</h3>
-                <p className="text-white/90 mb-2">Monthly office hours where you can bring:</p>
-                <ul className="grid md:grid-cols-2 gap-x-6 gap-y-1.5 text-white/80 text-sm">
+              <article className="rounded-3xl border border-[#1D2A38]/20 bg-white/60 backdrop-blur-md p-6 md:p-7 transition-all md:col-span-2 animate-in fade-in slide-in-from-bottom duration-700 delay-150" style={{ boxShadow: 'none' }}>
+                <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">5. Office Hours</h3>
+                <p className="text-[#1D2A38]/90 mb-2">Monthly office hours where you can bring:</p>
+                <ul className="grid md:grid-cols-2 gap-x-6 gap-y-1.5 text-[#1D2A38]/80 text-sm">
                   <li>Team issues</li>
                   <li>Profit questions</li>
                   <li>Billing model complexities</li>
@@ -253,7 +253,7 @@ export default function Home() {
                   <li>Operational fires</li>
                   <li>Leadership challenges</li>
                 </ul>
-                <p className="text-white/80 text-sm mt-3">
+                <p className="text-[#1D2A38]/80 text-sm mt-3">
                   You get real-time answers from someone who’s scaled firms, not just studied them.
                 </p>
               </article>
@@ -262,13 +262,13 @@ export default function Home() {
 
           {/* Result */}
           <section id="result" className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1.6fr)] items-start">
-            <div className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-8 shadow-md animate-in fade-in slide-in-from-left duration-700">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">⭐ The Result?</h2>
-              <p className="text-white/90 mb-3">
+            <div className="rounded-3xl border border-[#1D2A38]/20 bg-white/60 backdrop-blur-md p-6 md:p-8 animate-in fade-in slide-in-from-left duration-700" style={{ boxShadow: 'none' }}>
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ The Result?</h2>
+              <p className="text-[#1D2A38]/90 mb-3">
                 A business that funds the life you want — without consuming it.
               </p>
-              <p className="text-white/90 mb-4">You'll walk away with:</p>
-              <ul className="space-y-2 text-white/80 text-sm">
+              <p className="text-[#1D2A38]/90 mb-4">You'll walk away with:</p>
+              <ul className="space-y-2 text-[#1D2A38]/80 text-sm">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 mt-1 text-[#CCA43B]" />
                   <span>A leadership team that takes ownership</span>
@@ -297,9 +297,9 @@ export default function Home() {
             </div>
 
             {/* Roadmap */}
-            <div id="roadmap" className="rounded-3xl border border-dashed border-[#CCA43B]/60 bg-[#CCA43B]/10 backdrop-blur-md p-6 md:p-8 shadow-sm animate-in fade-in slide-in-from-right duration-700">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">⭐ Your Freedom Framework Roadmap</h2>
-              <ol className="space-y-3 text-white/90 text-sm md:text-base">
+            <div id="roadmap" className="rounded-3xl border border-dashed border-[#CCA43B]/60 bg-[#CCA43B]/20 backdrop-blur-md p-6 md:p-8 animate-in fade-in slide-in-from-right duration-700" style={{ boxShadow: 'none' }}>
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Your Freedom Framework Roadmap</h2>
+              <ol className="space-y-3 text-[#1D2A38]/90 text-sm md:text-base">
                 {[
                   'Phase 1: Diagnose your firm’s quadrant',
                   'Phase 2: Stabilize the operational foundations',
@@ -315,7 +315,7 @@ export default function Home() {
                   </li>
                 ))}
               </ol>
-              <p className="text-white/80 mt-4 text-sm md:text-base">
+              <p className="text-[#1D2A38]/80 mt-4 text-sm md:text-base">
                 This is the roadmap used by 7- and 8-figure firms that run without owner burnout.
               </p>
             </div>
@@ -324,15 +324,15 @@ export default function Home() {
           {/* Program Options */}
           <section id="program-options" className="space-y-6">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
-              <h2 className="text-2xl md:text-3xl font-bold text-white">⭐ Program Options</h2>
-              <p className="text-sm md:text-base text-white/80 max-w-md">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">⭐ Program Options</h2>
+              <p className="text-sm md:text-base text-[#1D2A38]/70 max-w-md">
                 (Pricing intentionally omitted so you can adjust or add a call-to-apply.)
               </p>
             </div>
             <div className="grid gap-6 md:grid-cols-3">
-              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-left duration-700">
-                <h3 className="text-lg font-semibold text-white mb-2">Freedom Framework Membership</h3>
-                <p className="text-sm text-white/90 mb-3">
+              <article className="rounded-3xl border border-[#1D2A38]/20 bg-white/60 backdrop-blur-md p-6 transition-all animate-in fade-in slide-in-from-left duration-700" style={{ boxShadow: 'none' }}>
+                <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Freedom Framework Membership</h3>
+                <p className="text-sm text-[#1D2A38]/90 mb-3">
                   Includes: Monthly deep-dives, toolkit access, community, office hours.
                 </p>
                 <p className="text-xs font-medium text-[#1D2A38] bg-[#FDE68A]/90 inline-flex px-3 py-1 rounded-full">
@@ -340,22 +340,22 @@ export default function Home() {
                 </p>
               </article>
 
-              <article className="rounded-3xl border-2 border-[#CCA43B] bg-white/10 backdrop-blur-md p-6 shadow-md hover:shadow-lg transition-all animate-in fade-in slide-in-from-bottom duration-700">
-                <h3 className="text-lg font-semibold text-white mb-2">Freedom Framework Accelerator</h3>
-                <p className="text-sm text-white/90 mb-3">
+              <article className="rounded-3xl border-2 border-[#CCA43B] bg-white/70 backdrop-blur-md p-6 transition-all animate-in fade-in slide-in-from-bottom duration-700" style={{ boxShadow: 'none' }}>
+                <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Freedom Framework Accelerator</h3>
+                <p className="text-sm text-[#1D2A38]/90 mb-3">
                   Includes: Everything above + quarterly implementation labs + direct advisory.
                 </p>
-                <p className="text-xs font-medium text-white bg-[#1D2A38]/90 inline-flex px-3 py-1 rounded-full">
+                <p className="text-xs font-medium text-white bg-[#1D2A38] inline-flex px-3 py-1 rounded-full">
                   Best for firms $5M–$20M+
                 </p>
               </article>
 
-              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-right duration-700">
-                <h3 className="text-lg font-semibold text-white mb-2">Private Advisory Partnership</h3>
-                <p className="text-sm text-white/90 mb-3">
+              <article className="rounded-3xl border border-[#1D2A38]/20 bg-white/60 backdrop-blur-md p-6 transition-all animate-in fade-in slide-in-from-right duration-700" style={{ boxShadow: 'none' }}>
+                <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Private Advisory Partnership</h3>
+                <p className="text-sm text-[#1D2A38]/90 mb-3">
                   High-touch, firm-specific operational transformation with deep advisory support.
                 </p>
-                <p className="text-xs font-medium text-white bg-white/20 inline-flex px-3 py-1 rounded-full">
+                <p className="text-xs font-medium text-[#1D2A38] bg-white/30 inline-flex px-3 py-1 rounded-full">
                   Application only
                 </p>
               </article>
@@ -363,13 +363,13 @@ export default function Home() {
           </section>
 
           {/* Final CTA */}
-          <section id="cta" className="rounded-3xl border border-[#CCA43B]/40 bg-gradient-to-r from-[#CCA43B]/10 via-white/5 to-[#1D2A38]/20 backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-md animate-in fade-in slide-in-from-bottom duration-700">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">⭐ Next Step: Join the Freedom Framework™</h2>
-            <p className="text-white/90 mb-6 max-w-2xl mx-auto text-sm md:text-base">
+          <section id="cta" className="rounded-3xl border border-[#CCA43B]/50 bg-gradient-to-r from-[#CCA43B]/25 via-white/20 to-[#1D2A38]/15 backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center animate-in fade-in slide-in-from-bottom duration-700" style={{ boxShadow: 'none' }}>
+            <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Next Step: Join the Freedom Framework™</h2>
+            <p className="text-[#1D2A38]/90 mb-6 max-w-2xl mx-auto text-sm md:text-base">
               Click below to secure your spot in the next session. Build the firm that gives you back your time, your profit, and your peace.
             </p>
             <Link href="/sign-in">
-              <Button className="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold px-10 py-3 rounded-xl border-2 border-[#CCA43B] shadow-lg hover:shadow-xl transition-all inline-flex items-center gap-2">
+              <Button className="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold px-10 py-3 rounded-xl border-2 border-[#CCA43B] transition-all inline-flex items-center gap-2" style={{ boxShadow: 'none' }}>
                 Apply to Join the Freedom Framework™
                 <ArrowRight className="h-4 w-4" />
               </Button>
@@ -379,12 +379,12 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="py-8 md:py-12 border-t border-white/10 bg-white/5 backdrop-blur-sm relative z-10">
+      <footer className="py-8 md:py-12 border-t border-[#1D2A38]/20 bg-white/40 backdrop-blur-sm relative z-10">
         <div className="container mx-auto px-4 text-center">
-          <p className="text-white/90 mb-2">
+          <p className="text-[#1D2A38]/90 mb-2">
             Freedom Framework™ for Law Firm Owners
           </p>
-          <p className="text-white/70 text-sm">
+          <p className="text-[#1D2A38]/60 text-sm">
             © 2025 All Rights Reserved
           </p>
         </div>

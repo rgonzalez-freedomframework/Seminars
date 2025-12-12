@@ -51,10 +51,6 @@ export default function Home() {
         <div className="container mx-auto px-4 max-w-6xl space-y-16">
           {/* Hero / Title */}
           <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/30 bg-[#FFFEF9] backdrop-blur-md shadow-lg px-6 py-10 md:px-10 md:py-14 animate-in fade-in slide-in-from-bottom duration-700">
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute -top-24 -right-10 h-64 w-64 rounded-full bg-[#CCA43B]/20 blur-3xl" />
-              <div className="absolute -bottom-24 -left-10 h-72 w-72 rounded-full bg-amber-200/20 blur-3xl" />
-            </div>
 
             <div className="relative grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,1.3fr)] items-center">
               <div>
@@ -363,7 +359,7 @@ export default function Home() {
           </section>
 
           {/* Final CTA */}
-          <section id="cta" className="rounded-3xl border border-[#CCA43B]/50 bg-gradient-to-r from-[#CCA43B]/25 via-white/20 to-[#1D2A38]/15 backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
+          <section id="cta" className="rounded-3xl border border-[#CCA43B]/50 bg-[#FFFEF9] backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Next Step: Join the Freedom Framework™</h2>
             <p className="text-[#1D2A38]/90 mb-6 max-w-2xl mx-auto text-sm md:text-base">
               Click below to secure your spot in the next session. Build the firm that gives you back your time, your profit, and your peace.

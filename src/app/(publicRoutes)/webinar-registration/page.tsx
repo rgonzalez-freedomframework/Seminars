@@ -39,10 +39,6 @@ export default function WebinarRegistration() {
           
           {/* Hero Section */}
           <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/30 bg-[#FFFEF9] backdrop-blur-md px-6 py-10 md:px-10 md:py-14 shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
-            <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute -top-24 -right-10 h-64 w-64 rounded-full bg-[#CCA43B]/20 blur-3xl" />
-              <div className="absolute -bottom-24 -left-10 h-72 w-72 rounded-full bg-amber-200/20 blur-3xl" />
-            </div>
 
             <div className="relative text-center space-y-6">
               <p className="inline-flex items-center gap-2 rounded-full bg-[#1D2A38] text-xs md:text-sm font-semibold tracking-[0.18em] text-white px-4 py-1 uppercase">
@@ -92,7 +88,7 @@ export default function WebinarRegistration() {
               They don't know exactly where their firm sits on the Freedom Matrix™, or which operational bottlenecks are silently holding them back.
             </p>
 
-            <div className="bg-gradient-to-br from-[#CCA43B]/15 to-amber-50/40 rounded-2xl border border-[#CCA43B]/40 p-6 md:p-8">
+            <div className="bg-[#FFFEF9] rounded-2xl border border-[#CCA43B]/40 p-6 md:p-8">
               <div className="flex items-start gap-3 mb-4">
                 <Gift className="h-6 w-6 text-[#CCA43B] flex-shrink-0 mt-1" />
                 <div>
@@ -263,7 +259,7 @@ export default function WebinarRegistration() {
               </p>
             </div>
 
-            <div className="rounded-3xl border border-[#CCA43B]/40 bg-gradient-to-br from-[#CCA43B]/15 to-amber-50/40 backdrop-blur-md p-6 md:p-8 shadow-md">
+            <div className="rounded-3xl border border-[#CCA43B]/40 bg-[#FFFEF9] backdrop-blur-md p-6 md:p-8 shadow-md">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ About Your Instructor</h2>
               <h3 className="text-xl font-semibold text-[#1D2A38] mb-2">Janelle Sam, MBA (Cornell)</h3>
               <p className="text-[#1D2A38]/90 mb-3">
@@ -342,7 +338,7 @@ export default function WebinarRegistration() {
           </section>
 
           {/* Final CTA */}
-          <section className="rounded-3xl border border-[#CCA43B]/50 bg-gradient-to-r from-[#CCA43B]/25 via-[#FFFEF9]/80 to-amber-100/40 backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg">
+          <section className="rounded-3xl border border-[#CCA43B]/50 bg-[#FFFEF9] backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Ready to Discover Your Path to Freedom?</h2>
             <p className="text-[#1D2A38]/90 mb-6 max-w-2xl mx-auto text-base md:text-lg">
               If you want a law firm that scales profitably and gives you back your life… start by learning where your firm stands today.

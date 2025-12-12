@@ -145,8 +145,8 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
           p.y,
           p.radius * 6,
         )
-        gradient.addColorStop(0, 'rgba(40, 38, 34, 0.25)')
-        gradient.addColorStop(0.4, 'rgba(40, 38, 34, 0.12)')
+        gradient.addColorStop(0, 'rgba(40, 38, 34, 0.18)')
+        gradient.addColorStop(0.4, 'rgba(40, 38, 34, 0.09)')
         gradient.addColorStop(1, 'rgba(40, 38, 34, 0)')
 
         ctx.globalAlpha = p.alpha
@@ -157,7 +157,7 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
 
         // Solid inner node with warm graphite
         ctx.globalAlpha = 1
-        ctx.fillStyle = 'rgba(40, 38, 34, 0.4)'
+        ctx.fillStyle = 'rgba(40, 38, 34, 0.3)'
         ctx.beginPath()
         ctx.arc(p.x, p.y, p.radius * 1.2, 0, Math.PI * 2)
         ctx.fill()
@@ -193,7 +193,7 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
 
           const dist = Math.sqrt(distSq)
           const strength = 1 - dist / maxDistance
-          const alpha = (mobile ? 0.05 : 0.08) * strength
+          const alpha = (mobile ? 0.12 : 0.15) * strength
 
           ctx.strokeStyle = `rgba(40, 38, 34, ${alpha})`
           ctx.beginPath()

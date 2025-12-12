@@ -16,29 +16,29 @@ export default function Home() {
     <div className="relative min-h-screen overflow-hidden" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
       <ExecutiveBackground className="fixed inset-0 z-0" />
       {/* Header with Login Button */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-sm border-b border-[#CCA43B]/10 shadow-sm transition-all duration-300">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b border-[#CCA43B]/20 shadow-sm transition-all duration-300">
         <div className="container mx-auto px-4 py-3 md:py-4 transition-all duration-300">
           <div className="flex justify-between items-center">
-            <Link href="/?view=landing" className="text-xl md:text-2xl font-bold text-white hover:text-[#CCA43B] transition-colors">
+            <Link href="/?view=landing" className="text-xl md:text-2xl font-bold text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
               Freedom Framework™
             </Link>
             <div className="flex items-center gap-3">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button size="lg" variant="outline" className="!border-2 !border-white/40 !text-white !bg-white/10 hover:!bg-white/20 font-semibold px-4 py-2 transition-all shadow-sm">
+                  <Button size="lg" variant="outline" className="!border-2 !border-[#1D2A38]/40 !text-[#1D2A38] !bg-white/60 hover:!bg-[#CCA43B]/20 font-semibold px-4 py-2 transition-all" style={{ boxShadow: 'none' }}>
                     Menu <ChevronDown className="ml-2 h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-[#1D2A38]/95 backdrop-blur-md border-white/20">
+                <DropdownMenuContent className="bg-white/95 backdrop-blur-md border-[#1D2A38]/20">
                   <DropdownMenuItem asChild>
-                    <Link href="/webinar-registration" className="text-white hover:text-[#CCA43B] cursor-pointer">
+                    <Link href="/webinar-registration" className="text-[#1D2A38] hover:text-[#CCA43B] cursor-pointer">
                       Webinar Registration
                     </Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
               <Link href="/sign-in">
-                <Button size="lg" variant="outline" className="!border-2 !border-white/40 !text-white !bg-white/10 hover:!bg-white hover:!text-white font-semibold px-4 py-2 md:px-6 md:py-3 transition-all shadow-sm">
+                <Button size="lg" variant="outline" className="!border-2 !border-[#1D2A38]/40 !text-[#1D2A38] !bg-white/60 hover:!bg-[#CCA43B]/20 font-semibold px-4 py-2 md:px-6 md:py-3 transition-all" style={{ boxShadow: 'none' }}>
                   Login
                 </Button>
               </Link>
@@ -50,10 +50,10 @@ export default function Home() {
       <main className="pt-28 pb-20 relative z-10">
         <div className="container mx-auto px-4 max-w-6xl space-y-16">
           {/* Hero / Title */}
-          <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/20 bg-white/5 backdrop-blur-md shadow-xl px-6 py-10 md:px-10 md:py-14 animate-in fade-in slide-in-from-bottom duration-700">
+          <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/30 bg-white/60 backdrop-blur-md px-6 py-10 md:px-10 md:py-14 animate-in fade-in slide-in-from-bottom duration-700" style={{ boxShadow: 'none' }}>
             <div className="absolute inset-0 pointer-events-none">
-              <div className="absolute -top-24 -right-10 h-64 w-64 rounded-full bg-[#CCA43B]/30 blur-3xl" />
-              <div className="absolute -bottom-24 -left-10 h-72 w-72 rounded-full bg-[#1D2A38]/20 blur-3xl" />
+              <div className="absolute -top-24 -right-10 h-64 w-64 rounded-full bg-[#CCA43B]/20 blur-3xl" />
+              <div className="absolute -bottom-24 -left-10 h-72 w-72 rounded-full bg-[#1D2A38]/10 blur-3xl" />
             </div>
 
             <div className="relative grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,1.3fr)] items-center">
@@ -62,32 +62,32 @@ export default function Home() {
                   <Sparkles className="h-3 w-3 text-[#CCA43B]" />
                   The Freedom Framework™ Program
                 </p>
-                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-4">
+                <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#1D2A38] leading-tight mb-4">
                   For Law Firm Owners Ready to Scale Growth — Without Sacrificing Time, Autonomy, or Sanity
                 </h1>
-                <p className="text-lg md:text-xl text-white/90 mb-3">
+                <p className="text-lg md:text-xl text-[#1D2A38]/90 mb-3">
                   You've built a successful law firm. Now it's time to build your freedom.
                 </p>
-                <p className="text-base md:text-lg text-white/80 mb-6">
+                <p className="text-base md:text-lg text-[#1D2A38]/70 mb-6">
                   The Freedom Framework is the only program designed specifically for 7- and 8-figure law firm owners who want a business that runs with clarity, profitability, and autonomy — without the daily drain of being the bottleneck.
                 </p>
 
                 <div className="flex flex-wrap items-center gap-4">
                   <Link href="/sign-in">
-                    <Button className="bg-gradient-to-r from-[#FDE68A] via-[#FBBF24] to-[#F59E0B] hover:from-[#FBBF24] hover:to-[#FDE68A] text-white font-bold px-7 py-3 rounded-xl border-2 border-[#FBBF24]/80 shadow-lg hover:shadow-xl transition-all flex items-center gap-2">
+                    <Button className="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold px-7 py-3 rounded-xl border-2 border-[#CCA43B] transition-all flex items-center gap-2" style={{ boxShadow: 'none' }}>
                       Apply to Join the Freedom Framework™
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
-                  <p className="text-xs md:text-sm text-white/70">
+                  <p className="text-xs md:text-sm text-[#1D2A38]/60">
                     Designed for established firms ready to scale with intention.
                   </p>
                 </div>
               </div>
 
-              <div className="relative rounded-2xl border border-gray-200/20 bg-white/5 p-6 md:p-7 shadow-sm backdrop-blur-sm animate-in fade-in slide-in-from-right duration-700 delay-150">
-                <h2 className="text-sm font-semibold text-white mb-3 uppercase tracking-[0.18em]">Program Snapshot</h2>
-                <ul className="space-y-3 text-sm text-white/80">
+              <div className="relative rounded-2xl border border-[#1D2A38]/20 bg-white/60 p-6 md:p-7 backdrop-blur-sm animate-in fade-in slide-in-from-right duration-700 delay-150" style={{ boxShadow: 'none' }}>
+                <h2 className="text-sm font-semibold text-[#1D2A38] mb-3 uppercase tracking-[0.18em]">Program Snapshot</h2>
+                <ul className="space-y-3 text-sm text-[#1D2A38]/80">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B]" />
                     <span>Built for 7- and 8-figure law firm owners</span>
@@ -111,12 +111,12 @@ export default function Home() {
 
           {/* Who This Is For */}
           <section id="who-this-is-for" className="grid gap-8 md:grid-cols-[minmax(0,1.8fr)_minmax(0,1.2fr)] items-start">
-            <div className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-8 shadow-md animate-in fade-in slide-in-from-left duration-700">
-              <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">⭐ Who This Is For</h2>
-              <p className="text-white/90 mb-4">
+            <div className="rounded-3xl border border-[#1D2A38]/20 bg-white/60 backdrop-blur-md p-6 md:p-8 animate-in fade-in slide-in-from-left duration-700" style={{ boxShadow: 'none' }}>
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Who This Is For</h2>
+              <p className="text-[#1D2A38]/90 mb-4">
                 This program is made for law firm owners who:
               </p>
-              <ul className="space-y-3 text-white/80">
+              <ul className="space-y-3 text-[#1D2A38]/80">
                 {[
                   'Have surpassed $2M in revenue and are feeling the weight of growth',
                   'Are still involved in too much day-to-day decision-making',
@@ -131,29 +131,29 @@ export default function Home() {
                   </li>
                 ))}
               </ul>
-              <p className="text-white/90 mt-5">
+              <p className="text-[#1D2A38]/90 mt-5">
                 If your firm is in the Grind Zone, Drift Zone, or Golden Cage, this is your path out.
               </p>
             </div>
 
             <div className="space-y-4 animate-in fade-in slide-in-from-right duration-700 delay-150">
-              <h3 className="text-sm font-semibold tracking-[0.16em] text-white uppercase">Where You Might Be Now</h3>
+              <h3 className="text-sm font-semibold tracking-[0.16em] text-[#1D2A38] uppercase">Where You Might Be Now</h3>
               <div className="grid gap-4">
-                <div className="rounded-2xl border border-red-400/20 bg-red-500/10 backdrop-blur-sm p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-red-400 mb-1">Grind Zone</p>
-                  <p className="text-sm text-white">
+                <div className="rounded-2xl border border-red-400/30 bg-red-500/15 backdrop-blur-sm p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-red-600 mb-1">Grind Zone</p>
+                  <p className="text-sm text-[#1D2A38]">
                     High effort, low return. You&apos;re working hard, but the business still leans on you for everything.
                   </p>
                 </div>
-                <div className="rounded-2xl border border-blue-400/20 bg-blue-500/10 backdrop-blur-sm p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-400 mb-1">Drift Zone</p>
-                  <p className="text-sm text-white">
+                <div className="rounded-2xl border border-blue-400/30 bg-blue-500/15 backdrop-blur-sm p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-blue-600 mb-1">Drift Zone</p>
+                  <p className="text-sm text-[#1D2A38]">
                     Low activity, low results. The firm has potential, but there&apos;s no clear operating system driving growth.
                   </p>
                 </div>
-                <div className="rounded-2xl border border-amber-400/20 bg-amber-500/10 backdrop-blur-sm p-4">
-                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-400 mb-1">Golden Cage</p>
-                  <p className="text-sm text-white">
+                <div className="rounded-2xl border border-amber-400/30 bg-amber-500/15 backdrop-blur-sm p-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.16em] text-amber-600 mb-1">Golden Cage</p>
+                  <p className="text-sm text-[#1D2A38]">
                     Profitable, but owner-dependent. The firm is successful on paper, but you can&apos;t step away without stress.
                   </p>
                 </div>
@@ -162,7 +162,7 @@ export default function Home() {
           </section>
 
           {/* Core Promise */}
-          <section id="core-promise" className="rounded-3xl border border-[#CCA43B]/30 bg-[#1D2A38]/70 backdrop-blur-md text-white px-6 py-8 md:px-10 md:py-10 shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
+          <section id="core-promise" className="rounded-3xl border border-[#CCA43B]/40 bg-[#1D2A38] backdrop-blur-md text-white px-6 py-8 md:px-10 md:py-10 animate-in fade-in slide-in-from-bottom duration-700" style={{ boxShadow: 'none' }}>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">⭐ The Core Promise</h2>
             <p className="text-base md:text-lg mb-4 text-white/90">
               We help law firm owners redesign their firm so it delivers both time freedom and financial freedom — through simple, repeatable operational systems that scale.

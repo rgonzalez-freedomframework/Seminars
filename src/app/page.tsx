@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle2, Sparkles, ChevronDown, Home } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Sparkles, ChevronDown } from 'lucide-react';
 import ExecutiveBackground from '@/components/ExecutiveBackground';
 import {
   DropdownMenu,

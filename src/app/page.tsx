@@ -1,3 +1,5 @@
+'use client';
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle2, Sparkles } from 'lucide-react';
@@ -5,7 +7,7 @@ import ExecutiveBackground from '@/components/ExecutiveBackground';
 export default function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden">
-      <ExecutiveBackground className="absolute inset-0 z-0" />
+      <ExecutiveBackground className="fixed inset-0 z-0" />
       {/* Header with Login Button */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-white/5 backdrop-blur-sm border-b border-[#CCA43B]/10 shadow-sm transition-all duration-300">
         <div className="container mx-auto px-4 py-3 md:py-4 transition-all duration-300">

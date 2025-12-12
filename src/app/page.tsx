@@ -178,10 +178,10 @@ export default function Home() {
                 </p>
               </article>
 
-              <article className="rounded-3xl border border-gray-200 bg-white p-6 md:p-7 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-right duration-700">
+              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-right duration-700">
                 <h3 className="text-lg md:text-xl font-semibold text-white mb-2">2. The Freedom Matrix Implementation Toolkit</h3>
                 <p className="text-white/90 mb-3">A complete suite of operational tools, including:</p>
-                <ul className="space-y-1.5 text-white/80 text-sm">
+                <ul className="space-y-1.5 text-white/90 text-sm">
                   <li>Role scorecard templates</li>
                   <li>KPI dashboards and scorecards</li>
                   <li>Cash flow forecasting tools</li>
@@ -189,7 +189,7 @@ export default function Home() {
                   <li>Delegation and decision rights map</li>
                   <li>Meeting rhythm + leadership cadence frameworks</li>
                 </ul>
-                <p className="text-white/80 text-sm mt-3">Everything is plug-and-play.</p>
+                <p className="text-white/90 text-sm mt-3">Everything is plug-and-play.</p>
               </article>
 
               <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-left duration-700 delay-100">
@@ -207,16 +207,16 @@ export default function Home() {
                 <p className="text-white/80 text-sm mt-3">This community alone accelerates growth.</p>
               </article>
 
-              <article className="rounded-3xl border border-gray-200 bg-white p-6 md:p-7 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-right duration-700 delay-100">
+              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-right duration-700 delay-100">
                 <h3 className="text-lg md:text-xl font-semibold text-white mb-2">4. Quarterly Implementation Labs</h3>
                 <p className="text-white/90 mb-2">Hands-on working sessions where we:</p>
-                <ul className="space-y-1.5 text-white/80 text-sm">
+                <ul className="space-y-1.5 text-white/90 text-sm">
                   <li>Build or refine your firm's leadership structure</li>
                   <li>Optimize your financial visibility</li>
                   <li>Identify and fix your biggest operational bottlenecks</li>
                   <li>Create a path to owner autonomy over the next 12 months</li>
                 </ul>
-                <p className="text-white/80 text-sm mt-3">This is where the real transformation happens.</p>
+                <p className="text-white/90 text-sm mt-3">This is where the real transformation happens.</p>
               </article>
 
               <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all md:col-span-2 animate-in fade-in slide-in-from-bottom duration-700 delay-150">

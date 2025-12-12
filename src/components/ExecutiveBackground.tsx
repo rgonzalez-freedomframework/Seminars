@@ -23,10 +23,18 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
 
   useEffect(() => {
     const canvas = canvasRef.current
-    if (!canvas) return
+    if (!canvas) {
+      console.log('ExecutiveBackground: No canvas ref')
+      return
+    }
 
     const ctx = canvas.getContext('2d')
-    if (!ctx) return
+    if (!ctx) {
+      console.log('ExecutiveBackground: No context')
+      return
+    }
+
+    console.log('ExecutiveBackground: Initializing animation')
 
     let animationFrameId: number
     let particles: Particle[] = []
@@ -41,6 +49,8 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
       typeof window !== 'undefined' &&
       window.matchMedia &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    
+    console.log('ExecutiveBackground: Prefers reduced motion:', prefersReducedMotion)
 
     const isMobile = () =>
       typeof window !== 'undefined' &&
@@ -73,6 +83,8 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
 
       particles = []
 
+      console.log('ExecutiveBackground: Creating', particleCount, 'particles')
+
       // Initialize nodes (particles) with slow drift
       for (let i = 0; i < particleCount; i++) {
         particles.push({
@@ -84,6 +96,8 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
           alpha: 0.3 + Math.random() * 0.4,
         })
       }
+      
+      console.log('ExecutiveBackground: Particles created:', particles.length)
     }
 
     const drawStaticGradient = () => {
@@ -225,11 +239,14 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     resizeCanvas()
 
     if (prefersReducedMotion) {
+      console.log('ExecutiveBackground: Using static gradient (reduced motion)')
       drawStaticGradient()
       return () => {
         // nothing to clean beyond default
       }
     }
+
+    console.log('ExecutiveBackground: Starting animation loop')
 
     const handleResize = () => {
       resizeCanvas()
@@ -239,6 +256,7 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     animationFrameId = window.requestAnimationFrame(render)
 
     return () => {
+      console.log('ExecutiveBackground: Cleaning up')
       window.removeEventListener('resize', handleResize)
       if (animationFrameId) {
         window.cancelAnimationFrame(animationFrameId)

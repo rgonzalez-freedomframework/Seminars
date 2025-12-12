@@ -90,8 +90,8 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
         particles.push({
           x: Math.random() * width,
           y: Math.random() * height,
-          vx: (Math.random() - 0.5) * (mobile ? 0.3 : 0.5),
-          vy: (Math.random() - 0.5) * (mobile ? 0.3 : 0.5),
+          vx: (Math.random() - 0.5) * (mobile ? 0.5 : 0.8),
+          vy: (Math.random() - 0.5) * (mobile ? 0.5 : 0.8),
           radius: (mobile ? 1.2 : 1.6) + Math.random() * (mobile ? 0.8 : 1.2),
           alpha: 0.3 + Math.random() * 0.4,
         })
@@ -115,7 +115,7 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
     }
 
     const updateParticles = (delta: number) => {
-      const driftFactor = isMobile() ? 1.5 : 2.0
+      const driftFactor = isMobile() ? 2.5 : 3.0
       for (const p of particles) {
         p.x += p.vx * delta * 60 * driftFactor
         p.y += p.vy * delta * 60 * driftFactor

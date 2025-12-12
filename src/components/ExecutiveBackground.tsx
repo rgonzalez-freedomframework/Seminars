@@ -141,34 +141,69 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
       for (const p of particles) {
         // Enhanced pulsing effect - more pronounced and smooth
         const pulse = Math.sin(t * 1.5 + p.pulseOffset) * 0.5 + 0.5 // 0 to 1
-        const pulseScale = 1 + pulse * 0.35 // Scale from 1.0 to 1.35
-        const pulseAlpha = 0.15 + pulse * 0.15 // Alpha variation
+        const pulseScale = 1 + pulse * 0.25
+        const rotation = t * 0.3 + p.pulseOffset // Subtle rotation
         
-        // Soft outer glow with warm graphite - pulsing
+        // Soft outer glow with warm graphite
         const gradient = ctx.createRadialGradient(
           p.x,
           p.y,
           0,
           p.x,
           p.y,
-          p.radius * 7 * pulseScale,
+          p.radius * 6,
         )
-        gradient.addColorStop(0, `rgba(40, 38, 34, ${0.22 + pulseAlpha})`)
-        gradient.addColorStop(0.4, `rgba(40, 38, 34, ${0.11 + pulseAlpha * 0.5})`)
+        gradient.addColorStop(0, 'rgba(40, 38, 34, 0.18)')
+        gradient.addColorStop(0.4, 'rgba(40, 38, 34, 0.09)')
         gradient.addColorStop(1, 'rgba(40, 38, 34, 0)')
 
         ctx.globalAlpha = p.alpha
         ctx.fillStyle = gradient
         ctx.beginPath()
-        ctx.arc(p.x, p.y, p.radius * 4 * pulseScale, 0, Math.PI * 2)
+        ctx.arc(p.x, p.y, p.radius * 3.5, 0, Math.PI * 2)
         ctx.fill()
 
-        // Solid inner node with warm graphite - also pulsing
-        ctx.globalAlpha = 1
-        ctx.fillStyle = `rgba(40, 38, 34, ${0.35 + pulse * 0.15})`
+        // Draw hexagon node with rotation and pulsing
+        ctx.save()
+        ctx.translate(p.x, p.y)
+        ctx.rotate(rotation)
+        
+        const hexRadius = p.radius * 1.8 * pulseScale
+        
+        // Outer hexagon with pulse
+        ctx.globalAlpha = 0.4 + pulse * 0.15
+        ctx.fillStyle = 'rgba(40, 38, 34, 0.35)'
         ctx.beginPath()
-        ctx.arc(p.x, p.y, p.radius * 1.4 * pulseScale, 0, Math.PI * 2)
+        for (let i = 0; i < 6; i++) {
+          const angle = (Math.PI / 3) * i
+          const x = Math.cos(angle) * hexRadius
+          const y = Math.sin(angle) * hexRadius
+          if (i === 0) ctx.moveTo(x, y)
+          else ctx.lineTo(x, y)
+        }
+        ctx.closePath()
         ctx.fill()
+        
+        // Inner core hexagon - counter-rotating and pulsing inversely
+        const innerRotation = -rotation * 0.6
+        const innerPulse = 1 - pulse * 0.3
+        ctx.rotate(innerRotation - rotation)
+        
+        const innerRadius = p.radius * 0.9 * innerPulse
+        ctx.globalAlpha = 0.6 + (1 - pulse) * 0.2
+        ctx.fillStyle = 'rgba(40, 38, 34, 0.45)'
+        ctx.beginPath()
+        for (let i = 0; i < 6; i++) {
+          const angle = (Math.PI / 3) * i
+          const x = Math.cos(angle) * innerRadius
+          const y = Math.sin(angle) * innerRadius
+          if (i === 0) ctx.moveTo(x, y)
+          else ctx.lineTo(x, y)
+        }
+        ctx.closePath()
+        ctx.fill()
+        
+        ctx.restore()
       }
 
       ctx.globalAlpha = 1

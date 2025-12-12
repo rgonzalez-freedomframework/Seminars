@@ -11,13 +11,6 @@ const isPublicRoute=createRouteMatcher([
 ])
 
 export default clerkMiddleware(async(auth,req)=>{
-    // Protect non-public routes
-    if(!isPublicRoute(req)){
-        const session = await auth();
-        session.protect();
-        return;
-    }
-    
     // For root path, optionally redirect authenticated users to /home
     if(req.nextUrl.pathname === '/'){
         const viewLanding = req.nextUrl.searchParams.get('view') === 'landing';
@@ -29,6 +22,14 @@ export default clerkMiddleware(async(auth,req)=>{
             if(userId){
                 return Response.redirect(new URL('/home', req.url));
             }
+        }
+    }
+    
+    // Protect non-public routes
+    if(!isPublicRoute(req)){
+        const {userId} = await auth();
+        if(!userId){
+            return Response.redirect(new URL('/sign-in', req.url));
         }
     }
 });

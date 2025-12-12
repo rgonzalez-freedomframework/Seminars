@@ -6,6 +6,7 @@ const isPublicRoute=createRouteMatcher([
     '/sign-up(.*)',
     '/api(.*)',
     '/live-webinar(.*)',
+    '/webinar-registration(.*)',
     '/',
     '/admin/sign-in',
 ])

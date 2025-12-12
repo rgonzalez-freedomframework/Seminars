@@ -174,10 +174,10 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
       ctx.globalAlpha = 1
       ctx.restore()
     }
-pulsing animation
-      t += delta * 0.8 (delta: number) => {
-      // Time parameter for subtle breathing in the network
-      t += delta * 0.25
+
+    const updateLines = (delta: number) => {
+      // Time parameter for pulsing animation
+      t += delta * 0.8
     }
 
     const drawLines = () => {

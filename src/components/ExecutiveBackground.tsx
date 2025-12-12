@@ -162,7 +162,6 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
         ctx.arc(p.x, p.y, p.radius * 1.2, 0, Math.PI * 2)
         ctx.fill()
       }
-      }
 
       ctx.globalAlpha = 1
       ctx.restore()

@@ -53,7 +53,7 @@ export default function Home() {
           <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/30 bg-[#FFFEF9] backdrop-blur-md shadow-lg px-6 py-10 md:px-10 md:py-14 animate-in fade-in slide-in-from-bottom duration-700">
             <div className="absolute inset-0 pointer-events-none">
               <div className="absolute -top-24 -right-10 h-64 w-64 rounded-full bg-[#CCA43B]/20 blur-3xl" />
-              <div className="absolute -bottom-24 -left-10 h-72 w-72 rounded-full bg-[#1D2A38]/10 blur-3xl" />
+              <div className="absolute -bottom-24 -left-10 h-72 w-72 rounded-full bg-amber-200/20 blur-3xl" />
             </div>
 
             <div className="relative grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,1.3fr)] items-center">

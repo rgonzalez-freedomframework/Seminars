@@ -16,7 +16,7 @@ export default function Home() {
     <div className="relative min-h-screen overflow-hidden" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
       <ExecutiveBackground className="fixed inset-0 z-0" />
       {/* Header with Login Button */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#CCA43B]/25 shadow-sm transition-all duration-300">
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#F6F7F4] backdrop-blur-md border-b border-[#CCA43B]/25 shadow-sm transition-all duration-300">
         <div className="container mx-auto px-4 py-3 md:py-4 transition-all duration-300">
           <div className="flex justify-between items-center">
             <Link href="/?view=landing" className="text-xl md:text-2xl font-bold text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
@@ -29,7 +29,7 @@ export default function Home() {
                     Menu <ChevronDown className="ml-2 h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent className="bg-white/95 backdrop-blur-md border-[#1D2A38]/20">
+                <DropdownMenuContent className="bg-[#F6F7F4] backdrop-blur-md border-[#1D2A38]/20">
                   <DropdownMenuItem asChild>
                     <Link href="/webinar-registration" className="text-[#1D2A38] hover:text-[#CCA43B] cursor-pointer">
                       Webinar Registration
@@ -50,7 +50,7 @@ export default function Home() {
       <main className="pt-28 pb-20 relative z-10">
         <div className="container mx-auto px-4 max-w-6xl space-y-16">
           {/* Hero / Title */}
-          <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/30 bg-white/95 backdrop-blur-md shadow-lg px-6 py-10 md:px-10 md:py-14 animate-in fade-in slide-in-from-bottom duration-700">
+          <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md shadow-lg px-6 py-10 md:px-10 md:py-14 animate-in fade-in slide-in-from-bottom duration-700">
 
             <div className="relative grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,1.3fr)] items-center">
               <div>
@@ -64,7 +64,7 @@ export default function Home() {
                 <p className="text-lg md:text-xl text-[#1D2A38]/90 mb-3">
                   You've built a successful law firm. Now it's time to build your freedom.
                 </p>
-                <p className="text-base md:text-lg text-[#1D2A38]/70 mb-6">
+                <p className="text-base md:text-lg text-[#1D2A38]/85 mb-6">
                   The Freedom Framework is the only program designed specifically for 7- and 8-figure law firm owners who want a business that runs with clarity, profitability, and autonomy — without the daily drain of being the bottleneck.
                 </p>
 
@@ -81,9 +81,9 @@ export default function Home() {
                 </div>
               </div>
 
-              <div className="relative rounded-2xl border border-[#1D2A38]/25 bg-white/95 p-6 md:p-7 backdrop-blur-md shadow-lg animate-in fade-in slide-in-from-right duration-700 delay-150">
+              <div className="relative rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-6 md:p-7 backdrop-blur-md shadow-lg animate-in fade-in slide-in-from-right duration-700 delay-150">
                 <h2 className="text-sm font-semibold text-[#1D2A38] mb-3 uppercase tracking-[0.18em]">Program Snapshot</h2>
-                <ul className="space-y-3 text-sm text-[#1D2A38]/80">
+                <ul className="space-y-3 text-sm text-[#1D2A38]/90">
                   <li className="flex items-start gap-2">
                     <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B]" />
                     <span>Built for 7- and 8-figure law firm owners</span>
@@ -107,12 +107,12 @@ export default function Home() {
 
           {/* Who This Is For */}
           <section id="who-this-is-for" className="grid gap-8 md:grid-cols-[minmax(0,1.8fr)_minmax(0,1.2fr)] items-start">
-            <div className="rounded-3xl border border-[#1D2A38]/25 bg-white/95 backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-left duration-700">
+            <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-left duration-700">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Who This Is For</h2>
               <p className="text-[#1D2A38]/90 mb-4">
                 This program is made for law firm owners who:
               </p>
-              <ul className="space-y-3 text-[#1D2A38]/80">
+              <ul className="space-y-3 text-[#1D2A38]/90">
                 {[
                   'Have surpassed $2M in revenue and are feeling the weight of growth',
                   'Are still involved in too much day-to-day decision-making',
@@ -176,13 +176,13 @@ export default function Home() {
           <section id="inside-program" className="space-y-6">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">⭐ Here's What You Get Inside the Program</h2>
-              <p className="text-sm md:text-base text-[#1D2A38]/70 max-w-md">
+              <p className="text-sm md:text-base text-[#1D2A38]/85 max-w-md">
                 Every element is built to move your firm from owner-dependent to owner-optional — without adding unnecessary complexity.
               </p>
             </div>
 
             <div className="grid gap-6 md:gap-8 md:grid-cols-2">
-              <article className="rounded-3xl border border-[#1D2A38]/25 bg-white/95 backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700">
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700">
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">1. Monthly Deep-Dive Workshops (Live + Recorded)</h3>
                 <p className="text-[#1D2A38]/90 mb-3">
                   Each month focuses on one of the three operational shifts:
@@ -197,7 +197,7 @@ export default function Home() {
                 </p>
               </article>
 
-              <article className="rounded-3xl border border-[#1D2A38]/25 bg-white/95 backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-right duration-700">
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-right duration-700">
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">2. The Freedom Matrix Implementation Toolkit</h3>
                 <p className="text-[#1D2A38]/90 mb-3">A complete suite of operational tools, including:</p>
                 <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">
@@ -211,7 +211,7 @@ export default function Home() {
                 <p className="text-[#1D2A38]/90 text-sm mt-3">Everything is plug-and-play.</p>
               </article>
 
-              <article className="rounded-3xl border border-[#1D2A38]/25 bg-white/95 backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700 delay-100">
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700 delay-100">
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">3. Private Freedom Owners Community</h3>
                 <p className="text-[#1D2A38]/90 mb-2">
                   A curated group of law firm owners committed to scaling with intention, not burnout.
@@ -238,10 +238,10 @@ export default function Home() {
                 <p className="text-[#1D2A38]/90 text-sm mt-3">This is where the real transformation happens.</p>
               </article>
 
-              <article className="rounded-3xl border border-[#1D2A38]/25 bg-white/95 backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all md:col-span-2 animate-in fade-in slide-in-from-bottom duration-700 delay-150">
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all md:col-span-2 animate-in fade-in slide-in-from-bottom duration-700 delay-150">
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">5. Office Hours</h3>
                 <p className="text-[#1D2A38]/90 mb-2">Monthly office hours where you can bring:</p>
-                <ul className="grid md:grid-cols-2 gap-x-6 gap-y-1.5 text-[#1D2A38]/80 text-sm">
+                <ul className="grid md:grid-cols-2 gap-x-6 gap-y-1.5 text-[#1D2A38]/90 text-sm">
                   <li>Team issues</li>
                   <li>Profit questions</li>
                   <li>Billing model complexities</li>
@@ -249,7 +249,7 @@ export default function Home() {
                   <li>Operational fires</li>
                   <li>Leadership challenges</li>
                 </ul>
-                <p className="text-[#1D2A38]/80 text-sm mt-3">
+                <p className="text-[#1D2A38]/90 text-sm mt-3">
                   You get real-time answers from someone who’s scaled firms, not just studied them.
                 </p>
               </article>
@@ -258,13 +258,13 @@ export default function Home() {
 
           {/* Result */}
           <section id="result" className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1.6fr)] items-start">
-            <div className="rounded-3xl border border-[#1D2A38]/25 bg-white/95 backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-left duration-700">
+            <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-left duration-700">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ The Result?</h2>
               <p className="text-[#1D2A38]/90 mb-3">
                 A business that funds the life you want — without consuming it.
               </p>
               <p className="text-[#1D2A38]/90 mb-4">You'll walk away with:</p>
-              <ul className="space-y-2 text-[#1D2A38]/80 text-sm">
+              <ul className="space-y-2 text-[#1D2A38]/90 text-sm">
                 <li className="flex items-start gap-2">
                   <CheckCircle2 className="h-4 w-4 mt-1 text-[#CCA43B]" />
                   <span>A leadership team that takes ownership</span>
@@ -311,7 +311,7 @@ export default function Home() {
                   </li>
                 ))}
               </ol>
-              <p className="text-[#1D2A38]/80 mt-4 text-sm md:text-base">
+              <p className="text-[#1D2A38]/90 mt-4 text-sm md:text-base">
                 This is the roadmap used by 7- and 8-figure firms that run without owner burnout.
               </p>
             </div>
@@ -321,12 +321,12 @@ export default function Home() {
           <section id="program-options" className="space-y-6">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">⭐ Program Options</h2>
-              <p className="text-sm md:text-base text-[#1D2A38]/70 max-w-md">
+              <p className="text-sm md:text-base text-[#1D2A38]/85 max-w-md">
                 (Pricing intentionally omitted so you can adjust or add a call-to-apply.)
               </p>
             </div>
             <div className="grid gap-6 md:grid-cols-3">
-              <article className="rounded-3xl border border-[#1D2A38]/25 bg-white/95 backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700">
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Freedom Framework Membership</h3>
                 <p className="text-sm text-[#1D2A38]/90 mb-3">
                   Includes: Monthly deep-dives, toolkit access, community, office hours.
@@ -336,7 +336,7 @@ export default function Home() {
                 </p>
               </article>
 
-              <article className="rounded-3xl border-2 border-[#CCA43B] bg-white/95 backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-bottom duration-700">
+              <article className="rounded-3xl border-2 border-[#CCA43B] bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-bottom duration-700">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Freedom Framework Accelerator</h3>
                 <p className="text-sm text-[#1D2A38]/90 mb-3">
                   Includes: Everything above + quarterly implementation labs + direct advisory.
@@ -346,7 +346,7 @@ export default function Home() {
                 </p>
               </article>
 
-              <article className="rounded-3xl border border-[#1D2A38]/25 bg-white/95 backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-right duration-700">
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-right duration-700">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Private Advisory Partnership</h3>
                 <p className="text-sm text-[#1D2A38]/90 mb-3">
                   High-touch, firm-specific operational transformation with deep advisory support.
@@ -359,7 +359,7 @@ export default function Home() {
           </section>
 
           {/* Final CTA */}
-          <section id="cta" className="rounded-3xl border border-[#CCA43B]/50 bg-white/95 backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
+          <section id="cta" className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Next Step: Join the Freedom Framework™</h2>
             <p className="text-[#1D2A38]/90 mb-6 max-w-2xl mx-auto text-sm md:text-base">
               Click below to secure your spot in the next session. Build the firm that gives you back your time, your profit, and your peace.
@@ -375,7 +375,7 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="py-8 md:py-12 border-t border-[#1D2A38]/20 bg-white/95/50 backdrop-blur-sm relative z-10 shadow-sm">
+      <footer className="py-8 md:py-12 border-t border-[#1D2A38]/20 bg-[#F6F7F4]/50 backdrop-blur-sm relative z-10 shadow-sm">
         <div className="container mx-auto px-4 text-center">
           <p className="text-[#1D2A38]/90 mb-2">
             Freedom Framework™ for Law Firm Owners

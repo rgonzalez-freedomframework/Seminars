@@ -11,7 +11,7 @@ export default function WebinarRegistration() {
       <ExecutiveBackground className="fixed inset-0 z-0" />
       
       {/* Header with Login Button */}
-      <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#CCA43B]/20 transition-all duration-300" >
+      <header className="fixed top-0 left-0 right-0 z-50 bg-[#F6F7F4] backdrop-blur-sm border-b border-[#CCA43B]/20 transition-all duration-300" >
         <div className="container mx-auto px-4 py-3 md:py-4 transition-all duration-300">
           <div className="flex justify-between items-center">
             <Link href="/" className="text-xl md:text-2xl font-bold text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
@@ -19,12 +19,12 @@ export default function WebinarRegistration() {
             </Link>
             <div className="flex items-center gap-3">
               <Link href="/">
-                <Button size="lg" variant="outline" className="!border-2 !border-[#1D2A38]/40 !text-[#1D2A38] !bg-white/95 hover:!bg-[#CCA43B]/20 font-semibold px-4 py-2 transition-all" >
+                <Button size="lg" variant="outline" className="!border-2 !border-[#1D2A38]/40 !text-[#1D2A38] !bg-[#F6F7F4] hover:!bg-[#CCA43B]/20 font-semibold px-4 py-2 transition-all" >
                   <Home className="h-4 w-4 mr-2" /> Home
                 </Button>
               </Link>
               <Link href="/sign-in">
-                <Button size="lg" variant="outline" className="!border-2 !border-[#1D2A38]/40 !text-[#1D2A38] !bg-white/95 hover:!bg-[#CCA43B]/20 font-semibold px-4 py-2 md:px-6 md:py-3 transition-all" >
+                <Button size="lg" variant="outline" className="!border-2 !border-[#1D2A38]/40 !text-[#1D2A38] !bg-[#F6F7F4] hover:!bg-[#CCA43B]/20 font-semibold px-4 py-2 md:px-6 md:py-3 transition-all" >
                   Login
                 </Button>
               </Link>
@@ -38,7 +38,7 @@ export default function WebinarRegistration() {
         <div className="container mx-auto px-4 max-w-6xl space-y-16">
           
           {/* Hero Section */}
-          <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/30 bg-white/95 backdrop-blur-md px-6 py-10 md:px-10 md:py-14 shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
+          <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md px-6 py-10 md:px-10 md:py-14 shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
 
             <div className="relative text-center space-y-6">
               <p className="inline-flex items-center gap-2 rounded-full bg-[#1D2A38] text-xs md:text-sm font-semibold tracking-[0.18em] text-white px-4 py-1 uppercase">
@@ -54,7 +54,7 @@ export default function WebinarRegistration() {
                 A Free 2-Hour Masterclass for Law Firm Owners Generating $2M+
               </p>
               
-              <p className="text-base md:text-lg text-[#1D2A38]/80 max-w-3xl mx-auto">
+              <p className="text-base md:text-lg text-[#1D2A38]/90 max-w-3xl mx-auto">
                 Unlock the three operational shifts that allow 7- and 8-figure firms to scale profitably without tying the owner's life to the business.
               </p>
               
@@ -77,7 +77,7 @@ export default function WebinarRegistration() {
           </section>
 
           {/* Why This Training is Different */}
-          <section className="rounded-3xl border border-[#CCA43B]/30 bg-white/95 backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
+          <section className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Why This Training is Different (And Why You Need the Diagnostic)</h2>
             
             <p className="text-[#1D2A38]/90 mb-4 text-lg">
@@ -88,7 +88,7 @@ export default function WebinarRegistration() {
               They don't know exactly where their firm sits on the Freedom Matrix™, or which operational bottlenecks are silently holding them back.
             </p>
 
-            <div className="bg-white/95 rounded-2xl border border-[#CCA43B]/40 p-6 md:p-8">
+            <div className="bg-[#F6F7F4] rounded-2xl border border-[#CCA43B]/40 p-6 md:p-8">
               <div className="flex items-start gap-3 mb-4">
                 <Gift className="h-6 w-6 text-[#CCA43B] flex-shrink-0 mt-1" />
                 <div>
@@ -120,7 +120,7 @@ export default function WebinarRegistration() {
                 </li>
               </ul>
 
-              <p className="text-[#1D2A38]/80 italic mt-4 ml-9">Your score will arrive by email once you register.</p>
+              <p className="text-[#1D2A38]/90 italic mt-4 ml-9">Your score will arrive by email once you register.</p>
             </div>
           </section>
 
@@ -130,7 +130,7 @@ export default function WebinarRegistration() {
             <p className="text-[#1D2A38]/90 text-center mb-8">This masterclass will give you clarity on:</p>
 
             <div className="grid gap-6 md:gap-8 md:grid-cols-2">
-              <article className="rounded-3xl border border-[#1D2A38]/25 bg-white/95 backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">1. The Freedom Matrix™</h3>
                 <p className="text-[#1D2A38]/90 mb-3">
                   How to diagnose exactly what's limiting your firm's ability to scale without consuming you.
@@ -143,7 +143,7 @@ export default function WebinarRegistration() {
                 </ul>
               </article>
 
-              <article className="rounded-3xl border border-[#1D2A38]/25 bg-white/95 backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">2. The Hidden Traps of Hourly, Flat-Fee, and Contingency Models</h3>
                 <p className="text-[#1D2A38]/90 mb-3">Every billing model contains a built-in freedom trap.</p>
                 <p className="text-[#1D2A38]/90 mb-2">You'll learn:</p>
@@ -155,7 +155,7 @@ export default function WebinarRegistration() {
                 </ul>
               </article>
 
-              <article className="rounded-3xl border border-[#1D2A38]/25 bg-white/95 backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">3. The Three Operational Shifts</h3>
                 <p className="text-[#1D2A38]/90 mb-3">The exact systems used by thriving firms in the Freedom Zone:</p>
                 <ul className="space-y-2 text-[#1D2A38]/90 text-sm">
@@ -174,7 +174,7 @@ export default function WebinarRegistration() {
                 </ul>
               </article>
 
-              <article className="rounded-3xl border border-[#1D2A38]/25 bg-white/95 backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">4. How High-Performing Firms Scale Without Sacrifice</h3>
                 <p className="text-[#1D2A38]/90 mb-3">You'll see how these shifts create:</p>
                 <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">
@@ -229,7 +229,7 @@ export default function WebinarRegistration() {
 
           {/* Who This Is For */}
           <section className="grid gap-8 md:grid-cols-2 items-start">
-            <div className="rounded-3xl border border-[#1D2A38]/25 bg-white/95 backdrop-blur-md p-6 md:p-8 shadow-md">
+            <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-md">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Who This Masterclass Is For</h2>
               <p className="text-[#1D2A38]/90 mb-4">This training is specifically for:</p>
               <ul className="space-y-3 text-[#1D2A38]/90">
@@ -259,7 +259,7 @@ export default function WebinarRegistration() {
               </p>
             </div>
 
-            <div className="rounded-3xl border border-[#CCA43B]/40 bg-white/95 backdrop-blur-md p-6 md:p-8 shadow-md">
+            <div className="rounded-3xl border border-[#CCA43B]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-md">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ About Your Instructor</h2>
               <h3 className="text-xl font-semibold text-[#1D2A38] mb-2">Janelle Sam, MBA (Cornell)</h3>
               <p className="text-[#1D2A38]/90 mb-3">
@@ -275,31 +275,31 @@ export default function WebinarRegistration() {
           </section>
 
           {/* Event Details */}
-          <section className="rounded-3xl border border-[#CCA43B]/30 bg-white/95 backdrop-blur-md p-6 md:p-8 text-center shadow-md">
+          <section className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 text-center shadow-md">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-6">⭐ Event Details</h2>
             
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 max-w-4xl mx-auto">
               <div className="flex flex-col items-center gap-2">
                 <Calendar className="h-8 w-8 text-[#CCA43B]" />
-                <p className="text-sm text-[#1D2A38]/70">Date</p>
+                <p className="text-sm text-[#1D2A38]/85">Date</p>
                 <p className="text-[#1D2A38]/90 font-semibold">[Insert date]</p>
               </div>
 
               <div className="flex flex-col items-center gap-2">
                 <Clock className="h-8 w-8 text-[#CCA43B]" />
-                <p className="text-sm text-[#1D2A38]/70">Time</p>
+                <p className="text-sm text-[#1D2A38]/85">Time</p>
                 <p className="text-[#1D2A38]/90 font-semibold">[Insert time]</p>
               </div>
 
               <div className="flex flex-col items-center gap-2">
                 <Clock className="h-8 w-8 text-[#CCA43B]" />
-                <p className="text-sm text-[#1D2A38]/70">Length</p>
+                <p className="text-sm text-[#1D2A38]/85">Length</p>
                 <p className="text-[#1D2A38]/90 font-semibold">2 hours</p>
               </div>
 
               <div className="flex flex-col items-center gap-2">
                 <Video className="h-8 w-8 text-[#CCA43B]" />
-                <p className="text-sm text-[#1D2A38]/70">Format</p>
+                <p className="text-sm text-[#1D2A38]/85">Format</p>
                 <p className="text-[#1D2A38]/90 font-semibold">Live on Zoom</p>
               </div>
             </div>
@@ -315,22 +315,22 @@ export default function WebinarRegistration() {
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] text-center">⭐ FAQ</h2>
             
             <div className="grid gap-4">
-              <div className="rounded-2xl border border-[#1D2A38]/25 bg-white/95 p-5 shadow-sm hover:shadow-md transition-all">
+              <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Will this training be recorded?</h3>
                 <p className="text-[#1D2A38]/90">Yes — registrants will receive the replay link.</p>
               </div>
 
-              <div className="rounded-2xl border border-[#1D2A38]/25 bg-white/95 p-5 shadow-sm hover:shadow-md transition-all">
+              <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Is this for small or new firms?</h3>
                 <p className="text-[#1D2A38]/90">No — the content in this webinar would be challenging for a firm that does not have admin support in operations to implement. This is recommended for firms that have generated at least $2M+ in annual revenue.</p>
               </div>
 
-              <div className="rounded-2xl border border-[#1D2A38]/25 bg-white/95 p-5 shadow-sm hover:shadow-md transition-all">
+              <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Will I get my diagnostic without providing email?</h3>
                 <p className="text-[#1D2A38]/90">No — your quadrant summary is delivered by email only.</p>
               </div>
 
-              <div className="rounded-2xl border border-[#1D2A38]/25 bg-white/95 p-5 shadow-sm hover:shadow-md transition-all">
+              <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Is this a sales webinar?</h3>
                 <p className="text-[#1D2A38]/90">The training is 100% valuable on its own. At the end, you'll hear about the Freedom Framework™ 12-month program, but there is zero pressure to join.</p>
               </div>
@@ -338,7 +338,7 @@ export default function WebinarRegistration() {
           </section>
 
           {/* Final CTA */}
-          <section className="rounded-3xl border border-[#CCA43B]/50 bg-white/95 backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg">
+          <section className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Ready to Discover Your Path to Freedom?</h2>
             <p className="text-[#1D2A38]/90 mb-6 max-w-2xl mx-auto text-base md:text-lg">
               If you want a law firm that scales profitably and gives you back your life… start by learning where your firm stands today.
@@ -357,7 +357,7 @@ export default function WebinarRegistration() {
       </main>
 
       {/* Footer */}
-      <footer className="py-8 md:py-12 border-t border-[#1D2A38]/25 bg-white/95/50 backdrop-blur-sm relative z-10 shadow-sm">
+      <footer className="py-8 md:py-12 border-t border-[#1D2A38]/40 bg-[#F6F7F4]/50 backdrop-blur-sm relative z-10 shadow-sm">
         <div className="container mx-auto px-4 text-center">
           <p className="text-[#1D2A38]/90 mb-2">
             Freedom Framework™ for Law Firm Owners

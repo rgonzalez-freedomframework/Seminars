@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle2, Sparkles, Gift, Calendar, Clock, Video } from 'lucide-react';
+import { ArrowRight, CheckCircle2, Sparkles, Gift, Calendar, Clock, Video, Home } from 'lucide-react';
 import ExecutiveBackground from '@/components/ExecutiveBackground';
 
 export default function WebinarRegistration() {
@@ -17,11 +17,18 @@ export default function WebinarRegistration() {
             <Link href="/" className="text-xl md:text-2xl font-bold text-white hover:text-[#CCA43B] transition-colors">
               Freedom Framework™
             </Link>
-            <Link href="/sign-in">
-              <Button size="lg" variant="outline" className="!border-2 !border-white/40 !text-white !bg-white/10 hover:!bg-white hover:!text-white font-semibold px-4 py-2 md:px-6 md:py-3 transition-all shadow-sm">
-                Login
-              </Button>
-            </Link>
+            <div className="flex items-center gap-3">
+              <Link href="/">
+                <Button size="lg" variant="outline" className="!border-2 !border-white/40 !text-white !bg-white/10 hover:!bg-white/20 font-semibold px-4 py-2 transition-all shadow-sm">
+                  <Home className="h-4 w-4 mr-2" /> Home
+                </Button>
+              </Link>
+              <Link href="/sign-in">
+                <Button size="lg" variant="outline" className="!border-2 !border-white/40 !text-white !bg-white/10 hover:!bg-white hover:!text-white font-semibold px-4 py-2 md:px-6 md:py-3 transition-all shadow-sm">
+                  Login
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </header>

@@ -28,6 +28,7 @@ type QuadrantResult = {
   description: string
   primaryFocus: string
   scoreRange: string
+  nextSteps: string
 }
 
 const questions = {
@@ -167,24 +168,28 @@ const quadrants: Record<string, QuadrantResult> = {
     description: 'High stress, low freedom — firm fully owner-dependent, inconsistent profit.',
     primaryFocus: 'Predictability + Accountability',
     scoreRange: '11–20',
+    nextSteps: 'Focus on building predictable systems and establishing team accountability. Start by documenting your core processes and delegating routine tasks.',
   },
   drift: {
     name: 'The Drift Zone',
     description: 'Stable operations but underperforming profit or growth; comfort replaces ambition.',
     primaryFocus: 'Profit Optimization + Metrics',
     scoreRange: '21–28',
+    nextSteps: 'Implement key performance metrics and profit optimization strategies. Review your pricing model and identify opportunities to increase revenue per client.',
   },
   golden: {
     name: 'The Golden Cage',
     description: 'Strong financials but low autonomy; owner still the bottleneck.',
     primaryFocus: 'Leadership + Delegation Systems',
     scoreRange: '29–36',
+    nextSteps: 'Develop leadership within your team and create delegation frameworks. Focus on removing yourself from day-to-day operations by empowering key leaders.',
   },
   freedom: {
     name: 'The Freedom Zone',
     description: 'Aligned profit, time, and leadership; firm runs on systems.',
     primaryFocus: 'Continuous Optimization + Autonomy',
     scoreRange: '37–44',
+    nextSteps: 'Continue optimizing your systems and exploring growth opportunities. Consider scaling your impact through coaching, acquisitions, or new practice areas.',
   },
 }
 

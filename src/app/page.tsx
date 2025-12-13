@@ -31,6 +31,11 @@ export default function Home() {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="bg-[#F6F7F4] backdrop-blur-md border-[#1D2A38]/20">
                   <DropdownMenuItem asChild>
+                    <Link href="/diagnostic" className="text-[#1D2A38] hover:text-[#CCA43B] cursor-pointer">
+                      Freedom Matrix Diagnostic
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
                     <Link href="/webinar-registration" className="text-[#1D2A38] hover:text-[#CCA43B] cursor-pointer">
                       Webinar Registration
                     </Link>

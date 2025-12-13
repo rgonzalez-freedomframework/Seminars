@@ -196,6 +196,7 @@ function calculateQuadrant(score: number): QuadrantResult {
 }
 
 export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean; onClose?: () => void }) {
+  const formRef = useRef<HTMLDivElement>(null)
   const [currentSection, setCurrentSection] = useState(1)
   const [answers, setAnswers] = useState<Partial<DiagnosticAnswers>>({})
   const [showEmailCapture, setShowEmailCapture] = useState(false)
@@ -204,6 +205,20 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  // Scroll to form on section or view change
+  useEffect(() => {
+    if (formRef.current) {
+      const headerOffset = 100
+      const elementPosition = formRef.current.getBoundingClientRect().top
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      })
+    }
+  }, [currentSection, showEmailCapture, showResults])
   const formRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -276,7 +291,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
 
   if (showResults) {
     return (
-      <div className="max-w-4xl mx-auto space-y-8">
+      <div ref={formRef} className="max-w-4xl mx-auto space-y-8">
         <div className="text-center space-y-4">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1D2A38]">Your Results</h2>
           <p className="text-lg text-[#1D2A38]/90">Based on your responses, here's where your firm stands:</p>

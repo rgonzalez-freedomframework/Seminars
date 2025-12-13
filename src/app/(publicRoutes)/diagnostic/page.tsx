@@ -6,10 +6,10 @@ import { Button } from '@/components/ui/button'
 
 export default function DiagnosticPage() {
   return (
-    <div className="relative">
+    <div className="relative min-h-screen">
       <ExecutiveBackground />
 
-      <div className="relative z-10">
+      <div className="relative z-10 flex flex-col min-h-screen">
         {/* Header */}
         <header className="fixed top-0 left-0 right-0 z-50 bg-[#F6F7F4] backdrop-blur-md border-b border-[#CCA43B]/25 shadow-sm transition-all duration-300">
           <div className="mx-auto px-4 md:px-6 max-w-7xl">
@@ -28,7 +28,7 @@ export default function DiagnosticPage() {
         </header>
 
         {/* Main Content */}
-        <main className="pt-28 pb-20">
+        <main className="flex-1 pt-28 pb-12">
           <div className="mx-auto px-4 md:px-6 max-w-6xl">
             {/* Hero */}
             <section className="text-center space-y-6 mb-12">

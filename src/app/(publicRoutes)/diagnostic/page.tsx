@@ -49,7 +49,7 @@ export default function DiagnosticPage() {
         </main>
 
         {/* Footer */}
-        <footer className="py-8 md:py-12 border-t border-[#1D2A38]/20 bg-white/50 backdrop-blur-sm relative z-10 shadow-sm">
+        <footer className="py-6 border-t border-[#1D2A38]/20 bg-white/50 backdrop-blur-sm relative z-10 shadow-sm">
           <div className="mx-auto px-4 text-center">
             <p className="text-[#1D2A38]/90 mb-2">
               Freedom Framework™ for Law Firm Owners

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
+import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -201,7 +201,6 @@ function calculateQuadrant(score: number): QuadrantResult {
 }
 
 export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean; onClose?: () => void }) {
-  const formRef = useRef<HTMLDivElement>(null)
   const [currentSection, setCurrentSection] = useState(1)
   const [answers, setAnswers] = useState<Partial<DiagnosticAnswers>>({})
   const [showEmailCapture, setShowEmailCapture] = useState(false)
@@ -210,20 +209,6 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
-
-  // Scroll to form on section or view change
-  useEffect(() => {
-    if (formRef.current) {
-      const headerOffset = 100
-      const elementPosition = formRef.current.getBoundingClientRect().top
-      const offsetPosition = elementPosition + window.pageYOffset - headerOffset
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      })
-    }
-  }, [currentSection, showEmailCapture, showResults])
 
   const handleAnswer = (questionId: string, value: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }))
@@ -290,7 +275,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
 
   if (showResults) {
     return (
-      <div ref={formRef} className="max-w-4xl mx-auto space-y-8">
+      <div className="max-w-4xl mx-auto space-y-8">
         <div className="text-center space-y-4">
           <h2 className="text-3xl md:text-4xl font-bold text-[#1D2A38]">Your Results</h2>
           <p className="text-lg text-[#1D2A38]/90">Based on your responses, here's where your firm stands:</p>
@@ -336,7 +321,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
 
   if (showEmailCapture) {
     return (
-      <div ref={formRef} className="max-w-2xl mx-auto">
+      <div className="max-w-2xl mx-auto">
         <Card className="border-0 bg-[#F6F7F4] p-8 md:p-10 shadow-lg">
           <div className="text-center space-y-4 mb-8">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">Get Your Results</h2>
@@ -413,7 +398,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
   const sectionQuestions = getSectionQuestions(currentSection)
 
   return (
-    <div ref={formRef} className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-4xl mx-auto space-y-8">
       {/* Progress Bar */}
       <div className="space-y-2">
         <div className="flex justify-between text-sm text-[#1D2A38]/90">

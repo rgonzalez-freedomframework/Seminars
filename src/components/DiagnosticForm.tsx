@@ -219,10 +219,287 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
       })
     }
   }, [currentSection, showEmailCapture, showResults])
-  const formRef = useRef<HTMLDivElement>(null)
 
-  useEffect(() => {
-    if (formRef.current) {
+  const handleAnswer = (questionId: string, value: string) => {
+    setAnswers((prev) => ({ ...prev, [questionId]: value }))
+  }
+
+  const getSectionQuestions = (section: number) => {
+    if (section === 1) return questions.section1.questions
+    if (section === 2) return questions.section2.questions
+    return questions.section3.questions
+  }
+
+  const getSectionInfo = (section: number) => {
+    if (section === 1) return { title: questions.section1.title, subtitle: questions.section1.subtitle }
+    if (section === 2) return { title: questions.section2.title, subtitle: questions.section2.subtitle }
+    return { title: questions.section3.title, subtitle: questions.section3.subtitle }
+  }
+
+  const isSectionComplete = (section: number) => {
+    const sectionQuestions = getSectionQuestions(section)
+    return sectionQuestions.every((q) => answers[q.id as keyof DiagnosticAnswers])
+  }
+
+  const handleNext = () => {
+    if (currentSection < 3) {
+      setCurrentSection(currentSection + 1)
+    } else {
+      setShowEmailCapture(true)
+    }
+  }
+
+  const handleBack = () => {
+    if (currentSection > 1) {
+      setCurrentSection(currentSection - 1)
+    }
+  }
+
+  const calculateScore = () => {
+    return Object.values(answers).reduce((sum, value) => sum + parseInt(value || '0'), 0)
+  }
+
+  const handleSubmitEmail = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmitting(true)
+    
+    try {
+      const score = calculateScore()
+      const quadrant = calculateQuadrant(score)
+      
+      // TODO: Send to backend API
+      console.log('Submitting:', { firstName, lastName, email, score, quadrant: quadrant.name })
+      
+      // Show results
+      setShowResults(true)
+    } catch (error) {
+      console.error('Error submitting:', error)
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  const score = calculateScore()
+  const quadrant = calculateQuadrant(score)
+  const progress = ((currentSection - 1) / 3) * 100
+
+  if (showResults) {
+    return (
+      <div ref={formRef} className="max-w-4xl mx-auto space-y-8">
+        <div className="text-center space-y-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1D2A38]">Your Results</h2>
+          <p className="text-lg text-[#1D2A38]/90">Based on your responses, here's where your firm stands:</p>
+        </div>
+
+        <Card className="border-2 border-[#CCA43B] bg-[#F6F7F4] p-8 md:p-10 shadow-xl">
+          <div className="text-center space-y-6">
+            <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#CCA43B]/20 border-2 border-[#CCA43B]">
+              <span className="text-3xl font-bold text-[#CCA43B]">{score}</span>
+            </div>
+            
+            <div>
+              <h3 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-2">{quadrant.name}</h3>
+              <p className="text-sm text-[#1D2A38]/85 uppercase tracking-wider">Score Range: {quadrant.scoreRange}</p>
+            </div>
+            
+            <p className="text-lg text-[#1D2A38]/90 max-w-2xl mx-auto">{quadrant.description}</p>
+            
+            <div className="pt-6 border-t border-[#1D2A38]/20">
+              <h4 className="font-semibold text-[#1D2A38] mb-3">Next Steps:</h4>
+              <p className="text-[#1D2A38]/90">{quadrant.nextSteps}</p>
+            </div>
+          </div>
+        </Card>
+
+        <div className="text-center space-y-4">
+          <p className="text-lg text-[#1D2A38]/90">
+            Ready to move toward freedom?
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
+            <Button className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white hover:text-white font-bold shadow-lg hover:shadow-xl transition-all">
+              Register for Webinar
+              <Calendar className="h-4 w-4 ml-2" />
+            </Button>
+            <Button variant="outline" className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold" onClick={onClose}>
+              Close
+            </Button>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  if (showEmailCapture) {
+    return (
+      <div ref={formRef} className="max-w-2xl mx-auto">
+        <Card className="border-0 bg-[#F6F7F4] p-8 md:p-10 shadow-lg">
+          <div className="text-center space-y-4 mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">Get Your Results</h2>
+            <p className="text-[#1D2A38]/90">
+              Enter your information to receive your Freedom Matrix Diagnostic results
+            </p>
+          </div>
+
+          <form onSubmit={handleSubmitEmail} className="space-y-6">
+            <div className="grid md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="firstName" className="text-[#1D2A38]">First Name</Label>
+                <Input
+                  id="firstName"
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required
+                  className="border-[#1D2A38]/40"
+                />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="lastName" className="text-[#1D2A38]">Last Name</Label>
+                <Input
+                  id="lastName"
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  required
+                  className="border-[#1D2A38]/40"
+                />
+              </div>
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="email" className="text-[#1D2A38]">Email Address</Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                className="border-[#1D2A38]/40"
+                placeholder="you@lawfirm.com"
+              />
+            </div>
+
+            <div className="flex gap-4 pt-4">
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => setShowEmailCapture(false)}
+                className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold"
+              >
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back
+              </Button>
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white hover:text-white font-bold shadow-lg hover:shadow-xl transition-all"
+              >
+                {isSubmitting ? 'Submitting...' : 'Get My Results'}
+                <Mail className="h-4 w-4 ml-2" />
+              </Button>
+            </div>
+          </form>
+        </Card>
+      </div>
+    )
+  }
+
+  const sectionInfo = getSectionInfo(currentSection)
+  const sectionQuestions = getSectionQuestions(currentSection)
+
+  return (
+    <div ref={formRef} className="max-w-4xl mx-auto space-y-8">
+      {/* Progress Bar */}
+      <div className="space-y-2">
+        <div className="flex justify-between text-sm text-[#1D2A38]/90">
+          <span>Section {currentSection} of 3</span>
+          <span>{Math.round(progress)}% Complete</span>
+        </div>
+        <div className="h-2 bg-[#1D2A38]/20 rounded-full overflow-hidden">
+          <div
+            className="h-full bg-gradient-to-r from-[#CCA43B] to-[#B8932F] transition-all duration-500"
+            style={{ width: `${progress}%` }}
+          />
+        </div>
+      </div>
+
+      {/* Section Header */}
+      <div className="text-center space-y-2">
+        <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">{sectionInfo.title}</h2>
+        <p className="text-[#1D2A38]/90 max-w-2xl mx-auto">{sectionInfo.subtitle}</p>
+      </div>
+
+      {/* Questions */}
+      <div className="space-y-6">
+        {sectionQuestions.map((question, index) => (
+          <Card key={question.id} className="border-0 bg-[#F6F7F4] p-6 md:p-8 shadow-lg">
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-[#1D2A38]">
+                {index + 1 + (currentSection - 1) * 4}. {question.text}
+              </h3>
+              <RadioGroup
+                value={answers[question.id as keyof DiagnosticAnswers] || ''}
+                onValueChange={(value) => handleAnswer(question.id, value)}
+              >
+                <div className="space-y-3">
+                  {question.options.map((option) => {
+                    const isSelected = answers[question.id as keyof DiagnosticAnswers] === option.value
+                    return (
+                    <div
+                      key={option.value}
+                      onClick={() => handleAnswer(question.id, option.value)}
+                      className={cn(
+                        "flex items-start space-x-3 p-4 rounded-lg border-2 transition-all cursor-pointer",
+                        isSelected 
+                          ? "border-[#CCA43B] bg-[#CCA43B]/10 shadow-md" 
+                          : "border-[#1D2A38]/30 hover:border-[#CCA43B]/50 hover:bg-[#CCA43B]/5 hover:shadow-sm"
+                      )}
+                    >
+                      <RadioGroupItem 
+                        value={option.value} 
+                        id={`${question.id}-${option.value}`} 
+                        className="mt-0.5 border-[#1D2A38]/40 data-[state=checked]:border-[#CCA43B] data-[state=checked]:bg-[#CCA43B]/10 pointer-events-none"
+                      />
+                      <Label
+                        htmlFor={`${question.id}-${option.value}`}
+                        className="flex-1 cursor-pointer text-[#1D2A38]/90 leading-relaxed pointer-events-none"
+                      >
+                        {option.label}
+                      </Label>
+                    </div>
+                  )})}
+                </div>
+              </RadioGroup>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      {/* Navigation */}
+      <div className="flex gap-4">
+        {currentSection > 1 && (
+          <Button
+            variant="outline"
+            onClick={handleBack}
+            className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold"
+          >
+            <ArrowLeft className="h-4 w-4 mr-2" />
+            Previous Section
+          </Button>
+        )}
+        <Button
+          onClick={handleNext}
+          disabled={!isSectionComplete(currentSection)}
+          className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white hover:text-white font-bold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          {currentSection === 3 ? 'Complete Diagnostic' : 'Next Section'}
+          <ArrowRight className="h-4 w-4 ml-2" />
+        </Button>
+      </div>
+    </div>
+  )
+}
+
       formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
     }
   }, [currentSection, showEmailCapture])

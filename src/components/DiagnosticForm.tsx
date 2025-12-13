@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -204,6 +204,13 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const formRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    if (formRef.current) {
+      formRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    }
+  }, [currentSection, showEmailCapture])
 
   const handleAnswer = (questionId: string, value: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }))
@@ -229,17 +236,14 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
   const handleNext = () => {
     if (currentSection < 3) {
       setCurrentSection(currentSection + 1)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
       setShowEmailCapture(true)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 
   const handleBack = () => {
     if (currentSection > 1) {
       setCurrentSection(currentSection - 1)
-      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 
@@ -278,7 +282,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
           <p className="text-lg text-[#1D2A38]/90">Based on your responses, here's where your firm stands:</p>
         </div>
 
-        <Card className="border-2 border-[#CCA43B]/50 bg-[#F6F7F4] p-8 md:p-10 shadow-xl">
+        <Card className="border-2 border-[#CCA43B] bg-[#F6F7F4] p-8 md:p-10 shadow-xl">
           <div className="text-center space-y-6">
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-[#CCA43B]/20 border-2 border-[#CCA43B]">
               <span className="text-3xl font-bold text-[#CCA43B]">{score}</span>
@@ -319,8 +323,8 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
 
   if (showEmailCapture) {
     return (
-      <div className="max-w-2xl mx-auto">
-        <Card className="border border-[#1D2A38]/40 bg-[#F6F7F4] p-8 md:p-10 shadow-lg">
+      <div ref={formRef} className="max-w-2xl mx-auto">
+        <Card className="border-0 bg-[#F6F7F4] p-8 md:p-10 shadow-lg">
           <div className="text-center space-y-4 mb-8">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">Get Your Results</h2>
             <p className="text-[#1D2A38]/90">
@@ -396,7 +400,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
   const sectionQuestions = getSectionQuestions(currentSection)
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div ref={formRef} className="max-w-4xl mx-auto space-y-8">
       {/* Progress Bar */}
       <div className="space-y-2">
         <div className="flex justify-between text-sm text-[#1D2A38]/90">
@@ -420,7 +424,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
       {/* Questions */}
       <div className="space-y-6">
         {sectionQuestions.map((question, index) => (
-          <Card key={question.id} className="border border-[#1D2A38]/40 bg-[#F6F7F4] p-6 md:p-8 shadow-lg">
+          <Card key={question.id} className="border-0 bg-[#F6F7F4] p-6 md:p-8 shadow-lg">
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-[#1D2A38]">
                 {index + 1 + (currentSection - 1) * 4}. {question.text}
@@ -435,6 +439,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
                     return (
                     <div
                       key={option.value}
+                      onClick={() => handleAnswer(question.id, option.value)}
                       className={cn(
                         "flex items-start space-x-3 p-4 rounded-lg border-2 transition-all cursor-pointer",
                         isSelected 
@@ -445,11 +450,11 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
                       <RadioGroupItem 
                         value={option.value} 
                         id={`${question.id}-${option.value}`} 
-                        className="mt-0.5 border-[#1D2A38]/40 data-[state=checked]:border-[#CCA43B] data-[state=checked]:bg-[#CCA43B]/10"
+                        className="mt-0.5 border-[#1D2A38]/40 data-[state=checked]:border-[#CCA43B] data-[state=checked]:bg-[#CCA43B]/10 pointer-events-none"
                       />
                       <Label
                         htmlFor={`${question.id}-${option.value}`}
-                        className="flex-1 cursor-pointer text-[#1D2A38]/90 leading-relaxed"
+                        className="flex-1 cursor-pointer text-[#1D2A38]/90 leading-relaxed pointer-events-none"
                       >
                         {option.label}
                       </Label>

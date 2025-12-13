@@ -201,7 +201,7 @@ function calculateQuadrant(score: number): QuadrantResult {
 }
 
 export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean; onClose?: () => void }) {
-  const [currentSection, setCurrentSection] = useState(1)
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState<Partial<DiagnosticAnswers>>({})
   const [showEmailCapture, setShowEmailCapture] = useState(false)
   const [showResults, setShowResults] = useState(false)
@@ -210,14 +210,25 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
   const [lastName, setLastName] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  // Get all questions in order
+  const allQuestions = [
+    ...questions.section1.questions,
+    ...questions.section2.questions,
+    ...questions.section3.questions,
+  ]
+
+  const currentQuestion = allQuestions[currentQuestionIndex]
+  const totalQuestions = allQuestions.length
+  const progress = ((currentQuestionIndex) / totalQuestions) * 100
+
   const handleAnswer = (questionId: string, value: string) => {
     setAnswers((prev) => ({ ...prev, [questionId]: value }))
   }
 
-  const getSectionQuestions = (section: number) => {
-    if (section === 1) return questions.section1.questions
-    if (section === 2) return questions.section2.questions
-    return questions.section3.questions
+  const getCurrentSection = () => {
+    if (currentQuestionIndex < 4) return 1
+    if (currentQuestionIndex < 8) return 2
+    return 3
   }
 
   const getSectionInfo = (section: number) => {
@@ -226,23 +237,22 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
     return { title: questions.section3.title, subtitle: questions.section3.subtitle }
   }
 
-  const isSectionComplete = (section: number) => {
-    const sectionQuestions = getSectionQuestions(section)
-    return sectionQuestions.every((q) => answers[q.id as keyof DiagnosticAnswers])
-  }
-
   const handleNext = () => {
-    if (currentSection < 3) {
-      setCurrentSection(currentSection + 1)
+    if (currentQuestionIndex < totalQuestions - 1) {
+      setCurrentQuestionIndex(currentQuestionIndex + 1)
     } else {
       setShowEmailCapture(true)
     }
   }
 
   const handleBack = () => {
-    if (currentSection > 1) {
-      setCurrentSection(currentSection - 1)
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(currentQuestionIndex - 1)
     }
+  }
+
+  const isQuestionAnswered = () => {
+    return !!answers[currentQuestion.id as keyof DiagnosticAnswers]
   }
 
   const calculateScore = () => {
@@ -271,7 +281,8 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
 
   const score = calculateScore()
   const quadrant = calculateQuadrant(score)
-  const progress = ((currentSection - 1) / 3) * 100
+  const currentSection = getCurrentSection()
+  const sectionInfo = getSectionInfo(currentSection)
 
   if (showResults) {
     return (
@@ -394,15 +405,12 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
     )
   }
 
-  const sectionInfo = getSectionInfo(currentSection)
-  const sectionQuestions = getSectionQuestions(currentSection)
-
   return (
-    <div className="max-w-4xl mx-auto space-y-8">
+    <div className="max-w-3xl mx-auto">
       {/* Progress Bar */}
-      <div className="space-y-2">
+      <div className="space-y-2 mb-8">
         <div className="flex justify-between text-sm text-[#1D2A38]/90">
-          <span>Section {currentSection} of 3</span>
+          <span>Question {currentQuestionIndex + 1} of {totalQuestions}</span>
           <span>{Math.round(progress)}% Complete</span>
         </div>
         <div className="h-2 bg-[#1D2A38]/20 rounded-full overflow-hidden">
@@ -414,75 +422,79 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
       </div>
 
       {/* Section Header */}
-      <div className="text-center space-y-2">
+      <div className="text-center space-y-2 mb-8">
+        <p className="text-sm text-[#CCA43B] font-semibold uppercase tracking-wider">
+          Section {currentSection} of 3
+        </p>
         <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">{sectionInfo.title}</h2>
         <p className="text-[#1D2A38]/90 max-w-2xl mx-auto">{sectionInfo.subtitle}</p>
       </div>
 
-      {/* Questions */}
-      <div className="space-y-6">
-        {sectionQuestions.map((question, index) => (
-          <Card key={question.id} className="border-0 bg-[#F6F7F4] p-6 md:p-8 shadow-lg">
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-[#1D2A38]">
-                {index + 1 + (currentSection - 1) * 4}. {question.text}
-              </h3>
-              <RadioGroup
-                value={answers[question.id as keyof DiagnosticAnswers] || ''}
-                onValueChange={(value) => handleAnswer(question.id, value)}
-              >
-                <div className="space-y-3">
-                  {question.options.map((option) => {
-                    const isSelected = answers[question.id as keyof DiagnosticAnswers] === option.value
-                    return (
-                    <div
-                      key={option.value}
-                      onClick={() => handleAnswer(question.id, option.value)}
-                      className={cn(
-                        "flex items-start space-x-3 p-4 rounded-lg border-2 transition-all cursor-pointer",
-                        isSelected 
-                          ? "border-[#CCA43B] bg-[#CCA43B]/10 shadow-md" 
-                          : "border-[#1D2A38]/30 hover:border-[#CCA43B]/50 hover:bg-[#CCA43B]/5 hover:shadow-sm"
-                      )}
+      {/* Single Question with Animation */}
+      <div className="animate-in fade-in slide-in-from-right-4 duration-500">
+        <Card className="border-0 bg-[#F6F7F4] p-6 md:p-10 shadow-lg">
+          <div className="space-y-6">
+            <h3 className="text-xl md:text-2xl font-semibold text-[#1D2A38]">
+              {currentQuestion.text}
+            </h3>
+            <RadioGroup
+              value={answers[currentQuestion.id as keyof DiagnosticAnswers] || ''}
+              onValueChange={(value) => handleAnswer(currentQuestion.id, value)}
+            >
+              <div className="space-y-3">
+                {currentQuestion.options.map((option) => {
+                  const isSelected = answers[currentQuestion.id as keyof DiagnosticAnswers] === option.value
+                  return (
+                  <div
+                    key={option.value}
+                    onClick={() => handleAnswer(currentQuestion.id, option.value)}
+                    className={cn(
+                      "flex items-start space-x-3 p-4 rounded-lg border-2 transition-all cursor-pointer",
+                      isSelected 
+                        ? "border-[#CCA43B] bg-[#CCA43B]/10 shadow-md" 
+                        : "border-[#1D2A38]/30 hover:border-[#CCA43B]/50 hover:bg-[#CCA43B]/5 hover:shadow-sm"
+                    )}
+                  >
+                    <RadioGroupItem 
+                      value={option.value} 
+                      id={`${currentQuestion.id}-${option.value}`} 
+                      className="mt-0.5 border-[#1D2A38]/40 data-[state=checked]:border-[#CCA43B] data-[state=checked]:bg-[#CCA43B]/10 pointer-events-none"
+                    />
+                    <Label
+                      htmlFor={`${currentQuestion.id}-${option.value}`}
+                      className="flex-1 cursor-pointer text-[#1D2A38]/90 leading-relaxed pointer-events-none"
                     >
-                      <RadioGroupItem 
-                        value={option.value} 
-                        id={`${question.id}-${option.value}`} 
-                        className="mt-0.5 border-[#1D2A38]/40 data-[state=checked]:border-[#CCA43B] data-[state=checked]:bg-[#CCA43B]/10 pointer-events-none"
-                      />
-                      <Label
-                        htmlFor={`${question.id}-${option.value}`}
-                        className="flex-1 cursor-pointer text-[#1D2A38]/90 leading-relaxed pointer-events-none"
-                      >
-                        {option.label}
-                      </Label>
-                    </div>
-                  )})}
-                </div>
-              </RadioGroup>
-            </div>
-          </Card>
-        ))}
+                      {option.label}
+                    </Label>
+                  </div>
+                )})}
+              </div>
+            </RadioGroup>
+          </div>
+        </Card>
       </div>
 
       {/* Navigation */}
-      <div className="flex gap-4">
-        {currentSection > 1 && (
+      <div className="flex gap-4 mt-8">
+        {currentQuestionIndex > 0 && (
           <Button
             variant="outline"
             onClick={handleBack}
             className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
-            Previous Section
+            Previous
           </Button>
         )}
         <Button
           onClick={handleNext}
-          disabled={!isSectionComplete(currentSection)}
-          className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white hover:text-white font-bold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={!isQuestionAnswered()}
+          className={cn(
+            "flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white hover:text-white font-bold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed",
+            currentQuestionIndex === 0 && "w-full"
+          )}
         >
-          {currentSection === 3 ? 'Complete Diagnostic' : 'Next Section'}
+          {currentQuestionIndex === totalQuestions - 1 ? 'Complete Diagnostic' : 'Next Question'}
           <ArrowRight className="h-4 w-4 ml-2" />
         </Button>
       </div>

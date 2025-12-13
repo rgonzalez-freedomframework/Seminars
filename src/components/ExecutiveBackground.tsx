@@ -313,7 +313,7 @@ export const ExecutiveBackground: React.FC<ExecutiveBackgroundProps> = ({ classN
 
   const wrapperClassName = className
     ? `${className} pointer-events-none`
-    : 'absolute inset-0 pointer-events-none'
+    : 'fixed inset-0 pointer-events-none'
 
   return (
     <div className={wrapperClassName} aria-hidden="true" style={{ backgroundColor: '#F6F7F4' }}>

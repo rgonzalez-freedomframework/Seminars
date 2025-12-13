@@ -132,7 +132,9 @@
   /* Industry standard font sizing - 16px base */
   html {
     font-size: 16px;
-    background: #0a192f !important;
+    background: #F6F7F4 !important;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
   
   body {
@@ -142,6 +144,9 @@
     line-height: 1.6; /* Improved readability */
     letter-spacing: 0.01em;
     overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
   }
   
   /* Enhanced typography scale */
@@ -256,6 +261,9 @@
     box-shadow: none !important;
     -webkit-box-shadow: none !important;
     overflow-x: hidden;
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
   }
   
   /* Prevent zoom on double-tap for iOS */

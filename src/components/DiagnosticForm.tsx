@@ -229,14 +229,17 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
   const handleNext = () => {
     if (currentSection < 3) {
       setCurrentSection(currentSection + 1)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     } else {
       setShowEmailCapture(true)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 
   const handleBack = () => {
     if (currentSection > 1) {
       setCurrentSection(currentSection - 1)
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 
@@ -305,7 +308,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
               <Calendar className="h-4 w-4 mr-2" />
               Register for Training Webinar
             </Button>
-            <Button variant="outline" className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] font-semibold" onClick={onClose}>
+            <Button variant="outline" className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold" onClick={onClose}>
               Close
             </Button>
           </div>
@@ -369,7 +372,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
                 type="button"
                 variant="outline"
                 onClick={() => setShowEmailCapture(false)}
-                className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] font-semibold"
+                className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
@@ -377,7 +380,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold shadow-lg hover:shadow-xl transition-all"
+                className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white hover:text-white font-bold shadow-lg hover:shadow-xl transition-all"
               >
                 {isSubmitting ? 'Submitting...' : 'Get My Results'}
                 <Mail className="h-4 w-4 ml-2" />
@@ -465,7 +468,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
           <Button
             variant="outline"
             onClick={handleBack}
-            className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] font-semibold"
+            className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Previous Section
@@ -474,7 +477,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
         <Button
           onClick={handleNext}
           disabled={!isSectionComplete(currentSection)}
-          className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white hover:text-white font-bold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {currentSection === 3 ? 'Complete Diagnostic' : 'Next Section'}
           <ArrowRight className="h-4 w-4 ml-2" />

@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button'
 
 export default function DiagnosticPage() {
   return (
-    <div className="relative min-h-screen">
+    <div className="relative">
       <ExecutiveBackground />
 
       <div className="relative z-10">

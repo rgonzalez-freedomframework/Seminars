@@ -137,10 +137,11 @@
   
   body {
     @apply bg-background text-foreground;
-    background: #0a192f !important;
+    background: #F6F7F4 !important;
     font-size: 1rem; /* 16px */
     line-height: 1.6; /* Improved readability */
     letter-spacing: 0.01em;
+    overflow-x: hidden;
   }
   
   /* Enhanced typography scale */
@@ -239,6 +240,7 @@
     -webkit-touch-callout: none;
     /* Prevent white flash on iOS pull-to-refresh */
     background-color: #F6F7F4 !important;
+    overflow-x: hidden;
   }
   
   body {
@@ -249,10 +251,11 @@
     /* Prevent pull-to-refresh on iOS when at top */
     touch-action: pan-x pan-y;
     /* Prevent white flash */
-    background-color: #0a192f !important;
+    background-color: #F6F7F4 !important;
     /* Remove any bottom glow/shadow */
     box-shadow: none !important;
     -webkit-box-shadow: none !important;
+    overflow-x: hidden;
   }
   
   /* Prevent zoom on double-tap for iOS */

@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { ArrowRight, ArrowLeft, Mail, Calendar } from 'lucide-react'
+import { cn } from '@/lib/utils'
 
 type DiagnosticAnswers = {
   q1: string
@@ -300,11 +301,11 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
             Your detailed diagnostic results have been sent to <strong>{email}</strong>. Ready to transform your firm?
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
-            <Button className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold">
+            <Button className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold shadow-lg hover:shadow-xl transition-all">
               <Calendar className="h-4 w-4 mr-2" />
               Register for Training Webinar
             </Button>
-            <Button variant="outline" className="flex-1 border-2 border-[#1D2A38]/40" onClick={onClose}>
+            <Button variant="outline" className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] font-semibold" onClick={onClose}>
               Close
             </Button>
           </div>
@@ -368,7 +369,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
                 type="button"
                 variant="outline"
                 onClick={() => setShowEmailCapture(false)}
-                className="flex-1 border-2 border-[#1D2A38]/40"
+                className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] font-semibold"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back
@@ -376,7 +377,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold"
+                className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold shadow-lg hover:shadow-xl transition-all"
               >
                 {isSubmitting ? 'Submitting...' : 'Get My Results'}
                 <Mail className="h-4 w-4 ml-2" />
@@ -426,12 +427,23 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
                 onValueChange={(value) => handleAnswer(question.id, value)}
               >
                 <div className="space-y-3">
-                  {question.options.map((option) => (
+                  {question.options.map((option) => {
+                    const isSelected = answers[question.id as keyof DiagnosticAnswers] === option.value
+                    return (
                     <div
                       key={option.value}
-                      className="flex items-start space-x-3 p-4 rounded-lg border border-[#1D2A38]/40 hover:border-[#CCA43B]/50 hover:bg-[#CCA43B]/5 transition-all cursor-pointer"
+                      className={cn(
+                        "flex items-start space-x-3 p-4 rounded-lg border-2 transition-all cursor-pointer",
+                        isSelected 
+                          ? "border-[#CCA43B] bg-[#CCA43B]/10 shadow-md" 
+                          : "border-[#1D2A38]/30 hover:border-[#CCA43B]/50 hover:bg-[#CCA43B]/5 hover:shadow-sm"
+                      )}
                     >
-                      <RadioGroupItem value={option.value} id={`${question.id}-${option.value}`} className="mt-0.5" />
+                      <RadioGroupItem 
+                        value={option.value} 
+                        id={`${question.id}-${option.value}`} 
+                        className="mt-0.5 border-[#1D2A38]/40 data-[state=checked]:border-[#CCA43B] data-[state=checked]:bg-[#CCA43B]/10"
+                      />
                       <Label
                         htmlFor={`${question.id}-${option.value}`}
                         className="flex-1 cursor-pointer text-[#1D2A38]/90 leading-relaxed"
@@ -439,7 +451,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
                         {option.label}
                       </Label>
                     </div>
-                  ))}
+                  )})}
                 </div>
               </RadioGroup>
             </div>
@@ -453,7 +465,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
           <Button
             variant="outline"
             onClick={handleBack}
-            className="flex-1 border-2 border-[#1D2A38]/40"
+            className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] font-semibold"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Previous Section
@@ -462,7 +474,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
         <Button
           onClick={handleNext}
           disabled={!isSectionComplete(currentSection)}
-          className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold disabled:opacity-50"
+          className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {currentSection === 3 ? 'Complete Diagnostic' : 'Next Section'}
           <ArrowRight className="h-4 w-4 ml-2" />

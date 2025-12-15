@@ -171,15 +171,15 @@ export default function Home() {
 
           {/* Core Promise */}
           <RevealOnScroll glow>
-          <section id="core-promise" className="rounded-3xl border border-[#CCA43B]/40 bg-[#1D2A38] backdrop-blur-md text-white px-6 py-8 md:px-10 md:py-10 animate-in fade-in slide-in-from-bottom duration-700" style={{ boxShadow: 'none' }}>
+          <section id="core-promise" className="rounded-3xl border border-[#CCA43B]/40 bg-[#F6F7F4] backdrop-blur-md text-[#1D2A38] px-6 py-8 md:px-10 md:py-10 animate-in fade-in slide-in-from-bottom duration-700">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">⭐ The Core Promise</h2>
-            <p className="text-base md:text-lg mb-4 text-white/90">
+            <p className="text-base md:text-lg mb-4 text-[#1D2A38]/90">
               We help law firm owners redesign their firm so it delivers both time freedom and financial freedom — through simple, repeatable operational systems that scale.
             </p>
-            <div className="space-y-1 text-sm md:text-base">
+            <div className="space-y-1 text-sm md:text-base text-[#1D2A38]/90">
               <p>This is not a course.</p>
               <p>This is not theory.</p>
-              <p className="font-semibold text-[#FDE68A]">
+              <p className="font-semibold text-[#B8932F]">
                 This is the Framework your law firm has been missing.
               </p>
             </div>
@@ -320,7 +320,7 @@ export default function Home() {
 
             {/* Roadmap */}
             <RevealOnScroll glow>
-            <div id="roadmap" className="rounded-3xl border border-dashed border-[#CCA43B]/60 bg-[#CCA43B]/20 backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-right duration-700">
+            <div id="roadmap" className="rounded-3xl border border-dashed border-[#CCA43B]/60 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-right duration-700">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Your Freedom Framework Roadmap</h2>
               <ol className="space-y-3 text-[#1D2A38]/90 text-sm md:text-base">
                 {[

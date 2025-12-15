@@ -74,7 +74,7 @@ export default function WebinarRegistration() {
                   </Button>
                 </Link>
               </div>
-            </div>
+              </div>
           </section>
 
           {/* Why This Training is Different */}

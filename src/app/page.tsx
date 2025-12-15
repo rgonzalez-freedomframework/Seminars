@@ -197,7 +197,7 @@ export default function Home() {
 
             <div className="grid gap-6 md:gap-8 md:grid-cols-2">
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700">
+              <article className="h-full flex flex-col rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700">
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">1. Monthly Deep-Dive Workshops (Live + Recorded)</h3>
                 <p className="text-[#1D2A38]/90 mb-3">
                   Each month focuses on one of the three operational shifts:
@@ -214,7 +214,7 @@ export default function Home() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-right duration-700">
+              <article className="h-full flex flex-col rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-right duration-700">
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">2. The Freedom Matrix Implementation Toolkit</h3>
                 <p className="text-[#1D2A38]/90 mb-3">A complete suite of operational tools, including:</p>
                 <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">
@@ -230,7 +230,7 @@ export default function Home() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700 delay-100">
+              <article className="h-full flex flex-col rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700 delay-100">
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">3. Private Freedom Owners Community</h3>
                 <p className="text-[#1D2A38]/90 mb-2">
                   A curated group of law firm owners committed to scaling with intention, not burnout.
@@ -247,7 +247,7 @@ export default function Home() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-right duration-700 delay-100">
+              <article className="h-full flex flex-col rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-right duration-700 delay-100">
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">4. Quarterly Implementation Labs</h3>
                 <p className="text-[#1D2A38]/90 mb-2">Hands-on working sessions where we:</p>
                 <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">
@@ -266,7 +266,7 @@ export default function Home() {
           {/* Office Hours */}
           <section id="office-hours" className="space-y-4">
             <RevealOnScroll glow>
-            <div className="rounded-3xl border-2 border-[#CCA43B] bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom duration-700">
+            <div className="rounded-3xl border-2 border-[#CCA43B] bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-3 text-center">⭐ Office Hours</h2>
               <p className="text-[#1D2A38]/90 mb-4 text-base md:text-lg text-center">Monthly office hours where you and your leadership team can bring:</p>
               <ul className="grid md:grid-cols-2 gap-x-6 gap-y-2 text-[#1D2A38]/90 text-sm md:text-base">
@@ -285,7 +285,7 @@ export default function Home() {
           </section>
 
           {/* Result */}
-          <section id="result" className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1.6fr)] items-start">
+          <section id="result" className="grid gap-8 md:grid-cols-2 items-stretch">
             <RevealOnScroll glow>
             <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-left duration-700">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ The Result?</h2>
@@ -324,7 +324,7 @@ export default function Home() {
 
             {/* Roadmap */}
             <RevealOnScroll glow>
-            <div id="roadmap" className="rounded-3xl border-2 border-[#CCA43B] bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-right duration-700">
+            <div id="roadmap" className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-right duration-700">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Your Freedom Framework Roadmap</h2>
               <ol className="space-y-3 text-[#1D2A38]/90 text-sm md:text-base">
                 {[

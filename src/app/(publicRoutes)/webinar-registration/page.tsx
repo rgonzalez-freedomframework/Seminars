@@ -137,7 +137,7 @@ export default function WebinarRegistration() {
 
             <div className="grid gap-6 md:gap-8 md:grid-cols-2">
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
+              <article className="h-full flex flex-col rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">1. The Freedom Matrix™</h3>
                 <p className="text-[#1D2A38]/90 mb-3">
                   How to diagnose exactly what's limiting your firm's ability to scale without consuming you.
@@ -152,7 +152,7 @@ export default function WebinarRegistration() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
+              <article className="h-full flex flex-col rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">2. The Hidden Traps of Hourly, Flat-Fee, and Contingency Models</h3>
                 <p className="text-[#1D2A38]/90 mb-3">Every billing model contains a built-in freedom trap.</p>
                 <p className="text-[#1D2A38]/90 mb-2">You'll learn:</p>
@@ -166,7 +166,7 @@ export default function WebinarRegistration() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
+              <article className="h-full flex flex-col rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">3. The Three Operational Shifts</h3>
                 <p className="text-[#1D2A38]/90 mb-3">The exact systems used by thriving firms in the Freedom Zone:</p>
                 <ul className="space-y-2 text-[#1D2A38]/90 text-sm">
@@ -187,7 +187,7 @@ export default function WebinarRegistration() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
+              <article className="h-full flex flex-col rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">4. How High-Performing Firms Scale Without Sacrifice</h3>
                 <p className="text-[#1D2A38]/90 mb-3">You'll see how these shifts create:</p>
                 <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">

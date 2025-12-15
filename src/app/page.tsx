@@ -118,6 +118,7 @@ export default function Home() {
             <RevealOnScroll glow>
             <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-left duration-700">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Who This Is For</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">Who This Is For</h2>
               <p className="text-[#1D2A38]/90 mb-4">
                 This program is made for law firm owners who:
               </p>
@@ -173,6 +174,7 @@ export default function Home() {
           <RevealOnScroll glow>
           <section id="core-promise" className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md text-[#1D2A38] px-6 py-8 md:px-10 md:py-10 animate-in fade-in slide-in-from-bottom duration-700">
             <h2 className="text-2xl md:text-3xl font-bold mb-4">⭐ The Core Promise</h2>
+              <h2 className="text-2xl md:text-3xl font-bold mb-4">The Core Promise</h2>
             <p className="text-base md:text-lg mb-4 text-[#1D2A38]/90">
               We help law firm owners redesign their firm so it delivers both time freedom and financial freedom — through simple, repeatable operational systems that scale.
             </p>
@@ -190,6 +192,7 @@ export default function Home() {
           <section id="inside-program" className="space-y-6">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">⭐ Here's What You Get Inside the Program</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">Here's What You Get Inside the Program</h2>
               <p className="text-sm md:text-base text-[#1D2A38]/85 max-w-md">
                 Every element is built to move your firm from owner-dependent to owner-optional — without adding unnecessary complexity.
               </p>
@@ -267,9 +270,9 @@ export default function Home() {
           <section id="office-hours" className="space-y-4">
             <RevealOnScroll glow>
             <div className="rounded-3xl border-2 border-[#CCA43B] bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
-              <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-3 text-center">⭐ Office Hours</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-3 text-center">Office Hours</h2>
               <p className="text-[#1D2A38]/90 mb-4 text-base md:text-lg text-center">Monthly office hours where you and your leadership team can bring:</p>
-              <ul className="grid md:grid-cols-2 gap-x-6 gap-y-2 text-[#1D2A38]/90 text-sm md:text-base">
+              <ul className="grid md:grid-cols-2 gap-x-6 gap-y-2 text-[#1D2A38]/90 text-sm md:text-base md:max-w-2xl mx-auto">
                 <li>Team issues</li>
                 <li>Profit questions</li>
                 <li>Billing model complexities</li>
@@ -287,8 +290,9 @@ export default function Home() {
           {/* Result */}
           <section id="result" className="grid gap-8 md:grid-cols-2 items-stretch">
             <RevealOnScroll glow>
-            <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-left duration-700">
+            <div className="h-full flex flex-col rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-left duration-700">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ The Result?</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">The Result?</h2>
               <p className="text-[#1D2A38]/90 mb-3">
                 A business that funds the life you want — without consuming it.
               </p>
@@ -324,8 +328,9 @@ export default function Home() {
 
             {/* Roadmap */}
             <RevealOnScroll glow>
-            <div id="roadmap" className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-right duration-700">
+            <div id="roadmap" className="h-full flex flex-col rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-right duration-700">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Your Freedom Framework Roadmap</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">Your Freedom Framework Roadmap</h2>
               <ol className="space-y-3 text-[#1D2A38]/90 text-sm md:text-base">
                 {[
                   'Phase 1: Diagnose your firm’s quadrant',
@@ -353,6 +358,7 @@ export default function Home() {
           <section id="program-options" className="space-y-6">
             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">⭐ Program Options</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38]">Program Options</h2>
               <p className="text-sm md:text-base text-[#1D2A38]/85 max-w-md">
                 (Pricing intentionally omitted so you can adjust or add a call-to-apply.)
               </p>
@@ -400,6 +406,7 @@ export default function Home() {
           <RevealOnScroll glow>
           <section id="cta" className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Next Step: Join the Freedom Framework™</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">Next Step: Join the Freedom Framework™</h2>
             <p className="text-[#1D2A38]/90 mb-6 max-w-2xl mx-auto text-sm md:text-base">
               Click below to secure your spot in the next session. Build the firm that gives you back your time, your profit, and your peace.
             </p>

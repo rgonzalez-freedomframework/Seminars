@@ -40,7 +40,13 @@ export function RevealOnScroll({
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
+          if (entry.target !== node) return
+
+          if (glow) {
+            // In glow mode, toggle visibility based on viewport presence
+            setIsVisible(entry.isIntersecting)
+          } else if (entry.isIntersecting) {
+            // Non-glow mode: one-time reveal with optional delay
             if (delay > 0) {
               timeoutId = window.setTimeout(() => setIsVisible(true), delay)
             } else {
@@ -61,7 +67,7 @@ export function RevealOnScroll({
         window.clearTimeout(timeoutId)
       }
     }
-  }, [delay, threshold])
+  }, [delay, threshold, glow])
 
   const baseClasses = glow
     ? 'transition-all duration-700 ease-out'

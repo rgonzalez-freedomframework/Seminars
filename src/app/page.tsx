@@ -58,7 +58,7 @@ export default function Home() {
         <div className="container mx-auto px-4 max-w-6xl space-y-16">
           {/* Hero / Title */}
           <RevealOnScroll glow>
-            <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md shadow-lg px-6 py-10 md:px-10 md:py-14">
+            <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md shadow-lg px-6 py-10 md:px-10 md:py-14 animate-in fade-in slide-in-from-bottom duration-700">
 
               <div className="relative grid gap-10 md:grid-cols-[minmax(0,2fr)_minmax(0,1.3fr)] items-center">
               <div>
@@ -117,7 +117,7 @@ export default function Home() {
           {/* Who This Is For */}
           <section id="who-this-is-for" className="grid gap-8 md:grid-cols-[minmax(0,1.8fr)_minmax(0,1.2fr)] items-start">
             <RevealOnScroll glow>
-            <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg">
+            <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-left duration-700">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Who This Is For</h2>
               <p className="text-[#1D2A38]/90 mb-4">
                 This program is made for law firm owners who:
@@ -144,7 +144,7 @@ export default function Home() {
             </RevealOnScroll>
 
             <RevealOnScroll glow>
-            <div className="space-y-4">
+            <div className="space-y-4 animate-in fade-in slide-in-from-right duration-700 delay-150">
               <h3 className="text-sm font-semibold tracking-[0.16em] text-[#1D2A38] uppercase">Where You Might Be Now</h3>
               <div className="grid gap-4">
                 <div className="rounded-2xl border border-red-400/30 bg-red-500/15 backdrop-blur-sm p-4">
@@ -172,7 +172,7 @@ export default function Home() {
 
           {/* Core Promise */}
           <RevealOnScroll glow>
-          <section id="core-promise" className="rounded-3xl border border-[#CCA43B]/40 bg-[#1D2A38] backdrop-blur-md text-white px-6 py-8 md:px-10 md:py-10" style={{ boxShadow: 'none' }}>
+          <section id="core-promise" className="rounded-3xl border border-[#CCA43B]/40 bg-[#1D2A38] backdrop-blur-md text-white px-6 py-8 md:px-10 md:py-10 animate-in fade-in slide-in-from-bottom duration-700" style={{ boxShadow: 'none' }}>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">⭐ The Core Promise</h2>
             <p className="text-base md:text-lg mb-4 text-white/90">
               We help law firm owners redesign their firm so it delivers both time freedom and financial freedom — through simple, repeatable operational systems that scale.
@@ -198,7 +198,7 @@ export default function Home() {
 
             <div className="grid gap-6 md:gap-8 md:grid-cols-2">
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all">
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700">
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">1. Monthly Deep-Dive Workshops (Live + Recorded)</h3>
                 <p className="text-[#1D2A38]/90 mb-3">
                   Each month focuses on one of the three operational shifts:
@@ -215,7 +215,7 @@ export default function Home() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all">
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-right duration-700">
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">2. The Freedom Matrix Implementation Toolkit</h3>
                 <p className="text-[#1D2A38]/90 mb-3">A complete suite of operational tools, including:</p>
                 <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">
@@ -231,7 +231,7 @@ export default function Home() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all">
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700 delay-100">
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">3. Private Freedom Owners Community</h3>
                 <p className="text-[#1D2A38]/90 mb-2">
                   A curated group of law firm owners committed to scaling with intention, not burnout.
@@ -248,7 +248,7 @@ export default function Home() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all">
+              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-right duration-700 delay-100">
                 <h3 className="text-lg md:text-xl font-semibold text-white mb-2">4. Quarterly Implementation Labs</h3>
                 <p className="text-white/90 mb-2">Hands-on working sessions where we:</p>
                 <ul className="space-y-1.5 text-white/90 text-sm">
@@ -262,7 +262,7 @@ export default function Home() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all md:col-span-2">
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all md:col-span-2 animate-in fade-in slide-in-from-bottom duration-700 delay-150">
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">5. Office Hours</h3>
                 <p className="text-[#1D2A38]/90 mb-2">Monthly office hours where you can bring:</p>
                 <ul className="grid md:grid-cols-2 gap-x-6 gap-y-1.5 text-[#1D2A38]/90 text-sm">
@@ -284,7 +284,7 @@ export default function Home() {
           {/* Result */}
           <section id="result" className="grid gap-8 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1.6fr)] items-start">
             <RevealOnScroll glow>
-            <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg">
+            <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-left duration-700">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ The Result?</h2>
               <p className="text-[#1D2A38]/90 mb-3">
                 A business that funds the life you want — without consuming it.
@@ -321,7 +321,7 @@ export default function Home() {
 
             {/* Roadmap */}
             <RevealOnScroll glow>
-            <div id="roadmap" className="rounded-3xl border border-dashed border-[#CCA43B]/60 bg-[#CCA43B]/20 backdrop-blur-md p-6 md:p-8 shadow-lg">
+            <div id="roadmap" className="rounded-3xl border border-dashed border-[#CCA43B]/60 bg-[#CCA43B]/20 backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-right duration-700">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Your Freedom Framework Roadmap</h2>
               <ol className="space-y-3 text-[#1D2A38]/90 text-sm md:text-base">
                 {[
@@ -356,7 +356,7 @@ export default function Home() {
             </div>
             <div className="grid gap-6 md:grid-cols-3">
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all">
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Freedom Framework Membership</h3>
                 <p className="text-sm text-[#1D2A38]/90 mb-3">
                   Includes: Monthly deep-dives, toolkit access, community, office hours.
@@ -368,7 +368,7 @@ export default function Home() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border-2 border-[#CCA43B] bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all">
+              <article className="rounded-3xl border-2 border-[#CCA43B] bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-bottom duration-700">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Freedom Framework Accelerator</h3>
                 <p className="text-sm text-[#1D2A38]/90 mb-3">
                   Includes: Everything above + quarterly implementation labs + direct advisory.
@@ -380,7 +380,7 @@ export default function Home() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all">
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-right duration-700">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Private Advisory Partnership</h3>
                 <p className="text-sm text-[#1D2A38]/90 mb-3">
                   High-touch, firm-specific operational transformation with deep advisory support.
@@ -395,7 +395,7 @@ export default function Home() {
 
           {/* Final CTA */}
           <RevealOnScroll glow>
-          <section id="cta" className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg">
+          <section id="cta" className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Next Step: Join the Freedom Framework™</h2>
             <p className="text-[#1D2A38]/90 mb-6 max-w-2xl mx-auto text-sm md:text-base">
               Click below to secure your spot in the next session. Build the firm that gives you back your time, your profit, and your peace.

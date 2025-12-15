@@ -266,9 +266,9 @@ export default function Home() {
           {/* Office Hours */}
           <section id="office-hours" className="space-y-4">
             <RevealOnScroll glow>
-            <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg max-w-3xl md:mr-auto animate-in fade-in slide-in-from-left duration-700">
-              <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-3">⭐ Office Hours</h2>
-              <p className="text-[#1D2A38]/90 mb-3 text-base md:text-lg">Monthly office hours where you and your leadership team can bring:</p>
+            <div className="rounded-3xl border-2 border-[#CCA43B] bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg max-w-4xl mx-auto animate-in fade-in slide-in-from-bottom duration-700">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-3 text-center">⭐ Office Hours</h2>
+              <p className="text-[#1D2A38]/90 mb-4 text-base md:text-lg text-center">Monthly office hours where you and your leadership team can bring:</p>
               <ul className="grid md:grid-cols-2 gap-x-6 gap-y-2 text-[#1D2A38]/90 text-sm md:text-base">
                 <li>Team issues</li>
                 <li>Profit questions</li>
@@ -277,7 +277,7 @@ export default function Home() {
                 <li>Operational fires</li>
                 <li>Leadership challenges</li>
               </ul>
-              <p className="text-[#1D2A38]/90 text-sm md:text-base mt-4">
+              <p className="text-[#1D2A38]/90 text-sm md:text-base mt-4 text-center">
                 You get real-time answers from someone who’s scaled firms, not just studied them.
               </p>
             </div>

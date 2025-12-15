@@ -88,8 +88,7 @@ export default function Home() {
                   </p>
                 </div>
               </div>
-
-              <div className="relative rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-6 md:p-7 backdrop-blur-md shadow-lg">
+              <div className="relative rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-6 md:p-7 backdrop-blur-md shadow-lg animate-in fade-in slide-in-from-right duration-700 delay-150">
                 <h2 className="text-sm font-semibold text-[#1D2A38] mb-3 uppercase tracking-[0.18em]">Program Snapshot</h2>
                 <ul className="space-y-3 text-sm text-[#1D2A38]/90">
                   <li className="flex items-start gap-2">

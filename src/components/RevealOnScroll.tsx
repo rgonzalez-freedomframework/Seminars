@@ -64,7 +64,7 @@ export function RevealOnScroll({
   }, [delay, threshold])
 
   const baseClasses = glow
-    ? 'transition-shadow duration-700 ease-out'
+    ? ''
     : 'transition-all duration-700 ease-out will-change-transform will-change-opacity'
 
   const visibilityClasses = glow
@@ -73,7 +73,7 @@ export function RevealOnScroll({
         ? 'opacity-100 translate-y-0'
         : 'opacity-0 translate-y-4'
 
-  const glowClasses = glow && isVisible ? 'shadow-[0_0_40px_rgba(29,42,56,0.16)]' : ''
+  const glowClasses = ''
 
   const combined = [baseClasses, visibilityClasses, glowClasses, className]
     .filter(Boolean)

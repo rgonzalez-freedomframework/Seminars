@@ -137,7 +137,7 @@ export default function WebinarRegistration() {
 
             <div className="grid gap-6 md:gap-8 md:grid-cols-2">
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-left duration-700" >
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">1. The Freedom Matrix™</h3>
                 <p className="text-[#1D2A38]/90 mb-3">
                   How to diagnose exactly what's limiting your firm's ability to scale without consuming you.
@@ -152,7 +152,7 @@ export default function WebinarRegistration() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-right duration-700" >
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">2. The Hidden Traps of Hourly, Flat-Fee, and Contingency Models</h3>
                 <p className="text-[#1D2A38]/90 mb-3">Every billing model contains a built-in freedom trap.</p>
                 <p className="text-[#1D2A38]/90 mb-2">You'll learn:</p>
@@ -166,7 +166,7 @@ export default function WebinarRegistration() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from.left duration-700" >
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">3. The Three Operational Shifts</h3>
                 <p className="text-[#1D2A38]/90 mb-3">The exact systems used by thriving firms in the Freedom Zone:</p>
                 <ul className="space-y-2 text-[#1D2A38]/90 text-sm">
@@ -187,7 +187,7 @@ export default function WebinarRegistration() {
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-right duration-700" >
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">4. How High-Performing Firms Scale Without Sacrifice</h3>
                 <p className="text-[#1D2A38]/90 mb-3">You'll see how these shifts create:</p>
                 <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">
@@ -244,7 +244,7 @@ export default function WebinarRegistration() {
           {/* Who This Is For */}
           <section className="grid gap-8 md:grid-cols-2 items-start">
             <RevealOnScroll glow>
-            <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-md animate-in fade-in slide-in-from-left duration-700">
+            <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-md">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Who This Masterclass Is For</h2>
               <p className="text-[#1D2A38]/90 mb-4">This training is specifically for:</p>
               <ul className="space-y-3 text-[#1D2A38]/90">
@@ -276,7 +276,7 @@ export default function WebinarRegistration() {
             </RevealOnScroll>
 
             <RevealOnScroll glow>
-            <div className="rounded-3xl border border-[#CCA43B]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-md animate-in fade-in slide-in-from-right duration-700">
+            <div className="rounded-3xl border border-[#CCA43B]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-md">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ About Your Instructor</h2>
               <h3 className="text-xl font-semibold text-[#1D2A38] mb-2">Janelle Sam, MBA (Cornell)</h3>
               <p className="text-[#1D2A38]/90 mb-3">
@@ -294,7 +294,7 @@ export default function WebinarRegistration() {
 
           {/* Event Details */}
           <RevealOnScroll glow>
-          <section className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 text-center shadow-md animate-in fade-in slide-in-from-bottom duration-700">
+          <section className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 text-center shadow-md">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-6">⭐ Event Details</h2>
             
             <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 max-w-4xl mx-auto">
@@ -336,28 +336,28 @@ export default function WebinarRegistration() {
             
             <div className="grid gap-4">
               <RevealOnScroll glow>
-              <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-bottom duration-700">
+              <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Will this training be recorded?</h3>
                 <p className="text-[#1D2A38]/90">Yes — registrants will receive the replay link.</p>
               </div>
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-bottom duration-700">
+              <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Is this for small or new firms?</h3>
                 <p className="text-[#1D2A38]/90">No — the content in this webinar would be challenging for a firm that does not have admin support in operations to implement. This is recommended for firms that have generated at least $2M+ in annual revenue.</p>
               </div>
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-bottom duration-700">
+              <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Will I get my diagnostic without providing email?</h3>
                 <p className="text-[#1D2A38]/90">No — your quadrant summary is delivered by email only.</p>
               </div>
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-bottom duration-700">
+              <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Is this a sales webinar?</h3>
                 <p className="text-[#1D2A38]/90">The training is 100% valuable on its own. At the end, you'll hear about the Freedom Framework™ 12-month program, but there is zero pressure to join.</p>
               </div>
@@ -367,7 +367,7 @@ export default function WebinarRegistration() {
 
           {/* Final CTA */}
           <RevealOnScroll glow>
-          <section className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
+          <section className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Ready to Discover Your Path to Freedom?</h2>
             <p className="text-[#1D2A38]/90 mb-6 max-w-2xl mx-auto text-base md:text-lg">
               If you want a law firm that scales profitably and gives you back your life… start by learning where your firm stands today.

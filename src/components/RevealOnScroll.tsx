@@ -70,11 +70,13 @@ export function RevealOnScroll({
   }, [delay, threshold, glow])
 
   const baseClasses = glow
-    ? 'transition-all duration-700 ease-out'
+    ? 'transition-all duration-700 ease-out will-change-transform'
     : 'transition-all duration-700 ease-out will-change-transform will-change-opacity'
 
   const visibilityClasses = glow
-    ? ''
+    ? isVisible
+        ? 'scale-[1.01]'
+        : 'scale-100'
     : isVisible
         ? 'opacity-100 translate-y-0'
         : 'opacity-0 translate-y-4'

@@ -235,22 +235,22 @@ export default function Home() {
                 <p className="text-[#1D2A38]/90 mb-2">
                   A curated group of law firm owners committed to scaling with intention, not burnout.
                 </p>
-                <p className="text-white/90 mb-2 text-sm">This is your space to:</p>
-                <ul className="space-y-1.5 text-white/80 text-sm">
+                <p className="text-[#1D2A38]/90 mb-2 text-sm">This is your space to:</p>
+                <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">
                   <li>Share wins and challenges</li>
                   <li>Compare systems, numbers, and metrics</li>
                   <li>Get feedback on leadership issues</li>
                   <li>Learn what’s actually working in real firms</li>
                 </ul>
-                <p className="text-white/80 text-sm mt-3">This community alone accelerates growth.</p>
+                <p className="text-[#1D2A38]/90 text-sm mt-3">This community alone accelerates growth.</p>
               </article>
               </RevealOnScroll>
 
               <RevealOnScroll glow>
-              <article className="rounded-3xl border border-gray-200/20 bg-white/5 backdrop-blur-md p-6 md:p-7 shadow-sm hover:shadow-md transition-all animate-in fade-in slide-in-from-right duration-700 delay-100">
-                <h3 className="text-lg md:text-xl font-semibold text-white mb-2">4. Quarterly Implementation Labs</h3>
-                <p className="text-white/90 mb-2">Hands-on working sessions where we:</p>
-                <ul className="space-y-1.5 text-white/90 text-sm">
+              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all animate-in fade-in slide-in-from-right duration-700 delay-100">
+                <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">4. Quarterly Implementation Labs</h3>
+                <p className="text-[#1D2A38]/90 mb-2">Hands-on working sessions where we:</p>
+                <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">
                   <li>Build or refine your firm's leadership structure</li>
                   <li>Optimize your financial visibility</li>
                   <li>Identify and fix your biggest operational bottlenecks</li>

@@ -75,13 +75,13 @@ export function RevealOnScroll({
 
   const visibilityClasses = glow
     ? isVisible
-        ? 'scale-[1.01]'
-        : 'scale-100'
+      ? 'scale-[1.03]'
+      : 'scale-100'
     : isVisible
         ? 'opacity-100 translate-y-0'
         : 'opacity-0 translate-y-4'
 
-  const glowClasses = glow && isVisible ? 'drop-shadow-[0_18px_55px_rgba(29,42,56,0.28)]' : ''
+  const glowClasses = glow && isVisible ? 'drop-shadow-[0_16px_40px_rgba(29,42,56,0.18)]' : ''
 
   const combined = [baseClasses, visibilityClasses, glowClasses, className]
     .filter(Boolean)

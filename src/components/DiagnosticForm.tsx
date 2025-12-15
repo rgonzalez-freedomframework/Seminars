@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
@@ -317,11 +318,17 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
             Ready to move toward freedom?
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center max-w-md mx-auto">
-            <Button className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white hover:text-white font-bold shadow-lg hover:shadow-xl transition-all">
-              Register for Webinar
-              <Calendar className="h-4 w-4 ml-2" />
-            </Button>
-            <Button variant="outline" className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold" onClick={onClose}>
+            <Link href="/sign-up" className="flex-1">
+              <Button className="w-full bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white hover:text-white font-bold shadow-lg hover:shadow-xl transition-all">
+                Register for Webinar
+                <Calendar className="h-4 w-4 ml-2" />
+              </Button>
+            </Link>
+            <Button
+              variant="outline"
+              className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold"
+              onClick={onClose ?? (() => {})}
+            >
               Close
             </Button>
           </div>

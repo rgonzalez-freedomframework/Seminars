@@ -77,9 +77,9 @@ export default function Home() {
                 </p>
 
                 <div className="flex flex-wrap items-center gap-4">
-                  <Link href="/sign-in">
+                  <Link href="/diagnostic">
                     <Button className="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold px-7 py-3 rounded-xl border-2 border-[#CCA43B] transition-all flex items-center gap-2" style={{ boxShadow: 'none' }}>
-                      Apply to Join the Freedom Framework™
+                      Take Freedom Matrix Diagnostic
                       <ArrowRight className="h-4 w-4" />
                     </Button>
                   </Link>
@@ -260,24 +260,28 @@ export default function Home() {
               </article>
               </RevealOnScroll>
 
-              <RevealOnScroll glow>
-              <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all md:col-span-2 animate-in fade-in slide-in-from-bottom duration-700 delay-150">
-                <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-2">5. Office Hours</h3>
-                <p className="text-[#1D2A38]/90 mb-2">Monthly office hours where you can bring:</p>
-                <ul className="grid md:grid-cols-2 gap-x-6 gap-y-1.5 text-[#1D2A38]/90 text-sm">
-                  <li>Team issues</li>
-                  <li>Profit questions</li>
-                  <li>Billing model complexities</li>
-                  <li>Hiring decisions</li>
-                  <li>Operational fires</li>
-                  <li>Leadership challenges</li>
-                </ul>
-                <p className="text-[#1D2A38]/90 text-sm mt-3">
-                  You get real-time answers from someone who’s scaled firms, not just studied them.
-                </p>
-              </article>
-              </RevealOnScroll>
             </div>
+          </section>
+
+          {/* Office Hours */}
+          <section id="office-hours" className="space-y-4">
+            <RevealOnScroll glow>
+            <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg max-w-3xl md:mr-auto animate-in fade-in slide-in-from-left duration-700">
+              <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-3">⭐ Office Hours</h2>
+              <p className="text-[#1D2A38]/90 mb-3 text-base md:text-lg">Monthly office hours where you and your leadership team can bring:</p>
+              <ul className="grid md:grid-cols-2 gap-x-6 gap-y-2 text-[#1D2A38]/90 text-sm md:text-base">
+                <li>Team issues</li>
+                <li>Profit questions</li>
+                <li>Billing model complexities</li>
+                <li>Hiring decisions</li>
+                <li>Operational fires</li>
+                <li>Leadership challenges</li>
+              </ul>
+              <p className="text-[#1D2A38]/90 text-sm md:text-base mt-4">
+                You get real-time answers from someone who’s scaled firms, not just studied them.
+              </p>
+            </div>
+            </RevealOnScroll>
           </section>
 
           {/* Result */}
@@ -399,9 +403,9 @@ export default function Home() {
             <p className="text-[#1D2A38]/90 mb-6 max-w-2xl mx-auto text-sm md:text-base">
               Click below to secure your spot in the next session. Build the firm that gives you back your time, your profit, and your peace.
             </p>
-            <Link href="/sign-in">
+            <Link href="/diagnostic">
               <Button className="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-bold px-10 py-3 rounded-xl border-2 border-[#CCA43B] transition-all inline-flex items-center gap-2" style={{ boxShadow: 'none' }}>
-                Apply to Join the Freedom Framework™
+                Take Freedom Matrix Diagnostic
                 <ArrowRight className="h-4 w-4" />
               </Button>
             </Link>

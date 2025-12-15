@@ -202,16 +202,16 @@ export default function WebinarRegistration() {
           </section>
 
           {/* What You Receive */}
-          <section className="rounded-3xl border border-[#CCA43B]/40 bg-[#1D2A38] backdrop-blur-md text-white px-6 py-8 md:px-10 md:py-10 shadow-lg">
+          <section className="rounded-3xl border border-[#CCA43B]/40 bg-[#F6F7F4] backdrop-blur-md text-[#1D2A38] px-6 py-8 md:px-10 md:py-10 shadow-lg">
             <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">⭐ What You Receive When You Register</h2>
-            <p className="text-white/90 mb-6 text-center">You get immediate access to:</p>
+            <p className="text-[#1D2A38]/90 mb-6 text-center">You get immediate access to:</p>
 
             <div className="grid gap-4 md:gap-6 md:grid-cols-2">
               <div className="flex items-start gap-3">
                 <Gift className="h-6 w-6 text-[#CCA43B] flex-shrink-0 mt-1" />
                 <div>
                   <p className="font-semibold mb-1">1. Your Freedom Matrix Diagnostic™</p>
-                  <p className="text-sm text-white/80">Delivered by email upon registration — personalized insights you can't get anywhere else.</p>
+                  <p className="text-sm text-[#1D2A38]/90">Delivered by email upon registration — personalized insights you can't get anywhere else.</p>
                 </div>
               </div>
 
@@ -219,7 +219,7 @@ export default function WebinarRegistration() {
                 <Gift className="h-6 w-6 text-[#CCA43B] flex-shrink-0 mt-1" />
                 <div>
                   <p className="font-semibold mb-1">2. The Operational Freedom Scorecard</p>
-                  <p className="text-sm text-white/80">A simple tool to identify time + money leaks in your firm. (Delivered after the webinar.)</p>
+                  <p className="text-sm text-[#1D2A38]/90">A simple tool to identify time + money leaks in your firm. (Delivered after the webinar.)</p>
                 </div>
               </div>
 
@@ -227,7 +227,7 @@ export default function WebinarRegistration() {
                 <Gift className="h-6 w-6 text-[#CCA43B] flex-shrink-0 mt-1" />
                 <div>
                   <p className="font-semibold mb-1">3. Access to the 2-hour masterclass</p>
-                  <p className="text-sm text-white/80">Plus the replay for internal leadership training.</p>
+                  <p className="text-sm text-[#1D2A38]/90">Plus the replay for internal leadership training.</p>
                 </div>
               </div>
 
@@ -235,7 +235,7 @@ export default function WebinarRegistration() {
                 <Gift className="h-6 w-6 text-[#CCA43B] flex-shrink-0 mt-1" />
                 <div>
                   <p className="font-semibold mb-1">4. A private invitation to our next advanced workshop</p>
-                  <p className="text-sm text-white/80">Optional, for owners who want deeper implementation support.</p>
+                  <p className="text-sm text-[#1D2A38]/90">Optional, for owners who want deeper implementation support.</p>
                 </div>
               </div>
             </div>

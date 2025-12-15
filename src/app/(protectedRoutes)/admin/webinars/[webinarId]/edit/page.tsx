@@ -28,7 +28,7 @@ const Page = async ({ params }: Props) => {
   }
 
   return (
-    <div className="w-full min-h-screen p-6 md:p-10">
+    <div className="w-full min-h-screen bg-[#F6F7F4] p-6 md:p-10">
       <div className="max-w-4xl mx-auto">
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-[#1D2A38] mb-2">Edit Webinar</h1>

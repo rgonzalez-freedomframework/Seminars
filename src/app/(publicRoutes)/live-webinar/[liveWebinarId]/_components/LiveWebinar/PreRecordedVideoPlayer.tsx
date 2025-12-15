@@ -17,7 +17,7 @@ const PreRecordedVideoPlayer = ({ webinar, user }: Props) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50">
+    <div className="min-h-screen bg-[#F6F7F4]">
       <div className="container mx-auto px-4 py-8">
         {/* Header */}
         <div className="mb-6">
@@ -60,7 +60,7 @@ const PreRecordedVideoPlayer = ({ webinar, user }: Props) => {
         </div>
 
         {/* Video Player */}
-        <Card className="bg-white border-2 border-gray-300 mb-8">
+        <Card className="bg-[#F6F7F4] border-2 border-gray-300 mb-8">
           <CardContent className="p-0">
             <div className="relative w-full bg-black rounded-lg overflow-hidden" style={{ paddingBottom: '56.25%' }}>
               <video
@@ -80,7 +80,7 @@ const PreRecordedVideoPlayer = ({ webinar, user }: Props) => {
 
         {/* Presenter Info */}
         {webinar.presenter && (
-          <Card className="bg-white border-2 border-gray-300">
+          <Card className="bg-[#F6F7F4] border-2 border-gray-300">
             <CardContent className="p-6">
               <h3 className="text-lg font-semibold text-[#1D2A38] mb-4">About the Presenter</h3>
               <div className="flex items-center gap-4">

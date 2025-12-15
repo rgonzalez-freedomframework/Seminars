@@ -328,7 +328,7 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
         </Card>
       </DialogTrigger>
       <DialogContent className="border-0 bg-transparent" isHideCloseButton={true}>
-        <DialogHeader className="justify-center items-center border-2 border-[#CCA43B] rounded-xl p-6 bg-white shadow-xl">
+        <DialogHeader className="justify-center items-center border-2 border-[#CCA43B] rounded-xl p-6 bg-white shadow-xl text-[#1D2A38]">
           <DialogTitle className="text-center text-xl font-bold text-[#1D2A38] mb-4">
             Register for this webinar
           </DialogTitle>

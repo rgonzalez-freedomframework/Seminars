@@ -16,7 +16,7 @@ const AdminLayout = async ({ children }: Props) => {
   }
 
   return (
-    <div className="flex w-full min-h-screen bg-gradient-to-br from-gray-50 via-gray-100 to-gray-50">
+    <div className="flex w-full min-h-screen bg-[#F6F7F4]">
       {/* SIDEBAR */}
       <Sidebar/>
       <div className="flex flex-col w-full h-screen overflow-auto px-2 md:px-4 scrollbar-hide container mx-auto">

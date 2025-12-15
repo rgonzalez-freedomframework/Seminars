@@ -1,0 +1,88 @@
+'use client'
+
+import React, { useEffect, useRef, useState } from 'react'
+
+type RevealOnScrollProps = {
+  children: React.ReactNode
+  className?: string
+  /** Additional delay (ms) before revealing once in view */
+  delay?: number
+  /** IntersectionObserver threshold, default ~15% */
+  threshold?: number
+  /** If true, adds a very subtle glow when revealed */
+  glow?: boolean
+}
+
+export function RevealOnScroll({
+  children,
+  className = '',
+  delay = 0,
+  threshold = 0.15,
+  glow = false,
+}: RevealOnScrollProps) {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const [isVisible, setIsVisible] = useState(false)
+
+  useEffect(() => {
+    const node = ref.current
+    if (!node) {
+      setIsVisible(true)
+      return
+    }
+
+    if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') {
+      setIsVisible(true)
+      return
+    }
+
+    let timeoutId: number | undefined
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (delay > 0) {
+              timeoutId = window.setTimeout(() => setIsVisible(true), delay)
+            } else {
+              setIsVisible(true)
+            }
+            observer.disconnect()
+          }
+        })
+      },
+      { threshold },
+    )
+
+    observer.observe(node)
+
+    return () => {
+      observer.disconnect()
+      if (timeoutId) {
+        window.clearTimeout(timeoutId)
+      }
+    }
+  }, [delay, threshold])
+
+  const baseClasses =
+    'transition-all duration-700 ease-out will-change-transform will-change-opacity'
+  const hiddenClasses = 'opacity-0 translate-y-4'
+  const visibleClasses = 'opacity-100 translate-y-0'
+  const glowClasses = glow && isVisible ? 'shadow-[0_0_40px_rgba(29,42,56,0.16)]' : ''
+
+  const combined = [
+    baseClasses,
+    isVisible ? visibleClasses : hiddenClasses,
+    glowClasses,
+    className,
+  ]
+    .filter(Boolean)
+    .join(' ')
+
+  return (
+    <div ref={ref} className={combined}>
+      {children}
+    </div>
+  )
+}
+
+export default RevealOnScroll

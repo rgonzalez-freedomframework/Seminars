@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle2, Sparkles, Gift, Calendar, Clock, Video, Home } from 'lucide-react';
+import RevealOnScroll from '@/components/RevealOnScroll';
 
 export default function WebinarRegistration() {
   return (
@@ -39,9 +40,10 @@ export default function WebinarRegistration() {
         <div className="container mx-auto px-4 max-w-6xl space-y-16">
           
           {/* Hero Section */}
-          <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md px-6 py-10 md:px-10 md:py-14 shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
+          <RevealOnScroll glow>
+            <section className="relative overflow-hidden rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md px-6 py-10 md:px-10 md:py-14 shadow-lg">
 
-            <div className="relative text-center space-y-6">
+              <div className="relative text-center space-y-6">
               <p className="inline-flex items-center gap-2 rounded-full bg-[#1D2A38] text-xs md:text-sm font-semibold tracking-[0.18em] text-white px-4 py-1 uppercase">
                 <Sparkles className="h-3 w-3 text-[#CCA43B]" />
                 Free 2-Hour Masterclass
@@ -75,10 +77,12 @@ export default function WebinarRegistration() {
                 </Link>
               </div>
               </div>
-          </section>
+            </section>
+          </RevealOnScroll>
 
           {/* Why This Training is Different */}
-          <section className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg animate-in fade-in slide-in-from-bottom duration-700">
+          <RevealOnScroll glow>
+          <section className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-lg">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Why This Training is Different (And Why You Need the Diagnostic)</h2>
             
             <p className="text-[#1D2A38]/90 mb-4 text-lg">
@@ -124,6 +128,7 @@ export default function WebinarRegistration() {
               <p className="text-[#1D2A38]/90 italic mt-4 ml-9">Your score will arrive by email once you register.</p>
             </div>
           </section>
+          </RevealOnScroll>
 
           {/* What You'll Learn */}
           <section className="space-y-6">
@@ -131,6 +136,7 @@ export default function WebinarRegistration() {
             <p className="text-[#1D2A38]/90 text-center mb-8">This masterclass will give you clarity on:</p>
 
             <div className="grid gap-6 md:gap-8 md:grid-cols-2">
+              <RevealOnScroll glow>
               <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">1. The Freedom Matrix™</h3>
                 <p className="text-[#1D2A38]/90 mb-3">
@@ -143,7 +149,9 @@ export default function WebinarRegistration() {
                   <li>• Revenue vs. operational design</li>
                 </ul>
               </article>
+              </RevealOnScroll>
 
+              <RevealOnScroll glow>
               <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">2. The Hidden Traps of Hourly, Flat-Fee, and Contingency Models</h3>
                 <p className="text-[#1D2A38]/90 mb-3">Every billing model contains a built-in freedom trap.</p>
@@ -155,7 +163,9 @@ export default function WebinarRegistration() {
                   <li>• And more importantly — how to escape these traps</li>
                 </ul>
               </article>
+              </RevealOnScroll>
 
+              <RevealOnScroll glow>
               <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">3. The Three Operational Shifts</h3>
                 <p className="text-[#1D2A38]/90 mb-3">The exact systems used by thriving firms in the Freedom Zone:</p>
@@ -174,7 +184,9 @@ export default function WebinarRegistration() {
                   </li>
                 </ul>
               </article>
+              </RevealOnScroll>
 
+              <RevealOnScroll glow>
               <article className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">4. How High-Performing Firms Scale Without Sacrifice</h3>
                 <p className="text-[#1D2A38]/90 mb-3">You'll see how these shifts create:</p>
@@ -185,6 +197,7 @@ export default function WebinarRegistration() {
                   <li>• A business that serves your life, not the other way around</li>
                 </ul>
               </article>
+              </RevealOnScroll>
             </div>
           </section>
 
@@ -230,6 +243,7 @@ export default function WebinarRegistration() {
 
           {/* Who This Is For */}
           <section className="grid gap-8 md:grid-cols-2 items-start">
+            <RevealOnScroll glow>
             <div className="rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-md">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Who This Masterclass Is For</h2>
               <p className="text-[#1D2A38]/90 mb-4">This training is specifically for:</p>
@@ -259,7 +273,9 @@ export default function WebinarRegistration() {
                 If your firm is too big to operate on hustle — but too owner-dependent to feel free — this session is for you.
               </p>
             </div>
+            </RevealOnScroll>
 
+            <RevealOnScroll glow>
             <div className="rounded-3xl border border-[#CCA43B]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 shadow-md">
               <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ About Your Instructor</h2>
               <h3 className="text-xl font-semibold text-[#1D2A38] mb-2">Janelle Sam, MBA (Cornell)</h3>
@@ -273,9 +289,11 @@ export default function WebinarRegistration() {
                 She created this masterclass because success without freedom isn't success — it's a more expensive form of burnout.
               </p>
             </div>
+            </RevealOnScroll>
           </section>
 
           {/* Event Details */}
+          <RevealOnScroll glow>
           <section className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-8 text-center shadow-md">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-6">⭐ Event Details</h2>
             
@@ -310,35 +328,45 @@ export default function WebinarRegistration() {
               <p><span className="font-semibold">Diagnostic:</span> Delivered automatically by email upon registration</p>
             </div>
           </section>
+          </RevealOnScroll>
 
           {/* FAQ */}
           <section className="space-y-6">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] text-center">⭐ FAQ</h2>
             
             <div className="grid gap-4">
+              <RevealOnScroll glow>
               <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Will this training be recorded?</h3>
                 <p className="text-[#1D2A38]/90">Yes — registrants will receive the replay link.</p>
               </div>
+              </RevealOnScroll>
 
+              <RevealOnScroll glow>
               <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Is this for small or new firms?</h3>
                 <p className="text-[#1D2A38]/90">No — the content in this webinar would be challenging for a firm that does not have admin support in operations to implement. This is recommended for firms that have generated at least $2M+ in annual revenue.</p>
               </div>
+              </RevealOnScroll>
 
+              <RevealOnScroll glow>
               <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Will I get my diagnostic without providing email?</h3>
                 <p className="text-[#1D2A38]/90">No — your quadrant summary is delivered by email only.</p>
               </div>
+              </RevealOnScroll>
 
+              <RevealOnScroll glow>
               <div className="rounded-2xl border border-[#1D2A38]/40 bg-[#F6F7F4] p-5 shadow-sm hover:shadow-md transition-all">
                 <h3 className="text-lg font-semibold text-[#1D2A38] mb-2">Is this a sales webinar?</h3>
                 <p className="text-[#1D2A38]/90">The training is 100% valuable on its own. At the end, you'll hear about the Freedom Framework™ 12-month program, but there is zero pressure to join.</p>
               </div>
+              </RevealOnScroll>
             </div>
           </section>
 
           {/* Final CTA */}
+          <RevealOnScroll glow>
           <section className="rounded-3xl border border-[#CCA43B]/50 bg-[#F6F7F4] backdrop-blur-md px-6 py-10 md:px-10 md:py-12 text-center shadow-lg">
             <h2 className="text-2xl md:text-3xl font-bold text-[#1D2A38] mb-4">⭐ Ready to Discover Your Path to Freedom?</h2>
             <p className="text-[#1D2A38]/90 mb-6 max-w-2xl mx-auto text-base md:text-lg">
@@ -354,6 +382,7 @@ export default function WebinarRegistration() {
               </Button>
             </Link>
           </section>
+          </RevealOnScroll>
         </div>
       </main>
 

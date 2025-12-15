@@ -3,7 +3,6 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle2, Sparkles, ChevronDown } from 'lucide-react';
-import ExecutiveBackground from '@/components/ExecutiveBackground';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -13,8 +12,10 @@ import {
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen overflow-hidden" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
-      <ExecutiveBackground className="fixed inset-0 z-0" />
+    <div
+      className="relative min-h-screen overflow-hidden bg-[#F6F7F4]"
+      style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
+    >
       {/* Header with Login Button */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#F6F7F4] backdrop-blur-md border-b border-[#CCA43B]/25 shadow-sm transition-all duration-300">
         <div className="container mx-auto px-4 py-3 md:py-4 transition-all duration-300">

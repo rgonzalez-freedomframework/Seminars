@@ -1,14 +1,11 @@
 import { DiagnosticForm } from '@/components/DiagnosticForm'
-import ExecutiveBackground from '@/components/ExecutiveBackground'
 import Link from 'next/link'
 import { ArrowLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export default function DiagnosticPage() {
   return (
-    <>
-      <ExecutiveBackground />
-
+    <div className="min-h-screen bg-[#F6F7F4]">
       <div className="relative z-10">
         {/* Header */}
         <header className="fixed top-0 left-0 right-0 z-50 bg-[#F6F7F4] backdrop-blur-md border-b border-[#CCA43B]/25 shadow-sm transition-all duration-300">
@@ -60,6 +57,6 @@ export default function DiagnosticPage() {
           </div>
         </footer>
       </div>
-    </>
+    </div>
   )
 }

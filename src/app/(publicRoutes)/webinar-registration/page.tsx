@@ -3,12 +3,13 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle2, Sparkles, Gift, Calendar, Clock, Video, Home } from 'lucide-react';
-import ExecutiveBackground from '@/components/ExecutiveBackground';
 
 export default function WebinarRegistration() {
   return (
-    <div className="relative min-h-screen overflow-hidden" style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}>
-      <ExecutiveBackground className="fixed inset-0 z-0" />
+    <div
+      className="relative min-h-screen overflow-hidden bg-[#F6F7F4]"
+      style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
+    >
       
       {/* Header with Login Button */}
       <header className="fixed top-0 left-0 right-0 z-50 bg-[#F6F7F4] backdrop-blur-sm border-b border-[#CCA43B]/20 transition-all duration-300" >

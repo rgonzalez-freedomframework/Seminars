@@ -11,7 +11,7 @@ export default function DiagnosticPage() {
         <header className="fixed top-0 left-0 right-0 z-50 bg-[#F6F7F4] backdrop-blur-md border-b border-[#CCA43B]/25 shadow-sm transition-all duration-300">
           <div className="mx-auto px-4 md:px-6 max-w-7xl">
             <div className="flex items-center justify-between h-16">
-              <Link href="/" className="flex items-center gap-2 text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
+              <Link href="/webinar-registration" className="flex items-center gap-2 text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
                 <ArrowLeft className="h-4 w-4" />
                 <span className="font-semibold">Back to Home</span>
               </Link>

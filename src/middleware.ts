@@ -12,14 +12,21 @@ const isPublicRoute = createRouteMatcher([
   '/admin/sign-in',
 ])
 
-export default clerkMiddleware(async(auth,req)=>{
-    // Protect non-public routes
-    if(!isPublicRoute(req)){
-        const {userId} = await auth();
-        if(!userId){
-            return Response.redirect(new URL('/sign-in', req.url));
-        }
+export default clerkMiddleware(async (auth, req) => {
+  // Temporarily route all visits to the root URL to the webinar registration page
+  if (req.nextUrl.pathname === '/') {
+    const url = new URL(req.url);
+    url.pathname = '/webinar-registration';
+    return Response.redirect(url);
+  }
+
+  // Protect non-public routes
+  if (!isPublicRoute(req)) {
+    const { userId } = await auth();
+    if (!userId) {
+      return Response.redirect(new URL('/sign-in', req.url));
     }
+  }
 });
 
 export const config = {

@@ -13,6 +13,19 @@ export async function onAuthenticateUser() {
       }
     }
 
+    // Prefer the primary email address from Clerk
+    const primaryEmail =
+      user.primaryEmailAddress?.emailAddress ||
+      user.emailAddresses[0]?.emailAddress
+
+    if (!primaryEmail) {
+      return {
+        status: 400,
+        message: 'No email address found for user',
+      }
+    }
+
+    // First, try to find by current Clerk user id
     const userExists = await prismaClient.user.findUnique({
       where: {
         clerkId: user.id,
@@ -25,16 +38,45 @@ export async function onAuthenticateUser() {
         user: userExists,
       }
     }
-    const newUser = await prismaClient.user.create({
-      data: {
-        clerkId: user.id,
-        email: user.emailAddresses[0].emailAddress,
-        name: user.firstName + ' ' + user.lastName,
-        profileImage: user.imageUrl,
+
+    // If not found by clerkId, try to find an existing user by email.
+    // This handles the case where a Clerk user was deleted and recreated
+    // with the same email but a different Clerk user id.
+    const userByEmail = await prismaClient.user.findUnique({
+      where: {
+        email: primaryEmail,
       },
     })
 
-    if (!newUser) {
+    let newOrUpdatedUser
+
+    if (userByEmail) {
+      // Re-link existing DB user to the new Clerk user id
+      newOrUpdatedUser = await prismaClient.user.update({
+        where: {
+          email: primaryEmail,
+        },
+        data: {
+          clerkId: user.id,
+          name: `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim(),
+          profileImage: user.imageUrl,
+          lastLoginAt: new Date(),
+        },
+      })
+    } else {
+      // Create a brand new user record
+      newOrUpdatedUser = await prismaClient.user.create({
+        data: {
+          clerkId: user.id,
+          email: primaryEmail,
+          name: `${user.firstName ?? ''} ${user.lastName ?? ''}`.trim() || primaryEmail,
+          profileImage: user.imageUrl,
+          lastLoginAt: new Date(),
+        },
+      })
+    }
+
+    if (!newOrUpdatedUser) {
       return {
         status: 500,
         message: 'Failed to create user',
@@ -43,7 +85,7 @@ export async function onAuthenticateUser() {
 
     return {
       status: 201,
-      user: newUser,
+      user: newOrUpdatedUser,
     }
   } catch (error) {
     console.log('ERROR',error)

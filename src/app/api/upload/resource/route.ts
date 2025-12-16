@@ -19,6 +19,9 @@ export async function POST(request: NextRequest) {
 
     const formData = await request.formData();
     const file = formData.get('file') as File;
+    const title = (formData.get('title') as string) || '';
+    const description = (formData.get('description') as string) || '';
+    const webinarId = (formData.get('webinarId') as string) || '';
 
     if (!file) {
       return NextResponse.json(
@@ -46,6 +49,21 @@ export async function POST(request: NextRequest) {
         access: 'public',
         contentType: file.type,
       });
+      let createdResource = null;
+
+      if (webinarId) {
+        createdResource = await prismaClient.webinarResource.create({
+          data: {
+            webinarId,
+            title: title || file.name,
+            description: description || null,
+            fileUrl: blob.url,
+            fileName: file.name,
+            fileSize: file.size,
+            fileType: file.type,
+          },
+        });
+      }
 
       return NextResponse.json({
         success: true,
@@ -53,6 +71,7 @@ export async function POST(request: NextRequest) {
         filename: file.name,
         fileSize: file.size,
         fileType: file.type,
+        resource: createdResource,
       });
     }
 
@@ -69,12 +88,29 @@ export async function POST(request: NextRequest) {
 
     const publicUrl = `/uploads/resources/${filename}`;
 
+    let createdResource = null;
+
+    if (webinarId) {
+      createdResource = await prismaClient.webinarResource.create({
+        data: {
+          webinarId,
+          title: title || file.name,
+          description: description || null,
+          fileUrl: publicUrl,
+          fileName: file.name,
+          fileSize: file.size,
+          fileType: file.type,
+        },
+      });
+    }
+
     return NextResponse.json({
       success: true,
       url: publicUrl,
       filename: file.name,
       fileSize: file.size,
       fileType: file.type,
+      resource: createdResource,
     });
   } catch (error: any) {
     console.error('Error uploading resource:', error);

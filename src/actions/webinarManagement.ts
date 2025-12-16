@@ -82,6 +82,7 @@ export async function updateWebinar(
     couponCode?: string | null
     couponEnabled?: boolean
     timeZone?: string
+    thumbnail?: string | null
   }
 ) {
   try {

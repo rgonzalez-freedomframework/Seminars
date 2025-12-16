@@ -97,30 +97,20 @@ export async function updateWebinar(
       data,
     })
 
-    // If Zoom integration is enabled and time/duration changed, update Zoom
+    // If Zoom integration is enabled and key fields changed, update the underlying Zoom MEETING directly
     if (webinar.zoomWebinarId && (data.startTime || data.duration || data.title || data.description)) {
       try {
         const zoomUpdateData: any = {}
-        
+
         if (data.title) zoomUpdateData.topic = data.title
         if (data.description) zoomUpdateData.agenda = data.description
         if (data.startTime) zoomUpdateData.start_time = data.startTime.toISOString()
         if (data.duration) zoomUpdateData.duration = data.duration
 
-        const response = await fetch(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/api/zoom/webinar/${webinar.zoomWebinarId}`,
-          {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(zoomUpdateData),
-          }
-        )
-
-        if (!response.ok) {
-          console.error('Failed to update Zoom webinar:', await response.text())
-        }
+        // We create Zoom MEETINGS in this flow, so update via the meetings API
+        await zoomClient.updateMeeting(webinar.zoomWebinarId, zoomUpdateData)
       } catch (zoomError) {
-        console.error('Error updating Zoom webinar:', zoomError)
+        console.error('Error updating Zoom meeting:', zoomError)
         // Continue even if Zoom update fails
       }
     }

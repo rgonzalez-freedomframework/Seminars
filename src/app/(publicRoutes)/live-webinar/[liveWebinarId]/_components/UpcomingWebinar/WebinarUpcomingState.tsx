@@ -53,6 +53,32 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
       window.open(webinar.zoomJoinUrl, '_blank');
     }
   };
+
+  const startDate = new Date(webinar.startTime);
+  const durationMinutes = webinar.duration && webinar.duration > 0 ? webinar.duration : 120;
+  const endDate = new Date(startDate.getTime() + durationMinutes * 60 * 1000);
+
+  const formatGoogleDate = (date: Date) => {
+    const y = date.getUTCFullYear();
+    const m = String(date.getUTCMonth() + 1).padStart(2, '0');
+    const d = String(date.getUTCDate()).padStart(2, '0');
+    const hh = String(date.getUTCHours()).padStart(2, '0');
+    const mm = String(date.getUTCMinutes()).padStart(2, '0');
+    const ss = String(date.getUTCSeconds()).padStart(2, '0');
+    return `${y}${m}${d}T${hh}${mm}${ss}Z`;
+  };
+
+  const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+    webinar.title
+  )}&dates=${formatGoogleDate(startDate)}/${formatGoogleDate(endDate)}&details=${encodeURIComponent(
+    webinar.description || ''
+  )}`;
+
+  const outlookCalendarUrl = `https://outlook.office.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&startdt=${encodeURIComponent(
+    startDate.toISOString()
+  )}&enddt=${encodeURIComponent(endDate.toISOString())}&subject=${encodeURIComponent(
+    webinar.title
+  )}&body=${encodeURIComponent(webinar.description || '')}`;
   return (
 	  <div className="w-full min-h-screen relative overflow-hidden bg-[#F6F7F4]">
 
@@ -70,6 +96,22 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
               webinarStatus={webinar.webinarStatus}
               onExpired={() => setIsExpired(true)}
             />
+            <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <Button
+                variant="outline"
+                className="rounded-xl bg-white border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white font-semibold transition-all text-sm"
+                onClick={() => window.open(googleCalendarUrl, '_blank')}
+              >
+                Add to Google Calendar
+              </Button>
+              <Button
+                variant="outline"
+                className="rounded-xl bg-white border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white font-semibold transition-all text-sm"
+                onClick={() => window.open(outlookCalendarUrl, '_blank')}
+              >
+                Add to Outlook Calendar
+              </Button>
+            </div>
           </>
         ) : (
           <p className="text-3xl md:text-4xl font-bold text-[#1D2A38] text-center leading-tight">

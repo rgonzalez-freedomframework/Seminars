@@ -334,7 +334,7 @@ export default function WebinarRegistration() {
               <div className="max-w-6xl mx-auto">
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="faq-root">
-                    <AccordionTrigger className="justify-center text-center text-lg md:text-xl font-bold text-white rounded-3xl border-2 border-[#CCA43B] bg-gradient-to-r from-[#CCA43B] to-[#B8932F] px-4 py-3 md:px-6 md:py-4 shadow-sm">
+                    <AccordionTrigger className="justify-center text-center text-lg md:text-xl font-bold text-white rounded-3xl border border-[#1D2A38]/40 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] px-4 py-3 md:px-6 md:py-4 shadow-sm">
                       Frequently Asked Questions
                     </AccordionTrigger>
                     <AccordionContent className="pt-3 md:pt-4">

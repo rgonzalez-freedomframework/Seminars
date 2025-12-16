@@ -112,7 +112,13 @@ export const createWebinar = async (formData: WebinarFormState) => {
           console.error('Zoom API error status:', zoomError.response.status)
           console.error('Zoom API error data:', JSON.stringify(zoomError.response.data))
         }
-        // Continue without Zoom integration
+
+        // If Zoom integration was explicitly enabled, treat failure as an error
+        return {
+          status: 500,
+          message:
+            'Failed to create Zoom meeting. Please check your Zoom Server-to-Server app credentials and scopes (meeting:read:admin, meeting:write:admin) and try again.',
+        }
       }
     }
 

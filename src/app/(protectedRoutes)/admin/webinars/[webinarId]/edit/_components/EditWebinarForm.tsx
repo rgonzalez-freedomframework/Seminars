@@ -477,6 +477,23 @@ const EditWebinarForm = ({ webinar }: Props) => {
             className="hidden"
             onChange={handleThumbnailUpload}
           />
+
+          <div className="pt-3 flex justify-end">
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="bg-[#CCA43B] hover:bg-[#B8932F] text-[#1D2A38] px-4 py-2 h-9 text-sm"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-3 h-3 mr-2 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                'Save Changes'
+              )}
+            </Button>
+          </div>
         </CardContent>
       </Card>
 
@@ -579,6 +596,23 @@ const EditWebinarForm = ({ webinar }: Props) => {
                 ))}
               </ul>
             )}
+          </div>
+
+          <div className="pt-3 flex justify-end">
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="bg-[#CCA43B] hover:bg-[#B8932F] text-[#1D2A38] px-4 py-2 h-9 text-sm"
+            >
+              {isLoading ? (
+                <>
+                  <Loader2 className="w-3 h-3 mr-2 animate-spin" />
+                  Saving...
+                </>
+              ) : (
+                'Save Changes'
+              )}
+            </Button>
           </div>
         </CardContent>
       </Card>

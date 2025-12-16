@@ -20,6 +20,7 @@ type Props = {
 const EditWebinarForm = ({ webinar }: Props) => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
+  const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null)
 
   const parseSeatsFromTags = (tags: string[] | null): { remaining: string; total: string } | null => {
     if (!tags || tags.length === 0) return null
@@ -90,12 +91,13 @@ const EditWebinarForm = ({ webinar }: Props) => {
 
       if (result.status === 200) {
         const savedAt = new Date()
+        setLastSavedAt(savedAt)
+
         const savedLabel = savedAt.toLocaleTimeString('en-US', {
           hour: 'numeric',
           minute: '2-digit',
         })
         toast.success(`Webinar updated successfully at ${savedLabel}`)
-        router.push('/admin/webinars')
         router.refresh()
       } else {
         toast.error(result.message)
@@ -117,6 +119,16 @@ const EditWebinarForm = ({ webinar }: Props) => {
             {webinar.zoomWebinarId && (
               <span className="block mt-2 text-blue-600 text-sm">
                 Zoom Integration Active - Changes will sync with Zoom
+              </span>
+            )}
+            {lastSavedAt && (
+              <span className="block mt-2 text-xs text-emerald-700">
+                Saved at{' '}
+                {lastSavedAt.toLocaleTimeString('en-US', {
+                  hour: 'numeric',
+                  minute: '2-digit',
+                })}{' '}
+                in your local timezone
               </span>
             )}
           </CardDescription>

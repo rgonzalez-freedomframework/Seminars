@@ -196,7 +196,7 @@ const Pages = async () => {
         <div className="container mx-auto px-4 md:px-8 lg:px-12">
           <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-2">
-              <Link href="/?view=landing" className="text-xl font-bold text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
+              <Link href="/webinar-registration" className="text-xl font-bold text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
                 Freedom Framework™
               </Link>
           </div>

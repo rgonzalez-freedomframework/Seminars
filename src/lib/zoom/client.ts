@@ -62,6 +62,12 @@ interface ZoomMeetingResponse {
   pstn_password?: string;
 }
 
+interface ZoomMeetingRegistrantRequest {
+  email: string;
+  first_name?: string;
+  last_name?: string;
+}
+
 interface ZoomWebinarResponse {
   id: number;
   uuid: string;
@@ -156,6 +162,29 @@ class ZoomClient {
     } catch (error: any) {
       console.error('Failed to create Zoom meeting:', error.response?.data || error.message);
       throw new Error(`Failed to create Zoom meeting: ${error.response?.data?.message || error.message}`);
+    }
+  }
+
+  /**
+   * Add a registrant to a Zoom meeting so Zoom sends them confirmation/calendar email.
+   */
+  async addMeetingRegistrant(meetingId: string, registrant: ZoomMeetingRegistrantRequest): Promise<void> {
+    const token = await this.getAccessToken();
+
+    try {
+      await axios.post(
+        `${ZOOM_API_BASE_URL}/meetings/${meetingId}/registrants`,
+        registrant,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    } catch (error: any) {
+      console.error('Failed to add Zoom meeting registrant:', error.response?.data || error.message);
+      throw new Error(`Failed to add Zoom meeting registrant: ${error.response?.data?.message || error.message}`);
     }
   }
 

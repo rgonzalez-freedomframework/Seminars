@@ -203,6 +203,8 @@ export const registerAttendee = async ({
         select: {
           id: true,
           tags: true,
+          zoomWebinarId: true,
+          title: true,
         },
       })
 
@@ -295,12 +297,34 @@ export const registerAttendee = async ({
         success: true,
         status: 200,
         data: attendance,
+        zoomWebinarId: webinar.zoomWebinarId,
+        webinarTitle: webinar.title,
         message: 'Successfully Registered',
       } as const
     })
 
     if (result.success) {
       revalidatePath(`/${webinarId}`)
+    }
+
+    // If this webinar is integrated with Zoom, add the registrant so Zoom sends calendar invites.
+    if (result.success && result.zoomWebinarId) {
+      try {
+        const { zoomClient } = await import('@/lib/zoom/client')
+
+        // Naive split of full name into first/last for Zoom
+        const [firstName, ...rest] = name.trim().split(' ')
+        const lastName = rest.join(' ') || firstName
+
+        await zoomClient.addMeetingRegistrant(result.zoomWebinarId, {
+          email,
+          first_name: firstName,
+          last_name: lastName,
+        })
+      } catch (zoomError) {
+        console.error('Error adding Zoom registrant:', zoomError)
+        // Do not fail local registration if Zoom registrant call fails
+      }
     }
 
     return result

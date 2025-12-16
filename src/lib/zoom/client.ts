@@ -273,6 +273,29 @@ class ZoomClient {
   }
 
   /**
+   * Update a Zoom meeting
+   */
+  async updateMeeting(meetingId: string, data: Partial<ZoomMeetingRequest>): Promise<void> {
+    const token = await this.getAccessToken();
+
+    try {
+      await axios.patch(
+        `${ZOOM_API_BASE_URL}/meetings/${meetingId}`,
+        data,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        }
+      );
+    } catch (error: any) {
+      console.error('Failed to update Zoom meeting:', error.response?.data || error.message);
+      throw new Error(`Failed to update Zoom meeting: ${error.response?.data?.message || error.message}`);
+    }
+  }
+
+  /**
    * Update a Zoom webinar
    */
   async updateWebinar(webinarId: string, data: Partial<ZoomWebinarRequest>): Promise<void> {

@@ -105,8 +105,8 @@ export async function PATCH(
 
     const body = await request.json();
 
-    // Update Zoom webinar
-    await zoomClient.updateWebinar(webinarId, body);
+    // Update underlying Zoom MEETING (this app creates meetings, not licensed webinars)
+    await zoomClient.updateMeeting(webinarId, body);
 
     return NextResponse.json({
       success: true,

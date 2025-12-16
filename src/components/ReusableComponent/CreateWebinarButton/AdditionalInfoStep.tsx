@@ -171,7 +171,7 @@ const handleRemoveResource = (index: number) => {
   return (
     <div className="space-y-6">
         {/* Zoom Integration Toggle */}
-        <div className="flex items-center justify-between p-4 border-2 border-gray-300 rounded-lg bg-white hover:border-[#CCA43B]/50 transition-colors">
+        <div className="flex items-center justify-between p-4 border-2 border-[#1D2A38]/30 rounded-lg bg-[#F6F7F4] hover:border-[#CCA43B]/50 transition-colors">
         <div className="flex-1">
     			<Label htmlFor="enable-zoom" className="text-base font-semibold text-black cursor-pointer">
             Zoom Integration
@@ -184,11 +184,11 @@ const handleRemoveResource = (index: number) => {
           id="enable-zoom"
           checked={formData.additionalInfo.enableZoom || false}
           onCheckedChange={(checked) => updateAdditionalInfoField('enableZoom', checked)}
-          className="data-[state=checked]:bg-[#CCA43B]"
+          className="bg-[#E5E7EB] border border-[#1D2A38]/30 data-[state=checked]:bg-[#CCA43B]"
         />
         </div>
 
-        <div className="flex items-center justify-between p-4 border-2 border-gray-300 rounded-lg bg-white hover:border-[#CCA43B]/50 transition-colors">
+        <div className="flex items-center justify-between p-4 border-2 border-[#1D2A38]/30 rounded-lg bg-[#F6F7F4] hover:border-[#CCA43B]/50 transition-colors">
         <div className="flex-1">
     			<Label htmlFor="lock-chat" className="text-base font-semibold text-black cursor-pointer">
             Lock Chat
@@ -201,11 +201,11 @@ const handleRemoveResource = (index: number) => {
           id="lock-chat"
           checked={lockChat||false}
           onCheckedChange={handleToggleLockChat}
-          className="data-[state=checked]:bg-[#CCA43B]"
+          className="bg-[#E5E7EB] border border-[#1D2A38]/30 data-[state=checked]:bg-[#CCA43B]"
         />
         </div>
 
-    <div className="space-y-4 p-4 border-2 border-gray-300 rounded-lg bg-white">
+    <div className="space-y-4 p-4 border-2 border-[#1D2A38]/30 rounded-lg bg-[#F6F7F4]">
     <div className="flex items-center justify-between">
         <div className="flex-1">
       <Label htmlFor="coupon-enabled" className="text-base font-semibold text-black cursor-pointer">
@@ -219,7 +219,7 @@ const handleRemoveResource = (index: number) => {
         id="coupon-enabled"
         checked={formData.additionalInfo.couponEnabled || false}
         onCheckedChange={handleToggleCoupon}
-        className="data-[state=checked]:bg-[#CCA43B]"
+        className="bg-[#E5E7EB] border border-[#1D2A38]/30 data-[state=checked]:bg-[#CCA43B]"
         />
     </div>
             {couponEnabled && (
@@ -233,7 +233,7 @@ const handleRemoveResource = (index: number) => {
                     onChange={handleCouponCodeChange}
                     placeholder="e.g., SAVE20"
                     className={cn(
-                      'bg-white border-2 border-gray-300 text-black focus:border-[#CCA43B]',
+                      'bg-white border-2 border-[#1D2A38]/40 text-black focus:border-[#CCA43B]',
                         errors.couponCode && 'border-red-400 focus-visible:ring-red-400'
                     )}
                     />
@@ -253,7 +253,7 @@ const handleRemoveResource = (index: number) => {
     </div>
 
     {/* Resources Upload Section */}
-    <div className="space-y-4 p-4 border-2 border-gray-300 rounded-lg bg-white">
+    <div className="space-y-4 p-4 border-2 border-[#1D2A38]/30 rounded-lg bg-[#F6F7F4]">
       <div className="flex items-center gap-2 mb-2">
       <FileText className="h-5 w-5 text-black" />
         <div>
@@ -292,7 +292,7 @@ const handleRemoveResource = (index: number) => {
             <Button
               type="button"
               variant="outline"
-              className="relative flex-1 justify-center border-2 border-gray-300 bg-white text-black font-semibold hover:border-[#CCA43B] hover:bg-[#CCA43B]/5 shadow-sm"
+              className="relative flex-1 justify-center border-2 border-[#1D2A38]/40 bg-white text-black font-semibold hover:border-[#CCA43B] hover:bg-[#CCA43B]/5 shadow-sm"
               disabled={newResource.uploading}
             >
               <Upload className="h-4 w-4 mr-2" />

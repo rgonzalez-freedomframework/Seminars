@@ -123,6 +123,7 @@ const EditWebinarForm = ({ webinar }: Props) => {
               value={formData.title}
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               placeholder="Enter webinar title"
+              className="border-[#1D2A38]/40 bg-white text-[#1D2A38] placeholder:text-[#1D2A38]/60"
               required
             />
           </div>
@@ -133,6 +134,7 @@ const EditWebinarForm = ({ webinar }: Props) => {
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
               placeholder="Enter webinar description"
+              className="border-[#1D2A38]/40 bg-white text-[#1D2A38] placeholder:text-[#1D2A38]/60"
               rows={4}
             />
           </div>
@@ -148,6 +150,7 @@ const EditWebinarForm = ({ webinar }: Props) => {
                 type="datetime-local"
                 value={formData.startTime}
                 onChange={(e) => setFormData({ ...formData, startTime: e.target.value })}
+                className="border-[#1D2A38]/40 bg-white text-[#1D2A38]"
                 required
               />
               <p className="text-xs text-gray-500">Time is in your local timezone</p>
@@ -166,6 +169,7 @@ const EditWebinarForm = ({ webinar }: Props) => {
                 value={formData.duration}
                 onChange={(e) => setFormData({ ...formData, duration: parseInt(e.target.value) })}
                 placeholder="60"
+                className="border-[#1D2A38]/40 bg-white text-[#1D2A38] placeholder:text-[#1D2A38]/60"
                 required
               />
             </div>
@@ -183,6 +187,7 @@ const EditWebinarForm = ({ webinar }: Props) => {
                 value={formData.seatsRemaining}
                 onChange={(e) => setFormData({ ...formData, seatsRemaining: e.target.value })}
                 placeholder="e.g. 10"
+                className="border-[#1D2A38]/40 bg-white text-[#1D2A38] placeholder:text-[#1D2A38]/60"
               />
               <p className="text-xs text-gray-500">
                 This controls how many seats are currently available. Set to 0 to mark the webinar as sold out.

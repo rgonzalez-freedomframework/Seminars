@@ -19,8 +19,8 @@ export const metadata: Metadata = {
   ],
 },
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#0a192f' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a192f' }
+    { media: '(prefers-color-scheme: light)', color: '#F6F7F4' },
+    { media: '(prefers-color-scheme: dark)', color: '#F6F7F4' }
   ],
   viewport: {
     width: 'device-width',
@@ -43,18 +43,18 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-      <html lang="en" suppressHydrationWarning style={{ backgroundColor: '#0a192f' }}>
+      <html lang="en" suppressHydrationWarning style={{ backgroundColor: '#F6F7F4' }}>
         <head>
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-          <meta name="theme-color" content="#0a192f" />
+          <meta name="theme-color" content="#F6F7F4" />
           <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         </head>
         <body
           className={`${manrope.variable} antialiased`}
           suppressHydrationWarning
-          style={{ backgroundColor: '#0a192f' }}
+          style={{ backgroundColor: '#F6F7F4' }}
         >
           <ThemeProvider
               attribute="class"

@@ -58,6 +58,22 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
   const durationMinutes = webinar.duration && webinar.duration > 0 ? webinar.duration : 120;
   const endDate = new Date(startDate.getTime() + durationMinutes * 60 * 1000);
 
+  const calendarDetailsParts: string[] = [];
+  if (webinar.description) {
+    calendarDetailsParts.push(webinar.description);
+  }
+  if (webinar.zoomJoinUrl) {
+    calendarDetailsParts.push(`Join link: ${webinar.zoomJoinUrl}`);
+  }
+  if (webinar.zoomWebinarId) {
+    calendarDetailsParts.push(`Meeting ID: ${webinar.zoomWebinarId}`);
+  }
+  if (webinar.zoomPassword) {
+    calendarDetailsParts.push(`Passcode: ${webinar.zoomPassword}`);
+  }
+
+  const calendarDetails = calendarDetailsParts.join('\n\n');
+
   const formatGoogleDate = (date: Date) => {
     const y = date.getUTCFullYear();
     const m = String(date.getUTCMonth() + 1).padStart(2, '0');
@@ -71,14 +87,14 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
   const googleCalendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
     webinar.title
   )}&dates=${formatGoogleDate(startDate)}/${formatGoogleDate(endDate)}&details=${encodeURIComponent(
-    webinar.description || ''
-  )}`;
+    calendarDetails
+  )}&location=${encodeURIComponent(webinar.zoomJoinUrl || '')}`;
 
   const outlookCalendarUrl = `https://outlook.office.com/calendar/0/deeplink/compose?path=/calendar/action/compose&rru=addevent&startdt=${encodeURIComponent(
     startDate.toISOString()
   )}&enddt=${encodeURIComponent(endDate.toISOString())}&subject=${encodeURIComponent(
     webinar.title
-  )}&body=${encodeURIComponent(webinar.description || '')}`;
+  )}&body=${encodeURIComponent(calendarDetails)}&location=${encodeURIComponent(webinar.zoomJoinUrl || '')}`;
   return (
 	  <div className="w-full min-h-screen relative overflow-hidden bg-[#F6F7F4]">
 

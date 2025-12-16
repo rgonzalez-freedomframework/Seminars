@@ -103,7 +103,7 @@ const EditWebinarForm = ({ webinar }: Props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Card>
+      <Card className="bg-[#F6F7F4] text-[#1D2A38]">
         <CardHeader>
           <CardTitle>Basic Information</CardTitle>
           <CardDescription>
@@ -218,7 +218,7 @@ const EditWebinarForm = ({ webinar }: Props) => {
       </Card>
 
       {webinar.webinarStatus !== 'ENDED' && webinar.webinarStatus !== 'CANCELLED' && (
-        <Card className="mt-6">
+        <Card className="mt-6 bg-[#F6F7F4] text-[#1D2A38]">
           <CardHeader>
             <CardTitle className="text-sm">Webinar Status</CardTitle>
           </CardHeader>
@@ -247,7 +247,7 @@ const EditWebinarForm = ({ webinar }: Props) => {
       )}
 
       {webinar.zoomWebinarId && (
-        <Card className="mt-6">
+        <Card className="mt-6 bg-[#F6F7F4] text-[#1D2A38]">
           <CardHeader>
             <CardTitle className="text-sm">Zoom Meeting Details</CardTitle>
             <CardDescription>

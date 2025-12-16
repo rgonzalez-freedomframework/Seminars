@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 import LiveStreamState from './LiveWebinar/LiveStreamState';
 import PreRecordedVideoPlayer from './LiveWebinar/PreRecordedVideoPlayer';
 import { WebinarWithPresenter } from '@/lib/type';
+import { Button } from '@/components/ui/button';
 
 type Props = {
   error: string | undefined;
@@ -98,15 +99,33 @@ const RenderWebinar = ({
                       </div>
                     </div>
 
-                    <div className="flex justify-center">
-                      <a
-                        href={webinar.zoomJoinUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-gradient-to-r from-[#CCA43B] to-[#B8932F] text-[#1D2A38] font-semibold border-2 border-[#CCA43B] shadow-sm hover:from-[#B8932F] hover:to-[#CCA43B] transition-all"
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
+                      <Button
+                        className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-semibold border-2 border-[#CCA43B] rounded-xl"
+                        onClick={() => {
+                          window.open(webinar.zoomJoinUrl as string, '_blank');
+                        }}
                       >
-                        Open in Zoom
-                      </a>
+                        Open Zoom Link
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="flex-1 !border-2 !border-[#1D2A38]/40 !bg-[#F6F7F4] !text-[#1D2A38] hover:!bg-[#1D2A38]/5"
+                        onClick={() => {
+                          navigator.clipboard
+                            .writeText(webinar.zoomJoinUrl as string)
+                            .catch(() => {});
+                        }}
+                      >
+                        Copy Join Link
+                      </Button>
+                      <Button
+                        variant="outline"
+                        className="flex-1 !border-2 !border-[#1D2A38]/40 !bg-[#F6F7F4] !text-[#1D2A38] hover:!bg-[#1D2A38]/5"
+                        onClick={() => router.push('/home')}
+                      >
+                        Go to Dashboard
+                      </Button>
                     </div>
                   </div>
                 </div>

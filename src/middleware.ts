@@ -14,19 +14,19 @@ const isPublicRoute = createRouteMatcher([
 ])
 
 export default clerkMiddleware(async (auth, req) => {
-  // Temporarily route all visits to the root URL to the webinar registration page
+  const { userId } = await auth();
+
+  // For the root URL, send authenticated users to their dashboard
+  // and unauthenticated visitors to the registration landing page.
   if (req.nextUrl.pathname === '/') {
     const url = req.nextUrl.clone();
-    url.pathname = '/webinar-registration';
+    url.pathname = userId ? '/home' : '/webinar-registration';
     return NextResponse.redirect(url);
   }
 
   // Protect non-public routes
-  if (!isPublicRoute(req)) {
-    const { userId } = await auth();
-    if (!userId) {
-      return NextResponse.redirect(new URL('/sign-in', req.url));
-    }
+  if (!isPublicRoute(req) && !userId) {
+    return NextResponse.redirect(new URL('/sign-in', req.url));
   }
 });
 

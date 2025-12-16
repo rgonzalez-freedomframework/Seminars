@@ -50,6 +50,7 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
   const [description, setDescription] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const isSoldOut =
     !webinar.isRegistered &&
@@ -246,11 +247,7 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
       toast.success(res.message || "Successfully registered for webinar");
 
       setSubmitted(true);
-
-      setTimeout(() => {
-        setIsOpen(false);
-        router.push(`/live-webinar/${webinar.id}`);
-      }, 1200);
+      setShowConfirmation(true);
     } catch (error) {
       console.error("Error submitting registration form:", error);
       toast.error(error instanceof Error ? error.message : "Something went wrong!");
@@ -328,64 +325,141 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
         </Card>
       </DialogTrigger>
       <DialogContent className="border-0 bg-transparent" isHideCloseButton={true}>
-        <DialogHeader className="justify-center items-center border-2 border-[#CCA43B] rounded-xl p-6 bg-white shadow-xl text-[#1D2A38]">
+        <DialogHeader className="justify-center items-center border-2 border-[#CCA43B] rounded-xl p-6 bg-white shadow-xl text-[#1D2A38] max-w-lg mx-auto">
           <DialogTitle className="text-center text-xl font-bold text-[#1D2A38] mb-4">
-            Register for this webinar
+            {showConfirmation ? "You're registered for this webinar" : "Register for this webinar"}
           </DialogTitle>
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
-            {!submitted && (
-              <React.Fragment>
-                <Input
-                  type="text"
-                  placeholder="Your Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-                <Input
-                  type="email"
-                  placeholder="Your Email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-                <Input
-                  type="tel"
-                  placeholder="Phone Number (Optional)"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                />
-                <Input
-                  type="text"
-                  placeholder="Business Name (Optional)"
-                  value={businessName}
-                  onChange={(e) => setBusinessName(e.target.value)}
-                />
-                <Input
-                  type="text"
-                  placeholder="Tell us about your needs (Optional)"
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-              </React.Fragment>
-            )}
-            <Button
-              type="submit"
-              className="w-full bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-bold border-2 border-[#CCA43B] rounded-xl"
-              disabled={isSubmitting || submitted}
-            >
-              {isSubmitting ? (
-                <>
-                  <Loader2 className="animate-spin mr-2" />
-                  Registering...
-                </>
-              ) : submitted ? (
-                "You're all set!"
+
+          {showConfirmation ? (
+            <div className="w-full space-y-5 text-center">
+              <div className="space-y-2">
+                <p className="text-sm font-semibold text-[#1D2A38]/80 uppercase tracking-[0.18em]">
+                  Your seat is confirmed
+                </p>
+                <p className="text-lg font-semibold text-[#1D2A38]">
+                  {webinar.title}
+                </p>
+              </div>
+
+              <div className="rounded-2xl bg-[#F6F7F4] border border-[#1D2A38]/15 px-4 py-3 text-sm text-[#1D2A38]/90 flex flex-col gap-2 items-center">
+                <div className="flex items-center gap-2">
+                  <Calendar className="w-4 h-4" />
+                  <WebinarCardDate startTime={webinar.startTime} />
+                </div>
+                <div className="flex items-center gap-2">
+                  <Clock className="w-4 h-4" />
+                  <WebinarCardTime
+                    startTime={webinar.startTime}
+                    duration={webinar.duration || undefined}
+                  />
+                </div>
+              </div>
+
+              {webinar.zoomJoinUrl ? (
+                <div className="space-y-2 text-sm text-[#1D2A38]/90">
+                  <p>
+                    We've also registered you with Zoom. You can join directly
+                    using the link below or from the email Zoom sends you.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                    <Button
+                      className="flex-1 bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-semibold border-2 border-[#CCA43B] rounded-xl"
+                      onClick={() => {
+                        window.open(webinar.zoomJoinUrl as string, "_blank");
+                      }}
+                    >
+                      Open Zoom Link
+                    </Button>
+                    <Button
+                      variant="outline"
+                      className="flex-1 !border-2 !border-[#1D2A38]/40 !bg-[#F6F7F4] !text-[#1D2A38] hover:!bg-[#1D2A38]/5"
+                      onClick={() => {
+                        navigator.clipboard.writeText(webinar.zoomJoinUrl as string).catch(() => {});
+                      }}
+                    >
+                      Copy Join Link
+                    </Button>
+                  </div>
+                </div>
               ) : (
-                "Register"
+                <p className="text-sm text-[#1D2A38]/80">
+                  We've registered you for this session. You'll receive an email
+                  with your calendar invite and join details.
+                </p>
               )}
-            </Button>
-          </form>
+
+              <div className="flex flex-col sm:flex-row gap-3 pt-2">
+                <Button
+                  className="flex-1 bg-[#1D2A38] hover:bg-[#1D2A38]/90 text-white font-semibold rounded-xl"
+                  onClick={() => {
+                    setIsOpen(false);
+                    router.push(`/live-webinar/${webinar.id}`);
+                  }}
+                >
+                  View Webinar Page
+                </Button>
+                <Button
+                  variant="outline"
+                  className="flex-1 !border-2 !border-[#1D2A38]/40 !bg-[#F6F7F4] !text-[#1D2A38] hover:!bg-[#1D2A38]/5"
+                  onClick={() => {
+                    setIsOpen(false);
+                    router.push("/home");
+                  }}
+                >
+                  Go to Dashboard
+                </Button>
+              </div>
+            </div>
+          ) : (
+            <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full">
+              <Input
+                type="text"
+                placeholder="Your Name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+              <Input
+                type="email"
+                placeholder="Your Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
+              <Input
+                type="tel"
+                placeholder="Phone Number (Optional)"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+              <Input
+                type="text"
+                placeholder="Business Name (Optional)"
+                value={businessName}
+                onChange={(e) => setBusinessName(e.target.value)}
+              />
+              <Input
+                type="text"
+                placeholder="Tell us about your needs (Optional)"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <Button
+                type="submit"
+                className="w-full bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-bold border-2 border-[#CCA43B] rounded-xl"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="animate-spin mr-2" />
+                    Registering...
+                  </>
+                ) : (
+                  "Register"
+                )}
+              </Button>
+            </form>
+          )}
         </DialogHeader>
       </DialogContent>
     </Dialog>

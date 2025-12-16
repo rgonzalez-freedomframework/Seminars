@@ -114,15 +114,14 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
             />
             <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Button
-                variant="outline"
-                className="rounded-xl bg-white border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white font-semibold transition-all text-sm"
+                className="rounded-xl bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-semibold border-2 border-[#CCA43B] text-sm"
                 onClick={() => window.open(googleCalendarUrl, '_blank')}
               >
                 Add to Google Calendar
               </Button>
               <Button
                 variant="outline"
-                className="rounded-xl bg-white border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white font-semibold transition-all text-sm"
+                className="rounded-xl !bg-[#F6F7F4] !border-2 !border-[#1D2A38]/40 !text-[#1D2A38] hover:!bg-[#1D2A38]/5 font-semibold text-sm"
                 onClick={() => window.open(outlookCalendarUrl, '_blank')}
               >
                 Add to Outlook Calendar

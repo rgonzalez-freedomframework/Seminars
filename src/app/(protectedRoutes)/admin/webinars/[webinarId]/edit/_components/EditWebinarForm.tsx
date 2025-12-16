@@ -89,7 +89,12 @@ const EditWebinarForm = ({ webinar }: Props) => {
       })
 
       if (result.status === 200) {
-        toast.success('Webinar updated successfully')
+        const savedAt = new Date()
+        const savedLabel = savedAt.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+        })
+        toast.success(`Webinar updated successfully at ${savedLabel}`)
         router.push('/admin/webinars')
         router.refresh()
       } else {

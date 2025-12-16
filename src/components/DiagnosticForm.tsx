@@ -31,6 +31,8 @@ type QuadrantResult = {
   primaryFocus: string
   scoreRange: string
   nextSteps: string
+  deepTitle: string
+  deepBody: string
 }
 
 const questions = {
@@ -171,6 +173,9 @@ const quadrants: Record<string, QuadrantResult> = {
     primaryFocus: 'Predictability + Accountability',
     scoreRange: '11–20',
     nextSteps: 'Focus on building predictable systems and establishing team accountability. Start by documenting your core processes and delegating routine tasks.',
+    deepTitle: 'Deeper Insight into The Grind Zone',
+    deepBody:
+      'In the Grind Zone, you and your firm are running on sheer effort rather than structure. Revenue may be coming in, but it feels fragile because so much depends on you personally showing up, deciding, and doing. This is where long hours, constant firefighting, and decision fatigue become normal. Team members look to you for answers because the systems, scorecards, and expectations they would rely on simply are not strong enough yet. The risk is that you normalize chaos as “just how it is” in a growing firm. Your biggest unlock here is to slow down long enough to build predictability: document a few core processes, define ownership, and install simple, visible metrics so the firm can start to perform without you carrying all the weight.',
   },
   drift: {
     name: 'The Drift Zone',
@@ -178,6 +183,9 @@ const quadrants: Record<string, QuadrantResult> = {
     primaryFocus: 'Profit Optimization + Metrics',
     scoreRange: '21–28',
     nextSteps: 'Implement key performance metrics and profit optimization strategies. Review your pricing model and identify opportunities to increase revenue per client.',
+    deepTitle: 'Deeper Insight into The Drift Zone',
+    deepBody:
+      'In the Drift Zone, the firm is “fine” on the surface — cases are handled, the team more or less knows what to do, and cash flow is not an emergency. But underneath, the numbers are not where they could be, and growth has quietly stalled. Comfort becomes the enemy: because nothing is on fire, there is no urgency to optimize pricing, tighten margins, or pursue higher‑value matters. The danger is that years pass while you work hard in a business that never quite delivers the lifestyle, freedom, or valuation you envisioned. The shift here is to treat your firm like an asset you are tuning, not just a job you are maintaining: install clear financial scorecards, set bolder targets, and intentionally design profit into every part of your model.',
   },
   golden: {
     name: 'The Golden Cage',
@@ -185,6 +193,9 @@ const quadrants: Record<string, QuadrantResult> = {
     primaryFocus: 'Leadership + Delegation Systems',
     scoreRange: '29–36',
     nextSteps: 'Develop leadership within your team and create delegation frameworks. Focus on removing yourself from day-to-day operations by empowering key leaders.',
+    deepTitle: 'Deeper Insight into The Golden Cage',
+    deepBody:
+      'In the Golden Cage, the firm looks successful from the outside: strong revenue, healthy profit, a reputation you have worked years to build. The problem is that your personal time and identity are still trapped inside the machine you created. You are the rainmaker, the quality control, the backstop for tough decisions. The cage is “golden” because the money is good — but the trade‑off is that you cannot step away without fearing that things will slow down, break, or decline. Moving forward means deliberately breaking the belief that you must be at the center of everything. This is the season to build leaders, not just staff; to create decision‑making frameworks; and to accept that empowering others will feel uncomfortable before it feels freeing.',
   },
   freedom: {
     name: 'The Freedom Zone',
@@ -192,6 +203,9 @@ const quadrants: Record<string, QuadrantResult> = {
     primaryFocus: 'Continuous Optimization + Autonomy',
     scoreRange: '37–44',
     nextSteps: 'Continue optimizing your systems and exploring growth opportunities. Consider scaling your impact through coaching, acquisitions, or new practice areas.',
+    deepTitle: 'Deeper Insight into The Freedom Zone',
+    deepBody:
+      'In the Freedom Zone, your firm runs on intentional design rather than heroic effort. Profit, time, and leadership are aligned: the business generates healthy returns, your calendar has margin, and your team can execute without you as the constant linchpin. At this stage, your role shifts from operator to architect and investor — you are deciding what to build next, not just keeping what you have alive. The opportunity here is to protect what you have created while thoughtfully expanding your impact: new markets, new practices, strategic hires, or even advisory and acquisition opportunities. Your work now is less about fixing weaknesses and more about compounding strengths while staying true to the lifestyle and freedom that matter most to you.',
   },
 }
 
@@ -319,6 +333,15 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
             <div className="pt-6 border-t border-[#1D2A38]/20">
               <h4 className="font-semibold text-[#1D2A38] mb-3">Next Steps:</h4>
               <p className="text-[#1D2A38]/90">{quadrant.nextSteps}</p>
+            </div>
+
+            <div className="pt-8 border-t border-dashed border-[#1D2A38]/20 text-left max-w-3xl mx-auto">
+              <h4 className="font-semibold text-[#1D2A38] mb-3 text-base md:text-lg">
+                {quadrant.deepTitle}
+              </h4>
+              <p className="text-sm md:text-base leading-relaxed text-[#1D2A38]/90 whitespace-pre-line">
+                {quadrant.deepBody}
+              </p>
             </div>
           </div>
         </Card>

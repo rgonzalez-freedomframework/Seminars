@@ -85,6 +85,7 @@ const EditWebinarForm = ({ webinar }: Props) => {
         startTime: new Date(formData.startTime),
         duration: formData.duration,
         tags: updatedTags,
+        timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       })
 
       if (result.status === 200) {

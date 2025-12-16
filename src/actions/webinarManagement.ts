@@ -3,6 +3,8 @@
 import { prismaClient } from '@/lib/prismaClient'
 import { WebinarStatusEnum } from '@prisma/client'
 import { zoomClient } from '@/lib/zoom/client'
+import { toZonedTime } from 'date-fns-tz'
+import { format } from 'date-fns'
 
 /**
  * Check and update webinars that should have ended but are still in LIVE/WAITING_ROOM status
@@ -79,9 +81,12 @@ export async function updateWebinar(
     lockChat?: boolean
     couponCode?: string | null
     couponEnabled?: boolean
+    timeZone?: string
   }
 ) {
   try {
+    const { timeZone, ...webinarUpdateData } = data
+
     // Get the webinar to check if it has Zoom integration
     const webinar = await prismaClient.webinar.findUnique({
       where: { id: webinarId },
@@ -94,18 +99,30 @@ export async function updateWebinar(
     // Update the webinar in our database
     const updatedWebinar = await prismaClient.webinar.update({
       where: { id: webinarId },
-      data,
+      data: webinarUpdateData,
     })
 
     // If Zoom integration is enabled and key fields changed, update the underlying Zoom MEETING directly
-    if (webinar.zoomWebinarId && (data.startTime || data.duration || data.title || data.description)) {
+    if (
+      webinar.zoomWebinarId &&
+      (webinarUpdateData.startTime || webinarUpdateData.duration || webinarUpdateData.title || webinarUpdateData.description)
+    ) {
       try {
         const zoomUpdateData: any = {}
 
-        if (data.title) zoomUpdateData.topic = data.title
-        if (data.description) zoomUpdateData.agenda = data.description
-        if (data.startTime) zoomUpdateData.start_time = data.startTime.toISOString()
-        if (data.duration) zoomUpdateData.duration = data.duration
+        if (webinarUpdateData.title) zoomUpdateData.topic = webinarUpdateData.title
+        if (webinarUpdateData.description) zoomUpdateData.agenda = webinarUpdateData.description
+
+        if (webinarUpdateData.startTime) {
+          const effectiveTimeZone =
+            timeZone || Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'
+
+          const zoned = toZonedTime(webinarUpdateData.startTime, effectiveTimeZone)
+          zoomUpdateData.start_time = format(zoned, "yyyy-MM-dd'T'HH:mm:ss")
+          zoomUpdateData.timezone = effectiveTimeZone
+        }
+
+        if (webinarUpdateData.duration) zoomUpdateData.duration = webinarUpdateData.duration
 
         // We create Zoom MEETINGS in this flow, so update via the meetings API
         await zoomClient.updateMeeting(webinar.zoomWebinarId, zoomUpdateData)

@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -202,6 +203,7 @@ function calculateQuadrant(score: number): QuadrantResult {
 }
 
 export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean; onClose?: () => void }) {
+  const router = useRouter()
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
   const [answers, setAnswers] = useState<Partial<DiagnosticAnswers>>({})
   const [showEmailCapture, setShowEmailCapture] = useState(false)
@@ -285,6 +287,14 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
   const currentSection = getCurrentSection()
   const sectionInfo = getSectionInfo(currentSection)
 
+  const handleClose = () => {
+    if (onClose) {
+      onClose()
+    } else {
+      router.push('/')
+    }
+  }
+
   if (showResults) {
     return (
       <div className="max-w-4xl mx-auto space-y-8">
@@ -326,8 +336,8 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
             </Link>
             <Button
               variant="outline"
-              className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold"
-              onClick={onClose ?? (() => {})}
+              className="flex-1 !border-2 !border-[#1D2A38] !bg-[#F6F7F4] hover:!bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold"
+              onClick={handleClose}
             >
               Close
             </Button>
@@ -392,7 +402,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
                 type="button"
                 variant="outline"
                 onClick={() => setShowEmailCapture(false)}
-                className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold"
+                className="flex-1 !border-2 !border-[#1D2A38] !bg-[#F6F7F4] hover:!bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold"
               >
                 <ArrowLeft className="h-4 w-4 mr-2" />
                 Back

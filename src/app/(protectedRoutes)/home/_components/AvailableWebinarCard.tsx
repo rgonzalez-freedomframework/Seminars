@@ -247,7 +247,13 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
       toast.success(res.message || "Successfully registered for webinar");
 
       setSubmitted(true);
-      setShowConfirmation(true);
+
+      // Instead of relying on a transient confirmation popup that can be
+      // interrupted by page refreshes, send the user directly to the
+      // webinar page where all details and the Zoom link are always
+      // available and can be revisited.
+      setIsOpen(false);
+      router.push(`/live-webinar/${webinar.id}`);
     } catch (error) {
       console.error("Error submitting registration form:", error);
       toast.error(error instanceof Error ? error.message : "Something went wrong!");

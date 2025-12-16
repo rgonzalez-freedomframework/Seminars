@@ -144,10 +144,19 @@ export default function WebinarRegistration() {
                   How to diagnose exactly what's limiting your firm's ability to scale without consuming you.
                 </p>
                 <p className="text-[#1D2A38]/90 mb-2">You'll understand the difference between:</p>
-                <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">
-                  <li>• Money freedom vs. time freedom</li>
-                  <li>• Growth vs. owner dependency</li>
-                  <li>• Revenue vs. operational design</li>
+                <ul className="space-y-2 text-[#1D2A38]/90 text-sm">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B] flex-shrink-0" />
+                    <span>Money freedom vs. time freedom</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B] flex-shrink-0" />
+                    <span>Growth vs. owner dependency</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B] flex-shrink-0" />
+                    <span>Revenue vs. operational design</span>
+                  </li>
                 </ul>
               </article>
               </RevealOnScroll>
@@ -157,11 +166,23 @@ export default function WebinarRegistration() {
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">2. The Hidden Traps of Hourly, Flat-Fee, and Contingency Models</h3>
                 <p className="text-[#1D2A38]/90 mb-3">Every billing model contains a built-in freedom trap.</p>
                 <p className="text-[#1D2A38]/90 mb-2">You'll learn:</p>
-                <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">
-                  <li>• Why hourly firms get stuck in utilization overload</li>
-                  <li>• Why flat-fee firms lose profit through scope creep</li>
-                  <li>• Why contingency firms live in volatility</li>
-                  <li>• And more importantly — how to escape these traps</li>
+                <ul className="space-y-2 text-[#1D2A38]/90 text-sm">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B] flex-shrink-0" />
+                    <span>Why hourly firms get stuck in utilization overload</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B] flex-shrink-0" />
+                    <span>Why flat-fee firms lose profit through scope creep</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B] flex-shrink-0" />
+                    <span>Why contingency firms live in volatility</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B] flex-shrink-0" />
+                    <span>How to escape these traps without sacrificing performance</span>
+                  </li>
                 </ul>
               </article>
               </RevealOnScroll>
@@ -191,11 +212,23 @@ export default function WebinarRegistration() {
               <article className="h-full flex flex-col rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] backdrop-blur-md p-6 md:p-7 shadow-lg hover:shadow-xl transition-all" >
                 <h3 className="text-lg md:text-xl font-semibold text-[#1D2A38] mb-3">4. How High-Performing Firms Scale Without Sacrifice</h3>
                 <p className="text-[#1D2A38]/90 mb-3">You'll see how these shifts create:</p>
-                <ul className="space-y-1.5 text-[#1D2A38]/90 text-sm">
-                  <li>• Better profit margins</li>
-                  <li>• Stronger leadership</li>
-                  <li>• Reduced owner involvement</li>
-                  <li>• A business that serves your life, not the other way around</li>
+                <ul className="space-y-2 text-[#1D2A38]/90 text-sm">
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B] flex-shrink-0" />
+                    <span>Better profit margins</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B] flex-shrink-0" />
+                    <span>Stronger leadership</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B] flex-shrink-0" />
+                    <span>Reduced owner involvement</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <CheckCircle2 className="h-4 w-4 mt-0.5 text-[#CCA43B] flex-shrink-0" />
+                    <span>A business that serves your life, not the other way around</span>
+                  </li>
                 </ul>
               </article>
               </RevealOnScroll>
@@ -301,7 +334,7 @@ export default function WebinarRegistration() {
               <div className="max-w-6xl mx-auto">
                 <Accordion type="single" collapsible className="w-full">
                   <AccordionItem value="faq-root">
-                    <AccordionTrigger className="justify-center text-center text-lg md:text-xl font-bold text-[#1D2A38] rounded-3xl border border-[#1D2A38]/40 bg-[#F6F7F4] px-4 py-3 md:px-6 md:py-4 shadow-sm">
+                    <AccordionTrigger className="justify-center text-center text-lg md:text-xl font-bold text-white rounded-3xl border-2 border-[#CCA43B] bg-gradient-to-r from-[#CCA43B] to-[#B8932F] px-4 py-3 md:px-6 md:py-4 shadow-sm">
                       Frequently Asked Questions
                     </AccordionTrigger>
                     <AccordionContent className="pt-3 md:pt-4">

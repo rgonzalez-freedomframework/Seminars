@@ -14,7 +14,7 @@ type Props = {
 
 const WebinarEndedState = ({ webinar, currentUser }: Props) => {
   return (
-    <div className="w-full min-h-screen relative overflow-hidden bg-gradient-to-br from-white via-gray-50 to-white">
+	    <div className="w-full min-h-screen relative overflow-hidden bg-[#F6F7F4]">
 
       <div className="relative z-10 w-full min-h-screen mx-auto max-w-[600px] flex flex-col justify-center items-center gap-8 py-20 px-4">
         {/* Ended Badge */}

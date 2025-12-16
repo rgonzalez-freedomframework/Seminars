@@ -358,7 +358,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   required
-                  className="border-[#1D2A38]/40"
+                  className="border-[#1D2A38]/40 bg-white text-[#1D2A38] placeholder:text-[#1D2A38]/60"
                 />
               </div>
               <div className="space-y-2">
@@ -369,7 +369,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                   required
-                  className="border-[#1D2A38]/40"
+                  className="border-[#1D2A38]/40 bg-white text-[#1D2A38] placeholder:text-[#1D2A38]/60"
                 />
               </div>
             </div>
@@ -382,7 +382,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="border-[#1D2A38]/40"
+                className="border-[#1D2A38]/40 bg-white text-[#1D2A38] placeholder:text-[#1D2A38]/60"
                 placeholder="you@lawfirm.com"
               />
             </div>
@@ -487,7 +487,7 @@ export function DiagnosticForm({ isModal = false, onClose }: { isModal?: boolean
           <Button
             variant="outline"
             onClick={handleBack}
-            className="flex-1 border-2 border-[#1D2A38]/40 bg-[#F6F7F4] hover:bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold"
+            className="flex-1 !border-2 !border-[#1D2A38] !bg-[#F6F7F4] hover:!bg-[#1D2A38]/5 text-[#1D2A38] hover:text-[#1D2A38] font-semibold"
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
             Previous

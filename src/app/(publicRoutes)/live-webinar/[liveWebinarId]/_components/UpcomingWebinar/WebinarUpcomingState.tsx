@@ -54,7 +54,7 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
     }
   };
   return (
-      <div className="w-full min-h-screen relative overflow-hidden bg-gradient-to-br from-white via-gray-50 to-gray-100">
+	  <div className="w-full min-h-screen relative overflow-hidden bg-[#F6F7F4]">
 
       <div className="relative z-10 w-full min-h-screen mx-auto max-w-[500px] flex flex-col justify-center items-center gap-8 py-20 px-4">
       <div className="space-y-6 animate-in fade-in slide-in-from-top duration-700">

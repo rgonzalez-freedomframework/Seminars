@@ -21,7 +21,7 @@ const ZoomJoinView = ({ webinar, autoJoin = false }: Props) => {
 
   if (!webinar.zoomJoinUrl) {
     return (
-      <div className="w-full min-h-screen flex items-center justify-center bg-gradient-to-br from-white via-gray-50 to-white p-4">
+	      <div className="w-full min-h-screen flex items-center justify-center bg-[#F6F7F4] p-4">
         <div className="max-w-md w-full text-center space-y-6 animate-in fade-in zoom-in duration-700">
           <div className="space-y-4">
             <div className="w-20 h-20 mx-auto bg-[#1D2A38] rounded-full flex items-center justify-center">
@@ -40,7 +40,7 @@ const ZoomJoinView = ({ webinar, autoJoin = false }: Props) => {
   }
 
   return (
-    <div className="w-full min-h-screen relative overflow-hidden bg-gradient-to-br from-white via-gray-50 to-white">
+	    <div className="w-full min-h-screen relative overflow-hidden bg-[#F6F7F4]">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-[#CCA43B]/5 rounded-full blur-3xl animate-pulse" style={{animationDuration: '4s'}}></div>

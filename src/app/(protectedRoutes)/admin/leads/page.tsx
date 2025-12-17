@@ -1,5 +1,5 @@
 import PageHeader from '@/components/ReusableComponent/PageHeader';
-import { Webcam, GitFork, Users } from 'lucide-react';
+import { Webcam, GitFork, Users, Download } from 'lucide-react';
 import React from 'react';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { prismaClient } from '@/lib/prismaClient';
@@ -51,6 +51,15 @@ const page = async () => {
           heading="The home to all your customers"
           placeholder="Search customer..."
         />
+        <div className="mt-4 flex justify-end">
+          <a
+            href="/api/admin/leads/export"
+            className="inline-flex items-center gap-2 rounded-md border border-[#1D2A38]/20 bg-white px-3 py-1.5 text-xs font-medium text-[#1D2A38] shadow-sm hover:bg-[#F6F7F4]"
+          >
+            <Download className="h-3 w-3" />
+            Download CSV
+          </a>
+        </div>
       </div>
 
       <div className="flex-grow overflow-y-auto mt-6"> 

@@ -62,6 +62,12 @@ export const createWebinar = async (formData: WebinarFormState) => {
     // UTC instant for our database
     const combinedDateTime = fromZonedTime(localDateTime, timeZone)
 
+    // Ensure duration is always a number for Prisma & Zoom
+    const durationMinutes =
+      typeof formData.basicInfo.duration === 'string'
+        ? parseInt(formData.basicInfo.duration, 10) || 60
+        : formData.basicInfo.duration || 60
+
     // Local time string for Zoom, per Zoom API docs (no trailing Z)
     const zoomStartTime = format(localDateTime, "yyyy-MM-dd'T'HH:mm:ss")
 
@@ -83,7 +89,7 @@ export const createWebinar = async (formData: WebinarFormState) => {
           topic: formData.basicInfo.webinarName,
           type: 2, // Scheduled meeting
           start_time: zoomStartTime,
-          duration: formData.basicInfo.duration || 60,
+          duration: durationMinutes,
           timezone: timeZone,
           agenda: formData.basicInfo.description || '',
           settings: {
@@ -132,7 +138,7 @@ export const createWebinar = async (formData: WebinarFormState) => {
         title: formData.basicInfo.webinarName,
         description: formData.basicInfo.description || '',
         startTime: combinedDateTime,
-        duration: formData.basicInfo.duration || 60,
+        duration: durationMinutes,
         tags: formData.cta.tags || [],
         ctaLabel: formData.cta.ctaLabel,
         ctaType: formData.cta.ctaType || 'BOOK_A_CALL',

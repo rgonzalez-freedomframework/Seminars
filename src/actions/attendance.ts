@@ -7,6 +7,7 @@ import { AttendedTypeEnum, CtaTypeEnum } from "@prisma/client"
 import { revalidatePath } from "next/cache"
 import { resendClient, isEmailConfigured } from "@/lib/email"
 import WebinarRegistrationConfirmation from "@/emails/WebinarRegistrationConfirmation"
+import { formatInTimeZone } from "date-fns-tz"
 
 const parseSeatsFromTags = (
   tags: string[] | null
@@ -322,14 +323,9 @@ export const registerAttendee = async ({
         const attendee = result.attendee
 
         const start = webinar.startTime ? new Date(webinar.startTime) : null
+        const timeZone = process.env.WEBINAR_TIMEZONE || 'America/Los_Angeles'
         const startTimeFormatted = start
-          ? start.toLocaleString(undefined, {
-              month: 'short',
-              day: '2-digit',
-              year: 'numeric',
-              hour: '2-digit',
-              minute: '2-digit',
-            })
+          ? formatInTimeZone(start, timeZone, "MMM dd, yyyy 'at' hh:mm a zzz")
           : 'To be announced'
 
         await resendClient.emails.send({
@@ -340,7 +336,6 @@ export const registerAttendee = async ({
             attendeeName: attendee.name,
             webinarTitle: webinar.title,
             startTimeFormatted,
-            timeZoneLabel: 'Your local time',
             zoomJoinUrl: webinar.zoomJoinUrl,
             zoomPassword: webinar.zoomPassword,
           }),

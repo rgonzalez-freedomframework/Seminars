@@ -29,9 +29,7 @@ export const WebinarRegistrationConfirmation: React.FC<Props> = ({
   zoomJoinUrl,
   zoomPassword,
 }) => {
-  const subtitle = timeZoneLabel
-    ? `${startTimeFormatted} (${timeZoneLabel})`
-    : startTimeFormatted
+  const subtitle = startTimeFormatted
 
   return (
     <Html>
@@ -40,7 +38,7 @@ export const WebinarRegistrationConfirmation: React.FC<Props> = ({
       <Body style={body}>
         <Container style={container}>
           <Section style={headerSection}>
-            <Text style={eyebrow}>Freedom Framework Seminars</Text>
+            <Text style={eyebrow}>Freedom Framework</Text>
             <Text style={h1}>You&apos;re registered</Text>
           </Section>
 

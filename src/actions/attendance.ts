@@ -333,7 +333,7 @@ export const registerAttendee = async ({
           : 'To be announced'
 
         await resendClient.emails.send({
-          from: 'Seminars <no-reply@yourdomain.com>',
+          from: 'Freedom Framework <no-reply@freedomframework.us>',
           to: attendee.email,
           subject: `Your registration is confirmed: ${webinar.title}`,
           react: React.createElement(WebinarRegistrationConfirmation, {

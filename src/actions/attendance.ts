@@ -1,5 +1,6 @@
 'use server'
 
+import React from "react"
 import { prismaClient } from "@/lib/prismaClient"
 import { AttendanceData } from "@/lib/type"
 import { AttendedTypeEnum, CtaTypeEnum } from "@prisma/client"
@@ -335,7 +336,7 @@ export const registerAttendee = async ({
           from: 'Seminars <no-reply@yourdomain.com>',
           to: attendee.email,
           subject: `Your registration is confirmed: ${webinar.title}`,
-          react: WebinarRegistrationConfirmation({
+          react: React.createElement(WebinarRegistrationConfirmation, {
             attendeeName: attendee.name,
             webinarTitle: webinar.title,
             startTimeFormatted,

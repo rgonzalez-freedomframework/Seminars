@@ -322,6 +322,9 @@ export const registerAttendee = async ({
         const webinar = result.webinar
         const attendee = result.attendee
 
+        const rawTitle = webinar.title || ''
+        const cleanedTitle = rawTitle.replace(/\s+in a Growing Law Firm/gi, '')
+
         const start = webinar.startTime ? new Date(webinar.startTime) : null
         const timeZone = process.env.WEBINAR_TIMEZONE || 'America/Los_Angeles'
         const startTimeFormatted = start
@@ -331,10 +334,10 @@ export const registerAttendee = async ({
         await resendClient.emails.send({
           from: 'Freedom Framework <no-reply@freedomframework.us>',
           to: attendee.email,
-          subject: `Your registration is confirmed: ${webinar.title}`,
+          subject: `Your registration is confirmed: ${cleanedTitle}`,
           react: React.createElement(WebinarRegistrationConfirmation, {
             attendeeName: attendee.name,
-            webinarTitle: webinar.title,
+            webinarTitle: cleanedTitle,
             startTimeFormatted,
             zoomJoinUrl: webinar.zoomJoinUrl,
             zoomPassword: webinar.zoomPassword,

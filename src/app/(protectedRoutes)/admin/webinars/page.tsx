@@ -1,5 +1,5 @@
 import { onAuthenticateUser } from '@/actions/auth'
-import { getWebinarByPresenterId } from '@/actions/webinar'
+import { getWebinarByPresenterId, getAllWebinars } from '@/actions/webinar'
 import { checkAndUpdateExpiredWebinars } from '@/actions/webinarManagement'
 import PageHeader from '@/components/ReusableComponent/PageHeader'
 import { Tabs, TabsList, TabsTrigger, TabsContent} from '@/components/ui/tabs'
@@ -8,6 +8,7 @@ import { redirect } from 'next/navigation'
 import React from 'react'
 import WebinarCard from './_components/WebinarCard'
 import { Webinar } from '@prisma/client'
+import { currentUser } from '@clerk/nextjs/server'
 
 const Page = async () => {
   const checkUser = await onAuthenticateUser()
@@ -18,7 +19,20 @@ const Page = async () => {
   // Check and update any webinars that should have ended
   await checkAndUpdateExpiredWebinars()
   
-  const webinars=await getWebinarByPresenterId(checkUser?.user?.id)
+  // Check if user is admin
+  const user = await currentUser()
+  const isAdmin = user?.publicMetadata?.role === 'admin' || 
+    user?.emailAddresses.some(email => 
+      email.emailAddress === 'rgonzalez@freedomframework.us' ||
+      email.emailAddress === 'janellesam2020@gmail.com' ||
+      email.emailAddress === 'jsam@freedomframework.us' ||
+      email.emailAddress === 'sroth@freedomframework.us'
+    )
+  
+  // Admins see all webinars, non-admins see only their own
+  const webinars = isAdmin 
+    ? await getAllWebinars()
+    : await getWebinarByPresenterId(checkUser?.user?.id)
   return (
     <Tabs defaultValue="all" className="w-full flex flex-col gap-8">
       <PageHeader

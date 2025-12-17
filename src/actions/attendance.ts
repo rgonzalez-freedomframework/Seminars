@@ -4,6 +4,8 @@ import { prismaClient } from "@/lib/prismaClient"
 import { AttendanceData } from "@/lib/type"
 import { AttendedTypeEnum, CtaTypeEnum } from "@prisma/client"
 import { revalidatePath } from "next/cache"
+import { resendClient, isEmailConfigured } from "@/lib/email"
+import WebinarRegistrationConfirmation from "@/emails/WebinarRegistrationConfirmation"
 
 const parseSeatsFromTags = (
   tags: string[] | null
@@ -204,6 +206,9 @@ export const registerAttendee = async ({
           id: true,
           tags: true,
           zoomWebinarId: true,
+          startTime: true,
+          zoomJoinUrl: true,
+          zoomPassword: true,
           title: true,
         },
       })
@@ -299,12 +304,49 @@ export const registerAttendee = async ({
         data: attendance,
         zoomWebinarId: webinar.zoomWebinarId,
         webinarTitle: webinar.title,
+        webinar,
+        attendee,
         message: 'Successfully Registered',
       } as const
     })
 
     if (result.success) {
       revalidatePath(`/${webinarId}`)
+    }
+
+    // Send confirmation email to the registrant (non-blocking if email is not configured or fails)
+    if (result.success && isEmailConfigured && resendClient && result.attendee && result.webinar) {
+      try {
+        const webinar = result.webinar
+        const attendee = result.attendee
+
+        const start = webinar.startTime ? new Date(webinar.startTime) : null
+        const startTimeFormatted = start
+          ? start.toLocaleString(undefined, {
+              month: 'short',
+              day: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            })
+          : 'To be announced'
+
+        await resendClient.emails.send({
+          from: 'Seminars <no-reply@yourdomain.com>',
+          to: attendee.email,
+          subject: `Your registration is confirmed: ${webinar.title}`,
+          react: WebinarRegistrationConfirmation({
+            attendeeName: attendee.name,
+            webinarTitle: webinar.title,
+            startTimeFormatted,
+            timeZoneLabel: 'Your local time',
+            zoomJoinUrl: webinar.zoomJoinUrl,
+            zoomPassword: webinar.zoomPassword,
+          }),
+        })
+      } catch (emailError) {
+        console.error('Error sending registration confirmation email:', emailError)
+      }
     }
 
     // If this webinar is integrated with Zoom, add the registrant so Zoom sends calendar invites.

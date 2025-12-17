@@ -54,10 +54,9 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
 
   const isSoldOut =
     !webinar.isRegistered &&
-    typeof webinar.seatsTotal === "number" &&
-    webinar.seatsTotal > 0 &&
     typeof webinar.seatsRemaining === "number" &&
-    webinar.seatsRemaining <= 0;
+    webinar.seatsRemaining <= 0 &&
+    typeof webinar.seatsTotal === "number";
 
   // If the user is already registered for this webinar, show a simple
   // "View Webinar" card that navigates directly without reopening the modal.

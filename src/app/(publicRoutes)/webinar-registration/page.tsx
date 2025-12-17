@@ -51,7 +51,7 @@ export default function WebinarRegistration() {
               </p>
               
               <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-[#1D2A38] leading-tight">
-                Beyond the Billable: The Freedom Framework for Scaling Law Firms Without Sacrifice
+                Your Journey to Freedom: Reclaiming Time, Profit, and Purpose in a Growing Law Firm
               </h1>
               
               <p className="text-lg md:text-xl text-[#1D2A38]/90">

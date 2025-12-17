@@ -5,7 +5,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { prismaClient } from '@/lib/prismaClient';
 import { onAuthenticateUser } from '@/actions/auth';
 import { redirect } from 'next/navigation';
-import { format } from 'date-fns';
+import LeadWebinarBadges from './LeadWebinarBadges';
 
 const page = async () => {
   const checkUser = await onAuthenticateUser();
@@ -74,36 +74,8 @@ const page = async () => {
                   <TableCell className="text-gray-700">{attendee.phone || '-'}</TableCell>
                   <TableCell className="text-gray-700">{attendee.businessName || '-'}</TableCell>
                   <TableCell className="max-w-xs truncate text-gray-700">{attendee.description || '-'}</TableCell>
-                  <TableCell className="text-right">
-                    {attendee.Attendance.length > 0 ? (
-                      <div className="flex flex-col items-end gap-1">
-                        {attendee.Attendance.map((attendance) => (
-                          <div
-                            key={attendance.id}
-                            className="inline-flex flex-col items-end rounded-full bg-gray-50 px-3 py-1 border border-gray-200 max-w-xs text-right"
-                          >
-                            <span className="text-xs font-semibold text-[#1D2A38] truncate">
-                              {attendance.webinar.title}
-                            </span>
-                            <span className="text-[11px] text-gray-600">
-                              {format(new Date(attendance.webinar.startTime), 'MMM dd, yyyy • hh:mm a')}
-                            </span>
-                            {attendance.webinar.zoomJoinUrl && (
-                              <span className="text-[11px] text-blue-700 truncate" title={attendance.webinar.zoomJoinUrl}>
-                                Zoom: {attendance.webinar.zoomJoinUrl}
-                              </span>
-                            )}
-                            {attendance.webinar.zoomPassword && (
-                              <span className="text-[11px] text-gray-600">
-                                Passcode: {attendance.webinar.zoomPassword}
-                              </span>
-                            )}
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <span className="text-xs text-gray-500">-</span>
-                    )}
+                  <TableCell className="text-right align-top">
+                    <LeadWebinarBadges attendances={attendee.Attendance as any} />
                   </TableCell>
                 </TableRow>
               ))

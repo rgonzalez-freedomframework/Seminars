@@ -6,6 +6,7 @@ import { prismaClient } from '@/lib/prismaClient';
 import { onAuthenticateUser } from '@/actions/auth';
 import { redirect } from 'next/navigation';
 import LeadWebinarBadges from './LeadWebinarBadges';
+import { currentUser } from '@clerk/nextjs/server';
 
 const page = async () => {
   const checkUser = await onAuthenticateUser();
@@ -13,7 +14,19 @@ const page = async () => {
     redirect('/');
   }
 
-  // Get all attendees who registered for this presenter's webinars
+  // Determine if this user is an admin
+  const clerkUser = await currentUser();
+  const isAdmin =
+    clerkUser?.publicMetadata?.role === 'admin' ||
+    clerkUser?.emailAddresses.some((email) =>
+      email.emailAddress === 'rgonzalez@freedomframework.us' ||
+      email.emailAddress === 'janellesam2020@gmail.com' ||
+      email.emailAddress === 'jsam@freedomframework.us' ||
+      email.emailAddress === 'sroth@freedomframework.us'
+    );
+
+  // Get all attendees who registered for webinars.
+  // For non-admins, only include attendance records for their own webinars.
   const attendees = await prismaClient.attendee.findMany({
     include: {
       Attendance: {
@@ -29,11 +42,13 @@ const page = async () => {
             },
           },
         },
-        where: {
-          webinar: {
-            presenterId: checkUser.user.id,
-          },
-        },
+        where: isAdmin
+          ? {}
+          : {
+              webinar: {
+                presenterId: checkUser.user.id,
+              },
+            },
       },
     },
     orderBy: {

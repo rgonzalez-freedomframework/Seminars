@@ -3,6 +3,7 @@ import { getWebinarById } from '@/actions/webinar'
 import { redirect } from 'next/navigation'
 import React from 'react'
 import EditWebinarForm from './_components/EditWebinarForm'
+import { currentUser } from '@clerk/nextjs/server'
 
 type Props = {
   params: Promise<{ webinarId: string }>
@@ -16,14 +17,25 @@ const Page = async ({ params }: Props) => {
     redirect('/')
   }
 
+  // Determine if this user is an admin
+  const clerkUser = await currentUser()
+  const isAdmin =
+    clerkUser?.publicMetadata?.role === 'admin' ||
+    clerkUser?.emailAddresses.some((email) =>
+      email.emailAddress === 'rgonzalez@freedomframework.us' ||
+      email.emailAddress === 'janellesam2020@gmail.com' ||
+      email.emailAddress === 'jsam@freedomframework.us' ||
+      email.emailAddress === 'sroth@freedomframework.us'
+    )
+
   const webinar = await getWebinarById(webinarId)
 
   if (!webinar) {
     redirect('/admin/webinars')
   }
 
-  // Ensure user owns this webinar
-  if (webinar.presenterId !== checkUser.user.id) {
+  // Ensure user owns this webinar, unless they are an admin
+  if (!isAdmin && webinar.presenterId !== checkUser.user.id) {
     redirect('/admin/webinars')
   }
 

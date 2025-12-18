@@ -427,9 +427,8 @@ export const adminRemoveAttendance = async (attendanceId: string) => {
       } as const
     })
 
-    if (result.success) {
-      revalidatePath('/home')
-    }
+    // Don't revalidate here—keep the removal local to the component state
+    // so the reschedule UI persists until the admin completes the action or manually refreshes.
 
     return result
   } catch (error) {

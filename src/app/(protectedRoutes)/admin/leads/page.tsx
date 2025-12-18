@@ -16,14 +16,18 @@ const page = async () => {
 
   // Determine if this user is an admin
   const clerkUser = await currentUser();
-  const isAdmin =
-    clerkUser?.publicMetadata?.role === 'admin' ||
-    clerkUser?.emailAddresses.some((email) =>
-      email.emailAddress === 'rgonzalez@freedomframework.us' ||
-      email.emailAddress === 'janellesam2020@gmail.com' ||
-      email.emailAddress === 'jsam@freedomframework.us' ||
-      email.emailAddress === 'sroth@freedomframework.us'
-    );
+  const isAdmin = !!(
+    clerkUser &&
+    (
+      clerkUser.publicMetadata?.role === 'admin' ||
+      clerkUser.emailAddresses.some((email) =>
+        email.emailAddress === 'rgonzalez@freedomframework.us' ||
+        email.emailAddress === 'janellesam2020@gmail.com' ||
+        email.emailAddress === 'jsam@freedomframework.us' ||
+        email.emailAddress === 'sroth@freedomframework.us'
+      )
+    )
+  );
 
   // Get all attendees who registered for webinars.
   // For non-admins, only include attendance records for their own webinars.

@@ -98,9 +98,20 @@ const page = async () => {
                   <TableCell className="text-gray-700">{attendee.phone || '-'}</TableCell>
                   <TableCell className="text-gray-700">{attendee.businessName || '-'}</TableCell>
                   <TableCell className="max-w-xs truncate text-gray-700">{attendee.description || '-'}</TableCell>
-                  <TableCell className="text-right align-top">
-                    <LeadWebinarBadges attendances={attendee.Attendance as any} />
-                  </TableCell>
+                      <TableCell className="text-right align-top">
+                        <LeadWebinarBadges
+                          attendances={attendee.Attendance as any}
+                          attendeeInfo={{
+                            id: attendee.id,
+                            name: attendee.name,
+                            email: attendee.email,
+                            phone: attendee.phone || undefined,
+                            businessName: attendee.businessName || undefined,
+                            description: attendee.description || undefined,
+                          }}
+                          isAdmin={isAdmin}
+                        />
+                      </TableCell>
                 </TableRow>
               ))
             ) : (

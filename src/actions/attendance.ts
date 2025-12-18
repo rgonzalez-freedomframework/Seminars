@@ -377,3 +377,98 @@ export const registerAttendee = async ({
     };
   }
 };
+
+// Admin-only helper: remove a specific registration (Attendance record)
+// and update seats tags if configured so /home and capacity stay in sync.
+export const adminRemoveAttendance = async (attendanceId: string) => {
+  try {
+    const result = await prismaClient.$transaction(async (tx) => {
+      const attendance = await tx.attendance.findUnique({
+        where: { id: attendanceId },
+        include: {
+          webinar: true,
+        },
+      })
+
+      if (!attendance) {
+        return {
+          success: false,
+          status: 404,
+          message: 'Registration not found',
+        } as const
+      }
+
+      const webinar = attendance.webinar
+      const { remaining, total } = parseSeatsFromTags(webinar.tags || [])
+
+      if (remaining !== null && total !== null) {
+        const newRemaining = Math.min(total, remaining + 1)
+        const existingTags = webinar.tags || []
+        const filteredTags = existingTags.filter((tag) => !tag.startsWith('seats:'))
+        const updatedTags = [...filteredTags, `seats:${newRemaining}/${total}`]
+
+        await tx.webinar.update({
+          where: { id: webinar.id },
+          data: {
+            tags: updatedTags,
+          },
+        })
+      }
+
+      await tx.attendance.delete({
+        where: { id: attendanceId },
+      })
+
+      return {
+        success: true,
+        status: 200,
+        message: 'Registration removed successfully',
+        webinarId: webinar.id,
+      } as const
+    })
+
+    if (result.success) {
+      revalidatePath('/home')
+    }
+
+    return result
+  } catch (error) {
+    console.error('Admin remove attendance error:', error)
+    return {
+      success: false,
+      status: 500,
+      message: 'Failed to remove registration',
+      error,
+    } as const
+  }
+}
+
+// Admin helper: re-register an attendee using the standard registration flow,
+// so seats, /home, Zoom, and confirmation email all behave consistently.
+export const adminReRegisterAttendance = async ({
+  webinarId,
+  email,
+  name,
+  phone,
+  businessName,
+  description,
+  userId,
+}: {
+  webinarId: string
+  email: string
+  name: string
+  phone?: string
+  businessName?: string
+  description?: string
+  userId?: string
+}) => {
+  return registerAttendee({
+    webinarId,
+    email,
+    name,
+    phone,
+    businessName,
+    description,
+    userId,
+  })
+}

@@ -7,6 +7,7 @@ import { onAuthenticateUser } from '@/actions/auth';
 import { redirect } from 'next/navigation';
 import LeadWebinarBadges from './LeadWebinarBadges';
 import { currentUser } from '@clerk/nextjs/server';
+import { WebinarStatusEnum } from '@prisma/client';
 
 const page = async () => {
   const checkUser = await onAuthenticateUser();
@@ -60,6 +61,36 @@ const page = async () => {
     },
   });
 
+  // Fetch webinars that this attendee can be moved into (for rescheduling).
+  // Admins see all upcoming/active webinars; non-admins only see their own.
+  const availableWebinars = await prismaClient.webinar.findMany({
+    where: {
+      webinarStatus: {
+        in: [
+          WebinarStatusEnum.SCHEDULED,
+          WebinarStatusEnum.WAITING_ROOM,
+          WebinarStatusEnum.LIVE,
+        ],
+      },
+      startTime: {
+        gt: new Date(),
+      },
+      ...(isAdmin
+        ? {}
+        : {
+            presenterId: checkUser.user.id,
+          }),
+    },
+    select: {
+      id: true,
+      title: true,
+      startTime: true,
+    },
+    orderBy: {
+      startTime: 'asc',
+    },
+  });
+
   return (
     <div className="w-full h-screen flex flex-col px-6 md:px-8 lg:px-10 xl:px-12">
       <div className="w-full flex flex-col">
@@ -102,20 +133,21 @@ const page = async () => {
                   <TableCell className="text-gray-700">{attendee.phone || '-'}</TableCell>
                   <TableCell className="text-gray-700">{attendee.businessName || '-'}</TableCell>
                   <TableCell className="max-w-xs truncate text-gray-700">{attendee.description || '-'}</TableCell>
-                      <TableCell className="text-right align-top">
-                        <LeadWebinarBadges
-                          attendances={attendee.Attendance as any}
-                          attendeeInfo={{
-                            id: attendee.id,
-                            name: attendee.name,
-                            email: attendee.email,
-                            phone: attendee.phone || undefined,
-                            businessName: attendee.businessName || undefined,
-                            description: attendee.description || undefined,
-                          }}
-                          isAdmin={isAdmin}
-                        />
-                      </TableCell>
+                  <TableCell className="text-right align-top">
+                    <LeadWebinarBadges
+                      attendances={attendee.Attendance as any}
+                      attendeeInfo={{
+                        id: attendee.id,
+                        name: attendee.name,
+                        email: attendee.email,
+                        phone: attendee.phone || undefined,
+                        businessName: attendee.businessName || undefined,
+                        description: attendee.description || undefined,
+                      }}
+                      isAdmin={isAdmin}
+                      availableWebinars={availableWebinars as any}
+                    />
+                  </TableCell>
                 </TableRow>
               ))
             ) : (

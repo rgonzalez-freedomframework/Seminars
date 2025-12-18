@@ -24,6 +24,11 @@ type LeadWebinarBadgesProps = {
     description?: string | null
   }
   isAdmin: boolean
+  availableWebinars: {
+    id: string
+    title: string
+    startTime: string | Date
+  }[]
 }
 
 const formatDateTime = (value: string | Date) => {
@@ -39,11 +44,16 @@ const formatDateTime = (value: string | Date) => {
   })
 }
 
-const LeadWebinarBadges: React.FC<LeadWebinarBadgesProps> = ({ attendances, attendeeInfo, isAdmin }) => {
+const LeadWebinarBadges: React.FC<LeadWebinarBadgesProps> = ({ attendances, attendeeInfo, isAdmin, availableWebinars }) => {
   const [statuses, setStatuses] = useState<Record<string, 'active' | 'removing' | 'removed' | 'readding'>>({})
+  const [selectedWebinars, setSelectedWebinars] = useState<Record<string, string>>({})
 
   const setStatus = (id: string, status: 'active' | 'removing' | 'removed' | 'readding') => {
     setStatuses((prev) => ({ ...prev, [id]: status }))
+  }
+
+  const handleSelectWebinar = (attendanceId: string, webinarId: string) => {
+    setSelectedWebinars((prev) => ({ ...prev, [attendanceId]: webinarId }))
   }
 
   const handleRemove = async (attendanceId: string) => {
@@ -100,6 +110,45 @@ const LeadWebinarBadges: React.FC<LeadWebinarBadgesProps> = ({ attendances, atte
       setStatus(attendanceId, 'active')
     }
   }
+
+  const handleMoveToSelectedWebinar = async (attendanceId: string) => {
+    if (!isAdmin) return
+
+    const targetWebinarId = selectedWebinars[attendanceId]
+    if (!targetWebinarId) {
+      toast.error('Please select a webinar to move this attendee to')
+      return
+    }
+
+    const current = statuses[attendanceId] || 'removed'
+    if (current === 'removing' || current === 'readding') return
+
+    setStatus(attendanceId, 'readding')
+    try {
+      const res = await adminReRegisterAttendance({
+        webinarId: targetWebinarId,
+        email: attendeeInfo.email,
+        name: attendeeInfo.name,
+        phone: attendeeInfo.phone || undefined,
+        businessName: attendeeInfo.businessName || undefined,
+        description: attendeeInfo.description || undefined,
+        userId: undefined,
+      })
+
+      if (!res.success) {
+        toast.error(res.message || 'Failed to move attendee to selected webinar')
+        setStatus(attendanceId, 'removed')
+        return
+      }
+
+      toast.success('Attendee moved to selected webinar and confirmation sent')
+      setStatus(attendanceId, 'removed')
+    } catch (error) {
+      console.error('Failed to move attendee to selected webinar:', error)
+      toast.error('Failed to move attendee to selected webinar')
+      setStatus(attendanceId, 'removed')
+    }
+  }
   if (!attendances || attendances.length === 0) {
     return <span className="text-xs text-gray-500">-</span>
   }
@@ -112,6 +161,7 @@ const LeadWebinarBadges: React.FC<LeadWebinarBadgesProps> = ({ attendances, atte
         const isReadding = statuses[attendance.id] === 'readding'
         const isBusy = status === 'removing' || status === 'readding'
         const formattedTime = formatDateTime(webinar.startTime)
+        const otherWebinars = (availableWebinars || []).filter((w) => w.id !== webinar.id)
 
         return (
           <div
@@ -143,13 +193,45 @@ const LeadWebinarBadges: React.FC<LeadWebinarBadgesProps> = ({ attendances, atte
               {isAdmin && (
                 <div className="flex flex-col items-end gap-1 ml-2">
                   {status === 'removed' ? (
-                    <button
-                      className="text-[11px] text-green-700 hover:underline disabled:opacity-50"
-                      disabled={isReadding}
-                      onClick={() => handleReRegister(attendance.id, webinar.id)}
-                    >
-                      Re-register
-                    </button>
+                    <>
+                      <button
+                        className="text-[11px] text-green-700 hover:underline disabled:opacity-50"
+                        disabled={isReadding}
+                        onClick={() => handleReRegister(attendance.id, webinar.id)}
+                      >
+                        Re-register
+                      </button>
+                      {otherWebinars && otherWebinars.length > 0 ? (
+                        <div className="flex flex-col items-end gap-1 mt-1 w-full">
+                          <select
+                            className="w-full max-w-[220px] border border-gray-300 rounded px-1 py-[2px] text-[11px] text-gray-700 bg-white"
+                            value={selectedWebinars[attendance.id] || ''}
+                            onChange={(e) => handleSelectWebinar(attendance.id, e.target.value)}
+                          >
+                            <option value="">Select another webinar…</option>
+                            {otherWebinars.map((w) => (
+                              <option key={w.id} value={w.id}>
+                                {w.title}
+                              </option>
+                            ))}
+                          </select>
+                          <button
+                            className="text-[11px] text-blue-700 hover:underline disabled:opacity-50"
+                            disabled={isReadding || !selectedWebinars[attendance.id]}
+                            onClick={() => handleMoveToSelectedWebinar(attendance.id)}
+                          >
+                            Move to selected webinar
+                          </button>
+                          <span className="text-[10px] text-gray-500 text-right">
+                            This will send a new confirmation email for the selected webinar.
+                          </span>
+                        </div>
+                      ) : (
+                        <span className="text-[11px] text-gray-400 mt-1">
+                          No other upcoming webinars available to move into
+                        </span>
+                      )}
+                    </>
                   ) : (
                     <button
                       className="text-[11px] text-red-600 hover:underline disabled:opacity-50"

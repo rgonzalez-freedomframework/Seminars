@@ -1,12 +1,67 @@
-'use client';
+ 'use client'
 
-import Link from 'next/link';
-import { Button } from '@/components/ui/button';
-import { ArrowRight, CheckCircle2, Sparkles, Gift, Calendar, Clock, Video, Home } from 'lucide-react';
-import RevealOnScroll from '@/components/RevealOnScroll';
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import Link from 'next/link'
+import { useEffect, useMemo, useState } from 'react'
+import { Button } from '@/components/ui/button'
+import { ArrowRight, CheckCircle2, Sparkles, Gift, Calendar, Clock, Video, Home } from 'lucide-react'
+import RevealOnScroll from '@/components/RevealOnScroll'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+
+type NextWebinar = {
+  id: string
+  title: string
+  description: string | null
+  startTime: string
+  duration: number | null
+}
+
+const formatLocalDateTime = (value: string | Date) => {
+  const date = value instanceof Date ? value : new Date(value)
+  const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
+  const dateLabel = new Intl.DateTimeFormat('en-US', {
+    weekday: 'short',
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: '2-digit',
+    timeZone,
+    timeZoneName: 'short',
+  }).format(date)
+
+  return dateLabel
+}
 
 export default function WebinarRegistration() {
+  const [nextWebinar, setNextWebinar] = useState<NextWebinar | null>(null)
+  const [isLoadingWebinar, setIsLoadingWebinar] = useState(false)
+
+  useEffect(() => {
+    const fetchNext = async () => {
+      try {
+        setIsLoadingWebinar(true)
+        const res = await fetch('/api/webinars/next')
+        if (!res.ok) return
+        const data = await res.json()
+        if (data?.success && data.webinar) {
+          setNextWebinar(data.webinar)
+        }
+      } catch (error) {
+        console.error('Failed to load next webinar', error)
+      } finally {
+        setIsLoadingWebinar(false)
+      }
+    }
+
+    fetchNext()
+  }, [])
+
+  const nextWebinarTimeLabel = useMemo(() => {
+    if (!nextWebinar?.startTime) return null
+    return formatLocalDateTime(nextWebinar.startTime)
+  }, [nextWebinar?.startTime])
+
   return (
     <div
       className="relative min-h-screen overflow-hidden bg-[#F6F7F4]"
@@ -68,6 +123,20 @@ export default function WebinarRegistration() {
                   Start with a short Freedom Matrix Diagnostic™ so you know exactly where your firm stands before the masterclass.
                 </p>
               </div>
+
+              {nextWebinarTimeLabel && (
+                <div className="mt-4 inline-flex items-center gap-2 rounded-full bg-white border border-[#CCA43B]/40 px-4 py-2 text-sm font-semibold text-[#1D2A38] shadow-sm">
+                  <Calendar className="h-4 w-4 text-[#CCA43B]" />
+                  <span>{nextWebinarTimeLabel}</span>
+                  {nextWebinar?.duration ? (
+                    <>
+                      <span className="mx-1 text-[#CCA43B]">•</span>
+                      <Clock className="h-4 w-4 text-[#CCA43B]" />
+                      <span>{nextWebinar.duration} min</span>
+                    </>
+                  ) : null}
+                </div>
+              )}
 
               <div className="flex justify-center">
                 <Link href="https://www.freedomframework.us/diagnostic">

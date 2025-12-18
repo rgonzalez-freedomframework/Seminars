@@ -194,42 +194,44 @@ const LeadWebinarBadges: React.FC<LeadWebinarBadgesProps> = ({ attendances, atte
                 <div className="flex flex-col items-end gap-1 ml-2">
                   {status === 'removed' ? (
                     <>
+                      <span className="text-[10px] text-gray-500 mb-1">Removed</span>
                       <button
                         className="text-[11px] text-green-700 hover:underline disabled:opacity-50"
                         disabled={isReadding}
                         onClick={() => handleReRegister(attendance.id, webinar.id)}
                       >
-                        Re-register
+                        Re-register to same
                       </button>
-                      {otherWebinars && otherWebinars.length > 0 ? (
+                      {otherWebinars && otherWebinars.length > 0 && (
                         <div className="flex flex-col items-end gap-1 mt-1 w-full">
                           <select
                             className="w-full max-w-[220px] border border-gray-300 rounded px-1 py-[2px] text-[11px] text-gray-700 bg-white"
                             value={selectedWebinars[attendance.id] || ''}
                             onChange={(e) => handleSelectWebinar(attendance.id, e.target.value)}
                           >
-                            <option value="">Select another webinar…</option>
-                            {otherWebinars.map((w) => (
-                              <option key={w.id} value={w.id}>
-                                {w.title}
-                              </option>
-                            ))}
+                            <option value="">Move to another webinar…</option>
+                            {otherWebinars.map((w) => {
+                              const webinarTime = formatDateTime(w.startTime)
+                              return (
+                                <option key={w.id} value={w.id}>
+                                  {w.title} — {webinarTime}
+                                </option>
+                              )
+                            })}
                           </select>
-                          <button
-                            className="text-[11px] text-blue-700 hover:underline disabled:opacity-50"
-                            disabled={isReadding || !selectedWebinars[attendance.id]}
-                            onClick={() => handleMoveToSelectedWebinar(attendance.id)}
-                          >
-                            Move to selected webinar
-                          </button>
+                          {selectedWebinars[attendance.id] && (
+                            <button
+                              className="text-[11px] text-blue-700 hover:underline disabled:opacity-50"
+                              disabled={isReadding}
+                              onClick={() => handleMoveToSelectedWebinar(attendance.id)}
+                            >
+                              Move & send confirmation
+                            </button>
+                          )}
                           <span className="text-[10px] text-gray-500 text-right">
-                            This will send a new confirmation email for the selected webinar.
+                            Sends new confirmation email
                           </span>
                         </div>
-                      ) : (
-                        <span className="text-[11px] text-gray-400 mt-1">
-                          No other upcoming webinars available to move into
-                        </span>
                       )}
                     </>
                   ) : (

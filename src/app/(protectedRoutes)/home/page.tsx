@@ -284,11 +284,15 @@ const Pages = async () => {
                             {webinar.resources.length} resource{webinar.resources.length !== 1 ? 's' : ''} available
                           </p>
                           <p className="text-xs text-gray-500 mt-1">
-                            {new Date(webinar.startTime).toLocaleDateString('en-US', {
+                            {new Intl.DateTimeFormat('en-US', {
                               month: 'long',
                               day: 'numeric',
                               year: 'numeric',
-                            })}
+                              hour: 'numeric',
+                              minute: '2-digit',
+                              timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                              timeZoneName: 'short',
+                            }).format(new Date(webinar.startTime))}
                           </p>
                         </div>
                       </div>

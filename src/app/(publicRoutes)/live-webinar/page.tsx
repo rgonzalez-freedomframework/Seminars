@@ -89,19 +89,22 @@ export default async function LiveWebinarIndexPage() {
                     <div className="space-y-2 text-sm">
                       <div className="flex items-center text-muted-foreground">
                         <Calendar className="w-4 h-4 mr-2" />
-                        {new Date(webinar.startTime).toLocaleDateString('en-US', {
+                        {new Intl.DateTimeFormat('en-US', {
                           weekday: 'short',
                           year: 'numeric',
                           month: 'short',
                           day: 'numeric',
-                        })}
+                          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                        }).format(new Date(webinar.startTime))}
                       </div>
                       <div className="flex items-center text-muted-foreground">
                         <Clock className="w-4 h-4 mr-2" />
-                        {new Date(webinar.startTime).toLocaleTimeString('en-US', {
+                        {new Intl.DateTimeFormat('en-US', {
                           hour: 'numeric',
                           minute: '2-digit',
-                        })}
+                          timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+                          timeZoneName: 'short',
+                        }).format(new Date(webinar.startTime))}
                         {webinar.duration && ` (${webinar.duration} min)`}
                       </div>
                       <div className="flex items-center text-muted-foreground">

@@ -20,6 +20,22 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
   const [loading, setLoading] = useState(false);
   const [isExpired, setIsExpired] = useState(false);
 
+  const formatStartLocal = (value: string | Date) => {
+    const date = value instanceof Date ? value : new Date(value)
+    const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone
+
+    return new Intl.DateTimeFormat('en-US', {
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      timeZone,
+      timeZoneName: 'short',
+    }).format(date)
+  }
+
   const router = useRouter();
 
     const handleStartWebinar = async () => {
@@ -112,6 +128,9 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
               webinarStatus={webinar.webinarStatus}
               onExpired={() => setIsExpired(true)}
             />
+            <p className="text-sm text-gray-600 text-center">
+              Starts at <span className="font-semibold text-[#1D2A38]">{formatStartLocal(webinar.startTime)}</span>
+            </p>
             <div className="mt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
               <Button
                 className="rounded-xl bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-[#1D2A38] font-semibold border-2 border-[#CCA43B] text-sm"

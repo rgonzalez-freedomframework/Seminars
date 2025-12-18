@@ -109,6 +109,8 @@ const LeadWebinarBadges: React.FC<LeadWebinarBadgesProps> = ({ attendances, atte
       {attendances.map((attendance) => {
         const { webinar } = attendance
         const status = statuses[attendance.id] || 'active'
+        const isReadding = statuses[attendance.id] === 'readding'
+        const isBusy = status === 'removing' || status === 'readding'
         const formattedTime = formatDateTime(webinar.startTime)
 
         return (
@@ -143,7 +145,7 @@ const LeadWebinarBadges: React.FC<LeadWebinarBadgesProps> = ({ attendances, atte
                   {status === 'removed' ? (
                     <button
                       className="text-[11px] text-green-700 hover:underline disabled:opacity-50"
-                      disabled={status === 'readding'}
+                      disabled={isReadding}
                       onClick={() => handleReRegister(attendance.id, webinar.id)}
                     >
                       Re-register
@@ -151,7 +153,7 @@ const LeadWebinarBadges: React.FC<LeadWebinarBadgesProps> = ({ attendances, atte
                   ) : (
                     <button
                       className="text-[11px] text-red-600 hover:underline disabled:opacity-50"
-                      disabled={status === 'removing' || status === 'readding'}
+                      disabled={isBusy}
                       onClick={() => handleRemove(attendance.id)}
                     >
                       {status === 'removing' ? 'Removing…' : 'Remove'}

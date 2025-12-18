@@ -290,7 +290,8 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
               month: 'long', 
               day: 'numeric', 
               year: 'numeric',
-              timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+              timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+              timeZoneName: 'short',
             })}
             </Button>
             <Button variant="outline" className="rounded-xl bg-white border-2 border-[#1D2A38] text-[#1D2A38] hover:bg-[#1D2A38] hover:text-white font-semibold transition-all duration-300 hover:scale-105 shadow-md">
@@ -299,7 +300,8 @@ const WebinarUpcomingState = ({ webinar, currentUser }: Props) => {
               hour: 'numeric', 
               minute: '2-digit',
               hour12: true,
-              timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone
+              timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+              timeZoneName: 'short',
             })}
             </Button>
         </div>

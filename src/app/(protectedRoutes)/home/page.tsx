@@ -61,6 +61,7 @@ const Pages = async () => {
     user?.emailAddresses.some(email => email.emailAddress === 'rgonzalez@freedomframework.us');
   // Get all upcoming and live webinars for users, plus whether this user is registered
   let webinarsForDisplay: Array<any> = [];
+  let pastWebinarsForDisplay: Array<any> = [];
 
   if (appUser) {
     const webinars = await prismaClient.webinar.findMany({
@@ -145,6 +146,73 @@ const Pages = async () => {
       return {
         ...webinar,
         isRegistered: false,
+        seatsRemaining,
+        seatsTotal,
+      };
+    });
+  }
+
+  // Get past webinars (ENDED) that this user attended/registered for
+  if (appUser) {
+    const pastWebinars = await prismaClient.webinar.findMany({
+      where: {
+        webinarStatus: WebinarStatusEnum.ENDED,
+        attendances: {
+          some: {
+            OR: [
+              {
+                userId: appUser.id,
+              },
+              {
+                user: {
+                  email: appUser.email,
+                },
+              },
+            ],
+          },
+        },
+      },
+      include: {
+        presenter: {
+          select: {
+            name: true,
+            profileImage: true,
+          },
+        },
+        _count: {
+          select: {
+            attendances: true,
+          },
+        },
+        attendances: {
+          where: {
+            OR: [
+              {
+                userId: appUser.id,
+              },
+              {
+                user: {
+                  email: appUser.email,
+                },
+              },
+            ],
+          },
+          select: {
+            id: true,
+          },
+        },
+      },
+      orderBy: {
+        startTime: 'desc',
+      },
+    });
+
+    pastWebinarsForDisplay = pastWebinars.map((webinar) => {
+      const { seatsRemaining, seatsTotal } = parseSeatsFromTags(webinar.tags);
+
+      return {
+        ...webinar,
+        isRegistered: webinar.attendances.length > 0,
         seatsRemaining,
         seatsTotal,
       };
@@ -262,6 +330,34 @@ const Pages = async () => {
           </Card>
         )}
       </div>
+
+        {/* Past Webinars Section */}
+        <div className="mb-12">
+          <h2 className="text-[#1D2A38] font-semibold text-2xl mb-6">
+            Past Webinars
+          </h2>
+          {pastWebinarsForDisplay.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {pastWebinarsForDisplay.map((webinar) => (
+                <AvailableWebinarCard
+                  key={webinar.id}
+                  webinar={webinar}
+                  currentUserId={appUser?.id || ''}
+                  defaultName={user?.firstName ? `${user.firstName} ${user.lastName ?? ''}`.trim() : undefined}
+                  defaultEmail={user?.emailAddresses?.[0]?.emailAddress}
+                />
+              ))}
+            </div>
+          ) : (
+            <Card className="bg-white border-2 border-gray-300">
+              <CardContent className="py-8 text-center">
+                <p className="text-gray-600 text-sm">
+                  Webinars you attend will appear here after they end.
+                </p>
+              </CardContent>
+            </Card>
+          )}
+        </div>
 
       {/* Resources Section */}
       <div>

@@ -42,6 +42,7 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
   defaultEmail,
 }) => {
   const router = useRouter();
+  const isEnded = webinar.webinarStatus === WebinarStatusEnum.ENDED;
   const [isOpen, setIsOpen] = useState(false);
   const [name, setName] = useState(defaultName || "");
   const [email, setEmail] = useState(defaultEmail || "");
@@ -63,7 +64,9 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
   if (webinar.isRegistered) {
     return (
       <Card
-        className="h-full hover:shadow-lg transition-shadow cursor-pointer border-2 border-[#CCA43B] bg-white"
+        className={`h-full hover:shadow-lg transition-shadow cursor-pointer border-2 border-[#CCA43B] bg-white ${
+          isEnded ? "opacity-90 hover:opacity-100" : ""
+        }`}
         onClick={() => router.push(`/live-webinar/${webinar.id}`)}
       >
         {webinar.thumbnail && (
@@ -73,6 +76,11 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
               alt={webinar.title}
               className="w-full h-full object-cover"
             />
+            {isEnded && (
+              <div className="absolute top-4 left-4">
+                <Badge className="bg-black/70 text-white">Past Webinar</Badge>
+              </div>
+            )}
             {webinar.webinarStatus === WebinarStatusEnum.LIVE && (
               <div className="absolute top-4 right-4 flex flex-col items-end gap-2">
                 <Badge className="bg-red-600 text-white">
@@ -102,7 +110,7 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
                   : "secondary"
               }
             >
-              {webinar.webinarStatus}
+              {isEnded ? "Completed" : webinar.webinarStatus}
             </Badge>
             {typeof webinar.seatsRemaining === "number" &&
               typeof webinar.seatsTotal === "number" &&
@@ -135,7 +143,7 @@ const AvailableWebinarCard: React.FC<AvailableWebinarCardProps> = ({
           </div>
           <Button className="w-full bg-[#1D2A38] hover:bg-[#1D2A38]/90 text-white font-semibold transition-all" variant="default">
             <PlayCircle className="w-4 h-4 mr-2" />
-            View Webinar
+            {isEnded ? 'View Replay' : 'View Webinar'}
           </Button>
         </CardContent>
       </Card>

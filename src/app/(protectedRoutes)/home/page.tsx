@@ -53,6 +53,7 @@ const Pages = async () => {
   
   // Check and update any expired webinars before displaying
   await checkAndUpdateExpiredWebinars();
+  const now = new Date();
   
   // Check if user is admin using Clerk's publicMetadata
   // You can set this via Clerk Dashboard: Users → Select User → Metadata → Public metadata: {"role": "admin"}
@@ -105,7 +106,8 @@ const Pages = async () => {
       },
     });
 
-    webinarsForDisplay = webinars.map((webinar) => {
+    webinarsForDisplay = webinars
+      .map((webinar) => {
       const { seatsRemaining, seatsTotal } = parseSeatsFromTags(webinar.tags);
 
       return {
@@ -114,7 +116,16 @@ const Pages = async () => {
         seatsRemaining,
         seatsTotal,
       };
-    });
+    })
+      .filter((webinar) => {
+        const start = new Date(webinar.startTime);
+        const durationMinutes = webinar.duration ?? 0;
+        const effectiveEnd = durationMinutes > 0
+          ? new Date(start.getTime() + durationMinutes * 60000)
+          : start;
+
+        return effectiveEnd >= now;
+      });
   } else {
     const webinars = await prismaClient.webinar.findMany({
       where: {
@@ -140,7 +151,8 @@ const Pages = async () => {
       },
     });
 
-    webinarsForDisplay = webinars.map((webinar) => {
+    webinarsForDisplay = webinars
+      .map((webinar) => {
       const { seatsRemaining, seatsTotal } = parseSeatsFromTags(webinar.tags);
 
       return {
@@ -149,14 +161,25 @@ const Pages = async () => {
         seatsRemaining,
         seatsTotal,
       };
-    });
+    })
+      .filter((webinar) => {
+        const start = new Date(webinar.startTime);
+        const durationMinutes = webinar.duration ?? 0;
+        const effectiveEnd = durationMinutes > 0
+          ? new Date(start.getTime() + durationMinutes * 60000)
+          : start;
+
+        return effectiveEnd >= now;
+      });
   }
 
   // Get past webinars (ENDED) that this user attended/registered for
   if (appUser) {
     const pastWebinars = await prismaClient.webinar.findMany({
       where: {
-        webinarStatus: WebinarStatusEnum.ENDED,
+        webinarStatus: {
+          not: WebinarStatusEnum.CANCELLED,
+        },
         attendances: {
           some: {
             OR: [
@@ -207,7 +230,20 @@ const Pages = async () => {
       },
     });
 
-    pastWebinarsForDisplay = pastWebinars.map((webinar) => {
+    pastWebinarsForDisplay = pastWebinars
+      .filter((webinar) => {
+        const start = new Date(webinar.startTime);
+        const durationMinutes = webinar.duration ?? 0;
+        const effectiveEnd = durationMinutes > 0
+          ? new Date(start.getTime() + durationMinutes * 60000)
+          : start;
+
+        return (
+          effectiveEnd < now ||
+          webinar.webinarStatus === WebinarStatusEnum.ENDED
+        );
+      })
+      .map((webinar) => {
       const { seatsRemaining, seatsTotal } = parseSeatsFromTags(webinar.tags);
 
       return {

@@ -29,10 +29,20 @@ const Page = async () => {
       email.emailAddress === 'sroth@freedomframework.us'
     )
   
-  // Admins see all webinars, non-admins see only their own
-  const webinars = isAdmin 
-    ? await getAllWebinars()
-    : await getWebinarByPresenterId(checkUser?.user?.id)
+    // Admins see all webinars, non-admins see only their own
+    const webinars = isAdmin 
+        ? await getAllWebinars()
+        : await getWebinarByPresenterId(checkUser?.user?.id)
+
+    const now = new Date()
+
+    const getEffectiveEnd = (webinar: Webinar) => {
+        const start = new Date(webinar.startTime)
+        const durationMinutes = webinar.duration ?? 0
+        return durationMinutes > 0
+            ? new Date(start.getTime() + durationMinutes * 60000)
+            : start
+    }
   return (
     <Tabs defaultValue="all" className="w-full flex flex-col gap-8">
       <PageHeader
@@ -88,18 +98,22 @@ const Page = async () => {
         value="upcoming"
         className="w-full grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 place-items-start place-content-start px-6 md:px-8 lg:px-10 xl:px-12 gap-y-10 gap-x-6"
         >
-        {webinars?.filter((w: Webinar) => 
-            new Date(w.startTime) > new Date() && 
-            w.webinarStatus !== 'ENDED' && 
-            w.webinarStatus !== 'CANCELLED'
-        )
+                {webinars?.filter((w: Webinar) => {
+                    const effectiveEnd = getEffectiveEnd(w)
+                    return (
+                        effectiveEnd >= now &&
+                        w.webinarStatus !== 'CANCELLED'
+                    )
+                })
         ?.length > 0 ? (
             webinars
-                .filter((w: Webinar) => 
-                    new Date(w.startTime) > new Date() && 
-                    w.webinarStatus !== 'ENDED' && 
-                    w.webinarStatus !== 'CANCELLED'
-                )
+                                .filter((w: Webinar) => {
+                                    const effectiveEnd = getEffectiveEnd(w)
+                                    return (
+                                        effectiveEnd >= now &&
+                                        w.webinarStatus !== 'CANCELLED'
+                                    )
+                                })
                 .map((webinar: Webinar, index: number) => (
             <WebinarCard key={index} webinar={webinar} />
             ))
@@ -113,8 +127,22 @@ const Page = async () => {
         value="ended"
         className="w-full grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 place-items-start place-content-start px-6 md:px-8 lg:px-10 xl:px-12 gap-y-10 gap-x-6"
         >
-        {webinars?.filter((w: Webinar) => w.webinarStatus === 'ENDED')?.length > 0 ? (
-            webinars.filter((w: Webinar) => w.webinarStatus === 'ENDED').map((webinar: Webinar, index: number) => (
+                {webinars?.filter((w: Webinar) => {
+                    const effectiveEnd = getEffectiveEnd(w)
+                    return (
+                        w.webinarStatus !== 'CANCELLED' &&
+                        (w.webinarStatus === 'ENDED' || effectiveEnd < now)
+                    )
+                })?.length > 0 ? (
+                        webinars
+                            .filter((w: Webinar) => {
+                                const effectiveEnd = getEffectiveEnd(w)
+                                return (
+                                    w.webinarStatus !== 'CANCELLED' &&
+                                    (w.webinarStatus === 'ENDED' || effectiveEnd < now)
+                                )
+                            })
+                            .map((webinar: Webinar, index: number) => (
             <WebinarCard key={index} webinar={webinar} />
             ))
         ) : (

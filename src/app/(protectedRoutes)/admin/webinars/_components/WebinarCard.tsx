@@ -75,6 +75,39 @@ const WebinarCard = ({ webinar }: Props) => {
   }
   const isCancelled = webinar.webinarStatus === 'CANCELLED'
 
+  const parseSeatsFromTags = (tags: string[] | null | undefined): { seatsRemaining: number | null; seatsTotal: number | null } => {
+    if (!tags || tags.length === 0) {
+      return { seatsRemaining: null, seatsTotal: null }
+    }
+
+    const seatTag = tags.find((tag) => tag.startsWith('seats:'))
+    if (!seatTag) {
+      return { seatsRemaining: null, seatsTotal: null }
+    }
+
+    const value = seatTag.replace('seats:', '').trim()
+    const [remainingStr, totalStr] = value.split('/')
+
+    const remaining = remainingStr ? Number.parseInt(remainingStr, 10) : NaN
+    const total = totalStr ? Number.parseInt(totalStr, 10) : NaN
+
+    if (!Number.isFinite(remaining) || !Number.isFinite(total)) {
+      return { seatsRemaining: null, seatsTotal: null }
+    }
+
+    return {
+      seatsRemaining: Math.max(0, remaining),
+      seatsTotal: Math.max(0, total),
+    }
+  }
+
+  const { seatsRemaining, seatsTotal } = parseSeatsFromTags(webinar.tags as any)
+  const isSoldOut =
+    typeof seatsRemaining === 'number' &&
+    typeof seatsTotal === 'number' &&
+    seatsTotal > 0 &&
+    seatsRemaining <= 0
+
   const baseStatusClasses = 'px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide'
   const statusClasses =
     webinar.webinarStatus === 'LIVE'
@@ -118,8 +151,19 @@ const WebinarCard = ({ webinar }: Props) => {
           </div>
         </div>
 
-      <div className="flex items-center gap-2 mt-1">
-        <span className={statusClasses}>{webinar.webinarStatus}</span>
+      <div className="flex flex-col gap-1 mt-1">
+        <div className="flex items-center gap-2">
+          <span className={statusClasses}>{webinar.webinarStatus}</span>
+          {typeof seatsRemaining === 'number' && typeof seatsTotal === 'number' && seatsTotal > 0 && (
+            <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold tracking-wide ${
+              isSoldOut ? 'bg-red-100 text-red-700' : 'bg-green-100 text-green-700'
+            }`}>
+              {isSoldOut
+                ? 'Sold Out'
+                : `${seatsRemaining} / ${seatsTotal} seats remaining`}
+            </span>
+          )}
+        </div>
         <span className="text-[11px] text-gray-500">
           Last updated{' '}
           {new Date(webinar.updatedAt).toLocaleDateString('en-US', {

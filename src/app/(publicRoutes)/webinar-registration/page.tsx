@@ -3,7 +3,13 @@
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import { Button } from '@/components/ui/button'
-import { ArrowRight, CheckCircle2, Sparkles, Gift, Calendar, Clock, Video, Home } from 'lucide-react'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { ArrowRight, CheckCircle2, Sparkles, Gift, Calendar, Clock, Loader2 } from 'lucide-react'
+import { registerAttendee } from '@/actions/attendance'
+import { toast } from 'sonner'
 import RevealOnScroll from '@/components/RevealOnScroll'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
 
@@ -13,6 +19,19 @@ type NextWebinar = {
   description: string | null
   startTime: string
   duration: number | null
+}
+
+type AvailableWebinar = {
+  id: string
+  title: string
+  description: string | null
+  startTime: string
+  duration: number | null
+}
+
+type TopicGroup = {
+  title: string
+  items: AvailableWebinar[]
 }
 
 const formatLocalDateTime = (value: string | Date) => {
@@ -76,11 +95,22 @@ export default function WebinarRegistration() {
               Freedom Framework™
             </Link>
             <div className="flex items-center gap-3">
-              <Link href="/webinar-registration">
-                <Button size="lg" variant="outline" className="!border-2 !border-[#1D2A38]/40 !text-[#1D2A38] !bg-[#F6F7F4] hover:!bg-[#CCA43B]/20 font-semibold px-4 py-2 transition-all" >
-                  <Home className="h-4 w-4 mr-2" /> Home
-                </Button>
-              </Link>
+              <Dialog>
+                <DialogTrigger asChild>
+                  <button className="text-sm md:text-base font-semibold text-[#1D2A38] hover:text-[#CCA43B] underline-offset-4 hover:underline">
+                    View Upcoming Webinar Dates
+                  </button>
+                </DialogTrigger>
+                <DialogContent className="bg-[#F6F7F4] border-[#CCA43B]/40 max-w-xl">
+                  <DialogHeader>
+                    <DialogTitle className="text-xl font-bold text-[#1D2A38]">
+                      Upcoming Webinar Dates
+                    </DialogTitle>
+                  </DialogHeader>
+
+                  <WebinarDatesModalContent />
+                </DialogContent>
+              </Dialog>
               <Link href="/sign-in">
                 <Button size="lg" variant="outline" className="!border-2 !border-[#1D2A38]/40 !text-[#1D2A38] !bg-[#F6F7F4] hover:!bg-[#CCA43B]/20 font-semibold px-4 py-2 md:px-6 md:py-3 transition-all" >
                   Login
@@ -487,4 +517,287 @@ export default function WebinarRegistration() {
       </footer>
     </div>
   );
+}
+
+type WebinarDatesModalState = 1 | 2 | 3
+
+function WebinarDatesModalContent() {
+  const [step, setStep] = useState<WebinarDatesModalState>(1)
+  const [availableWebinars, setAvailableWebinars] = useState<AvailableWebinar[]>([])
+  const [isLoadingWebinars, setIsLoadingWebinars] = useState(false)
+  const [selectedWebinarId, setSelectedWebinarId] = useState<string | null>(null)
+  const [selectedTitle, setSelectedTitle] = useState<string | null>(null)
+  const [selectedDateLabel, setSelectedDateLabel] = useState<string | null>(null)
+  const [firstName, setFirstName] = useState('')
+  const [email, setEmail] = useState('')
+  const [situation, setSituation] = useState('')
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  useEffect(() => {
+    const fetchAvailable = async () => {
+      try {
+        setIsLoadingWebinars(true)
+        const res = await fetch('/api/webinars/available')
+        if (!res.ok) return
+        const data = await res.json()
+        if (data?.success && Array.isArray(data.webinars)) {
+          setAvailableWebinars(data.webinars)
+        }
+      } catch (error) {
+        console.error('Failed to load available webinars', error)
+      } finally {
+        setIsLoadingWebinars(false)
+      }
+    }
+
+    fetchAvailable()
+  }, [])
+
+  const topicGroups: TopicGroup[] = useMemo(() => {
+    const groupsMap = new Map<string, AvailableWebinar[]>()
+
+    for (const webinar of availableWebinars) {
+      const key = webinar.title || 'Upcoming Webinar'
+      const existing = groupsMap.get(key) ?? []
+      existing.push(webinar)
+      groupsMap.set(key, existing)
+    }
+
+    return Array.from(groupsMap.entries()).map(([title, items]) => ({ title, items }))
+  }, [availableWebinars])
+
+  const canContinueFromStep1 = !!selectedWebinarId
+  const canSubmitStep2 = firstName.trim().length > 0 && email.trim().length > 0 && !!selectedWebinarId
+
+  const handleReset = () => {
+    setStep(1)
+    setSelectedWebinarId(null)
+    setSelectedTitle(null)
+    setSelectedDateLabel(null)
+    setFirstName('')
+    setEmail('')
+    setSituation('')
+  }
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault()
+    if (!canSubmitStep2 || !selectedWebinarId) return
+
+    try {
+      setIsSubmitting(true)
+      const res = await registerAttendee({
+        webinarId: selectedWebinarId,
+        email,
+        name: firstName,
+        description: situation || undefined,
+        phone: undefined,
+        businessName: undefined,
+        userId: undefined,
+      })
+
+      if (!res?.success) {
+        const message = res?.message || 'Something went wrong'
+        toast.error(message)
+        return
+      }
+
+      toast.success(res.message || 'You are registered for this webinar')
+      setStep(3)
+    } catch (error) {
+      console.error('Error submitting webinar registration:', error)
+      toast.error('Something went wrong while saving your spot')
+    } finally {
+      setIsSubmitting(false)
+    }
+  }
+
+  if (step === 3) {
+    return (
+      <div className="space-y-4">
+        <p className="text-sm md:text-base text-[#1D2A38]/90">
+          You&apos;re all set for the webinar.
+        </p>
+        <p className="text-sm md:text-base text-[#1D2A38]/90">
+          Want a personalized recommendation for your firm?
+        </p>
+        <div className="space-y-3">
+          <p className="text-sm md:text-base font-semibold text-[#1D2A38]">
+            Take the 2-minute assessment to see exactly where your firm sits on the Freedom Matrix™.
+          </p>
+          <Link href="https://www.freedomframework.us/diagnostic" target="_blank" rel="noreferrer">
+            <Button className="bg-gradient-to-r from-[#CCA43B] to-[#B8932F] hover:from-[#B8932F] hover:to-[#CCA43B] text-white font-semibold px-6 py-3 rounded-lg border-2 border-[#CCA43B] w-full md:w-auto">
+              Take the 2-minute assessment
+              <ArrowRight className="ml-2 h-4 w-4" />
+            </Button>
+          </Link>
+        </div>
+        <button
+          type="button"
+          onClick={handleReset}
+          className="mt-2 text-xs text-[#1D2A38]/70 underline-offset-4 hover:underline"
+        >
+          Choose a different topic or date
+        </button>
+      </div>
+    )
+  }
+
+  return (
+    <div className="space-y-6">
+      {/* Step 1: Topic + Date */}
+      {step === 1 && (
+        <div className="space-y-4">
+          <div className="space-y-1">
+            <p className="text-xs font-semibold tracking-[0.16em] text-[#1D2A38] uppercase">
+              Step 1
+            </p>
+            <h3 className="text-base md:text-lg font-semibold text-[#1D2A38]">
+              Choose your webinar topic and date
+            </h3>
+          </div>
+          {isLoadingWebinars ? (
+            <div className="flex items-center gap-2 text-sm text-[#1D2A38]/80">
+              <Loader2 className="h-4 w-4 animate-spin" />
+              Loading upcoming webinar dates...
+            </div>
+          ) : topicGroups.length === 0 ? (
+            <p className="text-sm text-[#1D2A38]/80">
+              No upcoming webinars are available right now. Please check back soon.
+            </p>
+          ) : (
+            <div className="space-y-4">
+              {topicGroups.map((group) => (
+                <div
+                  key={group.title}
+                  className="rounded-2xl border px-4 py-3 bg-white/70 border-[#1D2A38]/15"
+                >
+                  <div className="flex items-center justify-between gap-2 mb-2">
+                    <p className="font-semibold text-sm md:text-base text-[#1D2A38]">
+                      {group.title}
+                    </p>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {group.items.map((webinar) => {
+                      const label = formatLocalDateTime(webinar.startTime)
+                      const isSelected = selectedWebinarId === webinar.id
+                      return (
+                        <button
+                          key={webinar.id}
+                          type="button"
+                          className={`rounded-full border px-3 py-1 text-xs md:text-sm transition-all ${
+                            isSelected
+                              ? 'border-[#CCA43B] bg-[#CCA43B]/10 text-[#1D2A38]'
+                              : 'border-[#1D2A38]/20 bg-white/60 text-[#1D2A38] hover:border-[#CCA43B]/70'
+                          }`}
+                          onClick={() => {
+                            setSelectedWebinarId(webinar.id)
+                            setSelectedTitle(group.title)
+                            setSelectedDateLabel(label)
+                          }}
+                        >
+                          {label}
+                        </button>
+                      )
+                    })}
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+          <div className="flex justify-end pt-2">
+            <Button
+              type="button"
+              disabled={!canContinueFromStep1}
+              onClick={() => setStep(2)}
+              className="bg-[#1D2A38] hover:bg-[#1D2A38]/90 text-white px-5 py-2 rounded-lg text-sm"
+            >
+              Continue
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {/* Step 2: Minimal registration */}
+      {step === 2 && (
+        <form className="space-y-4" onSubmit={handleSubmit}>
+          <div className="space-y-1">
+            <p className="text-xs font-semibold tracking-[0.16em] text-[#1D2A38] uppercase">
+              Step 2
+            </p>
+            <h3 className="text-base md:text-lg font-semibold text-[#1D2A38]">
+              Quick registration
+            </h3>
+            {selectedTitle && selectedDateLabel && (
+              <p className="text-xs md:text-sm text-[#1D2A38]/80">
+                {selectedTitle} · {selectedDateLabel}
+              </p>
+            )}
+          </div>
+
+          <div className="space-y-3">
+            <div className="space-y-1.5">
+              <Label htmlFor="firstName">First name</Label>
+              <Input
+                id="firstName"
+                value={firstName}
+                onChange={(event) => setFirstName(event.target.value)}
+                required
+                placeholder="Enter your first name"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="email">Email</Label>
+              <Input
+                id="email"
+                type="email"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                required
+                placeholder="you@example.com"
+              />
+            </div>
+
+            <div className="space-y-1.5">
+              <Label htmlFor="situation" className="flex justify-between text-sm">
+                <span>What best describes your situation?</span>
+                <span className="text-[11px] text-[#1D2A38]/60">Optional</span>
+              </Label>
+              <Textarea
+                id="situation"
+                value={situation}
+                onChange={(event) => setSituation(event.target.value)}
+                placeholder="(Optional) Share a sentence or two so we can better tailor the session."
+                rows={3}
+              />
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between pt-2">
+            <button
+              type="button"
+              onClick={() => setStep(1)}
+              className="text-xs text-[#1D2A38]/70 underline-offset-4 hover:underline"
+            >
+              Back to dates
+            </button>
+            <Button
+              type="submit"
+              disabled={!canSubmitStep2 || isSubmitting}
+              className="bg-[#1D2A38] hover:bg-[#1D2A38]/90 text-white px-5 py-2 rounded-lg text-sm"
+            >
+              {isSubmitting ? (
+                <>
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Saving your spot...
+                </>
+              ) : (
+                'Save my spot'
+              )}
+            </Button>
+          </div>
+        </form>
+      )}
+    </div>
+  )
 }

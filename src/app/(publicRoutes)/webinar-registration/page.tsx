@@ -97,9 +97,13 @@ export default function WebinarRegistration() {
             <div className="flex items-center gap-3">
               <Dialog>
                 <DialogTrigger asChild>
-                  <button className="text-sm md:text-base font-semibold text-[#1D2A38] hover:text-[#CCA43B] underline-offset-4 hover:underline">
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    className="!border !border-[#1D2A38]/25 !bg-white/80 !text-[#1D2A38] hover:!bg-[#CCA43B]/15 hover:!border-[#CCA43B]/60 font-semibold px-4 py-2 md:px-5 md:py-2.5 shadow-sm"
+                  >
                     View Upcoming Webinar Dates
-                  </button>
+                  </Button>
                 </DialogTrigger>
                 <DialogContent className="bg-[#F6F7F4] border-[#CCA43B]/40 max-w-xl">
                   <DialogHeader>

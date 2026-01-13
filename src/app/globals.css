@@ -258,6 +258,18 @@
     -webkit-box-shadow: none !important;
     overflow-x: hidden;
   }
+
+  /* Ensure text selection is clearly visible on light backgrounds */
+  ::selection {
+    background-color: rgba(204, 164, 59, 0.35); /* soft gold */
+    color: #1D2A38;
+  }
+
+  input::selection,
+  textarea::selection {
+    background-color: rgba(204, 164, 59, 0.45);
+    color: #1D2A38;
+  }
   
   /* Prevent zoom on double-tap for iOS */
   * {

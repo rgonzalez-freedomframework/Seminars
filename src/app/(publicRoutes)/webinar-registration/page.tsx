@@ -12,6 +12,12 @@ import { registerAttendee } from '@/actions/attendance'
 import { toast } from 'sonner'
 import RevealOnScroll from '@/components/RevealOnScroll'
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 
 type NextWebinar = {
   id: string
@@ -94,7 +100,9 @@ export default function WebinarRegistration() {
             <Link href="/webinar-registration" className="text-xl md:text-2xl font-bold text-[#1D2A38] hover:text-[#CCA43B] transition-colors">
               Freedom Framework™
             </Link>
-            <div className="flex items-center gap-3">
+
+            {/* Desktop / tablet actions */}
+            <div className="hidden sm:flex items-center gap-3">
               <Dialog>
                 <DialogTrigger asChild>
                   <Button
@@ -120,6 +128,62 @@ export default function WebinarRegistration() {
                   Login
                 </Button>
               </Link>
+            </div>
+
+            {/* Mobile menu for actions */}
+            <div className="sm:hidden flex items-center">
+              <Dialog>
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="!border !border-[#1D2A38]/30 !bg-white/90 !text-[#1D2A38] hover:!bg-[#CCA43B]/15 hover:!border-[#CCA43B]/60 font-semibold px-3 py-1.5 text-sm"
+                    >
+                      Menu
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent className="bg-[#F6F7F4] border-[#1D2A38]/20 min-w-[190px]">
+                    <DropdownMenuItem
+                      className="cursor-pointer text-[#1D2A38] hover:text-[#CCA43B]"
+                      // When clicked, open the dialog
+                      onSelect={(event) => {
+                        event.preventDefault()
+                        const trigger = document.querySelector<HTMLElement>('[data-webinar-dates-trigger="true"]')
+                        trigger?.click()
+                      }}
+                    >
+                      View Upcoming Webinar Dates
+                    </DropdownMenuItem>
+                    <DropdownMenuItem asChild>
+                      <Link href="/sign-in" className="text-[#1D2A38] hover:text-[#CCA43B] cursor-pointer">
+                        Login
+                      </Link>
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+
+                {/* Hidden dialog trigger used by the menu item above */}
+                <DialogTrigger asChild>
+                  <button
+                    type="button"
+                    data-webinar-dates-trigger="true"
+                    className="hidden"
+                  >
+                    Open Dates
+                  </button>
+                </DialogTrigger>
+
+                <DialogContent className="bg-[#F6F7F4] border-[#CCA43B]/40 max-w-xl">
+                  <DialogHeader>
+                    <DialogTitle className="text-xl font-bold text-[#1D2A38]">
+                      Upcoming Webinar Dates
+                    </DialogTitle>
+                  </DialogHeader>
+
+                  <WebinarDatesModalContent />
+                </DialogContent>
+              </Dialog>
             </div>
           </div>
         </div>

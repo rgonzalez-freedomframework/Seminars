@@ -763,9 +763,11 @@ function WebinarDatesModalContent() {
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="situation" className="flex justify-between text-sm">
+              <Label htmlFor="situation" className="flex justify-between text-sm text-[#1D2A38]">
                 <span>What best describes your situation?</span>
-                <span className="text-[11px] text-[#1D2A38]/60">Optional</span>
+                <span className="text-[11px] font-medium text-[#B8932F] bg-white/80 px-1.5 py-0.5 rounded-full border border-[#CCA43B]/40">
+                  Optional
+                </span>
               </Label>
               <Textarea
                 id="situation"

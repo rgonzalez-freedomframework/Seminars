@@ -246,11 +246,8 @@
   
   body {
     /* Prevent overscroll bounce on iOS */
-    overscroll-behavior-y: none;
     /* Smooth scrolling */
     -webkit-overflow-scrolling: touch;
-    /* Prevent pull-to-refresh on iOS when at top */
-    touch-action: pan-x pan-y;
     /* Prevent white flash */
     background-color: #F6F7F4 !important;
     /* Remove any bottom glow/shadow */
@@ -259,10 +256,8 @@
     overflow-x: hidden;
   }
   
-  /* Prevent zoom on double-tap for iOS */
-  * {
-    touch-action: manipulation;
-  }
+  /* Note: avoid forcing global touch-action to preserve natural scroll
+     behavior for both touch and mouse wheel input. */
 }
 
 

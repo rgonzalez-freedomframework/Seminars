@@ -606,9 +606,8 @@ function WebinarDatesModalContent() {
   const isSoldOut = (webinar: AvailableWebinar) => {
     return (
       typeof webinar.seatsRemaining === 'number' &&
-      typeof webinar.seatsTotal === 'number' &&
-      webinar.seatsTotal > 0 &&
-      webinar.seatsRemaining <= 0
+      webinar.seatsRemaining <= 0 &&
+      typeof webinar.seatsTotal === 'number'
     )
   }
 

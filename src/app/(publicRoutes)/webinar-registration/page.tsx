@@ -115,7 +115,7 @@ export default function WebinarRegistration() {
                     View Upcoming Webinar Dates
                   </Button>
                 </DialogTrigger>
-                <DialogContent className="bg-[#F6F7F4] border-[#CCA43B]/40 max-w-xl">
+                <DialogContent className="bg-[#F6F7F4] border-[#CCA43B]/40 max-w-xl max-h-[90vh] overflow-y-auto">
                   <DialogHeader>
                     <DialogTitle className="text-xl font-bold text-[#1D2A38]">
                       Upcoming Webinar Dates
@@ -176,7 +176,7 @@ export default function WebinarRegistration() {
                   </button>
                 </DialogTrigger>
 
-                <DialogContent className="bg-[#F6F7F4] border-[#CCA43B]/40 max-w-xl">
+                <DialogContent className="bg-[#F6F7F4] border-[#CCA43B]/40 max-w-xl max-h-[90vh] overflow-y-auto">
                   <DialogHeader>
                     <DialogTitle className="text-xl font-bold text-[#1D2A38]">
                       Upcoming Webinar Dates

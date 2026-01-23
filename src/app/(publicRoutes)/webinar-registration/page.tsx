@@ -33,6 +33,8 @@ type AvailableWebinar = {
   description: string | null
   startTime: string
   duration: number | null
+  seatsRemaining: number | null
+  seatsTotal: number | null
 }
 
 type TopicGroup = {
@@ -89,7 +91,7 @@ export default function WebinarRegistration() {
 
   return (
     <div
-      className="relative min-h-screen overflow-hidden bg-[#F6F7F4]"
+      className="relative min-h-screen bg-[#F6F7F4]"
       style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
       
@@ -601,6 +603,15 @@ function WebinarDatesModalContent() {
   const [situation, setSituation] = useState('')
   const [isSubmitting, setIsSubmitting] = useState(false)
 
+  const isSoldOut = (webinar: AvailableWebinar) => {
+    return (
+      typeof webinar.seatsRemaining === 'number' &&
+      typeof webinar.seatsTotal === 'number' &&
+      webinar.seatsTotal > 0 &&
+      webinar.seatsRemaining <= 0
+    )
+  }
+
   useEffect(() => {
     const fetchAvailable = async () => {
       try {
@@ -748,22 +759,32 @@ function WebinarDatesModalContent() {
                     {group.items.map((webinar) => {
                       const label = formatLocalDateTime(webinar.startTime)
                       const isSelected = selectedWebinarId === webinar.id
+                      const soldOut = isSoldOut(webinar)
                       return (
                         <button
                           key={webinar.id}
                           type="button"
+                          disabled={soldOut}
                           className={`rounded-full border px-3 py-1 text-xs md:text-sm transition-all ${
-                            isSelected
-                              ? 'border-[#CCA43B] bg-[#CCA43B]/10 text-[#1D2A38]'
-                              : 'border-[#1D2A38]/20 bg-white/60 text-[#1D2A38] hover:border-[#CCA43B]/70'
+                            soldOut
+                              ? 'border-red-300 bg-red-50 text-red-700 cursor-not-allowed opacity-75'
+                              : isSelected
+                                ? 'border-[#CCA43B] bg-[#CCA43B]/10 text-[#1D2A38]'
+                                : 'border-[#1D2A38]/20 bg-white/60 text-[#1D2A38] hover:border-[#CCA43B]/70'
                           }`}
                           onClick={() => {
+                            if (soldOut) return
                             setSelectedWebinarId(webinar.id)
                             setSelectedTitle(group.title)
                             setSelectedDateLabel(label)
                           }}
                         >
                           {label}
+                          {soldOut && (
+                            <span className="ml-2 inline-flex items-center rounded-full bg-red-600 text-white px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide">
+                              Sold Out
+                            </span>
+                          )}
                         </button>
                       )
                     })}

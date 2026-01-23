@@ -91,7 +91,7 @@ export default function WebinarRegistration() {
 
   return (
     <div
-      className="relative min-h-screen bg-[#F6F7F4]"
+      className="relative min-h-screen bg-[#F6F7F4] overflow-y-auto"
       style={{ paddingTop: 'env(safe-area-inset-top)', paddingBottom: 'env(safe-area-inset-bottom)' }}
     >
       
